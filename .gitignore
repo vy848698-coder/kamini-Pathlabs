@@ -1,0 +1,16 @@
+# OS / editor cruft
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Build / dependency output
+node_modules/
+dist/
+*.log
+
+# Working files
+*.tmp
+.*.part
+.*.body

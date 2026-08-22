@@ -1,0 +1,12 @@
+{
+  "name": "Kamini Clinic & Labs",
+  "short_name": "Kamini Labs",
+  "description": "Diagnostic centre in Jagamara, Bhubaneswar — blood tests, ECG, ultrasound and health checkup packages with free home sample collection.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#fbf9f4",
+  "theme_color": "#0d4744",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
