@@ -90,8 +90,8 @@ section[id]{scroll-margin-top:92px}
   content:""; width:18px; height:2px; background:var(--iris); border-radius:2px; flex:none;
 }
 .eyebrow--center{justify-content:center}
-h2.h2{font-size:clamp(30px,4.1vw,46px)}
-h3.h3{font-size:clamp(22px,2.4vw,28px)}
+h2.h2{font-size:clamp(25px,6.2vw,46px)}
+h3.h3{font-size:clamp(19px,4.4vw,28px)}
 .lede{color:var(--muted); font-size:17px; max-width:56ch; margin-top:14px}
 .sec-head{margin-bottom:44px}
 .sec-head .eyebrow{margin-bottom:16px}
@@ -158,7 +158,7 @@ h3.h3{font-size:clamp(22px,2.4vw,28px)}
 .logo-mark{width:40px; height:40px; flex:none}
 .logo-txt{display:flex; flex-direction:column; line-height:1}
 .logo-name{font-family:var(--display); font-weight:800; font-size:19px; letter-spacing:-.02em; color:var(--navy-800)}
-.logo-sub{font-family:var(--mono); font-size:8.5px; font-weight:500; letter-spacing:.22em; color:var(--navy-500); margin-top:4px}
+.logo-sub{white-space:nowrap; font-family:var(--mono); font-size:8.5px; font-weight:500; letter-spacing:.22em; color:var(--navy-500); margin-top:4px}
 .logo--light .logo-name{color:#fff}
 .logo--light .logo-sub{color:var(--iris-soft)}
 
@@ -214,9 +214,9 @@ header.nav.is-stuck .nav-prog{opacity:1}
   mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000 20%,transparent 78%);
   opacity:.8;
 }
-.hero-in{position:relative; z-index:2; display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center}
+.hero-in{position:relative; z-index:2; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:56px; align-items:center}
 .hero-copy{max-width:640px}
-.hero h1{font-size:clamp(38px,5.6vw,66px); margin:18px 0 0; letter-spacing:-.04em}
+.hero h1{font-size:clamp(31px,8.2vw,66px); margin:18px 0 0; letter-spacing:-.04em}
 .hero h1 em{font-style:normal; color:var(--navy-600); position:relative; white-space:nowrap}
 .hero h1 em::after{
   content:""; position:absolute; left:0; right:0; bottom:.07em; height:.13em;
@@ -331,7 +331,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 
 /* ============ SHORTCUT TILES ============ */
 .shortcuts{position:relative; z-index:5; margin-top:64px; padding-bottom:14px}
-.sc-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+.sc-grid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px}
 .sc{
   background:var(--white); border:1px solid var(--line); border-radius:var(--r-l);
   padding:22px; display:flex; flex-direction:column; gap:14px; transition:.3s var(--ease);
@@ -360,7 +360,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 
 /* ============ TRUST STRIP ============ */
 .trust{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--white); margin-top:56px}
-.trust-in{display:grid; grid-template-columns:repeat(5,1fr); gap:0}
+.trust-in{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:0}
 .tr{
   padding:26px 22px; display:flex; align-items:center; gap:13px; border-right:1px solid var(--line-2);
 }
@@ -416,7 +416,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 .pkg-cta .btn{flex:1}
 
 /* ============ HEALTH GOAL GRID ============ */
-.goals{display:grid; grid-template-columns:repeat(6,1fr); gap:14px}
+.goals{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:14px}
 .goal{
   background:var(--white); border:1px solid var(--line); border-radius:18px; padding:18px 14px;
   text-align:center; transition:.3s var(--ease); position:relative; overflow:hidden;
@@ -440,7 +440,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 .goal-arrow svg{width:11px; height:11px}
 
 /* ============ TEST LIST ============ */
-.tests{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+.tests{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px}
 .test{
   background:var(--white); border:1px solid var(--line); border-radius:var(--r-m);
   padding:18px 20px; display:flex; align-items:center; gap:18px; transition:.25s var(--ease);
@@ -462,7 +462,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 .test-price s{font-family:var(--mono); font-size:11px; color:var(--muted)}
 
 /* ============ SMART DISCOVERY ============ */
-.disc{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+.disc{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px}
 .dc{
   border:1.5px solid rgba(255,255,255,.16); border-radius:var(--r-l); padding:28px;
   background:rgba(255,255,255,.05); transition:.3s var(--ease); text-align:left; color:#fff;
@@ -487,7 +487,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 }
 
 /* ============ STEPS / HOME COLLECTION ============ */
-.split{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center}
+.split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:64px; align-items:center}
 .steps{position:relative; padding-left:8px}
 .step{display:flex; gap:20px; padding-bottom:26px; position:relative}
 .step:last-child{padding-bottom:0}
@@ -519,7 +519,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 .fig-cap span{font-family:var(--mono); font-size:10.5px; color:var(--muted)}
 
 /* ============ TRUST GRID (WHY US) ============ */
-.wgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r-l); overflow:hidden}
+.wgrid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r-l); overflow:hidden}
 .wcell{background:var(--white); padding:26px 24px; transition:.3s var(--ease); position:relative}
 .wcell:hover{background:var(--ice-2)}
 .wcell-ic{width:40px; height:40px; border-radius:11px; background:var(--ice); color:var(--navy-700); display:grid; place-items:center; margin-bottom:16px}
@@ -529,7 +529,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 .wcell-k{position:absolute; top:22px; right:22px; font-family:var(--mono); font-size:10px; color:#C4C8E2}
 
 /* ============ HOW IT WORKS ============ */
-.flow{display:grid; grid-template-columns:repeat(5,1fr); gap:12px; position:relative}
+.flow{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; position:relative}
 .flow::before{
   content:""; position:absolute; left:6%; right:6%; top:31px; height:2px;
   background:repeating-linear-gradient(90deg,var(--line) 0 7px,transparent 7px 14px);
@@ -566,12 +566,12 @@ header.nav.is-stuck .nav-prog{opacity:1}
 .rep-acts{display:flex; gap:9px}
 .rep-tbl{padding:6px 22px 22px}
 .rep-hdr{
-  display:grid; grid-template-columns:1.5fr .8fr 1.4fr .7fr; gap:16px; padding:14px 0 10px;
+  display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr) minmax(0,1.4fr) minmax(0,.7fr); gap:16px; padding:14px 0 10px;
   font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
   border-bottom:1px solid var(--line-2);
 }
 .rep-row{
-  display:grid; grid-template-columns:1.5fr .8fr 1.4fr .7fr; gap:16px; padding:17px 0;
+  display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr) minmax(0,1.4fr) minmax(0,.7fr); gap:16px; padding:17px 0;
   align-items:center; border-bottom:1px solid var(--line-2);
 }
 .rep-row:last-child{border-bottom:0}
@@ -604,7 +604,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 .panel{display:none}
 .panel.on{display:grid; animation:fadeUp .45s var(--ease)}
 @keyframes fadeUp{from{opacity:0; transform:translateY(12px)}to{opacity:1; transform:none}}
-.pgrid{grid-template-columns:repeat(3,1fr); gap:18px}
+.pgrid{grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px}
 .lcard{
   background:var(--white); border:1px solid var(--line); border-radius:var(--r-l); padding:24px;
   display:flex; flex-direction:column; transition:.3s var(--ease);
@@ -617,7 +617,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 .lcard-list svg{width:15px; height:15px; color:var(--iris); flex:none; margin-top:3px}
 
 /* ============ SEASONAL ============ */
-.season{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+.season{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px}
 .scard{
   border-radius:var(--r-l); padding:24px; background:var(--white); border:1px solid var(--line);
   display:flex; flex-direction:column; gap:12px; transition:.3s var(--ease); position:relative; overflow:hidden;
@@ -631,7 +631,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 .scard-f b{font-family:var(--display); font-size:17px}
 
 /* ============ CENTER / MAP ============ */
-.map-wrap{display:grid; grid-template-columns:.85fr 1.15fr; gap:0; border:1px solid var(--line); border-radius:var(--r-xl); overflow:hidden; background:var(--white); box-shadow:var(--sh-1)}
+.map-wrap{display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:0; border:1px solid var(--line); border-radius:var(--r-xl); overflow:hidden; background:var(--white); box-shadow:var(--sh-1)}
 .map-side{padding:30px; display:flex; flex-direction:column}
 .map-search{display:flex; align-items:center; gap:10px; border:1.5px solid var(--line); border-radius:12px; padding:12px 15px; background:var(--ice-2)}
 .map-search svg{width:17px; height:17px; color:var(--navy-600)}
@@ -667,7 +667,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
   width:400px; background:var(--white); border:1px solid var(--line); border-radius:var(--r-l);
   padding:28px; display:flex; flex-direction:column; gap:16px;
 }
-.quote-mk{font-family:var(--display); font-size:44px; line-height:.6; color:var(--iris-soft)}
+.quote-mk{font-family:var(--display); font-size:clamp(34px,8vw,44px); line-height:.6; color:var(--iris-soft)}
 .quote p{font-size:15.5px; line-height:1.68; color:var(--ink-2)}
 .quote-by{display:flex; align-items:center; gap:12px; margin-top:auto; padding-top:16px; border-top:1px solid var(--line-2)}
 .avatar{width:40px; height:40px; border-radius:50%; background:var(--ice); color:var(--navy-700); display:grid; place-items:center; font-family:var(--display); font-weight:800; font-size:15px; flex:none}
@@ -677,7 +677,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 .stars svg{width:13px; height:13px; color:#E8A33D}
 
 /* ============ GUIDES ============ */
-.guides{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+.guides{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px}
 .guide{
   background:var(--white); border:1px solid var(--line); border-radius:var(--r-l); overflow:hidden;
   display:flex; flex-direction:column; transition:.3s var(--ease);
@@ -712,7 +712,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 .cta{background:var(--navy-800); border-radius:var(--r-xl); padding:64px 56px; position:relative; overflow:hidden; color:#fff; text-align:center}
 .cta::before{content:""; position:absolute; width:700px; height:700px; border-radius:50%; background:radial-gradient(circle,rgba(90,107,245,.28),transparent 62%); top:-320px; left:50%; transform:translateX(-50%)}
 .cta-in{position:relative; z-index:2; display:flex; flex-direction:column; align-items:center}
-.cta h2{font-size:clamp(32px,4.4vw,50px); color:#fff}
+.cta h2{font-size:clamp(26px,6.6vw,50px); color:#fff}
 .cta p{color:#B7BEE4; font-size:17px; margin-top:16px; max-width:52ch}
 .cta-btns{display:flex; gap:12px; margin-top:30px; flex-wrap:wrap; justify-content:center}
 .cta-ph{margin-top:26px; font-family:var(--mono); font-size:12.5px; color:#98A0CF; display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:center}
@@ -720,7 +720,7 @@ header.nav.is-stuck .nav-prog{opacity:1}
 
 /* ============ FOOTER ============ */
 footer{background:var(--navy-900); color:#AAB1D6; padding:64px 0 0; margin-top:0}
-.f-top{display:grid; grid-template-columns:1.5fr repeat(5,1fr); gap:32px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,.1)}
+.f-top{display:grid; grid-template-columns:minmax(0,1.5fr) repeat(5,minmax(0,1fr)); gap:32px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,.1)}
 .f-about p{font-size:13.5px; line-height:1.7; margin-top:18px; max-width:34ch}
 .f-contact{margin-top:20px; display:flex; flex-direction:column; gap:10px; font-family:var(--mono); font-size:12px}
 .f-contact div{display:flex; gap:10px; align-items:flex-start}
@@ -744,7 +744,7 @@ footer{background:var(--navy-900); color:#AAB1D6; padding:64px 0 0; margin-top:0
   backdrop-filter:blur(14px); border-top:1px solid var(--line); display:none;
   padding:8px 6px calc(8px + env(safe-area-inset-bottom));
 }
-.mnav-in{display:grid; grid-template-columns:repeat(5,1fr)}
+.mnav-in{display:grid; grid-template-columns:repeat(5,minmax(0,1fr))}
 .mnav a{display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 2px; border-radius:12px; color:var(--muted)}
 .mnav a.on{color:var(--navy-700)}
 .mnav svg{width:20px; height:20px}
@@ -773,50 +773,54 @@ footer{background:var(--navy-900); color:#AAB1D6; padding:64px 0 0; margin-top:0
 
 /* ============ RESPONSIVE ============ */
 @media (max-width:1180px){
-  .goals{grid-template-columns:repeat(4,1fr)}
-  .wgrid{grid-template-columns:repeat(2,1fr)}
-  .hero-in{grid-template-columns:1fr; gap:44px}
+  .goals{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .wgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-in{grid-template-columns:minmax(0,1fr); gap:44px}
   .hero-vis{max-width:520px; width:100%}
   .hf-1{left:-14px}.hf-2{right:-8px}
 }
 @media (max-width:1024px){
   .nav-links{display:none}
   .burger{display:grid}
-  .sc-grid{grid-template-columns:repeat(2,1fr)}
-  .trust-in{grid-template-columns:repeat(3,1fr)}
+  .sc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .trust-in{grid-template-columns:repeat(3,minmax(0,1fr))}
   .tr:nth-child(3){border-right:0}
   .tr:nth-child(n+4){border-top:1px solid var(--line-2)}
-  .disc,.season,.guides,.pgrid{grid-template-columns:1fr 1fr}
-  .split{grid-template-columns:1fr; gap:44px}
-  .flow{grid-template-columns:repeat(2,1fr); gap:26px}
+  .disc,.season,.guides,.pgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .split{grid-template-columns:minmax(0,1fr); gap:44px}
+  .flow{grid-template-columns:repeat(2,minmax(0,1fr)); gap:26px}
   .flow::before{display:none}
-  .map-wrap{grid-template-columns:1fr}
+  .map-wrap{grid-template-columns:minmax(0,1fr)}
   .map-vis{min-height:320px; order:-1}
   .sec{padding:76px 0}
 }
 @media (max-width:768px){
   body{padding-bottom:74px}
+  /* the drawer carries "Book a test" and the phone number on mobile */
+  .nav-act .btn-pri,.nav-act .nav-login{display:none}
+  .nav-act{gap:8px; margin-left:0}
+  .nav-in{gap:10px}
   .mnav{display:block}
   .wrap{padding-inline:20px}
   .sec{padding:60px 0}
   .sec-head{margin-bottom:32px}
   .topbar-loc span{display:none}
-  .tests,.goals{grid-template-columns:1fr}
-  .goals{grid-template-columns:repeat(2,1fr)}
-  .disc,.season,.guides,.pgrid,.wgrid{grid-template-columns:1fr}
-  .flow{grid-template-columns:1fr; gap:0; text-align:left}
-  .fstep{display:grid; grid-template-columns:62px 1fr; gap:18px; text-align:left; padding-bottom:24px; position:relative}
+  .tests,.goals{grid-template-columns:minmax(0,1fr)}
+  .goals{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .disc,.season,.guides,.pgrid,.wgrid{grid-template-columns:minmax(0,1fr)}
+  .flow{grid-template-columns:minmax(0,1fr); gap:0; text-align:left}
+  .fstep{display:grid; grid-template-columns:62px minmax(0,1fr); gap:18px; text-align:left; padding-bottom:24px; position:relative}
   .fstep-d{margin:0}
   .fstep::after{content:""; position:absolute; left:30px; top:64px; bottom:6px; width:2px; background:var(--line)}
   .fstep:last-child::after{display:none}
   .rep-hdr{display:none}
-  .rep-row{grid-template-columns:1fr auto; gap:10px 14px; row-gap:12px}
+  .rep-row{grid-template-columns:minmax(0,1fr) auto; gap:10px 14px; row-gap:12px}
   .rep-rng{grid-column:1/-1}
   .stat-pill{justify-self:end}
   .car{padding-inline:20px; margin-inline:-20px}
   .pkg,.quote{width:290px}
   .cta{padding:44px 24px}
-  .f-top{grid-template-columns:1fr 1fr; gap:28px}
+  .f-top{grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:28px}
   .f-about{grid-column:1/-1}
   .hero{padding-top:36px}
   .searchbar{padding:6px 6px 6px 16px; border-radius:16px}
@@ -826,14 +830,14 @@ footer{background:var(--navy-900); color:#AAB1D6; padding:64px 0 0; margin-top:0
   .s-go{width:46px; height:46px; padding:0; border-radius:50%}
   .shortcuts{margin-top:44px}
   .trust{margin-top:40px}
-  .trust-in{grid-template-columns:1fr 1fr}
+  .trust-in{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .tr{padding:18px 14px; border-right:1px solid var(--line-2)}
   .tr:nth-child(2n){border-right:0}
   .tr:nth-child(n+3){border-top:1px solid var(--line-2)}
   .qa-a p{padding:0 0 22px 34px}
 }
 @media (max-width:420px){
-  .sc-grid{grid-template-columns:1fr}
+  .sc-grid{grid-template-columns:minmax(0,1fr)}
   .hero-float{display:none}
 }
 /* ============ DESIGN VERSION SWITCH ============ */
@@ -855,6 +859,63 @@ a.vs-seg:hover{color:var(--navy-700)}
   .vswitch{--vs-w:44px}
   .vs-seg{font-size:10px; letter-spacing:.02em}
   .nav-act .nav-login{display:none}   /* make room for the switch */
+}
+@media (max-width:430px){
+  .vswitch{--vs-w:36px; padding:2px}
+  .vswitch .vs-knob{top:2px; left:2px; height:calc(100% - 4px)}
+  .vs-seg{font-size:9.5px; padding:6px 0}
+  /* the hero's own search field and the drawer both cover search here, and
+     the header row cannot fit the icon as well */
+  .nav-act #navSearch{display:none}
+  .nav-act{gap:6px}
+  .logo{gap:8px}
+  .logo-mark{width:34px; height:34px}
+  .logo-name{font-size:17px}
+  .logo-sub{font-size:9px; letter-spacing:.12em}
+}
+@media (max-width:340px){
+  .vswitch{--vs-w:31px}
+  .vs-seg{font-size:8.5px}
+}
+
+/* ---- small phones ---- */
+@media (max-width:480px){
+  .wrap{padding-inline:18px}
+  /* the address truncated mid-word here; the phone numbers matter more */
+  .topbar-loc{display:none}
+  .topbar .wrap{justify-content:center}
+  .topbar-ph{gap:14px}
+  .sec{padding:52px 0}
+  .goals{gap:10px}
+  .tests,.disc,.season,.guides,.pgrid{gap:12px}
+  .fstep{grid-template-columns:52px minmax(0,1fr); gap:14px}
+  .mnav span{font-size:9px}
+}
+@media (max-width:360px){
+  .wrap{padding-inline:15px}
+  .goals{grid-template-columns:minmax(0,1fr)}
+  .trust-in{grid-template-columns:minmax(0,1fr)}
+  .tr:nth-child(n){border-right:0}
+}
+
+/* An input under 16px makes iOS Safari zoom in on focus and never zoom back. */
+@media (max-width:900px){
+  input,select,textarea,.map-search input{font-size:16px}
+}
+
+/* Touch targets: the mono/link text here is 15–18px tall on its own. */
+@media (pointer:coarse){
+  .f-col a,.link-arrow,.sc-go,.foot-legal a,.pop a,
+  .topbar-ph a,.cta-ph a,.f-contact a{min-height:40px; display:inline-flex; align-items:center}
+  .qa-q{min-height:48px}
+  .mnav a{min-height:48px}
+}
+
+/* Short landscape phones. */
+@media (max-height:480px) and (orientation:landscape){
+  .sec{padding:40px 0}
+  .hero{padding-top:36px}
+  .drawer-in{overflow-y:auto}
 }
 
 @media (prefers-reduced-motion:reduce){

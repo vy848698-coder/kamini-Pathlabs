@@ -87,7 +87,7 @@
   .logo{display:flex;align-items:center;gap:11px}
   .mark{width:38px;height:38px;flex:0 0 38px}
   .logo b{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:-.01em;line-height:1}
-  .logo small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.24em;color:var(--muted);text-transform:uppercase;margin-top:3px}
+  .logo small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-top:3px;white-space:nowrap}
   .navlinks{display:flex;gap:30px;font-size:14.5px;font-weight:500}
   .navlinks a{position:relative;padding:4px 0;color:var(--ink-2)}
   .navlinks a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:1.5px;background:var(--coral);transition:right .3s}
@@ -100,7 +100,7 @@
   /* ============ HERO ============ */
   header{position:relative;padding:150px 0 80px;overflow:hidden}
   .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
-  .hero h1{font-size:clamp(46px,6.4vw,92px);letter-spacing:-.035em}
+  .hero h1{font-size:clamp(37px,9vw,92px);letter-spacing:-.035em}
   .hero h1 em{font-style:italic;color:var(--teal-lit)}
   .hero .lede{margin-top:26px;font-size:19px;color:#2c4442;max-width:440px;line-height:1.55}
   .hero .cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap}
@@ -134,7 +134,10 @@
   .dot.hi{background:var(--coral)}
   .dot.mid{background:var(--amber)}
   .scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:rgba(244,239,230,.4);margin-top:7px;letter-spacing:.05em}
-  .chips{position:absolute;inset:0;pointer-events:none}
+  /* the panel clips its own overflow for the rounded gradient, so the
+     floating chips live in a wrapper alongside it, not inside it */
+  .panel-wrap{position:relative}
+  .chips{position:absolute;inset:0;pointer-events:none;z-index:4}
   .chip{
     position:absolute;font-family:var(--mono);font-size:11px;font-weight:500;
     background:var(--paper);color:var(--ink);padding:8px 13px;border-radius:100px;
@@ -150,17 +153,17 @@
 
   /* trust rail */
   .rail{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:80px}
-  .rail-in{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+  .rail-in{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0}
   .stat{padding:34px 24px;border-right:1px solid var(--line)}
   .stat:last-child{border-right:0}
-  .stat .n{font-family:var(--serif);font-size:clamp(34px,4vw,52px);line-height:1;letter-spacing:-.03em}
+  .stat .n{font-family:var(--serif);font-size:clamp(30px,6vw,52px);line-height:1;letter-spacing:-.03em}
   .stat .n span{color:var(--teal-lit)}
   .stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:12px;line-height:1.5}
 
   /* ============ SECTION SHELL ============ */
   section{padding:110px 0;position:relative}
   .sec-head{max-width:640px;margin-bottom:64px}
-  .sec-head h2{font-size:clamp(34px,4.6vw,60px);letter-spacing:-.028em;margin-top:20px}
+  .sec-head h2{font-size:clamp(28px,7vw,60px);letter-spacing:-.028em;margin-top:20px}
   .sec-head p{margin-top:20px;font-size:18px;color:#3a5350;max-width:520px}
   .dark{background:var(--ink);color:var(--paper)}
   .dark .sec-head p{color:rgba(246,242,234,.72)}
@@ -182,7 +185,7 @@
   .eco-view::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 80% 10%,rgba(28,124,115,.45),transparent 60%)}
   .eco-view .body{position:relative}
   .eco-view .cat{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--gold-lit);text-transform:uppercase}
-  .eco-view h3{font-size:34px;margin:14px 0 16px}
+  .eco-view h3{font-size:clamp(25px,6.4vw,34px);margin:14px 0 16px}
   .eco-view p{color:rgba(244,239,230,.72);font-size:16px;max-width:380px;line-height:1.6}
   .eco-tests{margin-top:28px;display:flex;flex-wrap:wrap;gap:9px}
   .eco-tests span{font-family:var(--mono);font-size:12px;padding:8px 14px;border:1px solid var(--line-d);border-radius:100px;color:rgba(244,239,230,.85)}
@@ -198,7 +201,7 @@
   .jstep:last-child{border-bottom:1px solid var(--line)}
   .jstep.on{opacity:1}
   .jstep .no{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.14em}
-  .jstep h3{font-size:30px;margin:12px 0 12px}
+  .jstep h3{font-size:clamp(23px,5.8vw,30px);margin:12px 0 12px}
   .jstep p{color:#3a5350;font-size:16.5px;max-width:440px}
   .stagebox{position:relative;background:var(--ink);border-radius:26px;aspect-ratio:1/1.02;overflow:hidden;box-shadow:0 40px 80px -50px rgba(10,26,28,.6)}
   .stagebox svg{position:absolute;inset:0;width:100%;height:100%}
@@ -207,9 +210,9 @@
 
   /* technology split */
   .tech{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-  .tech .big{font-family:var(--serif);font-size:clamp(32px,4.2vw,54px);line-height:1.05;letter-spacing:-.025em}
+  .tech .big{font-family:var(--serif);font-size:clamp(26px,6.6vw,54px);line-height:1.05;letter-spacing:-.025em}
   .tech .big em{font-style:italic;color:var(--gold-lit)}
-  .tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-d);border:1px solid var(--line-d);border-radius:20px;overflow:hidden}
+  .tech-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1px;background:var(--line-d);border:1px solid var(--line-d);border-radius:20px;overflow:hidden}
   .tech-cell{background:var(--ink);padding:26px 24px}
   .tech-cell .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--gold-lit);text-transform:uppercase}
   .tech-cell .d{font-family:var(--serif);font-size:21px;margin-top:12px}
@@ -242,7 +245,7 @@
   .tlyr{font-family:var(--mono);font-size:13px;color:var(--muted);letter-spacing:.1em}
 
   /* home collection steps */
-  .hc-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:20px}
+  .hc-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:20px}
   .hc-step{padding:26px 20px;border:1px solid var(--line-d);border-radius:18px;position:relative;overflow:hidden}
   .hc-step .hn{font-family:var(--mono);font-size:11px;color:var(--gold-lit);letter-spacing:.14em}
   .hc-step h4{font-family:var(--serif);font-size:20px;font-weight:400;margin:14px 0 8px}
@@ -252,7 +255,7 @@
   .constel{position:relative;height:520px;display:flex;align-items:center;justify-content:center}
   .cnode{position:absolute;font-family:var(--mono);font-size:13px;padding:12px 18px;border:1px solid var(--line);border-radius:100px;background:var(--paper);transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .3s,color .3s;cursor:default}
   .cnode:hover{border-color:var(--gold);color:var(--teal-lit);transform:scale(1.06);box-shadow:0 10px 30px -14px rgba(201,168,106,.5)}
-  .ccenter{font-family:var(--serif);font-size:30px;text-align:center;max-width:220px;line-height:1.1;z-index:2}
+  .ccenter{font-family:var(--serif);font-size:clamp(22px,5.6vw,30px);text-align:center;max-width:220px;line-height:1.1;z-index:2}
   .ccenter b{color:var(--teal-lit);font-weight:400;font-style:italic}
 
   /* packages */
@@ -260,7 +263,7 @@
   .tab{font-family:var(--mono);font-size:13px;padding:11px 20px;border:1px solid var(--line);border-radius:100px;cursor:pointer;transition:.25s;letter-spacing:.04em}
   .tab.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
   .pkg{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:26px;padding:44px;box-shadow:0 30px 80px -60px rgba(10,26,28,.4)}
-  .pkg h3{font-size:38px;margin-bottom:14px}
+  .pkg h3{font-size:clamp(27px,6.8vw,38px);margin-bottom:14px}
   .pkg .pfor{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px}
   .pkg p{font-size:16px;color:#3a5350;margin-bottom:24px;max-width:400px}
   .pkg .meta{display:flex;gap:28px;margin-bottom:28px}
@@ -287,7 +290,7 @@
   .final::before{content:"";position:absolute;inset:0;background:
     radial-gradient(55% 55% at 50% 36%,rgba(31,111,106,.42),transparent 65%),
     radial-gradient(50% 40% at 50% 120%,rgba(201,168,106,.18),transparent 60%);pointer-events:none}
-  .final h2{font-size:clamp(40px,6vw,84px);letter-spacing:-.03em;position:relative;line-height:1}
+  .final h2{font-size:clamp(31px,8.4vw,84px);letter-spacing:-.03em;position:relative;line-height:1}
   .final h2 em{font-style:italic;color:var(--gold-lit)}
   .final .cta-row{margin-top:40px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative}
   .final .fcontact{margin-top:44px;font-family:var(--mono);font-size:13px;color:rgba(244,239,230,.6);letter-spacing:.06em;position:relative;display:flex;gap:26px;justify-content:center;flex-wrap:wrap}
@@ -295,7 +298,7 @@
 
   /* footer */
   footer{background:var(--ink);color:var(--paper);padding:70px 0 40px;border-top:1px solid var(--line-d)}
-  .foot{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
+  .foot{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:40px}
   .foot .brand b{font-family:var(--serif);font-size:24px}
   .foot .brand p{color:rgba(244,239,230,.6);font-size:14.5px;margin-top:16px;max-width:280px;line-height:1.6}
   .foot h5{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-lit);margin-bottom:18px}
@@ -307,7 +310,7 @@
   /* mobile menu */
   .mobmenu{position:fixed;inset:0;background:var(--ink);z-index:99;display:none;flex-direction:column;justify-content:center;padding:40px;gap:8px}
   .mobmenu.open{display:flex}
-  .mobmenu a{font-family:var(--serif);font-size:34px;color:var(--paper);padding:10px 0}
+  .mobmenu a{font-family:var(--serif);font-size:clamp(25px,7vw,34px);color:var(--paper);padding:10px 0}
   .mobmenu .mc{margin-top:30px;font-family:var(--mono);font-size:14px;color:var(--gold-lit)}
 
   @media(max-width:960px){
@@ -324,8 +327,11 @@
   }
   @media(max-width:560px){
     .wrap,.navin{padding-left:20px;padding-right:20px}
+    /* two-up keeps the trust rail from becoming a very long scroll */
+    .rail-in{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+    .stat{padding:22px 14px}
+    .stat:nth-child(2n){border-right:0}
     section{padding:80px 0}
-    .rail-in{grid-template-columns:1fr}
     .stat{border-right:0}
     .hc-steps,.foot{grid-template-columns:1fr}
     .pkg,.eco-view{padding:28px}
@@ -350,6 +356,58 @@
   @media(max-width:560px){
     .vswitch{--vs-w:44px}
     .vs-seg{font-size:10px;letter-spacing:.04em}
+  }
+
+  /* ---- phones ---- */
+  @media(max-width:700px){
+    /* the floating chips hang off the panel by design on desktop; on a phone
+       that puts them under the viewport edge, so tuck them inside */
+    .chip.c1{top:-13px;left:12px}
+    .chip.c2{top:auto;bottom:34%;left:-6px}
+    .chip.c3{bottom:-13px;right:12px}
+  }
+  @media(max-width:480px){
+    .wrap,.navin{padding-left:18px;padding-right:18px}
+    .navin{padding-top:12px;padding-bottom:12px}
+    section{padding:64px 0}
+    .hc-steps{gap:12px}
+    .pkg,.eco-view{padding:24px 20px}
+    .mobmenu{padding:32px 24px}
+    .scale{font-size:10px}
+    .marker .name{font-size:13.5px}
+  }
+  @media(max-width:400px){
+    .wrap,.navin{padding-left:15px;padding-right:15px}
+    .logo{gap:8px}
+    .logo b{font-size:17px}
+    .logo small{font-size:9px;letter-spacing:.13em}
+    .mark{width:32px;height:32px;flex:0 0 32px}
+    .navcta{gap:8px}
+    .vswitch{--vs-w:36px;padding:2px}
+    .vswitch .vs-knob{top:2px;left:2px;height:calc(100% - 4px)}
+    .vs-seg{font-size:9.5px;letter-spacing:0}
+    .chip{font-size:9.5px;padding:6px 10px}
+  }
+
+  @media(max-width:340px){
+    .vswitch{--vs-w:31px}
+    .vs-seg{font-size:8.5px}
+    .logo b{font-size:15.5px}
+    .logo small{font-size:8px;letter-spacing:.1em}
+    .navcta{gap:6px}
+  }
+
+  /* Touch: give the small mono/footer links a real hit area. */
+  @media(pointer:coarse){
+    .foot a,.navlinks a,.fbot a,.mobmenu a,.fcontact a{min-height:40px;display:inline-flex;align-items:center}
+    .q{min-height:48px}
+  }
+
+  /* Short landscape phones. */
+  @media(max-height:480px) and (orientation:landscape){
+    section{padding:48px 0}
+    .mobmenu{justify-content:flex-start;overflow-y:auto}
+    .mobmenu a{font-size:22px;padding:6px 0}
   }
 
   @media(prefers-reduced-motion:reduce){
@@ -421,7 +479,8 @@
     </div>
 
     <!-- SIGNATURE: reference-band report panel -->
-    <div class="panel" id="panel" data-rise>
+    <div class="panel-wrap" data-rise>
+    <div class="panel" id="panel">
       <div class="panel-h">
         <div class="who">SAMPLE #KCL-4471<span>Full body checkup · 62 markers</span></div>
         <div class="live"><i></i>ANALYSING</div>
@@ -443,6 +502,7 @@
         <div class="scale"><span>Normal</span><span>Pre-diabetic</span><span>High</span></div>
       </div>
 
+    </div>
       <div class="chips">
         <div class="chip c1" data-depth="14"><i></i>99.8% accuracy</div>
         <div class="chip c2" data-depth="22"><i></i>1 value flagged</div>
@@ -824,12 +884,12 @@
   if(panel && !reduce){
     panel.addEventListener('mousemove',function(e){
       var r=panel.getBoundingClientRect(), cx=e.clientX-r.left-r.width/2, cy=e.clientY-r.top-r.height/2;
-      panel.querySelectorAll('.chip').forEach(function(c){
+      panel.parentElement.querySelectorAll('.chip').forEach(function(c){
         var d=parseFloat(c.dataset.depth)/100; c.style.transform='translate('+(cx*d)+'px,'+(cy*d)+'px)';
       });
     });
     panel.addEventListener('mouseleave',function(){
-      panel.querySelectorAll('.chip').forEach(function(c){c.style.transform='';});
+      panel.parentElement.querySelectorAll('.chip').forEach(function(c){c.style.transform='';});
     });
   }
   var mg=document.getElementById('magnetic');
