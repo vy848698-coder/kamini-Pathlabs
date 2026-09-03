@@ -217,6 +217,7 @@
     prog.style.width = (h > 0 ? (y/h)*100 : 0) + "%";
     if (hpar && !rm && y < window.innerHeight * 1.4) hpar.style.transform = "translateY(" + (-y * 0.06) + "px)";
     qScroll();
+    spy();
     ticking = false;
   }
   window.addEventListener("resize", onScroll, {passive:true});
@@ -225,17 +226,64 @@
 
   /* ---- mobile menu ---- */
   var burger = document.getElementById("burger"), nl = document.getElementById("nlinks");
-  burger.addEventListener("click", function(){
-    var open = nl.classList.toggle("show");
+  function setMenu(open){
+    nl.classList.toggle("show", open);
     burger.classList.toggle("on", open);
     burger.setAttribute("aria-expanded", open ? "true" : "false");
+    /* stop the page scrolling behind the open sheet */
+    document.body.classList.toggle("menu-open", open);
+  }
+  burger.addEventListener("click", function(e){
+    e.stopPropagation();
+    setMenu(!nl.classList.contains("show"));
   });
   nl.querySelectorAll("a").forEach(function(a){
-    a.addEventListener("click", function(){
-      nl.classList.remove("show"); burger.classList.remove("on");
-      burger.setAttribute("aria-expanded","false");
-    });
+    a.addEventListener("click", function(){ setMenu(false); });
   });
+  /* escape, and a tap anywhere outside, both close it */
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && nl.classList.contains("show")) { setMenu(false); burger.focus(); }
+  });
+  document.addEventListener("click", function(e){
+    if (nl.classList.contains("show") && !nl.contains(e.target) && e.target !== burger) setMenu(false);
+  });
+  /* leaving mobile width with the sheet open would strand the scroll lock */
+  window.addEventListener("resize", function(){
+    if (window.innerWidth > 960 && nl.classList.contains("show")) setMenu(false);
+  });
+
+  /* ---- nav scrollspy ----
+     Each link names the section ids it stands for. The active link is the
+     last one whose section has passed the reading line, so a section with no
+     link of its own (programmes, reviews, FAQ) keeps the previous link lit
+     rather than leaving the bar blank. */
+  var spyLinks = [].slice.call(nl.querySelectorAll("a[data-spy]")).map(function(a){
+    var els = a.getAttribute("data-spy").split(" ")
+      .map(function(id){ return document.getElementById(id); })
+      .filter(Boolean);
+    return { a: a, els: els };
+  }).filter(function(o){ return o.els.length; });
+
+  function spy(){
+    if (!spyLinks || !spyLinks.length) return;   /* not built yet on first call */
+    var line = window.scrollY + (document.getElementById("nav").offsetHeight || 70) + 40;
+    var best = null, bestTop = -Infinity;
+    spyLinks.forEach(function(o){
+      o.els.forEach(function(el){
+        var top = el.getBoundingClientRect().top + window.scrollY;
+        if (top <= line && top > bestTop) { bestTop = top; best = o; }
+      });
+    });
+    /* past the last section the final link stays lit */
+    if (!best) best = spyLinks[0];
+    spyLinks.forEach(function(o){
+      var on = o === best;
+      o.a.classList.toggle("on", on);
+      if (on) o.a.setAttribute("aria-current", "true");
+      else o.a.removeAttribute("aria-current");
+    });
+  }
+  spy();
 
   /* ---- FAQ ---- */
   document.querySelectorAll(".fq").forEach(function(fq){

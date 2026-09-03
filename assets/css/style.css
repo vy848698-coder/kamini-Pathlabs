@@ -85,11 +85,18 @@ section{position:relative}
 .brand .wm span{font-size:.55rem;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-2);margin-top:4px;white-space:nowrap}
 footer .brand .wm b{color:#fff}
 footer .brand .wm span{color:var(--gold-soft)}
-.nlinks{display:flex;align-items:center;gap:23px;font-size:.85rem;font-weight:600;color:var(--grey);white-space:nowrap}
-.nlinks a{position:relative;padding:6px 0;transition:.25s}
-.nlinks a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--gold);transition:.35s var(--ease)}
-.nlinks a:hover{color:var(--teal)}
-.nlinks a:hover::after{width:100%}
+.nlinks{display:flex;align-items:center;gap:26px;font-size:.85rem;font-weight:600;color:var(--grey);white-space:nowrap}
+.nlinks a{position:relative;padding:6px 0;transition:color .25s var(--ease)}
+/* the rule grows from the centre, so it reads as one object rather than
+   a line sweeping in from the left on every hover */
+.nlinks a::after{content:"";position:absolute;left:50%;right:50%;bottom:0;height:1.5px;
+  background:var(--gold);border-radius:2px;transition:left .3s var(--ease),right .3s var(--ease)}
+.nlinks a:hover,.nlinks a:focus-visible{color:var(--teal)}
+.nlinks a:hover::after,.nlinks a:focus-visible::after{left:0;right:0}
+/* current section */
+.nlinks a.on{color:var(--teal);font-weight:800}
+.nlinks a.on::after{left:0;right:0;background:var(--teal)}
+.nlinks a:focus-visible{outline:2px solid var(--gold);outline-offset:5px;border-radius:3px}
 .nact{display:flex;align-items:center;gap:11px;flex-shrink:0}
 .ncall{display:flex;align-items:center;gap:9px;white-space:nowrap}
 .ncall .ic{width:37px;height:37px;border:1.5px solid var(--line);border-radius:var(--r);display:grid;place-items:center;color:var(--teal)}
@@ -487,8 +494,18 @@ footer .brand{margin-bottom:18px}
   .hgrid{gap:64px}
   .qgrid2{gap:72px}
   .nlinks{display:none}
-  .nlinks.show{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--ivory);padding:16px 30px 24px;gap:0;border-bottom:1px solid var(--line);box-shadow:var(--sh)}
+  .nlinks.show{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--ivory);padding:16px 30px 24px;gap:0;border-bottom:1px solid var(--line);box-shadow:var(--sh);
+    animation:navDrop .3s var(--ease) both}
   .nlinks.show a{padding:14px 0;border-bottom:1px solid var(--line-2);font-size:.94rem}
+  /* the centre-out rule makes no sense stacked; mark the row instead */
+  .nlinks.show a::after{display:none}
+  .nlinks.show a.on{color:var(--teal);padding-left:13px}
+  .nlinks.show a.on::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;
+    background:var(--gold);border-radius:3px}
+  .nlinks.show a:last-child{border-bottom:0}
+  @keyframes navDrop{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:none}}
+  /* the sheet scrolls, the page behind it does not */
+  body.menu-open{overflow:hidden}
   .burger{display:flex}
   /* rail collapses to 2 columns — the spine only reads on a single row */
   .qrail{grid-template-columns:1fr 1fr;padding-top:0}
