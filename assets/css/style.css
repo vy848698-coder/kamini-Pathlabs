@@ -219,7 +219,7 @@ footer .brand .wm span{color:var(--gold-soft)}
 /* ================= PROMO BANNER CAROUSEL ================= */
 .promo{padding:70px 0 0}
 .pcar{position:relative;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg);background:var(--teal-900)}
-.ptrack{display:flex;transition:transform .58s cubic-bezier(.62,0,.15,1);will-change:transform;backface-visibility:hidden}
+.ptrack{display:flex;transition:transform var(--pmove,.42s) cubic-bezier(.66,0,.16,1);will-change:transform;backface-visibility:hidden}
 /* stretch, not center — both columns must fill the row or the text panel's
    own background leaves dark bands above and below it */
 .pslide{min-width:100%;position:relative;display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);min-height:396px;align-items:stretch}
@@ -645,23 +645,28 @@ footer .brand{margin-bottom:18px}
 ========================================================== */
 
 /* --- staged entrance for the active slide's copy --- */
-.pcar.js .pslide .ptxt>*{opacity:0;transform:translateY(18px)}
-.pcar.js .pslide.is-active .ptxt>*{animation:pIn .5s cubic-bezier(.22,.72,.3,1) both}
-.pcar.js .pslide.is-active .ptxt>*:nth-child(1){animation-delay:.08s}
-.pcar.js .pslide.is-active .ptxt>*:nth-child(2){animation-delay:.13s}
-.pcar.js .pslide.is-active .ptxt>*:nth-child(3){animation-delay:.18s}
-.pcar.js .pslide.is-active .ptxt>*:nth-child(4){animation-delay:.23s}
-.pcar.js .pslide.is-active .ptxt>*:nth-child(5){animation-delay:.28s}
-@keyframes pIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+/* Every delay below is keyed off --pmove (the travel time) so the copy starts
+   arriving just as the track stops, never over a moving background. The whole
+   sequence finishes well inside --pdur, the autoplay dwell. */
+.pcar.js .pslide .ptxt>*{opacity:0;transform:translateY(14px)}
+.pcar.js .pslide.is-active .ptxt>*{animation:pIn .40s cubic-bezier(.22,.72,.3,1) both}
+.pcar.js .pslide.is-active .ptxt>*:nth-child(1){animation-delay:calc(var(--pmove,.42s) * .62)}
+.pcar.js .pslide.is-active .ptxt>*:nth-child(2){animation-delay:calc(var(--pmove,.42s) * .62 + .045s)}
+.pcar.js .pslide.is-active .ptxt>*:nth-child(3){animation-delay:calc(var(--pmove,.42s) * .62 + .09s)}
+.pcar.js .pslide.is-active .ptxt>*:nth-child(4){animation-delay:calc(var(--pmove,.42s) * .62 + .135s)}
+.pcar.js .pslide.is-active .ptxt>*:nth-child(5){animation-delay:calc(var(--pmove,.42s) * .62 + .18s)}
+@keyframes pIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
 /* the badge gets a touch more character than the rest */
-.pcar.js .pslide.is-active .plogo{animation:pLogo .5s var(--spring) both;animation-delay:.08s}
-@keyframes pLogo{from{opacity:0;transform:translateY(14px) scale(.94)}to{opacity:1;transform:none}}
+.pcar.js .pslide.is-active .plogo{animation:pLogo .42s var(--spring) both;animation-delay:calc(var(--pmove,.42s) * .62)}
+@keyframes pLogo{from{opacity:0;transform:translateY(12px) scale(.95)}to{opacity:1;transform:none}}
 
-/* --- slow Ken Burns drift on the active photo --- */
-.pcar.js .pslide .pimg img{transform:scale(1.055)}
-.pcar.js .pslide.is-active .pimg img{animation:pKen 3.3s linear both}
-@keyframes pKen{from{transform:scale(1.075)}to{transform:scale(1.005)}}
+/* --- Ken Burns drift on the active photo ---
+   Runs for exactly one dwell (--pken, set from the autoplay interval in JS) so
+   the zoom completes instead of being cut off part-way by the next slide. */
+.pcar.js .pslide .pimg img{transform:scale(1.045)}
+.pcar.js .pslide.is-active .pimg img{animation:pKen var(--pken,2000ms) linear both}
+@keyframes pKen{from{transform:scale(1.055)}to{transform:scale(1.005)}}
 
 /* --- autoplay progress rail --- */
 .pprog{position:absolute;left:0;right:0;bottom:0;height:3px;z-index:7;background:rgba(255,255,255,.13);pointer-events:none}

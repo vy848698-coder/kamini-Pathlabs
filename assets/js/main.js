@@ -21,7 +21,10 @@
      so the CSS owns the choreography and the JS only says "this one now". */
   var track = document.getElementById("ptrack");
   if (track) {
-    var AUTOPLAY = 3000;
+    /* One dwell. Every CSS duration below is derived from it, so changing
+       this number alone retimes the whole carousel. */
+    var AUTOPLAY = 2000;
+    var MOVE = 420;               /* keep in sync with --pmove's fallback */
     var slides = track.children, n = slides.length, cur = 0, timer = null;
     var dots = document.getElementById("pdots");
     var car = document.getElementById("pcar");
@@ -31,6 +34,10 @@
     /* signals to CSS that the staged entrance is safe to apply */
     car.classList.add("js");
     car.style.setProperty("--pdur", AUTOPLAY + "ms");
+    car.style.setProperty("--pmove", MOVE + "ms");
+    /* the photo drifts for exactly one dwell, so the zoom lands rather than
+       being cut off mid-way when the next slide takes over */
+    car.style.setProperty("--pken", AUTOPLAY + "ms");
 
     for (var d = 0; d < n; d++) {
       (function(k){
