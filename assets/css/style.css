@@ -690,6 +690,76 @@ footer .brand{margin-bottom:18px}
   .pprog{display:none}
 }
 
+/* ================= SPECIALIST CLINIC ================= */
+.docs{padding:96px 0;background:linear-gradient(180deg,var(--ivory-2),var(--ivory))}
+.docs .shead .l{max-width:720px}
+.docs .shead .lede{margin-top:16px}
+
+.dgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.dc{position:relative;display:flex;flex-direction:column;background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 24px 22px;
+  transition:transform .38s var(--ease),box-shadow .38s var(--ease),border-color .38s var(--ease)}
+.dc:hover{transform:translateY(-6px);box-shadow:var(--sh);border-color:transparent}
+.dic{width:46px;height:46px;border-radius:var(--r);background:var(--teal-50);color:var(--teal);
+  display:grid;place-items:center;margin-bottom:16px;transition:.38s var(--spring)}
+.dic svg{width:23px;height:23px}
+.dc:hover .dic{background:var(--teal);color:#fff;transform:translateY(-2px) rotate(-5deg)}
+.dc h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.32rem;
+  line-height:1.15;letter-spacing:-.01em;margin-bottom:6px}
+.dq{font-size:.82rem;color:var(--grey);line-height:1.5;margin-bottom:12px}
+.dtag{align-self:flex-start;font-size:.63rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold-2);background:var(--gold-pale);border-radius:100px;padding:5px 11px;margin-bottom:16px}
+
+/* days / time sit on a two-column definition list so they stay aligned card to card */
+.dwhen{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 14px;margin-top:auto;
+  padding-top:15px;border-top:1px solid var(--line-2)}
+.dwhen dt{font-size:.63rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--grey-2);padding-top:2px}
+.dwhen dd{font-size:.85rem;font-weight:700;color:var(--ink)}
+.dwhen dd em{display:block;font-style:normal;font-weight:600;font-size:.78rem;color:var(--grey);margin-top:2px}
+
+.dnote{display:flex;align-items:flex-start;gap:10px;margin-top:26px;font-size:.85rem;color:var(--grey)}
+.dnote svg{width:17px;height:17px;color:var(--gold-2);flex-shrink:0;margin-top:2px}
+.dnote b{color:var(--ink);font-weight:800}
+.dnote a{color:var(--teal);font-weight:800;border-bottom:1px solid var(--gold);padding-bottom:1px}
+
+/* on-site procedures */
+.facs{margin-top:44px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-xl);padding:32px 34px}
+.fachead h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.6rem;margin-bottom:6px}
+.fachead p{font-size:.88rem;color:var(--grey);margin-bottom:22px}
+.faclist{display:flex;flex-wrap:wrap;gap:9px;list-style:none}
+.faclist li{font-size:.83rem;font-weight:700;color:var(--teal);background:var(--teal-50);
+  border:1px solid var(--teal-100);border-radius:100px;padding:8px 15px;transition:.3s var(--ease)}
+.faclist li:hover{background:var(--teal);border-color:var(--teal);color:#fff}
+
+@media(max-width:1000px){ .dgrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media(max-width:900px){ .docs{padding:76px 0} .facs{padding:26px 22px} }
+@media(max-width:620px){
+  .dgrid{grid-template-columns:minmax(0,1fr);gap:14px}
+  .dc{padding:22px 20px 20px}
+  .dc h3{font-size:1.2rem}
+  .fachead h3{font-size:1.35rem}
+  .faclist li{font-size:.78rem;padding:7px 13px}
+}
+@media(max-width:400px){
+  .facs{padding:22px 17px}
+  .faclist{gap:7px}
+  .faclist li{font-size:.74rem;padding:6px 11px}
+  .dwhen{grid-template-columns:minmax(0,1fr);gap:2px}
+  .dwhen dt{padding-top:8px}
+}
+
+/* --- accredited lab partners --- */
+.labp{margin-top:52px;padding-top:30px;border-top:1px solid var(--teal-100);
+  display:flex;align-items:center;gap:26px;flex-wrap:wrap;justify-content:center}
+.labp-t{font-size:.68rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
+.labp-l{display:flex;flex-wrap:wrap;gap:10px;list-style:none;justify-content:center}
+.labp-l li{font-size:.86rem;font-weight:800;color:var(--teal);background:var(--paper);
+  border:1px solid var(--teal-100);border-radius:100px;padding:9px 18px}
+@media(max-width:620px){
+  .labp{margin-top:38px;gap:16px}
+  .labp-l li{font-size:.78rem;padding:7px 14px}
+}
+
 /* Smooth cross-document fade between pages (Chrome; others just navigate). */
 @view-transition{navigation:auto}
 @media (prefers-reduced-motion: reduce){ @view-transition{navigation:none} }
