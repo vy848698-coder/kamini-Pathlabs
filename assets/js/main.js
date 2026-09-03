@@ -177,19 +177,32 @@
       });
     }
   }
+  /* How much scrolling the reveal is spread over, as a fraction of viewport
+     height. QSPAN is the knob for pacing: bigger = slower, more deliberate
+     stagger. At 0.48 the whole rail lit within half a screen of scrolling,
+     which read as a rushed pop rather than a sequence. Past ~0.75 the last
+     card needs the rail almost at the top of the screen before it appears,
+     so anyone who stops scrolling mid-section is left looking at empty
+     cards — 0.70 lands the final one with the rail around a third up. */
+  var QSTART = 0.92, QSPAN = 0.70;
   function qScroll(){
     if (!qrail || rm) return;
     var r = qrail.getBoundingClientRect(), vh = window.innerHeight;
-    /* starts when the rail crosses 88% of the viewport, completes at 40% */
-    var p = (vh * 0.88 - r.top) / (vh * 0.48);
+    /* starts as the rail crosses QSTART of the viewport, completes once it
+       has travelled a further QSPAN of a screen */
+    var p = (vh * QSTART - r.top) / (vh * QSPAN);
     p = p < 0 ? 0 : (p > 1 ? 1 : p);
     qrail.style.setProperty("--p", p);
-    /* below 900px the rail is two columns and the spine is hidden, so light
-       by row instead of by column — otherwise the last card waits far too long */
-    var twoUp = window.innerWidth <= 900, n = qcards.length;
+    /* Read the real column count off the grid rather than guessing from the
+       width: the rail is 4 up, then 2, then 1 below 360px. Cards in the same
+       visual row should light together; a stacked card must not. */
+    var cols = getComputedStyle(qrail).gridTemplateColumns.split(" ").length,
+        n = qcards.length, rows = Math.ceil(n / cols);
     for (var i = 0; i < n; i++){
-      var t = twoUp ? (Math.floor(i / 2) + 0.4) / 2 * 0.9   /* row threshold */
-                    : (i + 0.5) / n;                        /* node position */
+      /* full width: each card lights as the spine reaches its own node.
+         Stacked: light by row, spread evenly down the rail. */
+      var t = cols >= n ? (i + 0.5) / n
+                        : (Math.floor(i / cols) + 0.4) / rows * 0.9;
       qcards[i].classList.toggle("lit", p >= t);
     }
   }
