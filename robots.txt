@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /index.original.backup.html
 
 Sitemap: https://kaminiclinicandlabs.in/sitemap.xml

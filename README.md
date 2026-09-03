@@ -23,8 +23,7 @@ kamini-Pathlabs/
 │   └── js/
 │       ├── image-fallback.js   Inline-SVG placeholders when a photo fails to load
 │       └── main.js             All page behaviour (see below)
-├── Images/                     Local photography goes here
-└── index.original.backup.html  Untouched copy of the original single-file page
+└── Images/                     Local photography goes here
 ```
 
 ## How the pages are wired
@@ -99,4 +98,3 @@ Upload the whole folder as-is. Then:
 2. Configure the host to serve `404.html` for unknown paths.
 3. Update the "Last updated" dates in `privacy.html` and `terms.html`, and have the two
    legal pages reviewed before going live — they are a solid starting draft, not legal advice.
-4. Delete `index.original.backup.html` once you are happy with the split version.
