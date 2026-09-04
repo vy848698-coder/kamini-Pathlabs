@@ -1,3 +1,6 @@
+| `assets/css/pages.css` | `<head>`, inner pages only | Overrides layered on top of `style.css` |
+| `assets/css/about.css` | `<head>`, `about.html` only | Loaded last; every rule is prefixed `.ab-` |
+| `assets/css/about.css` | `<head>`, `about.html` only | Loaded last; every rule is prefixed `.ab-` |
 # Kamini Clinic &amp; Labs — Website
 
 Static marketing + booking site for **Kamini Clinic & Labs**, a diagnostic centre in
@@ -9,6 +12,7 @@ vanilla JavaScript, so it can be dropped onto any static host.
 ```
 kamini-Pathlabs/
 ├── index.html                  Home page (hero, programmes, tests, packages, FAQ, booking)
+├── about.html                  About Us (story, timeline, values, quality, visit)
 ├── privacy.html                Privacy Policy
 ├── terms.html                  Terms of Service
 ├── 404.html                    Not-found page
@@ -19,7 +23,8 @@ kamini-Pathlabs/
 ├── assets/
 │   ├── css/
 │   │   ├── style.css           All shared styling — extracted from index.html
-│   │   └── pages.css           Extra styling for the legal pages and 404
+│   │   ├── pages.css           Extra styling for the legal pages, 404 and about
+│   │   └── about.css           Everything unique to about.html (all .ab- prefixed)
 │   └── js/
 │       ├── image-fallback.js   Inline-SVG placeholders when a photo fails to load
 │       └── main.js             All page behaviour (see below)
@@ -28,12 +33,13 @@ kamini-Pathlabs/
 
 ## How the pages are wired
 
-Every page loads the same three assets, in this order:
+Every page loads the same core assets, in this order:
 
 | Asset | Where | Why the order matters |
 | --- | --- | --- |
 | `assets/css/style.css` | `<head>` | Design tokens + all component styles |
 | `assets/css/pages.css` | `<head>`, inner pages only | Overrides layered on top of `style.css` |
+| `assets/css/about.css` | `<head>`, `about.html` only | Loaded last; every rule is prefixed `.ab-` |
 | `assets/js/image-fallback.js` | `<head>`, **blocking** | Defines `kFall()` before any `<img onerror>` can fire |
 | `assets/js/main.js` | end of `<body>`, `defer` | Runs after the DOM is parsed |
 
@@ -53,6 +59,7 @@ load on pages that do not have the element in question.
 - Mobile burger menu (`#burger` / `#nlinks`)
 - FAQ accordion (`.fq`)
 - Booking form validation (`#bform`) — **front-end only, see below**
+- About-page chapter rail spy + sideways auto-scroll (`#chap`)
 - Advisor widget dismiss (`#advClose`)
 - Smooth scrolling for in-page anchors, offset for the sticky header
 
@@ -63,6 +70,10 @@ visitor has asked for reduced motion.
 
 `#nav`, `#prog`, `#burger`, `#nlinks` — these live in the shared header/footer markup,
 so keep them when you add a new page.
+
+Anchor jumps clear the sticky chrome via `stickyTop()`: 72px for the header, plus the
+height of `#chap` on any page that has a chapter rail. A new page with its own sticky
+sub-nav only has to give it `id="chap"` to get the same offset and the same scrollspy.
 
 ## The booking form is not connected yet
 

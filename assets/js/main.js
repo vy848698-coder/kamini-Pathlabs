@@ -218,6 +218,7 @@
     if (hpar && !rm && y < window.innerHeight * 1.4) hpar.style.transform = "translateY(" + (-y * 0.06) + "px)";
     qScroll();
     spy();
+    chapSpy();
     ticking = false;
   }
   window.addEventListener("resize", onScroll, {passive:true});
@@ -285,6 +286,47 @@
   }
   spy();
 
+  /* ---- about-page chapter rail ----
+     A second, page-local nav that sticks under the header. Same "last section
+     past the reading line wins" rule as the main scrollspy, plus the active
+     chip is kept in view when the rail is scrolling sideways on a phone. */
+  var chap = document.getElementById("chap"), chapBox = chap ? chap.firstElementChild : null;
+  var chapLinks = chap ? [].slice.call(chap.querySelectorAll("a")).map(function(a){
+    return { a: a, el: document.querySelector(a.getAttribute("href")) };
+  }).filter(function(o){ return o.el; }) : [];
+
+  function chapSpy(){
+    if (!chapLinks || !chapLinks.length) return;   /* not an about page, or not built yet */
+    var line = window.scrollY + stickyTop() + 40, best = null, bestTop = -Infinity;
+    chapLinks.forEach(function(o){
+      var top = o.el.getBoundingClientRect().top + window.scrollY;
+      if (top <= line && top > bestTop) { bestTop = top; best = o; }
+    });
+    chapLinks.forEach(function(o){
+      var on = o === best;
+      if (on === o.a.classList.contains("on")) return;   /* nothing changed */
+      o.a.classList.toggle("on", on);
+      if (on) {
+        o.a.setAttribute("aria-current", "true");
+        /* centre the chip when the rail is scrolling sideways on a phone.
+           Measured off rects rather than offsetLeft, which would be relative
+           to the sticky rail rather than to the scrolling .wrap inside it. */
+        if (chapBox && chapBox.scrollWidth > chapBox.clientWidth) {
+          var ar = o.a.getBoundingClientRect(), br = chapBox.getBoundingClientRect();
+          chapBox.scrollLeft += (ar.left - br.left) - (br.width - ar.width) / 2;
+        }
+      } else o.a.removeAttribute("aria-current");
+    });
+  }
+  chapSpy();
+
+  /* How much sticky chrome an anchor has to clear: the header (72 has always
+     been the right number for it), plus the chapter rail on pages that have
+     one. Without this the about page would drop each section under its rail. */
+  function stickyTop(){
+    return 72 + (chap ? chap.offsetHeight : 0);
+  }
+
   /* ---- FAQ ---- */
   document.querySelectorAll(".fq").forEach(function(fq){
     var btn = fq.querySelector("button"), ans = fq.querySelector(".ans");
@@ -341,7 +383,7 @@
       var t = document.querySelector(id);
       if (!t) return;
       e.preventDefault();
-      window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 72, behavior: rm ? "auto":"smooth" });
+      window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - stickyTop(), behavior: rm ? "auto":"smooth" });
     });
   });
 })();

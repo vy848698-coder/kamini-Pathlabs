@@ -428,6 +428,9 @@ footer .brand .wm span{color:var(--gold-soft)}
 .fld input.bad{border-color:var(--red);background:#fdf3f0}
 .frow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:13px}
 .fmsg{margin-top:13px;font-size:.87rem;font-weight:700;color:var(--teal);display:flex;align-items:center;gap:8px}
+/* display:flex on the class outranks the UA's [hidden] rule, so the success
+   line has to be hidden explicitly until the form is submitted */
+.fmsg[hidden]{display:none}
 .fmsg svg{width:15px;height:15px;stroke-width:3}
 .ffine{margin-top:12px;font-size:.75rem;color:var(--grey-2);text-align:center}
 
@@ -780,4 +783,3 @@ footer .brand{margin-bottom:18px}
 /* Smooth cross-document fade between pages (Chrome; others just navigate). */
 @view-transition{navigation:auto}
 @media (prefers-reduced-motion: reduce){ @view-transition{navigation:none} }
-}

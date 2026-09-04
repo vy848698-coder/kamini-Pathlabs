@@ -1,0 +1,429 @@
+/* ==========================================================
+   KAMINI CLINIC & LABS — Home Collection
+   Loaded after style.css + pages.css on homecollection.html only.
+   Every class is prefixed .hc- so nothing leaks into the home
+   page, the about page or the legal pages.
+========================================================== */
+
+/* anchors clear the sticky header (70px once stuck) with air to spare */
+.hc-anchor{scroll-margin-top:100px}
+
+/* ================= MASTHEAD ================= */
+/* Deliberately unlike both the home hero and the about masthead: the
+   right-hand column is not a photograph but a working slot picker, because
+   the one thing a visitor wants from this page is a time and a date. */
+.hc-mast{position:relative;overflow:hidden;padding:64px 0 92px;background:var(--teal-900);color:#fff}
+/* a field of faint dots — the about page uses graph-paper lines, so this
+   reads as a sibling rather than a copy */
+.hc-mast::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.07) 1.4px,transparent 1.4px);
+  background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(115% 100% at 82% 0%,#000,transparent 68%);
+          mask-image:radial-gradient(115% 100% at 82% 0%,#000,transparent 68%)}
+.hc-mast::after{content:"";position:absolute;left:-180px;bottom:-240px;width:560px;height:560px;
+  border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(201,162,75,.24),transparent 66%)}
+.hc-mast .wrap{position:relative;z-index:2}
+.hc-mgrid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:60px;align-items:center}
+.hc-mast .crumb{margin-bottom:22px}
+.hc-mast h1{font-size:clamp(2.05rem,5.9vw,3.85rem);letter-spacing:-.02em;color:#fff;margin:16px 0 0}
+.hc-mast h1 em{font-style:italic;color:var(--gold-soft)}
+.hc-mast .lede{color:rgba(255,255,255,.74);margin-top:20px;font-size:1.05rem;max-width:52ch}
+
+/* three hard facts, set like a strip of tube labels */
+.hc-strip{display:flex;flex-wrap:wrap;gap:0;margin-top:32px;border:1px solid rgba(255,255,255,.16);
+  border-radius:var(--r);overflow:hidden;background:rgba(255,255,255,.03)}
+.hc-strip div{flex:1 1 150px;padding:15px 20px;border-right:1px solid rgba(255,255,255,.12)}
+.hc-strip div:last-child{border-right:0}
+.hc-strip b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.5rem;
+  line-height:1;color:var(--gold-soft)}
+.hc-strip span{display:block;margin-top:7px;font-size:.68rem;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(255,255,255,.52);line-height:1.5}
+.hc-macts{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+
+/* ---------- the slot picker ---------- */
+.hc-slot{position:relative;background:var(--paper);color:var(--ink);border-radius:var(--r-xl);
+  padding:28px 28px 24px;box-shadow:var(--sh-lg)}
+/* a gold seam along the top edge, the way a requisition slip is bound */
+.hc-slot::before{content:"";position:absolute;left:28px;right:28px;top:0;height:3px;border-radius:0 0 3px 3px;
+  background:linear-gradient(90deg,var(--gold-soft),var(--gold-2))}
+.hc-slot h2{font-size:1.42rem;margin:0 0 4px}
+.hc-slot .sub{font-size:.83rem;color:var(--grey);margin-bottom:20px}
+.hc-lab{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  font-size:.7rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--grey-2);margin-bottom:10px}
+.hc-lab i{font-style:normal;color:var(--gold-2)}
+.hc-dates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:20px}
+.hc-dchip{border:1.5px solid var(--line);border-radius:var(--r);padding:10px 8px;text-align:center;
+  background:var(--ivory);transition:.25s var(--ease);line-height:1.25}
+.hc-dchip b{display:block;font-size:.86rem;font-weight:800}
+.hc-dchip span{display:block;font-size:.68rem;color:var(--grey-2);font-weight:700;margin-top:2px}
+.hc-dchip:hover{border-color:var(--teal-200);background:var(--paper)}
+.hc-dchip[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-50);box-shadow:0 0 0 3px rgba(13,71,68,.07)}
+.hc-dchip[aria-pressed="true"] span{color:var(--teal)}
+
+.hc-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.hc-schip{position:relative;border:1.5px solid var(--line);border-radius:var(--r);padding:11px 12px;
+  text-align:left;background:var(--ivory);transition:.25s var(--ease)}
+.hc-schip b{display:block;font-size:.82rem;font-weight:800;letter-spacing:-.01em}
+.hc-schip span{display:block;font-size:.66rem;font-weight:700;color:var(--grey-2);margin-top:3px}
+.hc-schip.fast span{color:var(--gold-2)}
+.hc-schip:hover{border-color:var(--teal-200);background:var(--paper)}
+.hc-schip[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-50);box-shadow:0 0 0 3px rgba(13,71,68,.07)}
+.hc-schip[aria-pressed="true"]::after{content:"";position:absolute;right:10px;top:10px;width:7px;height:7px;
+  border-radius:50%;background:var(--gold)}
+
+.hc-loc{margin-top:16px}
+.hc-loc input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:var(--r);
+  font-size:.92rem;color:var(--ink);background:var(--ivory);outline:none;transition:.25s}
+.hc-loc input:focus{border-color:var(--teal);background:var(--paper);box-shadow:0 0 0 4px rgba(13,71,68,.08)}
+.hc-sgo{margin-top:16px}
+.hc-snote{margin-top:12px;font-size:.74rem;color:var(--grey-2);text-align:center;line-height:1.6}
+.hc-snote b{color:var(--teal);font-weight:800}
+
+/* ================= NO-CHARGE RECEIPT ================= */
+.hc-zero{padding:96px 0;background:var(--ivory)}
+.hc-zgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:72px;align-items:center}
+.hc-zgrid h2{margin:18px 0 16px}
+.hc-zgrid .lede{margin-bottom:26px}
+.hc-zpts{list-style:none;display:flex;flex-direction:column;gap:13px}
+.hc-zpts li{display:flex;align-items:flex-start;gap:11px;font-size:.93rem;color:var(--grey)}
+.hc-zpts svg{width:17px;height:17px;stroke-width:2.6;color:var(--gold);flex-shrink:0;margin-top:4px}
+.hc-zpts b{color:var(--ink);font-weight:700}
+
+/* A bill that only ever adds up to nothing. Tabular figures keep the
+   right-hand column in a straight line however long the label is. */
+.hc-receipt{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:34px 34px 32px;box-shadow:var(--sh);max-width:470px;margin:0 auto;overflow:hidden}
+.hc-receipt::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;
+  background:linear-gradient(90deg,var(--gold-2),var(--gold-soft),var(--gold-2))}
+.hc-rhead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+  padding-bottom:18px;border-bottom:1px dashed var(--line)}
+.hc-rhead b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.3rem;line-height:1.2}
+.hc-rhead>div>span{display:block;font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--grey-2);margin-top:6px}
+.hc-stamp{flex:none;transform:rotate(6deg);border:2px solid var(--gold);color:var(--gold-2);border-radius:6px;
+  padding:7px 11px;text-align:center;line-height:1;box-shadow:inset 0 0 0 2px var(--paper),inset 0 0 0 3px var(--gold-pale)}
+.hc-stamp b{display:block;font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;line-height:1}
+.hc-stamp span{display:block;font-size:.52rem;font-weight:800;letter-spacing:.18em;margin-top:4px}
+.hc-rrows{list-style:none;margin:6px 0 0}
+.hc-rrow{display:flex;align-items:baseline;gap:8px;padding:13px 0;font-size:.9rem;color:var(--grey)}
+.hc-rrow i{flex:1;font-style:normal;border-bottom:1px dotted var(--line);transform:translateY(-4px)}
+.hc-rrow em{font-style:normal;font-weight:800;color:var(--teal);font-variant-numeric:tabular-nums}
+.hc-rtot{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:10px;padding-top:18px;
+  border-top:2px solid var(--ink)}
+.hc-rtot span{font-size:.7rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--grey-2)}
+.hc-rtot b{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.5rem;color:var(--ink);line-height:1}
+.hc-rfoot{margin-top:16px;font-size:.75rem;color:var(--grey-2);line-height:1.65}
+
+/* ================= A MORNING WITH YOUR SAMPLE ================= */
+.hc-day{padding:100px 0;background:var(--paper);border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.hc-rail{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;margin-top:8px}
+/* the spine sits behind the dots and is drawn once for the whole row */
+.hc-rail::before{content:"";position:absolute;left:0;right:0;top:33px;height:1.5px;background:var(--line)}
+.hc-rail::after{content:"";position:absolute;left:0;top:33px;height:1.5px;width:100%;transform-origin:left;
+  background:linear-gradient(90deg,var(--gold-2),var(--gold-soft));transform:scaleX(0);
+  transition:transform 1.9s var(--ease) .15s}
+.hc-rail.in::after{transform:scaleX(1)}
+.hc-node{position:relative;padding:0 18px 0 0}
+.hc-node:last-child{padding-right:0}
+.hc-ntime{display:block;font-size:.71rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--gold-2);margin-bottom:12px;white-space:nowrap}
+.hc-ndot{position:relative;display:block;width:15px;height:15px;border-radius:50%;background:var(--paper);
+  border:2px solid var(--gold);margin-bottom:26px}
+.hc-ndot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--gold);
+  transform:scale(0);transition:transform .5s var(--spring)}
+/* the dots light in sequence behind the travelling spine, so the row reads
+   left to right rather than popping as one block */
+.hc-rail.in .hc-ndot::after{transform:scale(1)}
+.hc-rail.in .hc-node:nth-child(1) .hc-ndot::after{transition-delay:.20s}
+.hc-rail.in .hc-node:nth-child(2) .hc-ndot::after{transition-delay:.50s}
+.hc-rail.in .hc-node:nth-child(3) .hc-ndot::after{transition-delay:.80s}
+.hc-rail.in .hc-node:nth-child(4) .hc-ndot::after{transition-delay:1.10s}
+.hc-rail.in .hc-node:nth-child(5) .hc-ndot::after{transition-delay:1.40s}
+.hc-rail.in .hc-node:nth-child(6) .hc-ndot::after{transition-delay:1.70s}
+.hc-node h3{font-family:'Manrope',sans-serif;font-size:.97rem;font-weight:800;letter-spacing:-.005em;
+  line-height:1.35;margin-bottom:8px}
+.hc-node p{font-size:.85rem;color:var(--grey);line-height:1.65}
+.hc-dfoot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:52px;padding-top:26px;
+  border-top:1px solid var(--line-2);font-size:.86rem;color:var(--grey)}
+.hc-dfoot b{color:var(--ink);font-weight:800}
+.hc-dfoot .sp{flex:1}
+
+/* ================= BUILD YOUR VISIT ================= */
+.hc-build{padding:100px 0;background:var(--teal-50)}
+.hc-bgrid{display:grid;grid-template-columns:minmax(0,1fr) 348px;gap:44px;align-items:start}
+.hc-tabs{display:inline-flex;gap:4px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  padding:4px;margin-bottom:22px}
+.hc-tab{padding:9px 18px;border-radius:4px;font-size:.84rem;font-weight:700;color:var(--grey);transition:.25s var(--ease)}
+.hc-tab:hover{color:var(--teal)}
+.hc-tab[aria-selected="true"]{background:var(--teal);color:#fff}
+.hc-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+/* display:grid on the class outranks the UA's [hidden] rule, so the inactive
+   tab panel has to be hidden explicitly */
+.hc-cards[hidden]{display:none}
+/* The whole card is clickable for convenience, but the focusable control is
+   the real <button> in its price row — so the card stays valid markup and
+   the keyboard still gets one stop per test rather than none. */
+.hc-item{position:relative;background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r-lg);
+  padding:20px 20px 18px;transition:.3s var(--ease);text-align:left;cursor:pointer}
+.hc-item:focus-within{border-color:var(--teal);box-shadow:0 0 0 4px rgba(13,71,68,.09)}
+.hc-item:hover{border-color:var(--teal-200);transform:translateY(-2px);box-shadow:var(--sh)}
+.hc-item.on{border-color:var(--teal);background:linear-gradient(180deg,var(--teal-50),var(--paper) 60%)}
+.hc-itop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.hc-ifast{display:inline-flex;align-items:center;gap:6px;font-size:.66rem;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold-2);background:var(--gold-pale);border-radius:100px;padding:4px 10px}
+.hc-ifast.none{color:var(--teal);background:var(--teal-100)}
+.hc-itat{font-size:.7rem;font-weight:800;color:var(--grey-2);letter-spacing:.06em}
+.hc-item h3{font-family:'Manrope',sans-serif;font-size:1rem;font-weight:800;letter-spacing:-.008em;line-height:1.3}
+.hc-item p{font-size:.79rem;color:var(--grey);margin-top:6px;line-height:1.55;min-height:2.4em}
+.hc-iprice{display:flex;align-items:center;gap:9px;margin-top:15px;padding-top:14px;border-top:1px solid var(--line-2)}
+.hc-iprice b{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.32rem;line-height:1;color:var(--ink)}
+.hc-iprice s{font-size:.8rem;color:var(--grey-2)}
+.hc-iadd{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:800;
+  color:var(--teal);border:1.5px solid var(--line);border-radius:100px;padding:6px 13px;transition:.25s var(--ease)}
+.hc-iadd svg{width:13px;height:13px;stroke-width:2.6}
+.hc-item:hover .hc-iadd{border-color:var(--teal)}
+.hc-item.on .hc-iadd{background:var(--teal);border-color:var(--teal);color:#fff}
+.hc-bnote{display:flex;align-items:flex-start;gap:12px;margin-top:18px;background:var(--paper);
+  border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:var(--r);padding:15px 18px;
+  font-size:.85rem;color:var(--grey);line-height:1.65}
+.hc-bnote svg{width:17px;height:17px;color:var(--gold-2);flex-shrink:0;margin-top:3px}
+.hc-bnote b{color:var(--ink);font-weight:700}
+
+/* the running total — dark, so it holds its own against a page of white cards */
+.hc-sum{position:sticky;top:100px;background:linear-gradient(160deg,var(--teal),var(--teal-900));color:#fff;
+  border-radius:var(--r-lg);padding:26px 24px;box-shadow:var(--sh-lg);overflow:hidden}
+.hc-sum h3{font-size:1.25rem;color:#fff;margin-bottom:3px}
+.hc-sum .sub{font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:20px}
+.hc-slist{list-style:none;margin:0 0 4px;max-height:274px;overflow-y:auto}
+.hc-slist li{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.11);
+  font-size:.85rem;color:rgba(255,255,255,.88)}
+.hc-slist li span{flex:1;line-height:1.4}
+.hc-slist li em{font-style:normal;font-weight:800;font-variant-numeric:tabular-nums;color:#fff}
+.hc-srm{flex:none;width:19px;height:19px;border-radius:50%;border:1px solid rgba(255,255,255,.28);
+  color:rgba(255,255,255,.7);font-size:.85rem;line-height:1;display:grid;place-items:center;transition:.22s}
+.hc-srm:hover{background:rgba(255,255,255,.16);color:#fff}
+.hc-sempty{padding:22px 0 24px;font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.7;
+  border-top:1px solid rgba(255,255,255,.11);border-bottom:1px solid rgba(255,255,255,.11)}
+.hc-srow{display:flex;justify-content:space-between;gap:12px;font-size:.83rem;color:rgba(255,255,255,.72);padding:9px 0}
+.hc-srow em{font-style:normal;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.hc-srow.free em{color:var(--gold-soft)}
+.hc-stot{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:8px;padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.22)}
+.hc-stot span{font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.hc-stot b{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.85rem;line-height:1;color:#fff}
+.hc-save{display:block;margin-top:9px;font-size:.76rem;font-weight:800;color:var(--gold-soft);text-align:right}
+.hc-save[hidden]{display:none}
+.hc-sum .btn{margin-top:18px}
+.hc-sfine{margin-top:12px;font-size:.72rem;color:rgba(255,255,255,.5);text-align:center;line-height:1.6}
+
+/* ================= WHO COMES TO THE DOOR ================= */
+.hc-who{padding:100px 0;background:var(--paper)}
+.hc-wgrid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:76px;align-items:center}
+
+/* an ID card, drawn rather than photographed — the fields are labels, not a
+   made-up person, because the point is what the visitor should ask to see */
+.hc-idwrap{position:relative;display:flex;flex-direction:column;align-items:center}
+.hc-idwrap::before{content:"";position:absolute;left:50%;top:-6px;width:230px;height:230px;
+  transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,var(--gold-pale),transparent 68%)}
+.hc-id{position:relative;width:280px;background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--sh-lg);overflow:hidden;transform:rotate(-3deg);transition:.5s var(--spring)}
+.hc-id:hover{transform:rotate(0deg) translateY(-4px)}
+.hc-idclip{height:26px;background:var(--ivory-2);border-bottom:1px solid var(--line);display:grid;place-items:center}
+.hc-idclip i{display:block;width:52px;height:8px;border-radius:5px;background:var(--line);
+  box-shadow:inset 0 1px 2px rgba(7,34,32,.25)}
+.hc-idhead{display:flex;align-items:center;gap:9px;padding:13px 16px;background:linear-gradient(135deg,var(--teal),var(--teal-900))}
+.hc-idhead svg{width:26px;height:26px;flex-shrink:0}
+.hc-idhead b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:.98rem;color:#fff;line-height:1.1}
+/* scoped to .sub so it cannot also catch the wrapper span around it */
+.hc-idhead .sub{display:block;font-size:.48rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold-soft);margin-top:3px}
+.hc-idbody{padding:18px 16px 20px;text-align:center}
+.hc-idface{width:74px;height:74px;border-radius:50%;margin:0 auto 14px;background:var(--teal-50);
+  border:2px solid var(--teal-100);display:grid;place-items:center;color:var(--teal)}
+.hc-idface svg{width:34px;height:34px}
+.hc-idpill{display:inline-block;font-size:.55rem;font-weight:800;letter-spacing:.19em;text-transform:uppercase;
+  background:var(--gold-pale);color:var(--gold-2);border-radius:100px;padding:5px 12px}
+.hc-idrows{margin-top:16px;text-align:left}
+.hc-idrows div{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line-2);
+  font-size:.72rem}
+.hc-idrows div:last-child{border-bottom:0}
+.hc-idrows span{font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--grey-2);font-size:.6rem}
+.hc-idrows b{color:var(--ink);font-weight:700}
+.hc-idfoot{background:var(--ivory);border-top:1px solid var(--line);padding:9px 16px;font-size:.6rem;
+  font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-2);text-align:center}
+.hc-idcap{position:relative;margin-top:26px;font-size:.8rem;color:var(--grey);text-align:center;max-width:270px;line-height:1.7}
+
+.hc-wlist{list-style:none;margin-top:30px;display:grid;gap:0}
+.hc-wlist li{display:flex;gap:18px;padding:20px 0;border-top:1px solid var(--line-2)}
+.hc-wlist li:last-child{border-bottom:1px solid var(--line-2)}
+.hc-wico{flex:none;width:42px;height:42px;border-radius:var(--r);background:var(--teal-50);color:var(--teal);
+  display:grid;place-items:center;transition:.3s var(--ease)}
+.hc-wico svg{width:19px;height:19px}
+.hc-wlist li:hover .hc-wico{background:var(--teal);color:#fff}
+.hc-wlist h3{font-family:'Manrope',sans-serif;font-size:.96rem;font-weight:800;letter-spacing:-.005em;margin-bottom:5px}
+.hc-wlist p{font-size:.86rem;color:var(--grey);line-height:1.68}
+
+/* ================= KIT / KEEP READY ================= */
+/* One object cut in half: what we carry in, what you set out. The two panels
+   share a border so they read as a single opened case. */
+.hc-kit{padding:0 0 100px;background:var(--paper)}
+.hc-kgrid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:var(--r-xl);
+  overflow:hidden;box-shadow:var(--sh)}
+.hc-kp{padding:44px 42px}
+.hc-kp.dark{background:linear-gradient(165deg,var(--teal),var(--teal-900));color:#fff}
+.hc-kp.dark h3{color:#fff}
+.hc-kp.light{background:var(--ivory)}
+.hc-khead{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.hc-khead .ic{width:40px;height:40px;border-radius:var(--r);display:grid;place-items:center;flex-shrink:0}
+.hc-kp.dark .hc-khead .ic{background:rgba(255,255,255,.12);color:var(--gold-soft)}
+.hc-kp.light .hc-khead .ic{background:var(--gold-pale);color:var(--gold-2)}
+.hc-khead .ic svg{width:19px;height:19px}
+.hc-kp h3{font-size:1.42rem;line-height:1.15}
+.hc-kp>p{font-size:.87rem;line-height:1.7;margin-bottom:22px}
+.hc-kp.dark>p{color:rgba(255,255,255,.68)}
+.hc-kp.light>p{color:var(--grey)}
+.hc-klist{list-style:none;display:grid;gap:12px}
+.hc-klist li{display:flex;align-items:flex-start;gap:11px;font-size:.9rem;line-height:1.6}
+.hc-klist svg{width:16px;height:16px;stroke-width:2.6;flex-shrink:0;margin-top:4px}
+.hc-kp.dark .hc-klist li{color:rgba(255,255,255,.86)}
+.hc-kp.dark .hc-klist svg{color:var(--gold-soft)}
+.hc-kp.light .hc-klist li{color:var(--grey)}
+.hc-kp.light .hc-klist svg{color:var(--teal)}
+.hc-klist b{font-weight:700}
+.hc-kp.dark .hc-klist b{color:#fff}
+.hc-kp.light .hc-klist b{color:var(--ink)}
+
+/* ================= PREPARATION TABLE ================= */
+.hc-prep{padding:100px 0;background:var(--ivory)}
+.hc-tscroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--paper);
+  box-shadow:var(--sh);-webkit-overflow-scrolling:touch}
+.hc-table{width:100%;border-collapse:collapse;min-width:660px}
+.hc-table thead th{background:var(--teal-900);color:rgba(255,255,255,.72);font-size:.66rem;font-weight:800;
+  letter-spacing:.15em;text-transform:uppercase;text-align:left;padding:15px 20px;white-space:nowrap}
+.hc-table thead th:first-child{color:#fff}
+.hc-table tbody tr{border-top:1px solid var(--line-2);transition:background .22s}
+.hc-table tbody tr:hover{background:var(--teal-50)}
+.hc-table td{padding:16px 20px;font-size:.87rem;color:var(--grey);vertical-align:top}
+.hc-table td:first-child{font-weight:800;color:var(--ink)}
+.hc-table td small{display:block;font-size:.76rem;color:var(--grey-2);font-weight:600;margin-top:3px}
+.hc-fpill{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.06em;border-radius:100px;
+  padding:4px 11px;white-space:nowrap}
+.hc-fpill.yes{background:var(--gold-pale);color:var(--gold-2)}
+.hc-fpill.no{background:var(--teal-100);color:var(--teal)}
+.hc-pnotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+.hc-pn{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px 22px}
+.hc-pn b{display:flex;align-items:center;gap:9px;font-size:.9rem;color:var(--teal);margin-bottom:7px}
+.hc-pn svg{width:16px;height:16px;color:var(--gold);flex-shrink:0}
+.hc-pn p{font-size:.83rem;color:var(--grey);line-height:1.65}
+
+/* ================= COVERAGE ================= */
+.hc-area{position:relative;overflow:hidden;padding:100px 0;background:var(--teal-900);color:#fff}
+.hc-area::before{content:"";position:absolute;right:-140px;top:-160px;width:520px;height:520px;border-radius:50%;
+  pointer-events:none;background:radial-gradient(circle,rgba(201,162,75,.22),transparent 66%)}
+.hc-area .wrap{position:relative;z-index:2}
+.hc-area .center-head h2{color:#fff}
+.hc-area .center-head p{color:rgba(255,255,255,.7)}
+.hc-check{display:flex;gap:10px;max-width:560px;margin:0 auto;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.2);border-radius:var(--r-lg);padding:8px;transition:.3s}
+.hc-check:focus-within{border-color:var(--gold-soft);box-shadow:0 0 0 4px rgba(201,162,75,.14)}
+.hc-check .fi{flex:1;display:flex;align-items:center;gap:10px;padding-left:13px;min-width:0}
+.hc-check .fi svg{width:18px;height:18px;color:var(--gold-soft);flex-shrink:0}
+.hc-check input{flex:1;border:none;outline:none;background:transparent;color:#fff;font-size:.93rem;min-width:0}
+.hc-check input::placeholder{color:rgba(255,255,255,.45)}
+.hc-res{max-width:560px;margin:16px auto 0;border-radius:var(--r);padding:15px 18px;font-size:.88rem;
+  line-height:1.6;display:flex;align-items:flex-start;gap:11px;
+  border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)}
+.hc-res[hidden]{display:none}
+.hc-res svg{width:17px;height:17px;stroke-width:2.4;flex-shrink:0;margin-top:3px}
+.hc-res.ok{border-color:rgba(201,162,75,.5);background:rgba(201,162,75,.12)}
+.hc-res.ok svg{color:var(--gold-soft)}
+.hc-res b{color:#fff;font-weight:800}
+.hc-res a{color:var(--gold-soft);font-weight:800;border-bottom:1px solid rgba(227,198,127,.5)}
+.hc-chips{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;max-width:840px;margin:44px auto 0}
+.hc-chips button{font-size:.8rem;font-weight:600;color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.17);
+  border-radius:100px;padding:7px 15px;transition:.25s var(--ease)}
+.hc-chips button:hover{border-color:var(--gold-soft);color:#fff}
+.hc-chips button.hit{border-color:var(--gold);background:rgba(201,162,75,.2);color:#fff}
+.hc-afoot{margin-top:32px;text-align:center;font-size:.85rem;color:rgba(255,255,255,.6)}
+.hc-afoot a{color:var(--gold-soft);font-weight:800}
+
+/* ================= FAQ ================= */
+.hc-faqs{padding:100px 0;background:var(--teal-50)}
+.hc-fcols{display:grid;grid-template-columns:1fr 1fr;gap:0 56px;align-items:start}
+.hc-faqs .fq button{padding:21px 0}
+.hc-ffoot{margin-top:46px;text-align:center;font-size:.9rem;color:var(--grey)}
+.hc-ffoot a{color:var(--teal);font-weight:800;border-bottom:1px solid var(--teal-200)}
+
+/* ================= BOOKING PANEL ================= */
+/* Reuses .book / .bpanel / .bform from style.css — it is the same component
+   as the home page, only with the address and slot fields this page needs. */
+.hc-fchosen{margin-bottom:15px}
+.hc-fchosen .box{border:1.5px dashed var(--line);border-radius:var(--r);background:var(--ivory);padding:11px 14px;
+  font-size:.85rem;color:var(--grey);line-height:1.55;min-height:44px;display:flex;align-items:center}
+.hc-fchosen .box b{color:var(--teal);font-weight:800}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:1140px){
+  .hc-bgrid{grid-template-columns:minmax(0,1fr) 306px;gap:30px}
+  .hc-rail{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:44px}
+  /* with two rows the single spine would cut through the second row's copy */
+  .hc-rail::before,.hc-rail::after{display:none}
+  .hc-node{padding-right:22px}
+  .hc-node:nth-child(3n){padding-right:0}
+}
+@media(max-width:1000px){
+  .hc-mgrid{grid-template-columns:1fr;gap:44px}
+  .hc-zgrid,.hc-wgrid{grid-template-columns:1fr;gap:46px}
+  .hc-wgrid .hc-idwrap{order:2}
+  .hc-kgrid{grid-template-columns:1fr}
+  .hc-pnotes{grid-template-columns:1fr}
+}
+@media(max-width:960px){
+  .hc-bgrid{grid-template-columns:1fr}
+  /* the total stops following the page and simply closes the section */
+  .hc-sum{position:static}
+  .hc-slist{max-height:none}
+  .hc-fcols{grid-template-columns:1fr;gap:0}
+}
+@media(max-width:640px){
+  .hc-mast{padding:46px 0 66px}
+  .hc-zero,.hc-day,.hc-build,.hc-who,.hc-prep,.hc-area,.hc-faqs{padding:64px 0}
+  .hc-kit{padding-bottom:64px}
+  .hc-slot{padding:24px 20px 20px}
+  .hc-slot::before{left:20px;right:20px}
+  .hc-cards{grid-template-columns:1fr}
+  .hc-rail{grid-template-columns:1fr;row-gap:0}
+  /* stacked: the spine turns vertical and runs down the left of the copy */
+  .hc-node{padding:0 0 26px 34px;border-left:1.5px solid var(--line)}
+  .hc-node:last-child{border-left-color:transparent;padding-bottom:0}
+  .hc-ndot{position:absolute;left:-8px;top:2px;margin:0}
+  .hc-ntime{margin-bottom:6px}
+  .hc-receipt{padding:26px 22px 34px}
+  .hc-kp{padding:34px 26px}
+  .hc-who .hc-wgrid{gap:38px}
+  .hc-table td,.hc-table thead th{padding:13px 15px}
+}
+@media(max-width:480px){
+  /* three across becomes 2 + 1 with a hole in it, so stack the facts instead
+     and move the rule from the right edge to the bottom */
+  .hc-strip div{flex:1 1 100%;border-right:0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .hc-strip div:last-child{border-bottom:0}
+  .hc-strip b{display:inline-block}
+  .hc-strip span{display:inline-block;margin:0 0 0 10px}
+  .hc-dates{grid-template-columns:1fr;gap:8px}
+  .hc-dchip{display:flex;align-items:baseline;justify-content:space-between;gap:8px;text-align:left;padding:11px 14px}
+  .hc-slots{grid-template-columns:1fr}
+  .hc-rhead{flex-direction:column;gap:14px}
+  .hc-stamp{align-self:flex-start;transform:rotate(-3deg)}
+  .hc-tabs{display:flex;width:100%}
+  .hc-tab{flex:1;text-align:center;padding:10px 8px}
+  .hc-id{width:100%;max-width:280px}
+}
+@media(pointer:coarse){
+  .hc-chips button,.hc-tab{min-height:40px;display:inline-flex;align-items:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .hc-rail::after{transition:none;transform:scaleX(1)}
+  .hc-ndot::after{transition:none;transform:scale(1)}
+  .hc-id{transform:none}
+}
