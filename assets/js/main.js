@@ -231,8 +231,10 @@
     nl.classList.toggle("show", open);
     burger.classList.toggle("on", open);
     burger.setAttribute("aria-expanded", open ? "true" : "false");
-    /* stop the page scrolling behind the open sheet */
-    document.body.classList.toggle("menu-open", open);
+    /* No body scroll lock. `overflow:hidden` on the body makes it a scroll
+       container, and that un-sticks the header the sheet hangs from — the whole
+       menu would jump to the top of the document. The sheet rides with the
+       sticky header instead, and `overscroll-behavior` stops the chaining. */
   }
   burger.addEventListener("click", function(e){
     e.stopPropagation();
