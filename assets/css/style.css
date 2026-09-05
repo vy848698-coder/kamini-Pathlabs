@@ -295,16 +295,33 @@ footer .brand .wm span{color:var(--gold-soft)}
 
 /* ================= SPECIAL PROGRAMS ================= */
 .progs{padding:96px 0;background:linear-gradient(180deg,var(--ivory),var(--teal-50))}
-.pgrid6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
-.pcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:0 0 20px;text-align:center;transition:.38s var(--ease);overflow:hidden;position:relative}
-.pcard:hover{transform:translateY(-8px);box-shadow:var(--sh);border-color:transparent}
-.parch{height:96px;position:relative;display:grid;place-items:center;background:linear-gradient(180deg,var(--gold-pale),var(--paper))}
-.parch::before{content:"";position:absolute;width:76px;height:76px;border-radius:50%;background:var(--gold-soft);opacity:.5;bottom:10px;transition:.38s var(--ease)}
-.pcard:hover .parch::before{transform:scale(1.14);opacity:.75}
-.parch svg{width:46px;height:46px;position:relative;z-index:2;color:var(--teal);stroke-width:1.5;transition:.38s var(--ease)}
-.pcard:hover .parch svg{transform:scale(1.08)}
-.pcard b{display:block;font-size:.93rem;font-weight:700;margin:16px 12px 4px;line-height:1.3}
-.pcard small{display:block;font-size:.76rem;color:var(--grey);padding:0 10px}
+.progs h2 em{font-style:normal;color:var(--gold-2)}
+.pgrid6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px}
+.pcard{display:block;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-xl);padding:0 0 24px;text-align:center;overflow:hidden;position:relative;transition:transform .42s var(--ease),box-shadow .42s var(--ease),border-color .42s var(--ease)}
+.pcard:hover{transform:translateY(-10px);box-shadow:var(--sh);border-color:var(--gold-soft)}
+/* photo */
+.pph{display:block;position:relative;aspect-ratio:5/4;overflow:hidden;background:var(--teal-50)}
+.pph img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.pcard:hover .pph img{transform:scale(1.07)}
+/* a soft scrim keeps the medallion legible over a busy photo */
+.pph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,34,32,0) 48%,rgba(7,34,32,.3));transition:.42s var(--ease)}
+.pcard:hover .pph::after{background:linear-gradient(180deg,rgba(13,71,68,.06) 30%,rgba(7,34,32,.4))}
+/* body + the medallion straddling the photo edge */
+.pbody{display:block;position:relative;padding:40px 12px 0}
+.pmed{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:var(--gold-pale);border:3px solid var(--paper);display:grid;place-items:center;z-index:2;box-shadow:0 10px 22px -12px rgba(7,34,32,.6);transition:.42s var(--spring)}
+.pmed svg{width:26px;height:26px;color:var(--gold-2);stroke-width:1.6;transition:.42s var(--ease)}
+.pcard:hover .pmed{background:var(--teal);transform:translate(-50%,-50%) scale(1.08)}
+.pcard:hover .pmed svg{color:var(--gold-soft)}
+.pcard b{display:block;font-size:.93rem;font-weight:700;margin:0 0 5px;line-height:1.3}
+.pcard small{display:block;font-size:.76rem;color:var(--grey);line-height:1.45}
+/* trust strip */
+.ptrust{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:42px;background:rgba(255,255,255,.66);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.ptrust li{display:flex;align-items:center;gap:14px;padding:20px 22px;border-left:1px solid var(--line-2)}
+.ptrust li:first-child{border-left:none}
+.ptrust .ic{flex:none;width:42px;height:42px;border-radius:50%;background:var(--teal-50);color:var(--teal);display:grid;place-items:center}
+.ptrust .ic svg{width:20px;height:20px}
+.ptrust b{display:block;font-size:.85rem;font-weight:700;line-height:1.35}
+.ptrust small{display:block;font-size:.75rem;color:var(--grey);line-height:1.4}
 
 /* ================= HEALTH CONCERNS ================= */
 .conc{padding:96px 0}
@@ -523,6 +540,10 @@ footer .brand{margin-bottom:18px}
   .nlinks a{padding:9px 10px}
   .nlinks a.on::after{left:10px;right:10px}
   .pgrid6{grid-template-columns:repeat(3,1fr)}
+  .pph{aspect-ratio:16/10}
+  .ptrust{grid-template-columns:1fr 1fr}
+  .ptrust li:nth-child(odd){border-left:none}
+  .ptrust li:nth-child(n+3){border-top:1px solid var(--line-2)}
   .cgrid{grid-template-columns:repeat(5,1fr);gap:10px}
   .tgrid{grid-template-columns:repeat(2,1fr)}
   .chgrid{grid-template-columns:repeat(5,1fr);gap:8px}
@@ -639,10 +660,15 @@ footer .brand{margin-bottom:18px}
   .cc{padding:18px 8px;gap:9px}
   .cc .ic{width:44px;height:44px}
   .cc span{font-size:.8rem;line-height:1.3}
-  .pcard b{margin:13px 8px 4px;font-size:.87rem}
+  .pcard{padding-bottom:18px}
+  .pbody{padding:34px 8px 0}
+  .pcard b{font-size:.87rem}
   .pcard small{font-size:.72rem}
-  .parch{height:80px}
-  .parch svg{width:38px;height:38px}
+  .pmed{width:50px;height:50px}
+  .pmed svg{width:23px;height:23px}
+  .ptrust{grid-template-columns:minmax(0,1fr)}
+  .ptrust li{border-left:none;padding:16px 18px}
+  .ptrust li+li{border-top:1px solid var(--line-2)}
   .chgrid{gap:18px}
   .ch .ring{width:76px;height:76px;border-width:4px;box-shadow:0 0 0 6px var(--gold-pale)}
   .ch .ring svg{width:30px;height:30px}
@@ -676,7 +702,13 @@ footer .brand{margin-bottom:18px}
 }
 @media(max-width:360px){
   .wrap{padding:0 15px}
-  .cgrid,.pgrid6,.qrail{grid-template-columns:minmax(0,1fr)}
+  .cgrid,.qrail{grid-template-columns:minmax(0,1fr)}
+  .pgrid6{grid-template-columns:1fr 1fr;gap:9px}
+  .pbody{padding:30px 6px 0}
+  .pmed{width:44px;height:44px;border-width:2.5px}
+  .pmed svg{width:20px;height:20px}
+  .pcard b{font-size:.82rem}
+  .pcard small{font-size:.69rem}
   .chgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
   .cc{flex-direction:row;justify-content:flex-start;text-align:left;padding:14px 16px}
   .qi{padding:18px 14px 20px}
