@@ -12,6 +12,7 @@ kamini-Pathlabs/
 ├── about.html                  About Us (story, timeline, values, quality, visit)
 ├── homecollection.html         Home sample collection (slot picker, test picker, coverage)
 ├── doctors.html                Our Doctors (panel, weekly OPD board, visit, on-site tests)
+├── test-package.html           Tests & Packages (rate card, packages matrix, machines)
 ├── privacy.html                Privacy Policy
 ├── terms.html                  Terms of Service
 ├── 404.html                    Not-found page
@@ -25,11 +26,13 @@ kamini-Pathlabs/
 │   │   ├── pages.css           Extra styling for the legal pages, 404 and about
 │   │   ├── about.css           Everything unique to about.html (all .ab- prefixed)
 │   │   ├── homecollection.css  Everything unique to homecollection.html (.hc- prefixed)
-│   │   └── doctors.css         Everything unique to doctors.html (.dr- prefixed)
+│   │   ├── doctors.css         Everything unique to doctors.html (.dr- prefixed)
+│   │   └── tests.css           Everything unique to test-package.html (.tp- prefixed)
 │   └── js/
 │       ├── image-fallback.js   Inline-SVG placeholders when a photo fails to load
 │       ├── main.js             All shared page behaviour (see below)
 │       ├── homecollection.js   Slot picker, test picker and coverage checker
+│       ├── tests.js            Rate-card search, filters, packages chooser, chain
 │       └── doctors.js          Today's board, week dials, filters and booking prefill
 └── Images/                     Local photography goes here
 ```
@@ -45,6 +48,7 @@ Every page loads the same core assets, in this order:
 | `assets/css/about.css` | `<head>`, `about.html` only | Loaded last; every rule is prefixed `.ab-` |
 | `assets/css/homecollection.css` | `<head>`, `homecollection.html` only | Loaded last; every rule is prefixed `.hc-` |
 | `assets/css/doctors.css` | `<head>`, `doctors.html` only | Loaded last; every rule is prefixed `.dr-` |
+| `assets/css/tests.css` | `<head>`, `test-package.html` only | Loaded last; every rule is prefixed `.tp-` |
 | `assets/js/image-fallback.js` | `<head>`, **blocking** | Defines `kFall()` before any `<img onerror>` can fire |
 | `assets/js/main.js` | end of `<body>`, `defer` | Runs after the DOM is parsed |
 | `assets/js/doctors.js` | after `main.js`, `defer` | Page-specific; `main.js` already owns the nav, reveals, rail and form |
@@ -65,7 +69,8 @@ load on pages that do not have the element in question.
 - Mobile burger menu (`#burger` / `#nlinks`)
 - FAQ accordion (`.fq`)
 - Booking form validation (`#bform`) — **front-end only, see below**
-- Chapter rail spy + sideways auto-scroll (`#chap`) — used by `about.html` and `doctors.html`
+- Chapter rail spy + sideways auto-scroll (`#chap`) — used by `about.html`, `doctors.html`
+  and `test-package.html`
 - Advisor widget dismiss (`#advClose`)
 - Smooth scrolling for in-page anchors, offset for the sticky header
 
@@ -98,6 +103,33 @@ for search engines and for a visitor with JavaScript off. **If a consultant's da
 changes, edit it in two places: the card's `data-sessions` (plus its `.dr-days` letters and
 `.dr-when` text) and the matching slips in the `#board` columns.** Keep the JSON-LD
 `openingHoursSpecification` block at the foot of the page in step as well.
+
+## The tests & packages page
+
+`test-package.html` is the rate card: the search, the body-system index, the ruled ledger
+of investigations, the three checkups as one comparison matrix, the machines that run on
+site, the laboratory network and a pricing FAQ.
+
+**One source of truth for every test.** A test is declared exactly once — as a `.tp-row`
+in the ledger — carrying `data-name`, `data-alias` (search synonyms), `data-sys` (one or
+more body systems) and its price, in the markup. `tests.js` reads those rows back to build
+the search index and the suggestion sheet, the counts on the body-system tiles, the
+per-department counts and the "showing n of n" line. **To add or reprice a test, edit its
+row and nothing else** — every count and every search result follows.
+
+Prices are printed only where we have one. Everything else shows *quoted on call*, which
+is a designed state rather than a placeholder: `.tp-rprice` holds either
+`<b>₹300</b><s>₹400</s>` or `<em class="tp-ask">Quoted on call</em>`. Swap an `em.tp-ask`
+for the `b`/`s` pair when a rate is confirmed. The priced lines are also listed in the
+page's `OfferCatalog` JSON-LD at the foot of the file — keep the two in step.
+
+The packages matrix raises one column through a single class on `#tpMtx`
+(`p1` / `p2` / `p3`). The chooser sets it, and `p2` is written into the markup so the
+most-booked column is already raised with JavaScript off.
+
+Every nav and footer link that used to point at `index.html#tests` or
+`index.html#packages` now points here. The home page keeps its own short `#tests` and
+`#packages` sections as a summary, and its in-page links still work.
 
 ## The booking form is not connected yet
 
