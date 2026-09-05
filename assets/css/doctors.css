@@ -1,0 +1,370 @@
+/* ==========================================================
+   KAMINI CLINIC & LABS — Doctors
+   Loaded after style.css + pages.css on doctors.html only.
+   Every class is prefixed .dr- so nothing leaks into the home
+   page, the about page, home collection or the legal pages.
+
+   The visual idea: the clinic's own paperwork. The consultant
+   cards carry the twin rule that runs across every prescription
+   pad at the counter, and the weekly board is set the way the
+   printed OPD sheet is — days across, clinics down.
+========================================================== */
+
+/* header (70px stuck) + chapter rail (56px) + air */
+.dr-anchor{scroll-margin-top:140px}
+
+/* ================= MASTHEAD =================
+   About and Home Collection both open on a full-bleed dark panel.
+   This page keeps the ivory ground and lets the single dark object
+   be the OPD board — the thing the visitor actually came to read. */
+.dr-mast{position:relative;overflow:hidden;padding:52px 0 78px;background:var(--ivory)}
+/* a faint rule grid, like the ruled lines of a clinic register */
+.dr-mast::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(13,71,68,.05) 1px,transparent 1px);
+  background-size:100% 30px;
+  -webkit-mask-image:linear-gradient(180deg,#000,transparent 78%);
+          mask-image:linear-gradient(180deg,#000,transparent 78%)}
+.dr-mast::after{content:"";position:absolute;right:-160px;top:-190px;width:520px;height:520px;border-radius:50%;
+  pointer-events:none;background:radial-gradient(circle,rgba(216,235,229,.85),transparent 66%);filter:blur(20px)}
+.dr-mast .wrap{position:relative;z-index:2}
+.dr-mgrid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:58px;align-items:center}
+.dr-crumb{color:var(--grey-2);margin-bottom:20px}
+.dr-crumb a{color:var(--teal)}
+.dr-crumb a:hover{color:var(--gold-2)}
+.dr-mast h1{font-size:clamp(2.05rem,5.9vw,3.85rem);letter-spacing:-.02em;margin:16px 0 0}
+.dr-mast h1 em{font-style:italic;color:var(--teal)}
+.dr-mast .lede{margin-top:20px;font-size:1.05rem;max-width:54ch}
+
+/* three facts, set as a strip of register columns */
+.dr-strip{display:flex;flex-wrap:wrap;margin-top:32px;border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;background:var(--paper)}
+.dr-strip div{flex:1 1 150px;padding:15px 20px;border-right:1px solid var(--line-2)}
+.dr-strip div:last-child{border-right:0}
+.dr-strip b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.55rem;
+  line-height:1;color:var(--teal)}
+.dr-strip span{display:block;margin-top:7px;font-size:.68rem;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grey-2);line-height:1.5}
+.dr-macts{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+
+/* ---------- today's board ---------- */
+.dr-today{position:relative;background:linear-gradient(158deg,var(--teal),var(--teal-900));color:#fff;
+  border-radius:var(--r-xl);padding:26px 28px 22px;box-shadow:var(--sh-lg);overflow:hidden}
+.dr-today::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.06) 1.2px,transparent 1.2px);background-size:22px 22px;
+  -webkit-mask-image:radial-gradient(120% 90% at 88% 0%,#000,transparent 70%);
+          mask-image:radial-gradient(120% 90% at 88% 0%,#000,transparent 70%)}
+.dr-today>*{position:relative;z-index:2}
+.dr-thead{padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.14)}
+.dr-tt{display:flex;align-items:center;gap:10px}
+.dr-thead h2{font-size:1.4rem;color:#fff;margin:0}
+.dr-tdot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;position:relative}
+.dr-tdot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(201,162,75,.55);
+  animation:drPulse 2.6s var(--ease) infinite}
+@keyframes drPulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.dr-tdate{margin-top:6px;font-size:.75rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--gold-soft)}
+
+.dr-tlist{list-style:none;margin:4px 0 0}
+.dr-tlist li{display:flex;align-items:center;gap:14px;padding:13px 2px;border-bottom:1px dashed rgba(255,255,255,.13)}
+.dr-tlist li:last-child{border-bottom:0}
+.dr-tlist .tm{flex:none;width:70px;font-size:.78rem;font-weight:800;color:var(--gold-soft);letter-spacing:.01em}
+.dr-tlist .who{flex:1;min-width:0}
+.dr-tlist .who b{display:block;font-size:.9rem;font-weight:700;color:#fff;line-height:1.3}
+.dr-tlist .who span{display:block;font-size:.72rem;color:rgba(255,255,255,.55);margin-top:2px}
+.dr-tlist .st{flex:none;font-size:.63rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:5px 9px;border-radius:100px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6)}
+.dr-tlist .st.now{background:var(--gold);border-color:var(--gold);color:#2c2206}
+.dr-tlist .st.soon{border-color:rgba(227,198,127,.55);color:var(--gold-soft)}
+.dr-tlist .st.done{opacity:.5}
+.dr-tempty{display:block !important;font-size:.88rem;color:rgba(255,255,255,.72);padding:18px 2px !important}
+.dr-tempty a{color:var(--gold-soft);border-bottom:1px solid rgba(227,198,127,.4)}
+.dr-tfoot{display:flex;align-items:flex-start;gap:9px;margin-top:14px;padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.14);font-size:.74rem;color:rgba(255,255,255,.5);line-height:1.5}
+.dr-tfoot svg{width:14px;height:14px;color:var(--gold-soft);flex-shrink:0;margin-top:2px}
+
+/* ================= CHAPTER RAIL =================
+   Same behaviour as the about page rail (main.js drives both through
+   #chap) but set on the teal band rather than ivory, so the two pages
+   read as siblings instead of copies. */
+.dr-chap{position:sticky;top:69px;z-index:120;background:rgba(7,34,32,.95);
+  backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.09)}
+.dr-chap .wrap{display:flex;align-items:stretch;height:56px;overflow-x:auto;scrollbar-width:none;
+  -ms-overflow-style:none;scroll-behavior:smooth}
+.dr-chap .wrap::-webkit-scrollbar{display:none}
+.dr-chap a{position:relative;flex:none;display:inline-flex;align-items:center;gap:9px;padding:0 17px;
+  font-size:.81rem;font-weight:700;color:rgba(255,255,255,.6);white-space:nowrap;transition:color .25s var(--ease)}
+.dr-chap a:first-child{padding-left:0}
+.dr-chap a i{font-style:normal;font-size:.62rem;font-weight:800;letter-spacing:.1em;color:var(--gold-soft);opacity:.55}
+.dr-chap a::after{content:"";position:absolute;left:50%;right:50%;bottom:0;height:2px;background:var(--gold);
+  transition:left .32s var(--ease),right .32s var(--ease)}
+.dr-chap a:hover{color:#fff}
+.dr-chap a.on{color:#fff}
+.dr-chap a.on i{opacity:1}
+.dr-chap a.on::after{left:14px;right:14px}
+.dr-chap a:first-child.on::after{left:0}
+.dr-chap a:focus-visible{outline:2px solid var(--gold);outline-offset:-6px;border-radius:4px}
+
+/* ================= THE PANEL ================= */
+.dr-panel{padding:96px 0 100px;background:var(--ivory)}
+
+/* ---------- filter chips ---------- */
+.dr-filter{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:14px}
+.dr-chip{border:1.5px solid var(--line);background:var(--paper);border-radius:100px;padding:9px 16px;
+  font-size:.8rem;font-weight:700;color:var(--grey);transition:.25s var(--ease);white-space:nowrap}
+.dr-chip:hover{border-color:var(--teal-200);color:var(--teal)}
+.dr-chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.dr-chip:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.dr-chip-today{display:inline-flex;align-items:center;gap:8px}
+.dr-cdot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.dr-chip-today.on .dr-cdot{background:var(--gold-soft)}
+.dr-fdiv{width:1px;height:22px;background:var(--line);margin:0 4px}
+.dr-count{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-2);
+  margin-bottom:26px;min-height:1.2em}
+
+/* ---------- the consultant card ----------
+   Modelled on the letterhead of the pads the consultants actually
+   write on: a name, the qualification beneath it, then the twin rule. */
+.dr-roster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.dr-card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:26px 24px 20px;display:flex;flex-direction:column;height:100%;overflow:hidden;
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease)}
+/* the gold seam grows from the left the way a fresh sheet is torn off the pad */
+.dr-card::before{content:"";position:absolute;left:0;top:0;height:3px;width:0;
+  background:linear-gradient(90deg,var(--gold),var(--gold-soft));transition:width .5s var(--ease)}
+.dr-card:hover{transform:translateY(-5px);box-shadow:var(--sh);border-color:var(--teal-100)}
+.dr-card:hover::before{width:100%}
+.dr-card.hide{display:none}
+
+.dr-chead{display:flex;align-items:flex-start;gap:14px;padding-bottom:15px;position:relative}
+/* the twin rule from the prescription pads */
+.dr-chead::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(var(--teal-100) 1px,transparent 1px 2px,var(--teal-100) 2px)}
+.dr-mono{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  font-family:'Instrument Serif',Georgia,serif;font-size:1.12rem;letter-spacing:.02em;color:var(--teal);
+  background:var(--teal-50);box-shadow:inset 0 0 0 1px var(--teal-100),0 0 0 3px rgba(216,235,229,.4)}
+.dr-cid{flex:1;min-width:0}
+.dr-cid h3{font-size:1.24rem;line-height:1.15}
+.dr-qual{font-size:.76rem;color:var(--grey);margin-top:5px;line-height:1.5}
+.dr-cic{flex:none;width:30px;height:30px;color:var(--gold);opacity:.55}
+.dr-cic svg{width:100%;height:100%;stroke-width:1.4}
+
+.dr-spec{display:inline-block;align-self:flex-start;margin-top:15px;font-size:.66rem;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--teal);background:var(--teal-50);border:1px solid var(--teal-100);
+  border-radius:100px;padding:5px 12px}
+.dr-note{font-size:.85rem;color:var(--grey);margin-top:13px;line-height:1.62}
+
+/* ---------- the week dial ----------
+   Seven letters, the sitting days filled. It answers "is he here on
+   Thursday" faster than any sentence can. */
+.dr-days{display:flex;gap:5px;margin-top:18px}
+.dr-days b{flex:1;height:27px;display:grid;place-items:center;border-radius:5px;font-size:.68rem;
+  font-weight:800;letter-spacing:.02em;transition:.3s var(--ease)}
+.dr-days b.off{background:var(--ivory-2);color:var(--grey-2);opacity:.62}
+.dr-days b.on{background:var(--teal);color:#fff}
+.dr-card:hover .dr-days b.on{background:var(--teal-900)}
+/* today's letter is ringed in gold, set by doctors.js */
+.dr-days b.today{box-shadow:0 0 0 2px var(--gold)}
+
+.dr-when{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  margin-top:14px;padding:11px 13px;background:var(--ivory);border-radius:var(--r)}
+.dr-time{display:inline-flex;align-items:center;gap:7px;font-size:.85rem;font-weight:800;color:var(--ink)}
+.dr-time svg{width:14px;height:14px;color:var(--gold-2);flex-shrink:0}
+.dr-dtxt{font-size:.72rem;font-weight:700;color:var(--grey-2)}
+
+.dr-cfoot{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:auto;
+  padding-top:16px}
+.dr-reg{font-size:.68rem;font-weight:700;letter-spacing:.05em;color:var(--grey-2);line-height:1.4}
+.dr-book{display:inline-flex;align-items:center;gap:7px;flex:none;font-size:.8rem;font-weight:800;color:var(--teal);
+  border:1.5px solid var(--line);border-radius:var(--r);padding:8px 14px;transition:.28s var(--ease)}
+.dr-book svg{width:14px;height:14px;stroke-width:2.4;transition:.28s var(--ease)}
+.dr-book:hover{background:var(--teal);border-color:var(--teal);color:#fff}
+.dr-book:hover svg{transform:translateX(3px)}
+
+.dr-empty{text-align:center;padding:46px 0;color:var(--grey);font-size:.95rem}
+.dr-empty button{font-weight:800;color:var(--teal);border-bottom:1.5px solid var(--gold)}
+.dr-panel .dnote{margin-top:34px}
+
+/* ================= WEEKLY BOARD =================
+   Days across, clinics down — the shape of the printed OPD sheet that
+   hangs behind the counter, rather than a calendar widget. */
+.dr-board{padding:96px 0 100px;background:var(--teal-900);color:#fff;position:relative;overflow:hidden}
+.dr-board::before{content:"";position:absolute;left:-200px;top:-160px;width:620px;height:620px;border-radius:50%;
+  pointer-events:none;background:radial-gradient(circle,rgba(201,162,75,.16),transparent 66%)}
+.dr-board .wrap{position:relative;z-index:2}
+.dr-board h2{color:#fff}
+.dr-board .lede{color:rgba(255,255,255,.68)}
+
+.dr-wtabs{display:none;gap:7px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;scroll-behavior:smooth}
+.dr-wtabs::-webkit-scrollbar{display:none}
+.dr-wtabs button{flex:none;border:1px solid rgba(255,255,255,.18);border-radius:100px;padding:8px 16px;
+  font-size:.8rem;font-weight:800;color:rgba(255,255,255,.62);transition:.25s var(--ease)}
+.dr-wtabs button[aria-selected="true"]{background:var(--gold);border-color:var(--gold);color:#2c2206}
+
+.dr-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.11);
+  border:1px solid rgba(255,255,255,.11);border-radius:var(--r-lg);overflow:hidden}
+.dr-col{background:rgba(7,34,32,.86);padding:0 0 12px;display:flex;flex-direction:column;
+  transition:background .35s var(--ease)}
+.dr-col:hover{background:rgba(13,71,68,.7)}
+.dr-dhead{padding:15px 14px 13px;border-bottom:1px solid rgba(255,255,255,.1);position:relative}
+.dr-dhead b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.16rem;
+  line-height:1;color:#fff}
+.dr-dhead span{display:block;margin-top:6px;font-size:.62rem;font-weight:800;letter-spacing:.13em;
+  text-transform:uppercase;color:rgba(255,255,255,.4)}
+
+/* a clinic slip: the time first, because that is what is scanned for */
+.dr-slip{padding:12px 14px 11px;border-bottom:1px dashed rgba(255,255,255,.1);min-height:94px}
+.dr-slip:last-child{border-bottom:0}
+.dr-slip i{display:block;font-style:normal;font-size:.68rem;font-weight:800;letter-spacing:.08em;
+  color:var(--gold-soft)}
+.dr-slip b{display:block;margin-top:4px;font-size:.8rem;font-weight:700;color:#fff;line-height:1.35}
+.dr-slip span{display:block;margin-top:3px;font-size:.68rem;color:rgba(255,255,255,.45);line-height:1.4}
+
+/* today's column, marked by doctors.js */
+.dr-col.today{background:rgba(13,71,68,.92);box-shadow:inset 0 3px 0 var(--gold)}
+.dr-col.today .dr-dhead b{color:var(--gold-soft)}
+.dr-col.today .dr-dhead span::after{content:" · today";color:var(--gold)}
+.dr-sun .dr-dhead b{color:rgba(255,255,255,.82)}
+
+.dr-morning{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:22px;padding:18px 24px;
+  border:1px solid rgba(255,255,255,.14);border-radius:var(--r-lg);background:rgba(255,255,255,.035)}
+.dr-mtag{display:inline-flex;align-items:center;gap:9px;flex:none;font-size:.66rem;font-weight:800;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--gold-soft)}
+.dr-mtag svg{width:16px;height:16px}
+.dr-morning p{font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.65;margin:0;flex:1;min-width:260px}
+.dr-morning b{color:#fff;font-weight:700}
+
+/* ================= YOUR VISIT ================= */
+.dr-visit{padding:100px 0;background:var(--ivory)}
+.dr-vgrid{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:60px;align-items:start}
+.dr-vphoto{position:sticky;top:140px;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg)}
+.dr-vphoto img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:66% 44%}
+.dr-vstamp{position:absolute;left:20px;bottom:20px;max-width:78%;background:rgba(251,249,244,.94);
+  backdrop-filter:blur(10px);border-radius:var(--r);padding:14px 18px}
+.dr-vstamp b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.25rem;
+  color:var(--teal);line-height:1}
+.dr-vstamp span{display:block;margin-top:5px;font-size:.7rem;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--grey-2)}
+
+.dr-steps{list-style:none;margin-top:30px;counter-reset:none}
+.dr-steps li{display:flex;gap:18px;padding:0 0 22px;position:relative}
+.dr-steps li:last-child{padding-bottom:0}
+/* the spine linking the four steps */
+.dr-steps li::before{content:"";position:absolute;left:16px;top:34px;bottom:0;width:1px;background:var(--line)}
+.dr-steps li:last-child::before{display:none}
+.dr-steps .n{flex:none;width:33px;height:33px;border-radius:50%;display:grid;place-items:center;
+  font-size:.8rem;font-weight:800;color:var(--teal);background:var(--paper);border:1.5px solid var(--teal-100);
+  position:relative;z-index:2}
+.dr-steps b{display:block;font-size:.98rem;font-weight:800;color:var(--ink);margin-bottom:5px}
+.dr-steps p{font-size:.87rem;color:var(--grey);line-height:1.68;max-width:56ch}
+.dr-vnote{display:flex;align-items:flex-start;gap:11px;margin-top:26px;padding:15px 18px;background:var(--teal-50);
+  border:1px solid var(--teal-100);border-left:3px solid var(--gold);border-radius:var(--r);
+  font-size:.85rem;color:var(--teal-2);line-height:1.6}
+.dr-vnote svg{width:17px;height:17px;color:var(--gold-2);flex-shrink:0;margin-top:2px}
+
+/* ================= DONE ON SITE ================= */
+.dr-onsite{padding:96px 0 100px;background:var(--teal-50)}
+.dr-onsite .center-head{max-width:760px}
+.dr-onsite .center-head p{color:var(--grey)}
+.dr-ogrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.dr-oc{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 24px;
+  display:flex;flex-direction:column;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.dr-oc:hover{transform:translateY(-4px);box-shadow:var(--sh)}
+.dr-oic{width:40px;height:40px;border-radius:var(--r);display:grid;place-items:center;color:var(--teal);
+  background:var(--teal-50);margin-bottom:16px}
+.dr-oic svg{width:20px;height:20px}
+.dr-oc h3{font-size:1.16rem;margin-bottom:14px}
+.dr-oc ul{list-style:none;display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.dr-oc li{font-size:.74rem;font-weight:700;color:var(--teal-2);background:var(--ivory);
+  border:1px solid var(--line-2);border-radius:100px;padding:5px 12px}
+.dr-oc p{font-size:.84rem;color:var(--grey);line-height:1.65;margin-top:auto}
+
+/* ================= REFERRAL PANEL ================= */
+.dr-ref{padding:0 0 100px;background:var(--teal-50)}
+.dr-rpanel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:44px 46px;box-shadow:var(--sh);position:relative;overflow:hidden}
+.dr-rpanel::after{content:"";position:absolute;right:-120px;top:-140px;width:340px;height:340px;border-radius:50%;
+  pointer-events:none;background:radial-gradient(circle,rgba(245,236,214,.9),transparent 66%)}
+.dr-rpanel>*{position:relative;z-index:2}
+.dr-rhead{max-width:640px;margin-bottom:32px}
+.dr-rhead h2{font-size:clamp(1.6rem,3.6vw,2.35rem);margin:16px 0 12px}
+.dr-rhead p{font-size:.95rem;color:var(--grey);line-height:1.7}
+.dr-rgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.dr-rc{display:flex;gap:16px;background:var(--ivory);border:1px solid var(--line-2);border-radius:var(--r-lg);
+  padding:22px 22px 20px}
+.dr-rc h3{font-size:1.18rem;line-height:1.15}
+.dr-rc .dr-qual{margin-top:6px}
+.dr-raff{font-size:.8rem;color:var(--grey);margin-top:9px;line-height:1.6}
+.dr-rmeta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}
+.dr-rmeta .dr-spec{margin-top:0}
+.dr-rcta{margin-top:26px}
+
+/* ================= FAQ ================= */
+.dr-faq{padding:96px 0 100px;background:var(--ivory)}
+.dr-fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px;align-items:start}
+.dr-ffoot{margin-top:36px;text-align:center;font-size:.9rem;color:var(--grey)}
+.dr-ffoot a{color:var(--teal);font-weight:700;border-bottom:1px solid var(--teal-200)}
+.dr-ffoot a:hover{border-bottom-color:var(--teal)}
+
+/* the booking panel sits on ivory here, not on the FAQ's teal tint */
+.dr-anchor.book{background:var(--ivory);padding-bottom:100px}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:1100px){
+  .dr-roster{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dr-ogrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  /* seven columns stop being readable well before the phone breakpoint */
+  .dr-week{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .dr-col:nth-child(n+5){border-top:1px solid rgba(255,255,255,.11)}
+}
+@media(max-width:960px){
+  .dr-mgrid{grid-template-columns:1fr;gap:44px}
+  .dr-vgrid{grid-template-columns:1fr;gap:44px}
+  .dr-vphoto{position:static}
+  .dr-vphoto img{aspect-ratio:16/10}
+  .dr-rgrid{grid-template-columns:1fr}
+  .dr-fgrid{grid-template-columns:1fr;gap:0}
+  .dr-tlist{max-height:none}
+}
+@media(max-width:760px){
+  .dr-mast{padding:40px 0 62px}
+  .dr-panel,.dr-board,.dr-onsite,.dr-faq{padding:70px 0 76px}
+  .dr-visit{padding:70px 0}
+  .dr-ref{padding-bottom:76px}
+  .dr-chap .wrap{height:50px}
+  .dr-chap a{font-size:.77rem;padding:0 13px}
+  .dr-anchor{scroll-margin-top:126px}
+  .dr-roster{grid-template-columns:1fr}
+  .dr-ogrid{grid-template-columns:1fr}
+  .dr-rpanel{padding:32px 26px}
+
+  /* the board becomes one day at a time, chosen from the tab strip */
+  .dr-wtabs{display:flex}
+  .dr-week{grid-template-columns:1fr;background:transparent;border-color:rgba(255,255,255,.14)}
+  .dr-col{display:none;background:rgba(7,34,32,.75)}
+  .dr-col.show{display:flex}
+  .dr-col:nth-child(n+5){border-top:0}
+}
+@media(max-width:560px){
+  .dr-strip div{flex-basis:100%;border-right:0;border-bottom:1px solid var(--line-2)}
+  .dr-strip div:last-child{border-bottom:0}
+  .dr-today{padding:22px 20px 18px}
+  .dr-macts .btn{width:100%}
+  .dr-chead{gap:12px}
+  .dr-mono{width:42px;height:42px;font-size:1rem}
+  .dr-cid h3{font-size:1.14rem}
+  .dr-cic{display:none}
+  .dr-when{flex-direction:column;gap:5px}
+  .dr-rc{flex-direction:column;gap:14px}
+  .dr-morning{padding:16px 18px;gap:12px}
+}
+@media(max-width:400px){
+  .dr-card{padding:22px 18px 18px}
+  .dr-cfoot{flex-direction:column;align-items:flex-start;gap:12px}
+  .dr-book{width:100%;justify-content:center}
+  .dr-tlist .tm{width:62px;font-size:.74rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .dr-tdot::after{animation:none;opacity:0}
+  .dr-card,.dr-oc{transition:none}
+  .dr-card:hover,.dr-oc:hover{transform:none}
+}

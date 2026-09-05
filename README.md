@@ -1,6 +1,3 @@
-| `assets/css/pages.css` | `<head>`, inner pages only | Overrides layered on top of `style.css` |
-| `assets/css/about.css` | `<head>`, `about.html` only | Loaded last; every rule is prefixed `.ab-` |
-| `assets/css/about.css` | `<head>`, `about.html` only | Loaded last; every rule is prefixed `.ab-` |
 # Kamini Clinic &amp; Labs — Website
 
 Static marketing + booking site for **Kamini Clinic & Labs**, a diagnostic centre in
@@ -13,6 +10,8 @@ vanilla JavaScript, so it can be dropped onto any static host.
 kamini-Pathlabs/
 ├── index.html                  Home page (hero, programmes, tests, packages, FAQ, booking)
 ├── about.html                  About Us (story, timeline, values, quality, visit)
+├── homecollection.html         Home sample collection (slot picker, test picker, coverage)
+├── doctors.html                Our Doctors (panel, weekly OPD board, visit, on-site tests)
 ├── privacy.html                Privacy Policy
 ├── terms.html                  Terms of Service
 ├── 404.html                    Not-found page
@@ -24,10 +23,14 @@ kamini-Pathlabs/
 │   ├── css/
 │   │   ├── style.css           All shared styling — extracted from index.html
 │   │   ├── pages.css           Extra styling for the legal pages, 404 and about
-│   │   └── about.css           Everything unique to about.html (all .ab- prefixed)
+│   │   ├── about.css           Everything unique to about.html (all .ab- prefixed)
+│   │   ├── homecollection.css  Everything unique to homecollection.html (.hc- prefixed)
+│   │   └── doctors.css         Everything unique to doctors.html (.dr- prefixed)
 │   └── js/
 │       ├── image-fallback.js   Inline-SVG placeholders when a photo fails to load
-│       └── main.js             All page behaviour (see below)
+│       ├── main.js             All shared page behaviour (see below)
+│       ├── homecollection.js   Slot picker, test picker and coverage checker
+│       └── doctors.js          Today's board, week dials, filters and booking prefill
 └── Images/                     Local photography goes here
 ```
 
@@ -40,8 +43,11 @@ Every page loads the same core assets, in this order:
 | `assets/css/style.css` | `<head>` | Design tokens + all component styles |
 | `assets/css/pages.css` | `<head>`, inner pages only | Overrides layered on top of `style.css` |
 | `assets/css/about.css` | `<head>`, `about.html` only | Loaded last; every rule is prefixed `.ab-` |
+| `assets/css/homecollection.css` | `<head>`, `homecollection.html` only | Loaded last; every rule is prefixed `.hc-` |
+| `assets/css/doctors.css` | `<head>`, `doctors.html` only | Loaded last; every rule is prefixed `.dr-` |
 | `assets/js/image-fallback.js` | `<head>`, **blocking** | Defines `kFall()` before any `<img onerror>` can fire |
 | `assets/js/main.js` | end of `<body>`, `defer` | Runs after the DOM is parsed |
+| `assets/js/doctors.js` | after `main.js`, `defer` | Page-specific; `main.js` already owns the nav, reveals, rail and form |
 
 `image-fallback.js` must stay a plain blocking script in the head. If it is deferred, a
 photo that fails early would call `kFall` before it exists and the layout would break.
@@ -59,7 +65,7 @@ load on pages that do not have the element in question.
 - Mobile burger menu (`#burger` / `#nlinks`)
 - FAQ accordion (`.fq`)
 - Booking form validation (`#bform`) — **front-end only, see below**
-- About-page chapter rail spy + sideways auto-scroll (`#chap`)
+- Chapter rail spy + sideways auto-scroll (`#chap`) — used by `about.html` and `doctors.html`
 - Advisor widget dismiss (`#advClose`)
 - Smooth scrolling for in-page anchors, offset for the sticky header
 
@@ -74,6 +80,24 @@ so keep them when you add a new page.
 Anchor jumps clear the sticky chrome via `stickyTop()`: 72px for the header, plus the
 height of `#chap` on any page that has a chapter rail. A new page with its own sticky
 sub-nav only has to give it `id="chap"` to get the same offset and the same scrollspy.
+
+## The doctors page
+
+`doctors.html` holds the consultant panel, the weekly OPD board, the visit walk-through,
+the on-site investigation list, the referral panel and its own FAQ.
+
+**One source of truth for timings.** Every clinic is declared once, on the roster card, as
+`data-sessions` — a small JSON array of `{d, s, e, t}` where `d` is the weekdays
+(0 = Sunday), `s` and `e` are minutes from midnight, and `t` is the label a patient reads.
+`doctors.js` reads those back to build the "In clinic today" board in the masthead, ring
+today's letter on each week dial and drive the "Sitting today" filter, so the board can
+never disagree with the cards.
+
+The weekly board itself is written out in the markup rather than generated, so it is there
+for search engines and for a visitor with JavaScript off. **If a consultant's day or time
+changes, edit it in two places: the card's `data-sessions` (plus its `.dr-days` letters and
+`.dr-when` text) and the matching slips in the `#board` columns.** Keep the JSON-LD
+`openingHoursSpecification` block at the foot of the page in step as well.
 
 ## The booking form is not connected yet
 
