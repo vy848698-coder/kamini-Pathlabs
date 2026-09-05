@@ -153,60 +153,6 @@
   }, { threshold: 0.6 });
   document.querySelectorAll("[data-n]").forEach(function(c){ cio.observe(c); });
 
-  /* ---- quick-actions rail ----
-     A gold spine draws across the four cards as the section scrolls through
-     the viewport. Progress (0→1) goes to CSS as --p; each card lights when
-     the spine passes its node, so the reveal is tied to scroll position
-     rather than firing all at once. */
-  var qrail = document.getElementById("qrail");
-  var qcards = qrail ? Array.prototype.slice.call(qrail.querySelectorAll(".qi")) : [];
-  if (qrail) {
-    if (rm) {
-      /* reduced motion: show the finished state, no scroll coupling */
-      qrail.style.setProperty("--p", 1);
-      qcards.forEach(function(c){ c.classList.add("lit"); });
-    } else {
-      qrail.classList.add("js");
-      /* cursor spotlight */
-      qcards.forEach(function(c){
-        c.addEventListener("mousemove", function(e){
-          var r = c.getBoundingClientRect();
-          c.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100) + "%");
-          c.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100) + "%");
-        });
-      });
-    }
-  }
-  /* How much scrolling the reveal is spread over, as a fraction of viewport
-     height. QSPAN is the knob for pacing: bigger = slower, more deliberate
-     stagger. At 0.48 the whole rail lit within half a screen of scrolling,
-     which read as a rushed pop rather than a sequence. Past ~0.75 the last
-     card needs the rail almost at the top of the screen before it appears,
-     so anyone who stops scrolling mid-section is left looking at empty
-     cards — 0.70 lands the final one with the rail around a third up. */
-  var QSTART = 0.92, QSPAN = 0.70;
-  function qScroll(){
-    if (!qrail || rm) return;
-    var r = qrail.getBoundingClientRect(), vh = window.innerHeight;
-    /* starts as the rail crosses QSTART of the viewport, completes once it
-       has travelled a further QSPAN of a screen */
-    var p = (vh * QSTART - r.top) / (vh * QSPAN);
-    p = p < 0 ? 0 : (p > 1 ? 1 : p);
-    qrail.style.setProperty("--p", p);
-    /* Read the real column count off the grid rather than guessing from the
-       width: the rail is 4 up, then 2, then 1 below 360px. Cards in the same
-       visual row should light together; a stacked card must not. */
-    var cols = getComputedStyle(qrail).gridTemplateColumns.split(" ").length,
-        n = qcards.length, rows = Math.ceil(n / cols);
-    for (var i = 0; i < n; i++){
-      /* full width: each card lights as the spine reaches its own node.
-         Stacked: light by row, spread evenly down the rail. */
-      var t = cols >= n ? (i + 0.5) / n
-                        : (Math.floor(i / cols) + 0.4) / rows * 0.9;
-      qcards[i].classList.toggle("lit", p >= t);
-    }
-  }
-
   /* ---- nav, progress, parallax ---- */
   var nav = document.getElementById("nav"), prog = document.getElementById("prog"),
       hpar = document.getElementById("hpar"), ticking = false;
@@ -216,7 +162,6 @@
     var h = document.documentElement.scrollHeight - window.innerHeight;
     prog.style.width = (h > 0 ? (y/h)*100 : 0) + "%";
     if (hpar && !rm && y < window.innerHeight * 1.4) hpar.style.transform = "translateY(" + (-y * 0.06) + "px)";
-    qScroll();
     spy();
     chapSpy();
     ticking = false;

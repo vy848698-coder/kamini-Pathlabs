@@ -13,15 +13,7 @@
    right-hand column is not a photograph but a working slot picker, because
    the one thing a visitor wants from this page is a time and a date. */
 .hc-mast{position:relative;overflow:hidden;padding:64px 0 92px;background:var(--teal-900);color:#fff}
-/* a field of faint dots — the about page uses graph-paper lines, so this
-   reads as a sibling rather than a copy */
-.hc-mast::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:radial-gradient(rgba(255,255,255,.07) 1.4px,transparent 1.4px);
-  background-size:26px 26px;
-  -webkit-mask-image:radial-gradient(115% 100% at 82% 0%,#000,transparent 68%);
-          mask-image:radial-gradient(115% 100% at 82% 0%,#000,transparent 68%)}
-.hc-mast::after{content:"";position:absolute;left:-180px;bottom:-240px;width:560px;height:560px;
-  border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(201,162,75,.24),transparent 66%)}
+/* flat ground: no dot field, no glow */
 .hc-mast .wrap{position:relative;z-index:2}
 .hc-mgrid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:60px;align-items:center}
 .hc-mast .crumb{margin-bottom:22px}
@@ -91,28 +83,34 @@
 
 /* A bill that only ever adds up to nothing. Tabular figures keep the
    right-hand column in a straight line however long the label is. */
-.hc-receipt{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:34px 34px 32px;box-shadow:var(--sh);max-width:470px;margin:0 auto;overflow:hidden}
+/* the bill, printed dark so a page full of "₹0" reads as a statement */
+.hc-receipt{position:relative;background:var(--teal-900);color:#fff;border:1px solid rgba(255,255,255,.09);
+  border-radius:var(--r-lg);padding:34px 34px 32px;box-shadow:var(--sh-lg);max-width:470px;margin:0 auto;
+  overflow:hidden}
 .hc-receipt::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;
   background:linear-gradient(90deg,var(--gold-2),var(--gold-soft),var(--gold-2))}
 .hc-rhead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
-  padding-bottom:18px;border-bottom:1px dashed var(--line)}
-.hc-rhead b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.3rem;line-height:1.2}
+  padding-bottom:18px;border-bottom:1px dashed rgba(255,255,255,.18)}
+.hc-rhead b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.3rem;
+  line-height:1.2;color:#fff}
 .hc-rhead>div>span{display:block;font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--grey-2);margin-top:6px}
-.hc-stamp{flex:none;transform:rotate(6deg);border:2px solid var(--gold);color:var(--gold-2);border-radius:6px;
-  padding:7px 11px;text-align:center;line-height:1;box-shadow:inset 0 0 0 2px var(--paper),inset 0 0 0 3px var(--gold-pale)}
+  color:rgba(255,255,255,.5);margin-top:6px}
+.hc-stamp{flex:none;transform:rotate(6deg);border:2px solid var(--gold);color:var(--gold-soft);border-radius:6px;
+  padding:7px 11px;text-align:center;line-height:1;
+  box-shadow:inset 0 0 0 2px var(--teal-900),inset 0 0 0 3px rgba(201,162,75,.4)}
 .hc-stamp b{display:block;font-family:'Instrument Serif',Georgia,serif;font-size:1.35rem;line-height:1}
 .hc-stamp span{display:block;font-size:.52rem;font-weight:800;letter-spacing:.18em;margin-top:4px}
 .hc-rrows{list-style:none;margin:6px 0 0}
-.hc-rrow{display:flex;align-items:baseline;gap:8px;padding:13px 0;font-size:.9rem;color:var(--grey)}
-.hc-rrow i{flex:1;font-style:normal;border-bottom:1px dotted var(--line);transform:translateY(-4px)}
-.hc-rrow em{font-style:normal;font-weight:800;color:var(--teal);font-variant-numeric:tabular-nums}
+.hc-rrow{display:flex;align-items:baseline;gap:8px;padding:13px 0;font-size:.9rem;color:rgba(255,255,255,.74)}
+.hc-rrow i{flex:1;font-style:normal;border-bottom:1px dotted rgba(255,255,255,.26);transform:translateY(-4px)}
+.hc-rrow em{font-style:normal;font-weight:800;color:var(--gold-soft);font-variant-numeric:tabular-nums}
 .hc-rtot{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:10px;padding-top:18px;
-  border-top:2px solid var(--ink)}
-.hc-rtot span{font-size:.7rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--grey-2)}
-.hc-rtot b{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.5rem;color:var(--ink);line-height:1}
-.hc-rfoot{margin-top:16px;font-size:.75rem;color:var(--grey-2);line-height:1.65}
+  border-top:2px solid rgba(255,255,255,.5)}
+.hc-rtot span{font-size:.7rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(255,255,255,.55)}
+.hc-rtot b{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.5rem;color:var(--gold-soft);
+  line-height:1}
+.hc-rfoot{margin-top:16px;font-size:.75rem;color:rgba(255,255,255,.5);line-height:1.65}
 
 /* ================= A MORNING WITH YOUR SAMPLE ================= */
 .hc-day{padding:100px 0;background:var(--paper);border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
@@ -222,24 +220,59 @@
 
 /* an ID card, drawn rather than photographed — the fields are labels, not a
    made-up person, because the point is what the visitor should ask to see */
-.hc-idwrap{position:relative;display:flex;flex-direction:column;align-items:center}
-.hc-idwrap::before{content:"";position:absolute;left:50%;top:-6px;width:230px;height:230px;
-  transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,var(--gold-pale),transparent 68%)}
-.hc-id{position:relative;width:280px;background:var(--paper);border:1px solid var(--line);border-radius:14px;
-  box-shadow:var(--sh-lg);overflow:hidden;transform:rotate(-3deg);transition:.5s var(--spring)}
-.hc-id:hover{transform:rotate(0deg) translateY(-4px)}
-.hc-idclip{height:26px;background:var(--ivory-2);border-bottom:1px solid var(--line);display:grid;place-items:center}
-.hc-idclip i{display:block;width:52px;height:8px;border-radius:5px;background:var(--line);
-  box-shadow:inset 0 1px 2px rgba(7,34,32,.25)}
-.hc-idhead{display:flex;align-items:center;gap:9px;padding:13px 16px;background:linear-gradient(135deg,var(--teal),var(--teal-900))}
+.hc-idwrap{position:relative;display:flex;flex-direction:column;align-items:center;padding-top:96px}
+.hc-idwrap::before{content:"";position:absolute;left:50%;top:74px;width:270px;height:270px;
+  transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,var(--gold-pale),transparent 66%)}
+
+/* ---------- the lanyard ---------- */
+.hc-lany{position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:102px;z-index:1}
+.hc-lstrap{position:absolute;top:0;width:14px;height:88px;background:linear-gradient(180deg,var(--teal-2),var(--teal));
+  box-shadow:inset -2px 0 0 rgba(0,0,0,.2),inset 2px 0 0 rgba(255,255,255,.1)}
+.hc-lstrap.l{left:48px;transform:rotate(12deg);transform-origin:50% 100%}
+.hc-lstrap.r{right:48px;transform:rotate(-12deg);transform-origin:50% 100%}
+/* the metal crimp where both straps are folded in */
+.hc-lcrimp{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:42px;height:16px;
+  border-radius:3px;background:linear-gradient(180deg,#e8e3d6,#b9b1a0 55%,#8f8878);
+  box-shadow:0 2px 4px rgba(7,34,32,.35),inset 0 1px 0 rgba(255,255,255,.65)}
+/* the swivel clasp that hooks through the card's slot */
+.hc-lclasp{position:absolute;left:50%;bottom:-4px;transform:translateX(-50%);width:17px;height:24px;
+  border-radius:9px;border:3px solid #b9b1a0;background:linear-gradient(180deg,#efeade,#c6bfae);
+  box-shadow:0 2px 5px rgba(7,34,32,.3)}
+
+/* ---------- the badge ---------- */
+.hc-id{position:relative;z-index:2;width:280px;background:var(--paper);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;transform:rotate(-3deg);transition:.5s var(--spring);
+  box-shadow:var(--sh-lg),0 2px 0 rgba(7,34,32,.06),inset 0 0 0 1px rgba(255,255,255,.7)}
+.hc-id:hover{transform:rotate(0deg) translateY(-6px)}
+/* a laminate sheen — one diagonal highlight that travels on hover */
+.hc-idsheen{position:absolute;inset:0;z-index:5;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(112deg,transparent 32%,rgba(255,255,255,.5) 46%,rgba(255,255,255,.06) 55%,transparent 66%);
+  transform:translateX(-38%);transition:transform 1.1s var(--ease)}
+.hc-id:hover .hc-idsheen{transform:translateX(38%)}
+/* the punched slot the clasp passes through */
+.hc-idclip{position:relative;height:30px;background:var(--ivory-2);border-bottom:1px solid var(--line);
+  display:grid;place-items:center}
+.hc-idclip i{display:block;width:52px;height:9px;border-radius:5px;background:var(--teal-900);
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.55),0 1px 0 rgba(255,255,255,.85)}
+.hc-idhead{position:relative;display:flex;align-items:center;gap:9px;padding:14px 16px;
+  background:linear-gradient(135deg,var(--teal),var(--teal-900))}
+/* a brass rule closing the header, the way a printed credential is ruled */
+.hc-idhead::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:linear-gradient(90deg,var(--gold-2),var(--gold-soft),var(--gold-2))}
 .hc-idhead svg{width:26px;height:26px;flex-shrink:0}
 .hc-idhead b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:.98rem;color:#fff;line-height:1.1}
 /* scoped to .sub so it cannot also catch the wrapper span around it */
 .hc-idhead .sub{display:block;font-size:.48rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
   color:var(--gold-soft);margin-top:3px}
-.hc-idbody{padding:18px 16px 20px;text-align:center}
-.hc-idface{width:74px;height:74px;border-radius:50%;margin:0 auto 14px;background:var(--teal-50);
-  border:2px solid var(--teal-100);display:grid;place-items:center;color:var(--teal)}
+.hc-idbody{position:relative;padding:20px 16px 20px;text-align:center}
+/* faint security guilloché behind the fields, as on the rate card */
+.hc-idbody::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:repeating-radial-gradient(circle at 50% 34%,rgba(13,71,68,.07) 0 1px,transparent 1px 9px)}
+.hc-idbody>*{position:relative}
+.hc-idface{position:relative;width:78px;height:78px;border-radius:50%;margin:0 auto 15px;
+  background:radial-gradient(circle at 50% 32%,#fff,var(--teal-50) 72%);
+  border:1px solid var(--teal-100);display:grid;place-items:center;color:var(--teal);
+  box-shadow:0 0 0 4px var(--paper),0 0 0 5px var(--gold-soft),0 8px 18px -12px rgba(7,34,32,.7)}
 .hc-idface svg{width:34px;height:34px}
 .hc-idpill{display:inline-block;font-size:.55rem;font-weight:800;letter-spacing:.19em;text-transform:uppercase;
   background:var(--gold-pale);color:var(--gold-2);border-radius:100px;padding:5px 12px}
@@ -249,9 +282,9 @@
 .hc-idrows div:last-child{border-bottom:0}
 .hc-idrows span{font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--grey-2);font-size:.6rem}
 .hc-idrows b{color:var(--ink);font-weight:700}
-.hc-idfoot{background:var(--ivory);border-top:1px solid var(--line);padding:9px 16px;font-size:.6rem;
-  font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-2);text-align:center}
-.hc-idcap{position:relative;margin-top:26px;font-size:.8rem;color:var(--grey);text-align:center;max-width:270px;line-height:1.7}
+.hc-idfoot{background:var(--teal-900);padding:11px 14px;font-size:.58rem;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--gold-soft);text-align:center;line-height:1.6;text-wrap:balance}
+.hc-idcap{position:relative;margin-top:28px;font-size:.8rem;color:var(--grey);text-align:center;max-width:270px;line-height:1.7}
 
 .hc-wlist{list-style:none;margin-top:30px;display:grid;gap:0}
 .hc-wlist li{display:flex;gap:18px;padding:20px 0;border-top:1px solid var(--line-2)}
@@ -418,6 +451,10 @@
   .hc-tabs{display:flex;width:100%}
   .hc-tab{flex:1;text-align:center;padding:10px 8px}
   .hc-id{width:100%;max-width:280px}
+  .hc-idwrap{padding-top:78px}
+  .hc-idwrap::before{top:58px}
+  .hc-lany{height:84px}
+  .hc-lstrap{height:70px}
 }
 @media(pointer:coarse){
   .hc-chips button,.hc-tab{min-height:40px;display:inline-flex;align-items:center}
@@ -426,4 +463,5 @@
   .hc-rail::after{transition:none;transform:scaleX(1)}
   .hc-ndot::after{transition:none;transform:scale(1)}
   .hc-id{transform:none}
+  .hc-idsheen{display:none}
 }

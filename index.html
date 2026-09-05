@@ -35,19 +35,6 @@
 <body>
 <div id="prog"></div>
 
-<!-- ================= UTILITY BAR ================= -->
-<div class="util">
-  <div class="wrap">
-    <a href="tel:9861451521"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>98614 51521</a>
-    <span class="dv"></span>
-    <a href="tel:9040267654" class="hideS">90402 67654</a>
-    <span class="sp"></span>
-    <span class="hideS"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Mon–Sat 7 AM–9 PM &nbsp;·&nbsp; Sun 7 AM–1 PM</span>
-    <span class="dv hideS"></span>
-    <span><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Jagamara, Bhubaneswar</span>
-  </div>
-</div>
-
 <!-- ================= NAV ================= -->
 <header id="nav">
   <div class="wrap">
@@ -75,7 +62,7 @@
         <a href="homecollection.html">Home Collection</a>
         <a href="doctors.html">Doctors</a>
         <a href="test-package.html">Tests &amp; Packages</a>
-        <a href="#contact" data-spy="contact">Contact Us</a>
+        <a href="contact.html">Contact Us</a>
         <!-- shown only inside the mobile sheet: the two things the header
              offers on a desktop, which the burger would otherwise swallow -->
         <div class="nsheet">
@@ -99,20 +86,31 @@
   </div>
 </header>
 
-<!-- ================= HERO ================= -->
+<!-- ================= HERO =================
+     Full-bleed teal panel, the same ground the four inner mastheads open on.
+     The photograph bleeds off the right edge and dissolves into the panel
+     through a mask rather than sitting in a floating frame. -->
 <section class="hero" id="top">
-  <div class="bgfx" aria-hidden="true"><span class="glow g1"></span><span class="glow g2"></span></div>
+  <div class="hphoto" aria-hidden="true">
+    <img id="hpar" src="Images/optimized/hero-lab.jpg" width="1180" height="963"
+         alt="" fetchpriority="high" decoding="async" onerror="kFall(this,'micro')">
+    <span class="htint"></span>
+    <span class="hveil"></span>
+  </div>
+
   <div class="wrap">
     <div class="hgrid">
-      <div>
+      <div class="hcopy">
         <span class="hbadge rv"><span class="pulse"></span> Serving Jagamara &amp; Khandagiri, Bhubaneswar</span>
+
         <h1 class="rv d1">
-          Diagnostics you can
-          <span class="rot" id="rot" aria-label="trust">
-            <span class="on">trust.</span><span>rely on.</span><span>count on.</span><span>believe in.</span>
-          </span>
+          <span class="l1">Accurate Diagnostics.</span>
+          <span class="l2">Better Decisions.</span>
+          <span class="l3">Better Health.<svg class="hswash" viewBox="0 0 300 13" preserveAspectRatio="none"
+            aria-hidden="true"><path d="M3 9C58 3 116 2 172 5.6 214 8.3 258 10.6 297 4"/></svg></span>
         </h1>
-        <p class="lede rv d2">Blood tests, ECG, ultrasound and complete health checkups — handled by experienced technicians, with free home sample collection across Bhubaneswar and reports the same day.</p>
+
+        <p class="lede rv d2">Blood tests, ECG, ultrasound and full health checkups — signed by a doctor, with free home collection across Bhubaneswar.</p>
 
         <div class="tsearch rv d3">
           <div class="fi">
@@ -126,8 +124,9 @@
               <option>Blood Sugar Fasting</option><option>Urine Routine</option>
             </datalist>
           </div>
-          <a href="#tests" class="btn btn-solid btn-sm">Search</a>
+          <a href="#tests" class="btn btn-gold btn-sm">Book a test <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
+
         <div class="chips rv d4">
           <b>Popular</b>
           <a href="#tests">CBC</a><a href="#tests">Thyroid</a><a href="#tests">HbA1c</a>
@@ -135,24 +134,27 @@
         </div>
 
         <div class="hstats rv d5">
-          <div class="s"><b data-n="18" data-suf="+">18+</b><span>Years serving Bhubaneswar</span></div>
-          <div class="s"><b data-n="450" data-suf="+">450+</b><span>Tests &amp; profiles</span></div>
-          <div class="s"><b data-n="6" data-suf=" hrs">6 hrs</b><span>Typical report time</span></div>
+          <div class="s">
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.4-3 7.9-7 9-4-1.1-7-4.6-7-9V6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span>
+            <b data-n="18" data-suf="+">18+</b><span class="t">Years in Bhubaneswar</span>
+          </div>
+          <div class="s">
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M9 2v6l-4 7a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-4-7V2M8 2h8"/></svg></span>
+            <b data-n="450" data-suf="+">450+</b><span class="t">Tests &amp; profiles</span>
+          </div>
+          <div class="s">
+            <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span>
+            <b data-n="6" data-suf=" hrs">6 hrs</b><span class="t">Fastest report</span>
+          </div>
+          <div class="s">
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M12 9v5M9.5 11.5h5"/></svg></span>
+            <b>&#8377;0</b><span class="t">Home collection</span>
+          </div>
         </div>
       </div>
 
+      <!-- the right column is the photograph; these ride on top of it -->
       <div class="hvis rv d2">
-        <span class="hgold" aria-hidden="true"></span>
-        <div class="hframe">
-          <img id="hpar" src="Images/optimized/hero-section-1.jpg" width="800" height="1200"
-               alt="Gloved hands adjusting a laboratory microscope at Kamini Clinic &amp; Labs"
-               fetchpriority="high" decoding="async" onerror="kFall(this,'micro')">
-        </div>
-        <div class="hsub">
-          <img src="Images/optimized/hero-section-2.jpg" width="800" height="520"
-               alt="Lab technician in a white coat examining a sample under a microscope"
-               decoding="async" onerror="kFall(this,'lab')">
-        </div>
         <div class="hcard hc1">
           <span class="ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></span>
           <div><b>Same-day reports</b><small>On WhatsApp &amp; email</small></div>
@@ -163,49 +165,25 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ================= QUICK ACTION TILES ================= -->
-<section class="quick">
-  <div class="wrap">
-    <div class="qhead rv">
-      <span class="slabel"><i>&mdash;</i> Start here</span>
-      <a href="#contact" class="qhelp">Not sure which test you need? <b>Talk to us</b>
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-
-    <div class="qrail" id="qrail">
-      <span class="qline" aria-hidden="true"><i></i></span>
-
-      <a href="homecollection.html#book" class="qi">
-        <span class="qnum" aria-hidden="true">01</span>
-        <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span>
-        <span class="qt"><b>Book Home Collection</b><small>Free · at your doorstep</small></span>
-        <span class="qgo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-
-      <a href="#contact" class="qi">
-        <span class="qnum" aria-hidden="true">02</span>
-        <span class="ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15h6"/></svg></span>
-        <span class="qt"><b>Upload Prescription</b><small>We'll do the rest</small></span>
-        <span class="qgo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-
-      <a href="#contact" class="qi">
-        <span class="qnum" aria-hidden="true">03</span>
-        <span class="ic"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg></span>
-        <span class="qt"><b>Download Report</b><small>Secure digital copy</small></span>
-        <span class="qgo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-
-      <a href="#contact" class="qi">
-        <span class="qnum" aria-hidden="true">04</span>
-        <span class="ic"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-        <span class="qt"><b>Visit Our Centre</b><small>Jagamara, Bhubaneswar</small></span>
-        <span class="qgo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-    </div>
+    <ul class="hfeat rv d3">
+      <li>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.4-3 7.9-7 9-4-1.1-7-4.6-7-9V6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span>
+        <span><b>NABL-grade quality</b><small>Checked twice, doctor-signed</small></span>
+      </li>
+      <li>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M12 9v5M9.5 11.5h5"/></svg></span>
+        <span><b>Collection at home</b><small>Slots from 6 AM, free</small></span>
+      </li>
+      <li>
+        <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span>
+        <span><b>Reports in 24 hours</b><small>WhatsApp and email</small></span>
+      </li>
+      <li>
+        <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2"/></svg></span>
+        <span><b>Private &amp; confidential</b><small>Your results stay yours</small></span>
+      </li>
+    </ul>
   </div>
 </section>
 
@@ -436,25 +414,6 @@
         </span>
       </a>
     </div>
-
-    <ul class="ptrust rv d2">
-      <li>
-        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.4-3 7.9-7 9-4-1.1-7-4.6-7-9V6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span>
-        <span><b>NABL-grade quality</b><small>Checked twice, signed by a doctor</small></span>
-      </li>
-      <li>
-        <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M12 9v5M9.5 11.5h5"/></svg></span>
-        <span><b>Collection at home</b><small>Slots from 6 AM, all Bhubaneswar</small></span>
-      </li>
-      <li>
-        <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span>
-        <span><b>Reports in 24 hours</b><small>On WhatsApp and email</small></span>
-      </li>
-      <li>
-        <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2"/></svg></span>
-        <span><b>Private &amp; confidential</b><small>Your results stay yours</small></span>
-      </li>
-    </ul>
   </div>
 </section>
 
@@ -464,21 +423,82 @@
     <div class="shead">
       <div class="l">
         <span class="slabel rv"><i>02</i> Search by health concern</span>
-        <h2 class="dsp rv d1">Not sure what to book?<br>Start with the symptom.</h2>
+        <h2 class="dsp rv d1">Start with the symptom.<br>Not the test name.</h2>
+        <p class="lede rv d2">Pick what's bothering you — we'll show the exact tests and packages that answer it.</p>
       </div>
       <a href="#contact" class="btn btn-out rv d2">Ask our team <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
     <div class="cgrid">
-      <a href="#tests" class="cc rv"><span class="ic"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.5 1-1a5.5 5.5 0 0 0 0-7.9z"/></svg></span><span>Heart</span></a>
-      <a href="#tests" class="cc rv d1"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 0-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 0 0-7-7z"/></svg></span><span>Liver</span></a>
-      <a href="#tests" class="cc rv d2"><span class="ic"><svg viewBox="0 0 24 24"><path d="M8 3C5 3 4 6 4 9c0 5 4 12 4 12s4-3 4-9c0-5-1-9-4-9zM16 3c3 0 4 3 4 6 0 5-4 12-4 12s-4-3-4-9c0-5 1-9 4-9z"/></svg></span><span>Kidney</span></a>
-      <a href="#tests" class="cc rv d3"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 2v4a6 6 0 0 0 12 0V2M6 22v-4a6 6 0 0 1 12 0v4M6 2h12M6 22h12"/></svg></span><span>Thyroid</span></a>
-      <a href="#tests" class="cc rv d4"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></span><span>Vitamin D</span></a>
-      <a href="#tests" class="cc rv"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 4-3 6.5-3 9.5a4 4 0 0 1-8 0C8 15.5 5 13 5 9a7 7 0 0 1 7-7z"/></svg></span><span>Diabetes</span></a>
-      <a href="#tests" class="cc rv d1"><span class="ic"><svg viewBox="0 0 24 24"><path d="M9 2v6l-4 7a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-4-7V2M8 2h8"/></svg></span><span>CBC</span></a>
-      <a href="#tests" class="cc rv d2"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 22a4 4 0 0 1-4-4c0-3 2-4 2-8a2 2 0 0 1 4 0c0 4 2 5 2 8a4 4 0 0 1-4 4z"/><path d="M8 6L5 3M16 6l3-3"/></svg></span><span>Fever</span></a>
-      <a href="#tests" class="cc rv d3"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v6M9 6h6M6 21v-6a6 6 0 0 1 12 0v6M4 21h16"/></svg></span><span>Bone</span></a>
-      <a href="#tests" class="cc rv d4"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 6.2L21 9l-5 4.3 1.6 6.7L12 16.6 6.4 20 8 13.3 3 9l6.6-.8z"/></svg></span><span>Allergy</span></a>
+      <a href="#tests" class="cc rv">
+        <span class="cph">
+          <img src="Images/healthcare/heart-1.jpg" alt="An anatomical model of the human heart" width="560" height="420" loading="lazy" decoding="async" onerror="kFall(this,'vials')">
+          <span class="cchip"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.5 1-1a5.5 5.5 0 0 0 0-7.9z"/></svg></span>
+        </span>
+        <span class="cbody"><span class="ct"><b>Heart</b><small>Lipid profile &amp; ECG</small></span><span class="cgo"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a href="#tests" class="cc rv d1">
+        <span class="cph">
+          <img src="Images/healthcare/liver.jpg" alt="An anatomical model of the human liver" width="560" height="420" loading="lazy" decoding="async" onerror="kFall(this,'vials')">
+          <span class="cchip"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 0-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 0 0-7-7z"/></svg></span>
+        </span>
+        <span class="cbody"><span class="ct"><b>Liver</b><small>LFT, SGPT, SGOT</small></span><span class="cgo"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a href="#tests" class="cc rv d2">
+        <span class="cph">
+          <img src="Images/healthcare/kidney.jpg" alt="An anatomical model of the kidneys" width="560" height="420" loading="lazy" decoding="async" onerror="kFall(this,'vials')">
+          <span class="cchip"><svg viewBox="0 0 24 24"><path d="M8 3C5 3 4 6 4 9c0 5 4 12 4 12s4-3 4-9c0-5-1-9-4-9zM16 3c3 0 4 3 4 6 0 5-4 12-4 12s-4-3-4-9c0-5 1-9 4-9z"/></svg></span>
+        </span>
+        <span class="cbody"><span class="ct"><b>Kidney</b><small>KFT, urea, creatinine</small></span><span class="cgo"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a href="#tests" class="cc rv d3">
+        <span class="cph">
+          <img src="Images/healthcare/thyroid-1.jpg" alt="An illustration of the thyroid gland in the neck" width="560" height="420" loading="lazy" decoding="async" onerror="kFall(this,'vials')">
+          <span class="cchip"><svg viewBox="0 0 24 24"><path d="M6 2v4a6 6 0 0 0 12 0V2M6 22v-4a6 6 0 0 1 12 0v4M6 2h12M6 22h12"/></svg></span>
+        </span>
+        <span class="cbody"><span class="ct"><b>Thyroid</b><small>T3, T4, TSH</small></span><span class="cgo"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a href="#tests" class="cc rv d4">
+        <span class="cph">
+          <img src="Images/healthcare/vitamin-d.jpg" alt="A vitamin D softgel capsule in the sunlight" width="560" height="420" loading="lazy" decoding="async" onerror="kFall(this,'vials')">
+          <span class="cchip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></span>
+        </span>
+        <span class="cbody"><span class="ct"><b>Vitamin D</b><small>25-OH Vitamin D</small></span><span class="cgo"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a href="#tests" class="cc rv d1">
+        <span class="cph">
+          <img src="Images/healthcare/diabetes-1.jpg" alt="A glucometer reading a fingertip blood sugar sample" width="560" height="420" loading="lazy" decoding="async" onerror="kFall(this,'fam')">
+          <span class="cchip"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 4-3 6.5-3 9.5a4 4 0 0 1-8 0C8 15.5 5 13 5 9a7 7 0 0 1 7-7z"/></svg></span>
+        </span>
+        <span class="cbody"><span class="ct"><b>Diabetes</b><small>HbA1c &amp; blood sugar</small></span><span class="cgo"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a href="#tests" class="cc rv d2">
+        <span class="cph">
+          <img src="Images/healthcare/cbc.jpg" alt="Blood sample tubes being handled in the laboratory" width="560" height="420" loading="lazy" decoding="async" onerror="kFall(this,'vials')">
+          <span class="cchip"><svg viewBox="0 0 24 24"><path d="M9 2v6l-4 7a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-4-7V2M8 2h8"/></svg></span>
+        </span>
+        <span class="cbody"><span class="ct"><b>CBC</b><small>Complete blood count</small></span><span class="cgo"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a href="#tests" class="cc rv d3">
+        <span class="cph">
+          <img src="Images/healthcare/fever.jpg" alt="A woman checking her temperature with a thermometer" width="560" height="420" loading="lazy" decoding="async" onerror="kFall(this,'fam')">
+          <span class="cchip"><svg viewBox="0 0 24 24"><path d="M12 22a4 4 0 0 1-4-4c0-3 2-4 2-8a2 2 0 0 1 4 0c0 4 2 5 2 8a4 4 0 0 1-4 4z"/><path d="M8 6L5 3M16 6l3-3"/></svg></span>
+        </span>
+        <span class="cbody"><span class="ct"><b>Fever</b><small>Dengue, malaria, widal</small></span><span class="cgo"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a href="#tests" class="cc rv d4">
+        <span class="cph">
+          <img src="Images/healthcare/bone.jpg" alt="An anatomical model of the knee joint" width="560" height="420" loading="lazy" decoding="async" onerror="kFall(this,'vials')">
+          <span class="cchip"><svg viewBox="0 0 24 24"><path d="M12 3v6M9 6h6M6 21v-6a6 6 0 0 1 12 0v6M4 21h16"/></svg></span>
+        </span>
+        <span class="cbody"><span class="ct"><b>Bone</b><small>Calcium &amp; uric acid</small></span><span class="cgo"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a href="#tests" class="cc rv d5">
+        <span class="cph">
+          <img src="Images/healthcare/allergy.jpg" alt="A woman with allergy symptoms holding a tissue" width="560" height="420" loading="lazy" decoding="async" onerror="kFall(this,'fam')">
+          <span class="cchip"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 6.2L21 9l-5 4.3 1.6 6.7L12 16.6 6.4 20 8 13.3 3 9l6.6-.8z"/></svg></span>
+        </span>
+        <span class="cbody"><span class="ct"><b>Allergy</b><small>Total IgE panel</small></span><span class="cgo"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
     </div>
   </div>
 </section>

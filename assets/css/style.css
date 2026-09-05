@@ -68,15 +68,6 @@ section{position:relative}
 /* ---------- scroll progress ---------- */
 #prog{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-soft));z-index:300;transition:width .1s linear}
 
-/* ================= UTILITY BAR ================= */
-.util{background:var(--teal-900);color:rgba(255,255,255,.75);font-size:.79rem}
-.util .wrap{display:flex;align-items:center;gap:20px;height:40px}
-.util a,.util span{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
-.util svg{width:14px;height:14px;color:var(--gold-soft)}
-.util a{transition:.2s}.util a:hover{color:#fff}
-.util .sp{flex:1}
-.util .dv{width:1px;height:13px;background:rgba(255,255,255,.16)}
-
 /* ================= NAV ================= */
 #nav{position:sticky;top:0;z-index:150;background:rgba(251,249,244,.92);backdrop-filter:blur(18px) saturate(1.5);border-bottom:1px solid transparent;transition:.4s var(--ease)}
 #nav.stuck{border-bottom-color:var(--line);box-shadow:0 10px 40px -32px rgba(7,34,32,.9)}
@@ -96,21 +87,20 @@ footer .brand .wm span{color:var(--gold-soft)}
 /* The spacing lives in the links' own padding, not in a gap between bare
    words, so the row reads as one navigational object and each item has a
    hit area worth the name. */
-.nlinks{display:flex;align-items:center;gap:2px;margin-left:28px;
-  font-size:.875rem;font-weight:600;color:var(--grey);white-space:nowrap}
-.nlinks a{position:relative;padding:9px 12px;border-radius:8px;
+.nlinks{display:flex;align-items:center;gap:3px;margin-left:30px;
+  font-size:.9rem;font-weight:700;letter-spacing:-.006em;color:var(--grey);white-space:nowrap}
+.nlinks a{position:relative;padding:10px 13px;border-radius:9px;
   transition:color .25s var(--ease),background-color .25s var(--ease)}
 .nlinks a:hover,.nlinks a:focus-visible{color:var(--teal);background:var(--teal-50)}
 
 /* Current page. The rule grows from the centre so a page change reads as one
    object settling rather than a line sweeping in from the left. */
-.nlinks a::after{content:"";position:absolute;left:50%;right:50%;bottom:5px;height:2px;
+.nlinks a::after{content:"";position:absolute;left:50%;right:50%;bottom:4px;height:2.5px;
   background:var(--gold);border-radius:2px;transition:left .34s var(--ease),right .34s var(--ease)}
+/* Every item is already 700, so the current one is marked by colour and the
+   rule alone — no faux-bold, and therefore no width shift on a page change. */
 .nlinks a.on{color:var(--teal)}
-/* a hairline faux-bold: the current item gains weight without gaining width,
-   so nothing on the row shifts when the page changes */
-.nlinks a.on{text-shadow:0 0 .55px currentColor}
-.nlinks a.on::after{left:12px;right:12px}
+.nlinks a.on::after{left:13px;right:13px}
 .nlinks a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
 /* actions sit hard right, behind a hairline that separates navigating from doing */
@@ -142,120 +132,112 @@ footer .brand .wm span{color:var(--gold-soft)}
 .burger.on span:nth-child(1){transform:translateY(6.8px) rotate(45deg)}
 .burger.on span:nth-child(2){opacity:0}
 .burger.on span:nth-child(3){transform:translateY(-6.8px) rotate(-45deg)}
-/* ================= HERO ================= */
-.hero{padding:56px 0 76px;overflow:hidden}
-.hero .bgfx{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.hero .glow{position:absolute;border-radius:50%;filter:blur(70px)}
-.hero .g1{width:520px;height:520px;top:-170px;right:-130px;background:rgba(216,235,229,.9)}
-.hero .g2{width:380px;height:380px;bottom:-160px;left:-140px;background:rgba(245,236,214,.95)}
+/* ================= HERO =================
+   A full-bleed teal panel — the same #072220 ground the four inner mastheads
+   open on — with the photograph bleeding off the right edge and dissolving
+   into it through a mask, rather than sitting in a floating rounded frame. */
+.hero{position:relative;background:var(--teal-900);color:#fff;padding:44px 0 26px;overflow:hidden;isolation:isolate}
+
+/* ---------- the photograph ---------- */
+.hphoto{position:absolute;top:0;right:0;bottom:0;width:55%;z-index:0;pointer-events:none;overflow:hidden}
+.hphoto img{width:100%;height:110%;object-fit:cover;object-position:58% 46%;
+  filter:brightness(.94) contrast(1.08) saturate(1);will-change:transform}
+/* pulls a white clinical photo onto the brand's teal. Kept light — at .7 it
+   stripped the skin tones and the frame read as flat grey-green. */
+.htint{position:absolute;inset:0;background:linear-gradient(200deg,#0d4744,#072220);
+  mix-blend-mode:color;opacity:.38}
+/* the dissolve: hard teal at the left seam, clear through the subject, and a
+   soft close at the top and bottom so the photo never shows a cut edge */
+.hveil{position:absolute;inset:0;background:
+  linear-gradient(90deg,#072220 0%,rgba(7,34,32,.96) 14%,rgba(7,34,32,.42) 32%,rgba(7,34,32,.04) 56%,rgba(7,34,32,.3) 100%),
+  linear-gradient(180deg,rgba(7,34,32,.62) 0%,transparent 20%,transparent 58%,rgba(7,34,32,.88) 100%)}
+
 .hero .wrap{position:relative;z-index:2}
-.hgrid{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr);gap:56px;align-items:center}
-.hbadge{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--paper);padding:8px 16px;border-radius:100px;font-size:.75rem;font-weight:700;color:var(--teal);box-shadow:0 4px 16px -12px rgba(7,34,32,.6)}
-.hbadge .pulse{width:7px;height:7px;border-radius:50%;background:var(--gold);position:relative}
-.hbadge .pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--gold);animation:pp 2s cubic-bezier(0,0,.2,1) infinite}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:40px;align-items:center}
+.hgrid>*{min-width:0}
+.hcopy{max-width:620px;padding:0}
+
+/* ---------- badge ---------- */
+.hbadge{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(227,198,127,.4);
+  background:rgba(201,162,75,.14);padding:8px 17px;border-radius:100px;font-size:.72rem;font-weight:800;
+  letter-spacing:.06em;color:var(--gold-soft)}
+.hbadge .pulse{width:7px;height:7px;border-radius:50%;background:var(--gold);position:relative;flex:none}
+.hbadge .pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--gold);
+  animation:pp 2s cubic-bezier(0,0,.2,1) infinite}
 @keyframes pp{0%{transform:scale(1);opacity:.8}80%,100%{transform:scale(3);opacity:0}}
-.hero h1{font-size:clamp(2.05rem,7.4vw,4.4rem);margin:22px 0 0;letter-spacing:-.02em}
-/* rotating word (21st.dev style animated hero) */
-.rot{display:block;position:relative;height:1.3em;overflow:hidden;line-height:1.15}
-.rot span{position:absolute;left:0;right:0;top:0;line-height:1.15;padding-bottom:.14em;font-style:italic;color:var(--teal);opacity:0;transform:translateY(110%);transition:transform .7s var(--spring),opacity .5s var(--ease)}
-.rot span.on{opacity:1;transform:none}
-.rot span.out{opacity:0;transform:translateY(-110%)}
-.hero .lede{margin:22px 0 0;font-size:1.06rem}
-/* test search */
-.tsearch{margin-top:28px;display:flex;gap:9px;background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r-lg);padding:8px;max-width:530px;transition:.3s}
-.tsearch:focus-within{border-color:var(--teal);box-shadow:0 0 0 4px rgba(13,71,68,.08)}
-.tsearch .fi{flex:1;display:flex;align-items:center;gap:10px;padding-left:12px;min-width:0}
+
+/* ---------- headline ----------
+   All three lines in Instrument Serif, the face that carries every other
+   heading on the site — the homepage speaks in the brand's own voice rather
+   than switching to a heavy sans for its one big moment. The statement lines
+   sit upright, and the third turns italic and grows into the drawn swash.
+   Instrument Serif ships at 400 only, so the weight comes from size, not
+   from a bolder cut; the tracking is loosened from the sans setting to suit
+   it, and the type is stepped up to hold the same presence on the photo. */
+.hero h1{font-size:clamp(2.1rem,5.2vw,3.75rem);margin:20px 0 0;line-height:1.06}
+.hero h1 .l1,.hero h1 .l2{display:block;font-weight:400;letter-spacing:-.016em;color:#fff}
+.hero h1 .l2{color:var(--teal-200)}
+.hero h1 .l3{display:inline-block;position:relative;font-style:italic;color:var(--gold-soft);
+  font-size:1.2em;letter-spacing:-.015em;line-height:1.24;padding-right:.1em}
+.hswash{position:absolute;left:0;width:100%;bottom:.06em;height:.2em;color:var(--gold);
+  stroke-width:2.4;stroke-linecap:round;overflow:visible;opacity:.9}
+
+.hero .lede{margin:18px 0 0;font-size:1.03rem;line-height:1.65;color:rgba(255,255,255,.75);max-width:46ch;
+  text-wrap:balance}
+
+/* ---------- search ---------- */
+.tsearch{margin-top:26px;display:flex;gap:8px;background:var(--paper);border:1.5px solid transparent;
+  border-radius:13px;padding:8px;max-width:545px;box-shadow:0 26px 52px -34px rgba(0,0,0,.9);transition:.3s var(--ease)}
+.tsearch:focus-within{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,162,75,.2),0 26px 52px -34px rgba(0,0,0,.9)}
+.tsearch .fi{flex:1;display:flex;align-items:center;gap:10px;padding-left:13px;min-width:0}
 .tsearch .fi svg{width:18px;height:18px;color:var(--grey-2);flex-shrink:0}
-.tsearch input{flex:1;border:none;outline:none;font-size:.93rem;color:var(--ink);background:transparent;min-width:0}
+.tsearch input{flex:1;border:none;outline:none;font-size:.93rem;font-weight:500;color:var(--ink);
+  background:transparent;min-width:0}
+.tsearch .btn-sm{padding:12px 20px;border-radius:9px;font-weight:800}
+
+/* ---------- popular chips ---------- */
 .chips{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap;align-items:center}
-.chips b{font-size:.73rem;color:var(--grey-2);font-weight:800;letter-spacing:.07em;text-transform:uppercase}
-.chips a{font-size:.79rem;font-weight:600;color:var(--teal);border:1px solid var(--line);background:var(--paper);padding:5px 12px;border-radius:100px;transition:.25s}
-.chips a:hover{border-color:var(--gold);background:var(--gold-pale)}
-.hstats{display:flex;margin-top:38px;border-top:1px solid var(--line);padding-top:24px;flex-wrap:wrap;gap:0}
-.hstats .s{padding-right:30px;margin-right:30px;border-right:1px solid var(--line)}
-.hstats .s:last-child{border:none;margin:0;padding:0}
-.hstats b{font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,5.6vw,2.2rem);line-height:1;display:block}
-.hstats span{font-size:.76rem;color:var(--grey);display:block;margin-top:5px}
-/* hero visual */
-.hvis{position:relative}
-.hframe{position:relative;border-radius:var(--r-xl);overflow:hidden;aspect-ratio:5/5.7;background:var(--teal-100);box-shadow:var(--sh-lg)}
-.hframe img{width:100%;height:110%;object-fit:cover;will-change:transform}
-.hframe::after{content:"";position:absolute;inset:0;background:linear-gradient(195deg,transparent 55%,rgba(7,34,32,.5));pointer-events:none}
-.hsub{position:absolute;left:-44px;bottom:70px;width:172px;border-radius:var(--r-lg);overflow:hidden;border:6px solid var(--ivory);box-shadow:var(--sh);aspect-ratio:4/5;background:var(--teal-50)}
-.hsub img{width:100%;height:100%;object-fit:cover;object-position:32% center}
-.hcard{position:absolute;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-radius:var(--r-lg);padding:13px 16px;box-shadow:var(--sh);display:flex;align-items:center;gap:11px}
-.hcard .ic{width:38px;height:38px;border-radius:var(--r);background:var(--teal-50);color:var(--teal);display:grid;place-items:center;flex-shrink:0}
+.chips b{font-size:.68rem;color:rgba(255,255,255,.5);font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.chips a{font-size:.79rem;font-weight:700;color:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.05);padding:6px 14px;border-radius:100px;transition:.25s var(--ease)}
+.chips a:hover{border-color:var(--gold-soft);background:rgba(201,162,75,.2);color:#fff}
+
+/* ---------- stats ---------- */
+.hstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:30px;
+  border-top:1px solid rgba(255,255,255,.15);padding-top:22px;gap:16px}
+.hstats .s{position:relative;padding-right:16px}
+.hstats .s+.s{padding-left:20px;border-left:1px solid rgba(255,255,255,.13)}
+.hstats .ic{display:block;width:19px;height:19px;color:var(--gold);margin-bottom:9px}
+.hstats .ic svg{width:19px;height:19px;stroke-width:1.7}
+.hstats b{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(1.55rem,3.4vw,2rem);
+  line-height:1;display:block;color:#fff}
+.hstats .t{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.58);display:block;margin-top:7px;line-height:1.4}
+
+/* ---------- the cards riding on the photograph ---------- */
+.hvis{position:relative;min-height:470px}
+.hcard{position:absolute;z-index:3;background:rgba(255,255,255,.96);color:var(--ink);
+  backdrop-filter:blur(10px);border-radius:12px;padding:13px 17px;display:flex;align-items:center;gap:12px;
+  box-shadow:0 26px 50px -28px rgba(0,0,0,.85)}
+.hcard .ic{width:38px;height:38px;border-radius:9px;background:var(--teal-50);color:var(--teal);
+  display:grid;place-items:center;flex-shrink:0}
 .hcard .ic svg{width:18px;height:18px}
-.hcard b{font-size:.84rem;display:block;line-height:1.3}
-.hcard small{font-size:.71rem;color:var(--grey)}
-.hc1{top:30px;right:-30px;animation:fl 6s ease-in-out infinite}
-.hc2{right:-22px;bottom:28px;animation:fl 6s ease-in-out infinite 1.4s}
+.hcard b{font-size:.84rem;font-weight:800;display:block;line-height:1.3}
+.hcard small{font-size:.71rem;color:var(--grey);display:block;margin-top:1px}
+.hc1{top:8px;right:-46px;animation:fl 6s ease-in-out infinite}
+.hc2{right:-58px;bottom:26px;animation:fl 6s ease-in-out infinite 1.4s}
 @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.hgold{position:absolute;left:-42px;top:-16px;width:90px;height:90px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);opacity:.7}
-
-/* ================= QUICK ACTION TILES ================= */
-/* ================= QUICK ACTIONS — scroll-drawn rail =================
-   A gold spine draws across as the section scrolls into view; each card
-   lights up as the line reaches its node. --p (0→1) is set by main.js.
-==================================================================== */
-.quick{background:var(--ivory-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:54px 0 60px;overflow:hidden}
-.quick::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:radial-gradient(circle at 1px 1px,rgba(13,71,68,.06) 1px,transparent 0);background-size:22px 22px;
-  -webkit-mask-image:linear-gradient(180deg,#000,transparent 76%);mask-image:linear-gradient(180deg,#000,transparent 76%)}
-.quick .wrap{position:relative;z-index:1}
-
-.qhead{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:30px}
-.qhelp{font-size:.85rem;font-weight:600;color:var(--grey);display:inline-flex;align-items:center;gap:8px;transition:.3s var(--ease)}
-.qhelp b{color:var(--teal);font-weight:800;border-bottom:1px solid var(--teal-200);transition:.3s var(--ease)}
-.qhelp svg{width:15px;height:15px;color:var(--gold);stroke-width:2.2;transition:transform .35s var(--ease)}
-.qhelp:hover{color:var(--ink)}
-.qhelp:hover b{border-bottom-color:var(--teal)}
-.qhelp:hover svg{transform:translateX(4px)}
-
-.qrail{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;padding-top:46px}
-/* the spine */
-.qline{position:absolute;top:22px;left:0;right:0;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
-.qline i{display:block;height:100%;width:100%;transform:scaleX(var(--p,0));transform-origin:left;
-  background:linear-gradient(90deg,var(--gold-2),var(--gold),var(--gold-soft));box-shadow:0 0 14px rgba(201,162,75,.55)}
-
-/* no overflow:hidden here — the node sits outside the card, on the spine */
-.qi{position:relative;display:block;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:24px 20px 26px;
-  transition:opacity .78s var(--ease),transform .86s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease)}
-/* node on the spine */
-.qi::before{content:"";position:absolute;left:50%;top:-28.5px;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;
-  background:var(--paper);border:2px solid var(--line);z-index:2;transition:.55s var(--spring)}
-/* cursor spotlight */
-.qi::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .4s var(--ease);
-  background:radial-gradient(360px circle at var(--mx,50%) var(--my,0%),rgba(201,162,75,.13),transparent 60%)}
-.qi:hover::after{opacity:1}
-
-.qi .ic{width:46px;height:46px;border-radius:var(--r);background:var(--teal-50);color:var(--teal);
-  display:grid;place-items:center;transition:.4s var(--spring);position:relative;z-index:1}
-.qi .ic svg{width:21px;height:21px;transition:.4s var(--ease)}
-.qt{display:block;margin-top:16px;position:relative;z-index:1}
-.qi b{font-size:.95rem;font-weight:700;display:block;line-height:1.3}
-.qi small{font-size:.78rem;color:var(--grey);display:block;margin-top:3px}
-.qnum{position:absolute;top:12px;right:16px;font-family:'Instrument Serif',Georgia,serif;font-size:2.5rem;line-height:1;
-  color:var(--teal);opacity:.08;transition:.62s var(--ease);z-index:1}
-.qgo{position:absolute;right:18px;bottom:20px;width:31px;height:31px;border-radius:50%;background:var(--teal-50);
-  color:var(--teal);display:grid;place-items:center;opacity:0;transform:translateX(-8px);transition:.4s var(--ease);z-index:1}
-.qgo svg{width:15px;height:15px;stroke-width:2.3}
-
-/* --- lit: the spine has reached this card --- */
-.qi.lit::before{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 5px rgba(201,162,75,.15)}
-.qi.lit .qnum{opacity:.15}
-
-/* --- hover --- */
-.qi:hover{border-color:transparent;box-shadow:var(--sh)}
-.qi:hover .ic{background:var(--teal);color:#fff;transform:translateY(-3px) rotate(-5deg)}
-.qi:hover .qnum{color:var(--gold);opacity:.45;transform:translateY(-3px)}
-.qi:hover .qgo{opacity:1;transform:none;background:var(--gold);color:#2c2206}
-
-/* --- scroll entrance (only when JS is driving the rail) --- */
-.qrail.js .qi{opacity:0;transform:translateY(30px)}
-.qrail.js .qi.lit{opacity:1;transform:none}
-.qrail.js .qi.lit:hover{transform:translateY(-6px)}
+/* ---------- the closing feature bar ---------- */
+.hfeat{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:26px;
+  border:1px solid rgba(255,255,255,.15);border-radius:var(--r-lg);background:rgba(7,34,32,.62);
+  backdrop-filter:blur(14px) saturate(1.3);overflow:hidden}
+.hfeat li{display:flex;align-items:center;gap:13px;padding:16px 20px;
+  border-left:1px solid rgba(255,255,255,.12)}
+.hfeat li:first-child{border-left:0}
+.hfeat .ic{flex:none;width:38px;height:38px;border-radius:50%;background:rgba(201,162,75,.15);
+  color:var(--gold-soft);display:grid;place-items:center}
+.hfeat .ic svg{width:18px;height:18px}
+.hfeat b{display:block;font-size:.83rem;font-weight:800;line-height:1.35;color:#fff}
+.hfeat small{display:block;font-size:.72rem;color:rgba(255,255,255,.5);line-height:1.45}
 
 /* ================= PROMO BANNER CAROUSEL ================= */
 .promo{padding:70px 0 0}
@@ -314,24 +296,38 @@ footer .brand .wm span{color:var(--gold-soft)}
 .pcard:hover .pmed svg{color:var(--gold-soft)}
 .pcard b{display:block;font-size:.93rem;font-weight:700;margin:0 0 5px;line-height:1.3}
 .pcard small{display:block;font-size:.76rem;color:var(--grey);line-height:1.45}
-/* trust strip */
-.ptrust{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:42px;background:rgba(255,255,255,.66);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
-.ptrust li{display:flex;align-items:center;gap:14px;padding:20px 22px;border-left:1px solid var(--line-2)}
-.ptrust li:first-child{border-left:none}
-.ptrust .ic{flex:none;width:42px;height:42px;border-radius:50%;background:var(--teal-50);color:var(--teal);display:grid;place-items:center}
-.ptrust .ic svg{width:20px;height:20px}
-.ptrust b{display:block;font-size:.85rem;font-weight:700;line-height:1.35}
-.ptrust small{display:block;font-size:.75rem;color:var(--grey);line-height:1.4}
 
 /* ================= HEALTH CONCERNS ================= */
 .conc{padding:96px 0}
-.cgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
-.cc{display:flex;flex-direction:column;align-items:center;gap:11px;padding:24px 12px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);transition:.32s var(--ease);text-align:center}
-.cc:hover{border-color:var(--teal);background:var(--teal-50);transform:translateY(-4px)}
-.cc .ic{width:50px;height:50px;border-radius:50%;background:var(--teal-50);color:var(--teal);display:grid;place-items:center;transition:.32s var(--ease)}
-.cc:hover .ic{background:var(--teal);color:#fff}
-.cc .ic svg{width:24px;height:24px}
-.cc span{font-size:.85rem;font-weight:700}
+.conc .shead{margin-bottom:44px}
+.conc .lede{margin-top:16px;font-size:1rem}
+.cgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+/* a photo card: picture, a frosted organ chip, then the name and a gold go-dot */
+.cc{display:block;position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;
+  transition:transform .42s var(--ease),box-shadow .42s var(--ease),border-color .42s var(--ease)}
+.cc:hover{transform:translateY(-8px);box-shadow:var(--sh);border-color:var(--gold-soft)}
+.cc:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.cph{display:block;position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--teal-50)}
+.cph img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.cc:hover .cph img{transform:scale(1.08)}
+/* a scrim so the chip stays readable and the photos sit as one family */
+.cph::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(7,34,32,.24),rgba(7,34,32,0) 46%,rgba(7,34,32,.22));transition:.42s var(--ease)}
+.cc:hover .cph::after{background:linear-gradient(160deg,rgba(13,71,68,.3),rgba(7,34,32,.02) 50%,rgba(7,34,32,.3))}
+.cchip{position:absolute;top:11px;left:11px;width:34px;height:34px;border-radius:50%;z-index:2;display:grid;place-items:center;
+  background:rgba(255,255,255,.82);color:var(--teal);border:1px solid rgba(255,255,255,.6);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+  box-shadow:0 6px 16px -8px rgba(7,34,32,.6);transition:.42s var(--spring)}
+.cchip svg{width:17px;height:17px;stroke-width:1.8}
+.cc:hover .cchip{background:var(--gold);color:#2c2206;border-color:rgba(255,255,255,.35);transform:scale(1.08)}
+/* body */
+.cbody{display:flex;align-items:center;gap:10px;padding:14px 15px 15px}
+.ct{min-width:0;flex:1}
+.cc b{display:block;font-size:.94rem;font-weight:800;letter-spacing:-.012em;line-height:1.25;transition:color .32s var(--ease)}
+.cc:hover b{color:var(--teal)}
+.cc small{display:block;font-size:.69rem;color:var(--grey-2);line-height:1.4;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cgo{flex:none;width:32px;height:32px;border-radius:50%;background:var(--gold-pale);color:var(--gold-2);display:grid;place-items:center;transition:.36s var(--ease)}
+.cgo svg{width:15px;height:15px;stroke-width:2.2;transition:transform .36s var(--ease)}
+.cc:hover .cgo{background:var(--teal);color:var(--gold-soft)}
+.cc:hover .cgo svg{transform:translateX(2px)}
 
 /* ================= TESTS ================= */
 .tests{padding:96px 0;background:var(--ivory-2)}
@@ -534,17 +530,27 @@ footer .brand{margin-bottom:18px}
 /* ================= RESPONSIVE ================= */
 @media(max-width:1240px){ .ncall{display:none} .nact{padding-left:0} .nact::before{display:none} }
 @media(max-width:1060px){ .nact .btn{display:none} }
+@media(max-width:1340px){ .hc1{right:-8px} .hc2{right:-16px} }
 @media(max-width:1140px){
+  .hphoto{width:52%}
+  .hc1{right:-18px}
+  .hc2{right:-24px}
+  .hfeat li{padding:16px 15px;gap:11px}
+  .hfeat small{font-size:.69rem}
+  .hstats .t{font-size:.68rem}
+  .hstats{gap:12px}
+  .hstats .s+.s{padding-left:16px}
+  .hstats .s{padding-right:10px}
   /* tighten the padding before the type — a legible label matters more than a wide one */
-  .nlinks{margin-left:24px}
-  .nlinks a{padding:9px 10px}
+  .nlinks{margin-left:22px}
+  .nlinks a{padding:10px 10px}
   .nlinks a.on::after{left:10px;right:10px}
   .pgrid6{grid-template-columns:repeat(3,1fr)}
   .pph{aspect-ratio:16/10}
-  .ptrust{grid-template-columns:1fr 1fr}
-  .ptrust li:nth-child(odd){border-left:none}
-  .ptrust li:nth-child(n+3){border-top:1px solid var(--line-2)}
-  .cgrid{grid-template-columns:repeat(5,1fr);gap:10px}
+  .cgrid{gap:12px}
+  .cph{aspect-ratio:5/4}
+  .cbody{padding:12px 12px 13px;gap:8px}
+  .cc small{font-size:.66rem}
   .tgrid{grid-template-columns:repeat(2,1fr)}
   .chgrid{grid-template-columns:repeat(5,1fr);gap:8px}
   .ch .ring{width:88px;height:88px}
@@ -552,7 +558,23 @@ footer .brand{margin-bottom:18px}
 }
 @media(max-width:960px){
   .hgrid,.qgrid2,.fgrid,.bgrid{grid-template-columns:1fr}
-  .hgrid{gap:64px}
+  .hgrid{gap:0}
+  /* stacked: the photograph goes full width and sits behind everything, so the
+     veil has to run top-to-bottom instead of left-to-right or the copy lands
+     on the subject's face */
+  .hphoto{width:100%}
+  .hphoto img{object-position:64% 26%}
+  .hveil{background:
+    linear-gradient(180deg,rgba(7,34,32,.96) 0%,rgba(7,34,32,.93) 40%,rgba(7,34,32,.9) 70%,rgba(7,34,32,.97) 100%)}
+  .hphoto img{filter:brightness(.66) contrast(1.05) saturate(.85)}
+  .hcopy{max-width:none;padding-bottom:0}
+  .hvis{min-height:270px;margin-top:26px}
+  .hvis{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;align-content:flex-start}
+  .hcard{position:static;flex:1 1 260px;min-width:0}
+  .hc1,.hc2{animation:none}
+  .hfeat{grid-template-columns:1fr 1fr}
+  .hfeat li:nth-child(odd){border-left:0}
+  .hfeat li:nth-child(n+3){border-top:1px solid rgba(255,255,255,.12)}
   .qgrid2{gap:72px}
   .nlinks{display:none}
   .nlinks{margin-left:0}
@@ -589,8 +611,6 @@ footer .brand{margin-bottom:18px}
   .nlinks.show{overscroll-behavior:contain}
   .burger{display:flex}
   /* rail collapses to 2 columns — the spine only reads on a single row */
-  .qrail{grid-template-columns:1fr 1fr;padding-top:0}
-  .qline,.qi::before{display:none}
   .pslide{grid-template-columns:1fr;min-height:0}
   .pslide .ptxt{padding:36px 28px 30px;order:2}
   .pslide .pimg{order:1;min-height:230px;height:230px}
@@ -604,9 +624,6 @@ footer .brand{margin-bottom:18px}
   .chgrid::before{display:none}
   .pstep{grid-template-columns:auto 1fr;gap:20px}
   .pstep .ic{display:none}
-  .hc1,.hc2{right:0}
-  .hsub{left:-14px}
-  .hgold{left:-16px}
   .fgrid2{grid-template-columns:1fr 1fr}
   .fbrand{grid-column:span 2}
   .advisor{max-width:290px;padding:8px 16px 8px 8px}
@@ -621,19 +638,16 @@ footer .brand{margin-bottom:18px}
   #nav nav{gap:12px;height:70px}
   .brand .mark{width:42px;height:42px}
   .brand .wm b{font-size:1.28rem}
-  .tgrid,.cgrid{grid-template-columns:1fr 1fr}
-  .qrail{grid-template-columns:1fr 1fr;gap:14px}
+  .tgrid{grid-template-columns:1fr 1fr}
+  .cgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
   .pgrid6{grid-template-columns:1fr 1fr}
   .chgrid{grid-template-columns:1fr 1fr;gap:22px}
-  .qi{padding:20px 16px 22px}
-  .qnum{font-size:2rem;top:10px;right:12px}
-  .qgo{display:none}
-  .hstats{gap:18px}
-  .hstats .s{border:none;padding:0;margin:0;min-width:44%}
-  .hsub{width:118px;left:-10px;bottom:-20px}
-  .hc1,.hc2{transform:scale(.88)}
-  .hc2{bottom:-10px}
-  .hgold{display:none}
+  .hstats{grid-template-columns:1fr 1fr;gap:22px 18px}
+  .hstats .s{padding-right:0}
+  .hstats .s+.s{padding-left:0;border-left:0}
+  .hstats .s:nth-child(even){padding-left:20px;border-left:1px solid rgba(255,255,255,.13)}
+  .hvis{min-height:0}
+  .hcard{padding:11px 14px}
   .bpanel{padding:36px 22px}
   .bform{padding:26px 20px}
   .frow{grid-template-columns:1fr}
@@ -641,7 +655,6 @@ footer .brand{margin-bottom:18px}
   .fbrand{grid-column:auto}
   .fbot{flex-direction:column;gap:10px}
   .qbadge{right:0;bottom:-14px;padding:18px 20px}
-  .util .hideS{display:none}
   .advisor{display:none}
   .fab{display:inline-flex}
   .pslide .ptxt{padding:30px 20px 26px}
@@ -655,20 +668,21 @@ footer .brand{margin-bottom:18px}
      squeezes all three; one column reads far better on a phone */
   .tgrid{grid-template-columns:minmax(0,1fr);gap:14px}
   .tc{padding:20px 18px}
-  .qrail{gap:12px}
-  .cgrid,.pgrid6{gap:10px}
-  .cc{padding:18px 8px;gap:9px}
-  .cc .ic{width:44px;height:44px}
-  .cc span{font-size:.8rem;line-height:1.3}
+  .pgrid6{gap:10px}
+  .cgrid{grid-template-columns:1fr 1fr;gap:10px}
+  .cbody{padding:11px 12px 12px;gap:7px}
+  .cc b{font-size:.86rem}
+  .cc small{font-size:.65rem}
+  .cchip{width:30px;height:30px;top:9px;left:9px}
+  .cchip svg{width:15px;height:15px}
+  .cgo{width:28px;height:28px}
+  .cgo svg{width:13px;height:13px}
   .pcard{padding-bottom:18px}
   .pbody{padding:34px 8px 0}
   .pcard b{font-size:.87rem}
   .pcard small{font-size:.72rem}
   .pmed{width:50px;height:50px}
   .pmed svg{width:23px;height:23px}
-  .ptrust{grid-template-columns:minmax(0,1fr)}
-  .ptrust li{border-left:none;padding:16px 18px}
-  .ptrust li+li{border-top:1px solid var(--line-2)}
   .chgrid{gap:18px}
   .ch .ring{width:76px;height:76px;border-width:4px;box-shadow:0 0 0 6px var(--gold-pale)}
   .ch .ring svg{width:30px;height:30px}
@@ -682,7 +696,9 @@ footer .brand{margin-bottom:18px}
   .brand .wm span{font-size:.6rem;letter-spacing:.2em}
   .tsearch{flex-wrap:wrap;gap:7px}
   .tsearch .btn{width:100%}
-  .hstats .s{min-width:46%;margin-bottom:14px}
+  .hfeat{grid-template-columns:minmax(0,1fr)}
+  .hfeat li{border-left:0}
+  .hfeat li+li{border-top:1px solid rgba(255,255,255,.12)}
 }
 
 /* ---- very small phones: 360px and below ---- */
@@ -697,12 +713,10 @@ footer .brand{margin-bottom:18px}
   .brand .wm b{font-size:1.02rem}
   .brand .mark{width:34px;height:34px}
   .burger{padding:7px}
-  /* the utility bar's location line no longer fits beside the phone number */
-  .util .wrap>span:last-child{display:none}
 }
 @media(max-width:360px){
   .wrap{padding:0 15px}
-  .cgrid,.qrail{grid-template-columns:minmax(0,1fr)}
+  .cgrid{gap:9px}
   .pgrid6{grid-template-columns:1fr 1fr;gap:9px}
   .pbody{padding:30px 6px 0}
   .pmed{width:44px;height:44px;border-width:2.5px}
@@ -710,8 +724,6 @@ footer .brand{margin-bottom:18px}
   .pcard b{font-size:.82rem}
   .pcard small{font-size:.69rem}
   .chgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
-  .cc{flex-direction:row;justify-content:flex-start;text-align:left;padding:14px 16px}
-  .qi{padding:18px 14px 20px}
   .fab{padding:11px 16px;font-size:.82rem}
 }
 
@@ -723,7 +735,7 @@ footer .brand{margin-bottom:18px}
 
 /* Touch targets: pointer-coarse devices need a real hit area, not just text. */
 @media(pointer:coarse){
-  .fcol a,.fbot a,.chips a,.nlinks a,.fcont a,.qhelp,.tmore a,.util a{min-height:40px;display:flex;align-items:center}
+  .fcol a,.fbot a,.chips a,.nlinks a,.fcont a,.tmore a{min-height:40px;display:flex;align-items:center}
   .fcol a{margin-bottom:2px}
   .chips a{padding:9px 14px}
   .fq button{min-height:48px}
@@ -741,8 +753,6 @@ footer .brand{margin-bottom:18px}
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .rv{opacity:1;transform:none}
-  .rot span{position:absolute;opacity:0;transform:none}
-  .rot span.on{opacity:1}
   html{scroll-behavior:auto}
 }
 

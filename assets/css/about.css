@@ -9,15 +9,7 @@
 /* Dark, editorial, and deliberately unlike the home hero: no rotating
    word, no search box — just a statement, a specimen label and one photo. */
 .ab-mast{position:relative;overflow:hidden;padding:70px 0 96px;background:var(--teal-900);color:#fff}
-/* faint laboratory graph-paper, faded out towards the bottom left */
-.ab-mast::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
-  background-size:62px 62px;
-  -webkit-mask-image:radial-gradient(120% 95% at 76% 6%,#000,transparent 70%);
-          mask-image:radial-gradient(120% 95% at 76% 6%,#000,transparent 70%)}
-.ab-mast::after{content:"";position:absolute;right:-160px;top:-190px;width:540px;height:540px;border-radius:50%;
-  pointer-events:none;background:radial-gradient(circle,rgba(201,162,75,.26),transparent 66%)}
+/* flat ground: no graph-paper, no glow — the type carries the panel */
 .ab-mast .wrap{position:relative;z-index:2}
 
 .ab-mgrid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:64px;align-items:center}

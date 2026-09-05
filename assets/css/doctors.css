@@ -14,73 +14,64 @@
 .dr-anchor{scroll-margin-top:140px}
 
 /* ================= MASTHEAD =================
-   About and Home Collection both open on a full-bleed dark panel.
-   This page keeps the ivory ground and lets the single dark object
-   be the OPD board — the thing the visitor actually came to read. */
-.dr-mast{position:relative;overflow:hidden;padding:52px 0 78px;background:var(--ivory)}
-/* a faint rule grid, like the ruled lines of a clinic register */
-.dr-mast::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(rgba(13,71,68,.05) 1px,transparent 1px);
-  background-size:100% 30px;
-  -webkit-mask-image:linear-gradient(180deg,#000,transparent 78%);
-          mask-image:linear-gradient(180deg,#000,transparent 78%)}
-.dr-mast::after{content:"";position:absolute;right:-160px;top:-190px;width:520px;height:520px;border-radius:50%;
-  pointer-events:none;background:radial-gradient(circle,rgba(216,235,229,.85),transparent 66%);filter:blur(20px)}
+   The same flat deep-teal ground as About, Home Collection and the rate
+   card. The OPD board keeps its own lighter gradient and a hairline so it
+   still reads as an object sitting on the panel rather than a hole in it. */
+.dr-mast{position:relative;overflow:hidden;padding:64px 0 92px;background:var(--teal-900);color:#fff}
+/* flat ground: no ruled register lines, no bloom */
 .dr-mast .wrap{position:relative;z-index:2}
 .dr-mgrid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:58px;align-items:center}
-.dr-crumb{color:var(--grey-2);margin-bottom:20px}
-.dr-crumb a{color:var(--teal)}
-.dr-crumb a:hover{color:var(--gold-2)}
-.dr-mast h1{font-size:clamp(2.05rem,5.9vw,3.85rem);letter-spacing:-.02em;margin:16px 0 0}
-.dr-mast h1 em{font-style:italic;color:var(--teal)}
-.dr-mast .lede{margin-top:20px;font-size:1.05rem;max-width:54ch}
+.dr-crumb{margin-bottom:20px}
+.dr-mast h1{font-size:clamp(2.05rem,5.9vw,3.85rem);letter-spacing:-.02em;margin:16px 0 0;color:#fff}
+.dr-mast h1 em{font-style:italic;color:var(--gold-soft)}
+.dr-mast .lede{margin-top:20px;font-size:1.05rem;max-width:54ch;color:rgba(255,255,255,.74)}
 
 /* three facts, set as a strip of register columns */
-.dr-strip{display:flex;flex-wrap:wrap;margin-top:32px;border:1px solid var(--line);border-radius:var(--r);
-  overflow:hidden;background:var(--paper)}
-.dr-strip div{flex:1 1 150px;padding:15px 20px;border-right:1px solid var(--line-2)}
+.dr-strip{display:flex;flex-wrap:wrap;margin-top:32px;border:1px solid rgba(255,255,255,.16);
+  border-radius:var(--r);overflow:hidden;background:rgba(255,255,255,.03)}
+.dr-strip div{flex:1 1 150px;padding:15px 20px;border-right:1px solid rgba(255,255,255,.12)}
 .dr-strip div:last-child{border-right:0}
 .dr-strip b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.55rem;
-  line-height:1;color:var(--teal)}
+  line-height:1;color:var(--gold-soft)}
 .dr-strip span{display:block;margin-top:7px;font-size:.68rem;font-weight:800;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grey-2);line-height:1.5}
+  text-transform:uppercase;color:rgba(255,255,255,.52);line-height:1.5}
 .dr-macts{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
 
-/* ---------- today's board ---------- */
-.dr-today{position:relative;background:linear-gradient(158deg,var(--teal),var(--teal-900));color:#fff;
-  border-radius:var(--r-xl);padding:26px 28px 22px;box-shadow:var(--sh-lg);overflow:hidden}
-.dr-today::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:radial-gradient(rgba(255,255,255,.06) 1.2px,transparent 1.2px);background-size:22px 22px;
-  -webkit-mask-image:radial-gradient(120% 90% at 88% 0%,#000,transparent 70%);
-          mask-image:radial-gradient(120% 90% at 88% 0%,#000,transparent 70%)}
+/* ---------- today's board ----------
+   White paper on the teal panel, built like the Home Collection slot picker:
+   same radius, same lift, same gold seam bound along the top edge. */
+.dr-today{position:relative;background:var(--paper);color:var(--ink);border-radius:var(--r-xl);
+  padding:26px 28px 22px;box-shadow:var(--sh-lg);overflow:hidden}
+.dr-today::before{content:"";position:absolute;left:28px;right:28px;top:0;height:3px;border-radius:0 0 3px 3px;
+  background:linear-gradient(90deg,var(--gold-soft),var(--gold-2))}
 .dr-today>*{position:relative;z-index:2}
-.dr-thead{padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.14)}
+.dr-thead{padding-bottom:14px;border-bottom:1px solid var(--line)}
 .dr-tt{display:flex;align-items:center;gap:10px}
-.dr-thead h2{font-size:1.4rem;color:#fff;margin:0}
+.dr-thead h2{font-size:1.4rem;color:var(--teal);margin:0}
 .dr-tdot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;position:relative}
 .dr-tdot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(201,162,75,.55);
   animation:drPulse 2.6s var(--ease) infinite}
 @keyframes drPulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.5);opacity:0}}
 .dr-tdate{margin-top:6px;font-size:.75rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--gold-soft)}
+  color:var(--gold-2)}
 
 .dr-tlist{list-style:none;margin:4px 0 0}
-.dr-tlist li{display:flex;align-items:center;gap:14px;padding:13px 2px;border-bottom:1px dashed rgba(255,255,255,.13)}
+.dr-tlist li{display:flex;align-items:center;gap:14px;padding:13px 2px;border-bottom:1px dashed var(--line)}
 .dr-tlist li:last-child{border-bottom:0}
-.dr-tlist .tm{flex:none;width:70px;font-size:.78rem;font-weight:800;color:var(--gold-soft);letter-spacing:.01em}
+.dr-tlist .tm{flex:none;width:70px;font-size:.78rem;font-weight:800;color:var(--gold-2);letter-spacing:.01em}
 .dr-tlist .who{flex:1;min-width:0}
-.dr-tlist .who b{display:block;font-size:.9rem;font-weight:700;color:#fff;line-height:1.3}
-.dr-tlist .who span{display:block;font-size:.72rem;color:rgba(255,255,255,.55);margin-top:2px}
+.dr-tlist .who b{display:block;font-size:.9rem;font-weight:700;color:var(--ink);line-height:1.3}
+.dr-tlist .who span{display:block;font-size:.72rem;color:var(--grey);margin-top:2px}
 .dr-tlist .st{flex:none;font-size:.63rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
-  padding:5px 9px;border-radius:100px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6)}
+  padding:5px 9px;border-radius:100px;border:1px solid var(--line);color:var(--grey-2);background:var(--ivory)}
 .dr-tlist .st.now{background:var(--gold);border-color:var(--gold);color:#2c2206}
-.dr-tlist .st.soon{border-color:rgba(227,198,127,.55);color:var(--gold-soft)}
-.dr-tlist .st.done{opacity:.5}
-.dr-tempty{display:block !important;font-size:.88rem;color:rgba(255,255,255,.72);padding:18px 2px !important}
-.dr-tempty a{color:var(--gold-soft);border-bottom:1px solid rgba(227,198,127,.4)}
+.dr-tlist .st.soon{border-color:var(--gold-soft);background:var(--gold-pale);color:var(--gold-2)}
+.dr-tlist .st.done{opacity:.62}
+.dr-tempty{display:block !important;font-size:.88rem;color:var(--grey);padding:18px 2px !important}
+.dr-tempty a{color:var(--teal);font-weight:700;border-bottom:1px solid var(--teal-200)}
 .dr-tfoot{display:flex;align-items:flex-start;gap:9px;margin-top:14px;padding-top:14px;
-  border-top:1px solid rgba(255,255,255,.14);font-size:.74rem;color:rgba(255,255,255,.5);line-height:1.5}
-.dr-tfoot svg{width:14px;height:14px;color:var(--gold-soft);flex-shrink:0;margin-top:2px}
+  border-top:1px solid var(--line);font-size:.74rem;color:var(--grey);line-height:1.5}
+.dr-tfoot svg{width:14px;height:14px;color:var(--gold-2);flex-shrink:0;margin-top:2px}
 
 /* ================= CHAPTER RAIL =================
    Same behaviour as the about page rail (main.js drives both through
@@ -326,7 +317,7 @@
   .dr-tlist{max-height:none}
 }
 @media(max-width:760px){
-  .dr-mast{padding:40px 0 62px}
+  .dr-mast{padding:46px 0 66px}
   .dr-panel,.dr-board,.dr-onsite,.dr-faq{padding:70px 0 76px}
   .dr-visit{padding:70px 0}
   .dr-ref{padding-bottom:76px}

@@ -1,0 +1,349 @@
+/* ==========================================================
+   KAMINI CLINIC & LABS — Contact
+   Loaded after style.css + pages.css on contact.html only.
+   Every class is prefixed .ct- so nothing leaks into the home
+   page, about, doctors, home collection or the legal pages.
+
+   The visual idea: a switchboard. The page is built around the
+   act of reaching someone — a desk that says whether it is open
+   right now, a board of numbered lines, a written note, and a
+   map for when you would rather just walk in.
+========================================================== */
+
+/* header (70px stuck) + chapter rail (56px) + air */
+.ct-anchor{scroll-margin-top:140px}
+
+/* ================= MASTHEAD =================
+   The same flat deep-teal ground the other four inner pages open on.
+   The object sitting on it is the front desk itself, reporting live
+   whether anyone is there to pick up. */
+.ct-mast{position:relative;overflow:hidden;padding:64px 0 92px;background:var(--teal-900);color:#fff}
+/* Concentric rings behind the desk card — a signal leaving the building.
+   Kept at a whisper so it reads as texture, never as decoration. */
+.ct-mast::before{content:"";position:absolute;right:-140px;top:-160px;width:760px;height:760px;
+  border-radius:50%;pointer-events:none;
+  background:repeating-radial-gradient(circle at center,
+    rgba(227,198,127,.085) 0 1px, transparent 1px 62px)}
+.ct-mast .wrap{position:relative;z-index:2}
+.ct-mgrid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:58px;align-items:center}
+.ct-crumb{margin-bottom:20px}
+.ct-mast h1{font-size:clamp(2.05rem,5.9vw,3.85rem);letter-spacing:-.02em;margin:16px 0 0;color:#fff}
+.ct-mast h1 em{font-style:italic;color:var(--gold-soft)}
+.ct-mast .lede{margin-top:20px;font-size:1.05rem;max-width:52ch;color:rgba(255,255,255,.74)}
+
+/* three promises about reaching us, set as a strip of register columns */
+.ct-strip{display:flex;flex-wrap:wrap;margin-top:32px;border:1px solid rgba(255,255,255,.16);
+  border-radius:var(--r);overflow:hidden;background:rgba(255,255,255,.03)}
+.ct-strip div{flex:1 1 150px;padding:15px 20px;border-right:1px solid rgba(255,255,255,.12)}
+.ct-strip div:last-child{border-right:0}
+.ct-strip b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.55rem;
+  line-height:1;color:var(--gold-soft)}
+.ct-strip span{display:block;margin-top:7px;font-size:.68rem;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.52);line-height:1.5}
+.ct-macts{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+
+/* ---------- the front desk card ----------
+   White paper on the teal panel: same radius, same lift and the same gold
+   seam bound along the top edge as the OPD board and the slot picker, so
+   the five inner pages read as one set of stationery. */
+.ct-desk{position:relative;background:var(--paper);color:var(--ink);border-radius:var(--r-xl);
+  padding:28px 30px 24px;box-shadow:var(--sh-lg);overflow:hidden}
+.ct-desk::before{content:"";position:absolute;left:30px;right:30px;top:0;height:3px;border-radius:0 0 3px 3px;
+  background:linear-gradient(90deg,var(--gold-soft),var(--gold-2))}
+.ct-desk>*{position:relative;z-index:2}
+.ct-dhead{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding-bottom:15px;border-bottom:1px solid var(--line)}
+.ct-dtag{font-size:.68rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-2)}
+/* the IST clock — tabular so the seconds tick without the row twitching */
+.ct-clock{font-size:.74rem;font-weight:800;color:var(--grey-2);font-variant-numeric:tabular-nums;
+  letter-spacing:.04em;white-space:nowrap}
+
+/* the status line itself: a live dot, then the verdict set in the display face */
+.ct-status{display:flex;align-items:center;gap:14px;padding:20px 0 6px}
+.ct-dot{width:11px;height:11px;border-radius:50%;flex:none;position:relative;background:var(--grey-2)}
+.ct-dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid transparent}
+.ct-desk[data-open="yes"] .ct-dot{background:#2f9e6d}
+.ct-desk[data-open="yes"] .ct-dot::after{border-color:rgba(47,158,109,.6);animation:ctPulse 2.4s var(--ease) infinite}
+.ct-desk[data-open="no"] .ct-dot{background:var(--red)}
+@keyframes ctPulse{0%{transform:scale(.55);opacity:1}100%{transform:scale(1.6);opacity:0}}
+.ct-sverdict{min-width:0}
+.ct-sverdict b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;
+  font-size:1.72rem;line-height:1.05;letter-spacing:-.015em;color:var(--teal)}
+.ct-sverdict span{display:block;margin-top:4px;font-size:.82rem;color:var(--grey)}
+
+/* today / tomorrow, ruled like a ledger */
+.ct-drows{margin:16px 0 20px;border-top:1px dashed var(--line);padding-top:6px}
+.ct-drows div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  padding:8px 0;border-bottom:1px dashed var(--line);font-size:.85rem}
+.ct-drows div:last-child{border-bottom:0}
+.ct-drows dt,.ct-drows span:first-child{color:var(--grey);font-weight:600}
+.ct-drows b{font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}
+.ct-dacts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ct-dnote{margin-top:13px;display:flex;align-items:flex-start;gap:9px;font-size:.74rem;
+  color:var(--grey);line-height:1.55}
+.ct-dnote svg{width:14px;height:14px;color:var(--gold-2);flex:none;margin-top:2px}
+
+/* ================= CHAPTER RAIL =================
+   Driven by main.js through #chap, like the about and doctors rails.
+   Set on the teal band so the pages read as siblings. */
+.ct-chap{position:sticky;top:69px;z-index:120;background:rgba(7,34,32,.95);
+  backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.09)}
+.ct-chap .wrap{display:flex;align-items:stretch;height:56px;overflow-x:auto;scrollbar-width:none;
+  -ms-overflow-style:none;scroll-behavior:smooth}
+.ct-chap .wrap::-webkit-scrollbar{display:none}
+.ct-chap a{position:relative;flex:none;display:inline-flex;align-items:center;gap:9px;padding:0 17px;
+  font-size:.81rem;font-weight:700;color:rgba(255,255,255,.6);white-space:nowrap;transition:color .25s var(--ease)}
+.ct-chap a:first-child{padding-left:0}
+.ct-chap a i{font-style:normal;font-size:.62rem;font-weight:800;letter-spacing:.1em;color:var(--gold-soft);opacity:.55}
+.ct-chap a::after{content:"";position:absolute;left:50%;right:50%;bottom:0;height:2px;background:var(--gold);
+  transition:left .32s var(--ease),right .32s var(--ease)}
+.ct-chap a:hover,.ct-chap a.on{color:#fff}
+.ct-chap a.on i{opacity:1}
+.ct-chap a.on::after{left:14px;right:14px}
+.ct-chap a:first-child.on::after{left:0}
+.ct-chap a:focus-visible{outline:2px solid var(--gold);outline-offset:-6px;border-radius:4px}
+
+/* ================= THE SWITCHBOARD =================
+   Not a row of three icon cards. A board of numbered lines, the way the
+   desk itself is wired — you pick the line by what you want, and each one
+   says out loud whether it is answering at this hour. */
+.ct-lines{padding:96px 0 100px;background:var(--ivory)}
+.ct-board{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--paper);
+  overflow:hidden;box-shadow:var(--sh)}
+.ct-line{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr) auto 40px;
+  align-items:center;gap:20px;padding:22px 26px 22px 0;border-bottom:1px solid var(--line-2);
+  transition:background-color .3s var(--ease)}
+.ct-line:last-child{border-bottom:0}
+/* the gold seam that grows down the left edge on hover — the line lighting up */
+.ct-line::before{content:"";position:absolute;left:0;top:50%;bottom:50%;width:3px;background:var(--gold);
+  transition:top .34s var(--ease),bottom .34s var(--ease)}
+.ct-line:hover{background:var(--ivory)}
+.ct-line:focus-visible{background:var(--ivory);outline:2px solid var(--gold);outline-offset:-3px}
+.ct-line:hover::before,.ct-line:focus-visible::before{top:0;bottom:0}
+.ct-lidx{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.25rem;
+  color:var(--gold-2);text-align:center;opacity:.75;transition:.3s var(--ease);font-style:normal}
+.ct-line:hover .ct-lidx{opacity:1;transform:translateX(3px)}
+.ct-lmain{min-width:0}
+.ct-lmain b{display:block;font-size:1.24rem;font-weight:800;letter-spacing:-.02em;color:var(--ink);
+  line-height:1.2;font-variant-numeric:tabular-nums}
+.ct-lmain small{display:block;margin-top:5px;font-size:.85rem;color:var(--grey);font-weight:500;line-height:1.5}
+.ct-ltag{display:block;font-size:.64rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold-2);margin-bottom:7px}
+/* availability chip */
+.ct-lav{display:inline-flex;align-items:center;gap:7px;flex:none;font-size:.68rem;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;border-radius:100px;
+  border:1px solid var(--line);background:var(--ivory);color:var(--grey-2);white-space:nowrap}
+.ct-lav i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.ct-lav.live{border-color:rgba(47,158,109,.34);background:rgba(47,158,109,.09);color:#1f7d55}
+.ct-lav.always{border-color:var(--gold-soft);background:var(--gold-pale);color:var(--gold-2)}
+.ct-lgo{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;
+  color:var(--teal);flex:none;transition:.32s var(--ease);background:var(--paper)}
+.ct-lgo svg{width:15px;height:15px;stroke-width:2.2;transition:.32s var(--ease)}
+.ct-line:hover .ct-lgo{background:var(--teal);border-color:var(--teal);color:#fff}
+.ct-line:hover .ct-lgo svg{transform:translateX(2px)}
+/* the WhatsApp line wears its own colour so the one channel that answers
+   at 2 AM is findable without reading a word */
+.ct-line.wa .ct-lgo{color:#1f7d55}
+.ct-line.wa:hover .ct-lgo{background:#1f7d55;border-color:#1f7d55;color:#fff}
+
+.ct-lfoot{display:flex;align-items:center;gap:11px;margin-top:18px;font-size:.82rem;color:var(--grey)}
+.ct-lfoot svg{width:16px;height:16px;color:var(--gold-2);flex:none}
+.ct-lfoot a{color:var(--teal);font-weight:700;border-bottom:1px solid var(--teal-200);transition:.2s;
+  white-space:nowrap}
+.ct-lfoot a:hover{border-bottom-color:var(--teal)}
+
+/* ================= WRITE TO US =================
+   The dark panel. On the left, what actually happens after you press the
+   button — the one thing an enquiry form never tells you. On the right,
+   the form, on paper. */
+.ct-write{padding:100px 0;background:var(--teal-900);color:#fff;position:relative;overflow:hidden}
+.ct-write::before{content:"";position:absolute;left:-180px;bottom:-220px;width:620px;height:620px;
+  border-radius:50%;background:radial-gradient(circle,rgba(201,162,75,.15),transparent 68%);pointer-events:none}
+.ct-write .wrap{position:relative;z-index:2}
+.ct-wgrid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:64px;align-items:start}
+.ct-write h2{color:#fff;margin:18px 0 16px;font-size:clamp(1.9rem,3.6vw,2.9rem)}
+.ct-write .lede{color:rgba(255,255,255,.72);margin-bottom:34px}
+
+/* the three steps, as a rail with a line running through it */
+.ct-steps{list-style:none;position:relative;padding-left:2px}
+.ct-steps li{position:relative;padding:0 0 26px 46px}
+.ct-steps li:last-child{padding-bottom:0}
+/* the rail: drawn from each marker down to the next, so it stops cleanly
+   at the last step instead of trailing into nothing */
+.ct-steps li::before{content:"";position:absolute;left:14px;top:30px;bottom:0;width:1px;
+  background:linear-gradient(rgba(227,198,127,.42),rgba(227,198,127,.06))}
+.ct-steps li:last-child::before{display:none}
+.ct-steps li i{position:absolute;left:0;top:2px;width:29px;height:29px;border-radius:50%;
+  border:1px solid rgba(227,198,127,.45);background:rgba(227,198,127,.09);color:var(--gold-soft);
+  display:grid;place-items:center;font-style:normal;font-size:.7rem;font-weight:800;letter-spacing:.04em}
+.ct-steps b{display:block;font-size:1rem;font-weight:800;color:#fff;letter-spacing:-.01em}
+.ct-steps p{margin-top:5px;font-size:.9rem;color:rgba(255,255,255,.68);line-height:1.65;max-width:42ch}
+.ct-wpriv{display:flex;align-items:flex-start;gap:11px;margin-top:30px;padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.12);font-size:.81rem;color:rgba(255,255,255,.6);line-height:1.65}
+.ct-wpriv svg{width:16px;height:16px;color:var(--gold-soft);flex:none;margin-top:3px}
+.ct-wpriv a{color:var(--gold-soft);font-weight:700;border-bottom:1px solid rgba(227,198,127,.4)}
+
+/* ---------- the note ---------- */
+.ct-form{position:relative;background:var(--paper);color:var(--ink);border-radius:var(--r-xl);
+  padding:32px 34px 30px;box-shadow:var(--sh-lg);overflow:hidden}
+.ct-form::before{content:"";position:absolute;left:34px;right:34px;top:0;height:3px;border-radius:0 0 3px 3px;
+  background:linear-gradient(90deg,var(--gold-soft),var(--gold-2))}
+.ct-form h3{font-size:1.5rem;margin:0 0 5px;color:var(--teal)}
+.ct-fsub{font-size:.86rem;color:var(--grey);margin-bottom:24px}
+.ct-frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ct-fld{margin-bottom:15px;position:relative}
+.ct-fld label{display:block;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grey-2);margin-bottom:8px}
+.ct-fld label em{font-style:normal;color:var(--gold-2);text-transform:none;letter-spacing:0;
+  font-size:.72rem;font-weight:700;margin-left:5px}
+.ct-fld input,.ct-fld select,.ct-fld textarea{width:100%;padding:13px 15px;border:1.5px solid var(--line);
+  border-radius:var(--r);font-size:.93rem;color:var(--ink);background-color:var(--ivory);outline:none;
+  transition:border-color .25s var(--ease),box-shadow .25s var(--ease),background-color .25s var(--ease)}
+.ct-fld textarea{resize:vertical;min-height:96px;line-height:1.6;font-family:inherit}
+.ct-fld select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:40px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2355635f' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;background-size:15px}
+/* background-COLOR, not the shorthand: the shorthand would drop the chevron
+   the select draws with background-image the moment the field takes focus. */
+.ct-fld input:focus,.ct-fld select:focus,.ct-fld textarea:focus{border-color:var(--teal);
+  background-color:var(--paper);box-shadow:0 0 0 4px rgba(13,71,68,.08)}
+.ct-fld input.bad,.ct-fld textarea.bad{border-color:var(--red);box-shadow:0 0 0 4px rgba(180,68,47,.08)}
+.ct-err{display:none;margin-top:6px;font-size:.75rem;font-weight:700;color:var(--red)}
+.ct-fld.err .ct-err{display:block}
+/* live character budget on the message — reassurance that a short note is fine */
+.ct-count{position:absolute;right:2px;top:0;font-size:.68rem;font-weight:800;color:var(--grey-2);
+  font-variant-numeric:tabular-nums}
+.ct-fbtn{margin-top:22px}
+.ct-fmsg{display:none;align-items:flex-start;gap:11px;margin-top:16px;padding:15px 17px;border-radius:var(--r);
+  background:var(--teal-50);border:1px solid var(--teal-100);font-size:.88rem;color:var(--teal);
+  font-weight:600;line-height:1.6}
+.ct-fmsg.show{display:flex}
+.ct-fmsg svg{width:17px;height:17px;stroke-width:2.6;color:var(--gold-2);flex:none;margin-top:2px}
+.ct-ffine{margin-top:15px;font-size:.74rem;color:var(--grey-2);text-align:center;line-height:1.6}
+
+/* ================= FIND US =================
+   The map is the object, not a thumbnail beside a paragraph. The address
+   sits on it the way a pin does. */
+.ct-find{padding:100px 0;background:var(--paper)}
+/* the pin is a sibling of the map frame and is positioned against this */
+.ct-mapstack{position:relative}
+.ct-mapwrap{position:relative;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--line);
+  box-shadow:var(--sh);background:var(--ivory-2);min-height:520px}
+.ct-mapwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;
+  filter:saturate(.86) contrast(1.03)}
+/* a soft scrim under the card so white type on a pale map stays readable */
+.ct-mapwrap::after{content:"";position:absolute;left:0;bottom:0;width:min(560px,68%);height:100%;
+  pointer-events:none;background:linear-gradient(90deg,rgba(7,34,32,.42),transparent 88%)}
+.ct-pin{position:absolute;left:32px;bottom:32px;z-index:3;width:min(430px,calc(100% - 64px));
+  background:rgba(7,34,32,.95);backdrop-filter:blur(14px) saturate(1.3);color:#fff;
+  border:1px solid rgba(255,255,255,.13);border-radius:var(--r-lg);padding:26px 28px 24px;
+  box-shadow:var(--sh-lg)}
+.ct-pin h3{font-size:1.5rem;color:#fff;margin:14px 0 14px}
+.ct-prow{display:flex;gap:12px;margin-bottom:15px;font-size:.87rem;line-height:1.6;
+  color:rgba(255,255,255,.74)}
+.ct-prow:last-of-type{margin-bottom:20px}
+.ct-prow svg{width:16px;height:16px;color:var(--gold-soft);flex:none;margin-top:4px}
+.ct-prow b{display:block;color:#fff;font-weight:700;font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase;margin-bottom:4px}
+.ct-prow a{color:rgba(255,255,255,.86);transition:.2s}
+.ct-prow a:hover{color:var(--gold-soft)}
+.ct-pacts{display:flex;gap:10px;flex-wrap:wrap}
+.ct-pacts .btn{flex:1 1 150px}
+/* the copy-address control, and the word it swaps to once it has copied */
+.ct-copy{position:relative}
+/* .btn-out.on-dark is three classes deep, so the confirmation state has to
+   match it or the colour never lands */
+.ct-pacts .ct-copy.done{border-color:var(--gold-soft);color:var(--gold-soft)}
+
+/* ---------- the week, as a strip of desk cards ---------- */
+.ct-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;margin-top:26px}
+.ct-day{border:1px solid var(--line);border-radius:var(--r);padding:15px 12px 14px;text-align:center;
+  background:var(--ivory);transition:.28s var(--ease)}
+.ct-day b{display:block;font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--grey-2)}
+.ct-day span{display:block;margin-top:9px;font-size:.83rem;font-weight:700;color:var(--ink);line-height:1.45;
+  font-variant-numeric:tabular-nums}
+.ct-day em{display:block;margin-top:6px;font-style:normal;font-size:.62rem;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;color:transparent}
+.ct-day.today{border-color:var(--teal);background:var(--teal-50);box-shadow:0 0 0 3px rgba(13,71,68,.07)}
+.ct-day.today b{color:var(--teal)}
+.ct-day.today em{color:var(--gold-2)}
+
+/* the one-line escape hatch for anyone who would rather not travel */
+.ct-alt{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;
+  margin-top:26px;padding:20px 26px;border:1px solid var(--line);border-left:3px solid var(--gold);
+  border-radius:var(--r);background:var(--ivory)}
+.ct-alt p{flex:1 1 420px;min-width:0;font-size:.94rem;color:var(--grey);margin:0}
+.ct-alt .btn{flex:none}
+.ct-alt b{color:var(--ink);font-weight:800}
+
+/* ================= BEFORE YOU CALL ================= */
+.ct-faq{padding:96px 0 104px;background:var(--ivory)}
+.ct-fgrid{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:64px;align-items:start}
+.ct-fgrid .lede{margin-top:16px}
+.ct-fask{margin-top:26px;padding:22px 24px;border:1px solid var(--line);border-radius:var(--r-lg);
+  background:var(--paper);box-shadow:var(--sh)}
+.ct-fask b{display:block;font-size:.95rem;color:var(--ink);margin-bottom:6px}
+.ct-fask p{font-size:.87rem;color:var(--grey);margin-bottom:16px}
+
+/* ================= MOBILE ACTION BAR =================
+   This page replaces the site-wide floating button with the two things a
+   contact page is actually for. Phones only. */
+.ct-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:140;gap:10px;padding:10px 14px
+  calc(10px + env(safe-area-inset-bottom));background:rgba(251,249,244,.94);
+  backdrop-filter:blur(16px) saturate(1.5);border-top:1px solid var(--line)}
+.ct-bar .btn{flex:1;min-height:48px}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:1060px){
+  .ct-mgrid{grid-template-columns:1fr;gap:44px}
+  .ct-mast .lede{max-width:60ch}
+  .ct-desk{max-width:520px}
+  .ct-wgrid{grid-template-columns:1fr;gap:46px}
+  .ct-fgrid{grid-template-columns:1fr;gap:36px}
+  /* The card falls out of the frame and stacks under the map. The frame
+     moves up to the stack so the two still read as one object. */
+  .ct-mapstack{border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh)}
+  .ct-mapwrap{border:0;border-radius:0;box-shadow:none;min-height:340px}
+  .ct-mapwrap::after{display:none}
+  .ct-pin{position:static;width:auto;border-radius:0;border:0;
+    border-top:1px solid rgba(255,255,255,.13);padding:26px 28px 26px}
+}
+@media(max-width:820px){
+  .ct-week{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:700px){
+  .ct-mast{padding:52px 0 70px}
+  .ct-lines,.ct-write,.ct-find{padding:70px 0}
+  .ct-faq{padding:70px 0 78px}
+  .ct-anchor{scroll-margin-top:126px}
+  .ct-chap .wrap{height:50px}
+  .ct-chap a{font-size:.77rem;padding:0 13px}
+  .ct-desk{padding:24px 22px 20px}
+  .ct-desk::before{left:22px;right:22px}
+  .ct-form{padding:26px 22px 24px}
+  .ct-form::before{left:22px;right:22px}
+  .ct-frow{grid-template-columns:1fr;gap:0}
+  /* The number is the point of the row, so it keeps the full width and the
+     availability chip drops beneath it. Every cell is placed explicitly —
+     auto-placement would push the arrow onto the second row. */
+  .ct-line{grid-template-columns:44px minmax(0,1fr) 36px;gap:12px 12px;padding:18px 16px 18px 0}
+  .ct-lidx{grid-column:1;grid-row:1/3;align-self:center}
+  .ct-lmain{grid-column:2;grid-row:1}
+  .ct-lav{grid-column:2;grid-row:2;justify-self:start}
+  .ct-lgo{grid-column:3;grid-row:1/3;align-self:center}
+  .ct-lmain b{font-size:1.1rem}
+  .ct-alt{padding:18px 20px}
+  .ct-bar{display:flex}
+  body{padding-bottom:76px}
+  .ct-pacts .btn{flex:1 1 100%}
+}
+@media(max-width:460px){
+  .ct-week{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ct-dacts{grid-template-columns:1fr}
+}
+
+/* Motion-sensitive visitors keep the live dot but lose the ring. */
+@media(prefers-reduced-motion:reduce){
+  .ct-dot::after{animation:none}
+}
