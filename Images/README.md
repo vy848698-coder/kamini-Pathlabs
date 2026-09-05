@@ -16,6 +16,30 @@ set from ~13 MB down to ~650 KB with no visible quality loss.
 | imaging-cardiology.jpg | 933x1400 | carousel slide 3 |
 | home-trust.jpg | 1386x1135 | carousel slide 4 |
 
+## `Images/healthcare/`
+
+The health-concern photography for the twelve tiles in section 01 of
+`test-package.html` — one picture per concern, already web-sized at 560x420 or
+660x454 and 24-47 KB each, so they need no further optimisation.
+
+| file | tile |
+| --- | --- |
+| heart.jpg | Heart & cholesterol |
+| liver.jpg | Liver |
+| kidney.jpg | Kidney |
+| thyroid.jpg | Thyroid & hormones |
+| vitamin-d.jpg | Vitamin D & B12 |
+| diabetes.jpg | Diabetes & sugar |
+| cbc.jpg | Blood count |
+| fever.jpg | Fever & infection |
+| bone.jpg | Bone & joints |
+| allergy.jpg | Allergy |
+| pregnancy.jpg | Women's health |
+| full-body.jpg | A full checkup (links to the packages) |
+
+`heart-1.jpg`, `thyroid-1.jpg`, `diabetes-1.jpg` and `senior.jpg` are unused
+alternates — swap a filename in the tile markup to use one.
+
 ## Replacing a photo
 
 1. Drop the full-size original in `Images/`.

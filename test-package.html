@@ -195,47 +195,67 @@
       <p class="lede rv d2" style="max-width:330px">Pick a group and the rate card below narrows to it. Pick nothing and you get the whole list.</p>
     </div>
 
-    <div class="tp-sys rv" id="tpSys" role="group" aria-label="Filter the rate card by body system">
-      <button type="button" class="tp-syc" data-sys="blood">
-        <span class="tp-syic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c3.5 4.2 6 7.2 6 10a6 6 0 0 1-12 0c0-2.8 2.5-5.8 6-10z"/><path d="M9.4 13.4a2.7 2.7 0 0 0 2.6 3.1"/></svg></span>
-        <b>Blood &amp; anaemia</b><em class="tp-syn" data-count="blood"></em>
-      </button>
-      <button type="button" class="tp-syc" data-sys="sugar">
-        <span class="tp-syic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="9" rx="2.4"/><path d="M8 7.5v9M12 7.5v9M16 7.5v9"/></svg></span>
-        <b>Diabetes &amp; sugar</b><em class="tp-syn" data-count="sugar"></em>
-      </button>
+    <div class="tp-sys rv" id="tpSys" role="group" aria-label="Filter the rate card by health concern">
       <button type="button" class="tp-syc" data-sys="heart">
-        <span class="tp-syic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.8 5.6a5.4 5.4 0 0 0-7.8 0L12 6.7l-1-1a5.4 5.4 0 1 0-7.8 7.6L12 21l8.8-7.7a5.4 5.4 0 0 0 0-7.7z"/><path d="M3.6 12.4h4l1.6-3 2.2 5 1.8-3.4h5.4"/></svg></span>
-        <b>Heart &amp; cholesterol</b><em class="tp-syn" data-count="heart"></em>
-      </button>
-      <button type="button" class="tp-syc" data-sys="thyroid">
-        <span class="tp-syic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4.5v4"/><path d="M8.6 8.5C6.3 8.5 5 10.6 5 13.4c0 3 1.6 5.1 3.4 5.1 2 0 3.1-2 3.4-5.1V8.5z"/><path d="M15.4 8.5c2.3 0 3.6 2.1 3.6 4.9 0 3-1.6 5.1-3.4 5.1-2 0-3.1-2-3.4-5.1V8.5z"/></svg></span>
-        <b>Thyroid &amp; hormones</b><em class="tp-syn" data-count="thyroid"></em>
+        <span class="tp-syph"><img src="Images/healthcare/heart.jpg" alt="" width="660" height="454"
+          loading="lazy" decoding="async" onerror="kFall(this,'scan')"></span>
+        <span class="tp-syb"><b>Heart &amp; cholesterol</b><em class="tp-syn" data-count="heart"></em><span class="tp-syar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
       </button>
       <button type="button" class="tp-syc" data-sys="liver">
-        <span class="tp-syic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 8.5c3-2 7-2.5 10.5-2 3 .4 6 1.6 6 3.4 0 2-2 2.4-3.4 2.9-1.2.4-1.6 1.3-1.9 2.5-.4 1.8-1.6 3.2-3.7 3.2-3.6 0-7.5-4.2-7.5-10z"/><path d="M9.5 7v9"/></svg></span>
-        <b>Liver</b><em class="tp-syn" data-count="liver"></em>
+        <span class="tp-syph"><img src="Images/healthcare/liver.jpg" alt="" width="560" height="420"
+          loading="lazy" decoding="async" onerror="kFall(this,'micro')"></span>
+        <span class="tp-syb"><b>Liver</b><em class="tp-syn" data-count="liver"></em><span class="tp-syar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
       </button>
       <button type="button" class="tp-syc" data-sys="kidney">
-        <span class="tp-syic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 3C6 3 4.5 6 4.5 9.5c0 5 4.5 11.5 4.5 11.5s1.5-2.4 1.5-7c0-4-1-11-1.5-11z"/><path d="M15 3c3 0 4.5 3 4.5 6.5 0 5-4.5 11.5-4.5 11.5s-1.5-2.4-1.5-7c0-4 1-11 1.5-11z"/></svg></span>
-        <b>Kidney</b><em class="tp-syn" data-count="kidney"></em>
+        <span class="tp-syph"><img src="Images/healthcare/kidney.jpg" alt="" width="560" height="420"
+          loading="lazy" decoding="async" onerror="kFall(this,'micro')"></span>
+        <span class="tp-syb"><b>Kidney</b><em class="tp-syn" data-count="kidney"></em><span class="tp-syar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </button>
+      <button type="button" class="tp-syc" data-sys="thyroid">
+        <span class="tp-syph"><img src="Images/healthcare/thyroid.jpg" alt="" width="660" height="454"
+          loading="lazy" decoding="async" onerror="kFall(this,'micro')"></span>
+        <span class="tp-syb"><b>Thyroid &amp; hormones</b><em class="tp-syn" data-count="thyroid"></em><span class="tp-syar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
       </button>
       <button type="button" class="tp-syc" data-sys="vitamin">
-        <span class="tp-syic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.6" y="8.2" width="18.8" height="7.6" rx="3.8" transform="rotate(-38 12 12)"/><path d="M9.1 15.4 15.1 8.9"/></svg></span>
-        <b>Vitamins</b><em class="tp-syn" data-count="vitamin"></em>
+        <span class="tp-syph"><img src="Images/healthcare/vitamin-d.jpg" alt="" width="560" height="420"
+          loading="lazy" decoding="async" onerror="kFall(this,'vials')"></span>
+        <span class="tp-syb"><b>Vitamin D &amp; B12</b><em class="tp-syn" data-count="vitamin"></em><span class="tp-syar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </button>
+      <button type="button" class="tp-syc" data-sys="sugar">
+        <span class="tp-syph"><img src="Images/healthcare/diabetes.jpg" alt="" width="660" height="454"
+          loading="lazy" decoding="async" onerror="kFall(this,'scan')"></span>
+        <span class="tp-syb"><b>Diabetes &amp; sugar</b><em class="tp-syn" data-count="sugar"></em><span class="tp-syar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </button>
+      <button type="button" class="tp-syc" data-sys="blood">
+        <span class="tp-syph"><img src="Images/healthcare/cbc.jpg" alt="" width="560" height="420"
+          loading="lazy" decoding="async" onerror="kFall(this,'vials')"></span>
+        <span class="tp-syb"><b>Blood count</b><em class="tp-syn" data-count="blood"></em><span class="tp-syar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
       </button>
       <button type="button" class="tp-syc" data-sys="infection">
-        <span class="tp-syic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13.8 14.1V4.6a1.9 1.9 0 0 0-3.8 0v9.5a3.6 3.6 0 1 0 3.8 0z"/><path d="M11.9 16.6v-4"/><path d="M16.2 6.4h2.4M16.2 9.6h2.4"/></svg></span>
-        <b>Fever &amp; infection</b><em class="tp-syn" data-count="infection"></em>
+        <span class="tp-syph"><img src="Images/healthcare/fever.jpg" alt="" width="560" height="420"
+          loading="lazy" decoding="async" onerror="kFall(this,'fam')"></span>
+        <span class="tp-syb"><b>Fever &amp; infection</b><em class="tp-syn" data-count="infection"></em><span class="tp-syar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </button>
+      <button type="button" class="tp-syc" data-sys="bone">
+        <span class="tp-syph"><img src="Images/healthcare/bone.jpg" alt="" width="560" height="420"
+          loading="lazy" decoding="async" onerror="kFall(this,'scan')"></span>
+        <span class="tp-syb"><b>Bone &amp; joints</b><em class="tp-syn" data-count="bone"></em><span class="tp-syar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </button>
+      <button type="button" class="tp-syc" data-sys="allergy">
+        <span class="tp-syph"><img src="Images/healthcare/allergy.jpg" alt="" width="560" height="420"
+          loading="lazy" decoding="async" onerror="kFall(this,'fam')"></span>
+        <span class="tp-syb"><b>Allergy</b><em class="tp-syn" data-count="allergy"></em><span class="tp-syar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
       </button>
       <button type="button" class="tp-syc" data-sys="women">
-        <span class="tp-syic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18.5h6"/></svg></span>
-        <b>Women&#39;s health</b><em class="tp-syn" data-count="women"></em>
+        <span class="tp-syph"><img src="Images/healthcare/pregnancy.jpg" alt="" width="660" height="454"
+          loading="lazy" decoding="async" onerror="kFall(this,'fam')"></span>
+        <span class="tp-syb"><b>Women&#39;s health</b><em class="tp-syn" data-count="women"></em><span class="tp-syar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
       </button>
-      <button type="button" class="tp-syc" data-sys="urine">
-        <span class="tp-syic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 3h8l-.7 5.4a3 3 0 0 0 .6 2.2l1.4 1.9a5 5 0 0 1-4 8H10.7a5 5 0 0 1-4-8l1.4-1.9a3 3 0 0 0 .6-2.2z"/><path d="M8.6 14.5h6.8"/></svg></span>
-        <b>Urine &amp; stool</b><em class="tp-syn" data-count="urine"></em>
-      </button>
+      <a href="#packages" class="tp-syc tp-syc-pk">
+        <span class="tp-syph"><img src="Images/healthcare/full-body.jpg" alt="" width="660" height="454"
+          loading="lazy" decoding="async" onerror="kFall(this,'fam')"></span>
+        <span class="tp-syb"><b>A full checkup</b><em class="tp-syn">3 packages</em><span class="tp-syar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
     </div>
 
     <div class="tp-fnote rv d1">
@@ -272,6 +292,8 @@
         <button type="button" class="tp-chip" data-sys="kidney" aria-pressed="false">Kidney</button>
         <button type="button" class="tp-chip" data-sys="vitamin" aria-pressed="false">Vitamins</button>
         <button type="button" class="tp-chip" data-sys="infection" aria-pressed="false">Infection</button>
+        <button type="button" class="tp-chip" data-sys="bone" aria-pressed="false">Bone</button>
+        <button type="button" class="tp-chip" data-sys="allergy" aria-pressed="false">Allergy</button>
         <button type="button" class="tp-chip" data-sys="women" aria-pressed="false">Women</button>
         <button type="button" class="tp-chip" data-sys="urine" aria-pressed="false">Urine &amp; stool</button>
       </div>
@@ -517,7 +539,7 @@
           </div></div>
         </article>
 
-        <article class="tp-row" data-sys="vitamin" data-name="Vitamin D (25-OH)" data-alias="vitamin d 25 oh bone pain deficiency sunlight">
+        <article class="tp-row" data-sys="vitamin bone" data-name="Vitamin D (25-OH)" data-alias="vitamin d 25 oh bone pain deficiency sunlight">
           <button type="button" class="tp-rmain" aria-expanded="false" aria-controls="d-vitd">
             <span class="tp-rid"><b>Vitamin D — 25-Hydroxy</b><em>The deficiency behind a great deal of unexplained bone and muscle ache.</em></span>
             <span class="tp-rmeta"><span class="tp-tag ok">No fasting</span><span class="tp-tag tat">24 hrs</span></span>
@@ -632,7 +654,7 @@
           </div></div>
         </article>
 
-        <article class="tp-row" data-sys="kidney" data-name="Serum Uric Acid" data-alias="uric acid gout joint pain toe">
+        <article class="tp-row" data-sys="kidney bone" data-name="Serum Uric Acid" data-alias="uric acid gout joint pain toe">
           <button type="button" class="tp-rmain" aria-expanded="false" aria-controls="d-ua">
             <span class="tp-rid"><b>Serum Uric Acid</b><em>The first thing asked for when one joint — usually a big toe — flares.</em></span>
             <span class="tp-rmeta"><span class="tp-tag ok">No fasting</span><span class="tp-tag tat">4 hrs</span></span>
@@ -759,6 +781,76 @@
             <div class="tp-plist"><span>Colour and consistency</span><span>Ova and cysts</span><span>Pus cells</span><span>Occult blood</span></div>
             <p class="tp-rnote">Collect in the container from our counter. Avoid red meat and iron tablets for three days before an occult-blood test, or the result can read positive for the wrong reason.</p>
             <div class="tp-ract"><a href="#book" class="tp-book" data-test="Stool Routine &amp; Occult Blood">Book this test</a><a href="doctors.html#panel" class="tp-alt">See the gastro clinic</a></div>
+          </div></div>
+        </article>
+      </section>
+
+      <!-- ---------- bone, joints and allergy ---------- -->
+      <section class="tp-grp rv">
+        <header class="tp-ghead">
+          <span class="tp-gic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v6M9 6h6M6 21v-6a6 6 0 0 1 12 0v6M4 21h16"/></svg></span>
+          <h3>Bone, joints &amp; allergy</h3>
+          <span class="tp-grule" aria-hidden="true"></span>
+          <span class="tp-gn"></span>
+        </header>
+
+        <article class="tp-row" data-sys="bone" data-name="Rheumatoid Factor (RA)" data-alias="ra rheumatoid arthritis joint pain swelling">
+          <button type="button" class="tp-rmain" aria-expanded="false" aria-controls="d-ra">
+            <span class="tp-rid"><b>Rheumatoid Factor (RA)</b><em>Ordered when several joints ache together, worst in the morning.</em></span>
+            <span class="tp-rmeta"><span class="tp-tag ok">No fasting</span><span class="tp-tag tat">Same day</span></span>
+            <span class="tp-rprice"><em class="tp-ask">Quoted on call</em></span>
+            <span class="tp-rchev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="tp-rdrop" id="d-ra" hidden><div class="tp-rin">
+            <h4>What the report will show</h4>
+            <div class="tp-plist"><span>RA factor, quantitative</span></div>
+            <p class="tp-rnote">A negative RA does not rule arthritis out, and a positive one does not settle it. Dr. Pratik Mohapatra, orthopaedic surgeon, sits here morning and evening every day.</p>
+            <div class="tp-ract"><a href="#book" class="tp-book" data-test="Rheumatoid Factor (RA)">Book this test</a><a href="doctors.html#panel" class="tp-alt">See the orthopaedic clinic</a></div>
+          </div></div>
+        </article>
+
+        <article class="tp-row" data-sys="bone" data-name="Serum Calcium &amp; Phosphorus" data-alias="calcium phosphorus bone density cramps">
+          <button type="button" class="tp-rmain" aria-expanded="false" aria-controls="d-ca">
+            <span class="tp-rid"><b>Serum Calcium &amp; Phosphorus</b><em>Read beside Vitamin D when bones ache or muscles keep cramping.</em></span>
+            <span class="tp-rmeta"><span class="tp-tag ok">No fasting</span><span class="tp-tag tat">4 hrs</span></span>
+            <span class="tp-rprice"><em class="tp-ask">Quoted on call</em></span>
+            <span class="tp-rchev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="tp-rdrop" id="d-ca" hidden><div class="tp-rin">
+            <h4>What the report will show</h4>
+            <div class="tp-plist"><span>Serum calcium</span><span>Serum phosphorus</span><span>Alkaline phosphatase</span></div>
+            <p class="tp-rnote">Worth booking on the same slip as Vitamin D — the three are read together, and one draw covers all of them.</p>
+            <div class="tp-ract"><a href="#book" class="tp-book" data-test="Serum Calcium &amp; Phosphorus">Book this test</a><a href="tel:9861451521" class="tp-alt">Ask the price</a></div>
+          </div></div>
+        </article>
+
+        <article class="tp-row" data-sys="allergy blood" data-name="Absolute Eosinophil Count" data-alias="aec eosinophil allergy asthma itching worm">
+          <button type="button" class="tp-rmain" aria-expanded="false" aria-controls="d-aec">
+            <span class="tp-rid"><b>Absolute Eosinophil Count</b><em>The first, cheapest pointer towards an allergic cause.</em></span>
+            <span class="tp-rmeta"><span class="tp-tag ok">No fasting</span><span class="tp-tag tat">6 hrs</span></span>
+            <span class="tp-rprice"><em class="tp-ask">Quoted on call</em></span>
+            <span class="tp-rchev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="tp-rdrop" id="d-aec" hidden><div class="tp-rin">
+            <h4>What the report will show</h4>
+            <div class="tp-plist"><span>Absolute eosinophil count</span></div>
+            <p class="tp-rnote">Often already answered by the differential count inside a CBC. Ask us before you pay for it twice.</p>
+            <div class="tp-ract"><a href="#book" class="tp-book" data-test="Absolute Eosinophil Count">Book this test</a><a href="tel:9861451521" class="tp-alt">Ask the price</a></div>
+          </div></div>
+        </article>
+
+        <article class="tp-row" data-sys="allergy" data-name="Serum IgE, total" data-alias="ige allergy asthma eczema rhinitis skin">
+          <button type="button" class="tp-rmain" aria-expanded="false" aria-controls="d-ige">
+            <span class="tp-rid"><b>Serum IgE, total</b><em>For long-running sneezing, eczema or asthma that has no obvious trigger.</em></span>
+            <span class="tp-rmeta"><span class="tp-tag ok">No fasting</span><span class="tp-tag tat">24 hrs</span></span>
+            <span class="tp-rprice"><em class="tp-ask">Quoted on call</em></span>
+            <span class="tp-rchev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="tp-rdrop" id="d-ige" hidden><div class="tp-rin">
+            <h4>What the report will show</h4>
+            <div class="tp-plist"><span>Total IgE</span></div>
+            <p class="tp-rnote">A total IgE says an allergy is likely; it does not say to what. Specific allergen panels are booked here and run by our partner laboratories — ask and we will quote the panel your doctor named.</p>
+            <div class="tp-ract"><a href="#book" class="tp-book" data-test="Serum IgE, total">Book this test</a><a href="#network" class="tp-alt">Where it is run</a></div>
           </div></div>
         </article>
       </section>

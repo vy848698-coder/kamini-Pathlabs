@@ -49,7 +49,7 @@
   rows.forEach(function(r){
     r.sys.forEach(function(s){ sysCount[s] = (sysCount[s] || 0) + 1; });
   });
-  all(".tp-syn").forEach(function(em){
+  all(".tp-syn[data-count]").forEach(function(em){
     var k = em.getAttribute("data-count"), n = sysCount[k] || 0;
     em.textContent = n + (n === 1 ? " test" : " tests");
   });
@@ -62,7 +62,7 @@
   var state = { sys: "all", q: "" };
 
   var chips  = all(".tp-chip");
-  var tiles  = all(".tp-syc");
+  var tiles  = all(".tp-syc[data-sys]");
   var input  = $("tpq");
   var clear  = $("tpClear");
   var sug    = $("tpSug");

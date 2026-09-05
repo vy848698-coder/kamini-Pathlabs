@@ -110,6 +110,11 @@ changes, edit it in two places: the card's `data-sessions` (plus its `.dr-days` 
 of investigations, the three checkups as one comparison matrix, the machines that run on
 site, the laboratory network and a pricing FAQ.
 
+The twelve tiles in section 01 are photographs from `Images/healthcare/`, one per
+health concern — a patient recognises a kidney long before they recognise "KFT". Eleven
+filter the rate card; the twelfth is brass and links to the packages instead. Each
+`<img>` keeps the project's `onerror="kFall(this,'key')"` fallback.
+
 **One source of truth for every test.** A test is declared exactly once — as a `.tp-row`
 in the ledger — carrying `data-name`, `data-alias` (search synonyms), `data-sys` (one or
 more body systems) and its price, in the markup. `tests.js` reads those rows back to build
