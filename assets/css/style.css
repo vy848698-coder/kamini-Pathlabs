@@ -550,7 +550,7 @@ footer .brand{margin-bottom:18px}
 .fmade:hover svg{transform:translate(2px,-2px)}
 .fmade:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
-/* ================= CALLBACK WIDGET + FAB ================= */
+/* ================= QUICK-CONTACT BUTTONS ================= */
 /* ---------- the two quick-contact buttons ----------
    One in each bottom corner and built to the same 56px disc: a callback
    request on the left in brand teal, WhatsApp on the right in its own green.
@@ -569,8 +569,6 @@ footer .brand{margin-bottom:18px}
   animation:pp2 2.6s ease-out infinite;pointer-events:none}
 @keyframes pp2{0%{transform:scale(1);opacity:.85}100%{transform:scale(1.65);opacity:0}}
 @media(prefers-reduced-motion:reduce){ .advisor::after{animation:none;opacity:0} }
-.fab{position:fixed;right:18px;bottom:18px;z-index:140;display:none;align-items:center;gap:8px;background:var(--gold);color:#2c2206;font-weight:800;font-size:.88rem;padding:13px 20px;border-radius:100px;box-shadow:0 18px 34px -14px rgba(201,162,75,.85)}
-.fab svg{width:18px;height:18px;stroke-width:2.2}
 
 /* ---------- WhatsApp ----------
    Bottom right, facing the callback button across the foot of the page.
@@ -738,9 +736,6 @@ footer .brand{margin-bottom:18px}
   .fbot .lnks{margin-right:0}
   .fmade{align-self:stretch;justify-content:center}
   .qbadge{right:0;bottom:-14px;padding:18px 20px}
-  /* the callback button is an icon now, so it stays on a phone too; the
-     booking pill moves to the middle, between the two discs */
-  .fab{display:inline-flex;left:50%;right:auto;transform:translateX(-50%)}
   .pslide .ptxt{padding:30px 20px 26px}
   .pdots{left:20px}
   .parr{display:none}  /* swipe handles navigation on touch */
@@ -808,7 +803,6 @@ footer .brand{margin-bottom:18px}
   .pcard b{font-size:.82rem}
   .pcard small{font-size:.69rem}
   .chgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
-  .fab{padding:11px 16px;font-size:.82rem}
 }
 
 /* Inputs below 16px make iOS Safari zoom the page on focus and never zoom
@@ -831,7 +825,7 @@ footer .brand{margin-bottom:18px}
   .hero{padding:26px 0 34px}
   .progs,.conc,.tests,.pk,.proc,.rev,.faq,.qual,.chain{padding:48px 0}
   #nav nav{height:58px}
-  .advisor,.fab,.wapp{display:none}
+  .advisor,.wapp{display:none}
 }
 
 @media(prefers-reduced-motion:reduce){
