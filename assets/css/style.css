@@ -87,25 +87,38 @@ footer .brand .wm span{color:var(--gold-soft)}
 /* The spacing lives in the links' own padding, not in a gap between bare
    words, so the row reads as one navigational object and each item has a
    hit area worth the name. */
-.nlinks{display:flex;align-items:center;gap:3px;margin-left:30px;
-  font-size:.9rem;font-weight:700;letter-spacing:-.006em;color:var(--grey);white-space:nowrap}
-.nlinks a{position:relative;padding:10px 13px;border-radius:9px;
+/* Auto margins on both sides, so the row of links floats in the space
+   between the brand and the actions instead of hugging the wordmark and
+   leaving a void on the right. */
+.nlinks{display:flex;align-items:center;gap:4px;margin:0 auto;
+  font-size:.95rem;font-weight:700;letter-spacing:-.006em;color:var(--grey);white-space:nowrap}
+.nlinks a{position:relative;display:inline-flex;align-items:center;gap:7px;
+  padding:11px 16px;border-radius:10px;
   transition:color .25s var(--ease),background-color .25s var(--ease)}
 .nlinks a:hover,.nlinks a:focus-visible{color:var(--teal);background:var(--teal-50)}
+
+/* The one thing worth pointing at from the header: collection costs nothing.
+   A gold chip rather than another word, so it reads before it is read. */
+.nbadge{font-style:normal;font-size:.56rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:#2c2206;background:var(--gold);border-radius:100px;padding:3px 7px;line-height:1;
+  box-shadow:0 2px 8px -3px rgba(201,162,75,.9);transition:.3s var(--ease)}
+.nlinks a:hover .nbadge{background:var(--teal);color:#fff;box-shadow:none}
 
 /* Current page. The rule grows from the centre so a page change reads as one
    object settling rather than a line sweeping in from the left. */
 .nlinks a::after{content:"";position:absolute;left:50%;right:50%;bottom:4px;height:2.5px;
   background:var(--gold);border-radius:2px;transition:left .34s var(--ease),right .34s var(--ease)}
 /* Every item is already 700, so the current one is marked by colour and the
-   rule alone — no faux-bold, and therefore no width shift on a page change. */
+   rule alone — no faux-bold, and therefore no width shift on a page change.
+   The same rule sweeps in under whatever is hovered, so the header answers
+   the pointer rather than only the page. */
 .nlinks a.on{color:var(--teal)}
-.nlinks a.on::after{left:13px;right:13px}
+.nlinks a.on::after,.nlinks a:hover::after,.nlinks a:focus-visible::after{left:16px;right:16px}
 .nlinks a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
 /* actions sit hard right, behind a hairline that separates navigating from doing */
 .nsheet{display:none}
-.nact{display:flex;align-items:center;gap:12px;flex-shrink:0;margin-left:auto;
+.nact{display:flex;align-items:center;gap:12px;flex-shrink:0;
   padding-left:20px;position:relative}
 .nact::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
   width:1px;height:26px;background:var(--line)}
@@ -610,9 +623,10 @@ footer .brand{margin-bottom:18px}
   .hstats .s+.s{padding-left:16px}
   .hstats .s{padding-right:10px}
   /* tighten the padding before the type — a legible label matters more than a wide one */
-  .nlinks{margin-left:22px}
-  .nlinks a{padding:10px 10px}
-  .nlinks a.on::after{left:10px;right:10px}
+  .nlinks{gap:2px;font-size:.88rem}
+  .nlinks a{padding:10px 10px;gap:5px}
+  .nlinks a.on::after,.nlinks a:hover::after,.nlinks a:focus-visible::after{left:10px;right:10px}
+  .nbadge{font-size:.52rem;padding:3px 6px;letter-spacing:.08em}
   .pgrid6{grid-template-columns:repeat(3,1fr)}
   .pph{aspect-ratio:16/10}
   .cgrid{gap:12px}
@@ -644,8 +658,7 @@ footer .brand{margin-bottom:18px}
   .hfeat li:nth-child(odd){border-left:0}
   .hfeat li:nth-child(n+3){border-top:1px solid rgba(255,255,255,.12)}
   .qgrid2{gap:72px}
-  .nlinks{display:none}
-  .nlinks{margin-left:0}
+  .nlinks{display:none;margin:0}
   .nlinks.show{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--ivory);padding:14px 22px 20px;gap:2px;border-bottom:1px solid var(--line);box-shadow:var(--sh);
     animation:navDrop .3s var(--ease) both}
   .nlinks.show a{padding:15px 14px;border-radius:9px;border-bottom:1px solid var(--line-2);
