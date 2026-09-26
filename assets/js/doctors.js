@@ -19,8 +19,18 @@
   if (!roster) return;                       /* not the doctors page */
 
   var cards = [].slice.call(roster.querySelectorAll(".dr-card"));
-  var now   = new Date();
-  var today = now.getDay();                  /* 0 = Sunday */
+
+  /* The clinic's day, not the reader's. Shift any clock onto IST — strip the
+     local offset, add 5h30m — so a relative checking today's list from Dubai
+     or New Jersey is told which consultants are sitting in Jagamara rather
+     than being shown a board that has already "ended" hours early. The
+     contact page's front-desk card does the same. */
+  function istNow(){
+    var d = new Date();
+    return new Date(d.getTime() + d.getTimezoneOffset() * 60000 + 330 * 60000);
+  }
+  var now   = istNow();
+  var today = now.getDay();                  /* 0 = Sunday, in IST */
   var mins  = now.getHours() * 60 + now.getMinutes();
 
   var DAYS  = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -32,6 +42,12 @@
     var h = Math.floor(m / 60), mm = m % 60, ap = h >= 12 ? "PM" : "AM";
     h = h % 12; if (h === 0) h = 12;
     return h + (mm ? "." + (mm < 10 ? "0" + mm : mm) : "") + " " + ap;
+  }
+  /* the same minute split for the board's stacked time chip */
+  function clockParts(m){
+    var h = Math.floor(m / 60), mm = m % 60, ap = h >= 12 ? "PM" : "AM";
+    h = h % 12; if (h === 0) h = 12;
+    return { n: h + (mm ? "." + (mm < 10 ? "0" + mm : mm) : ""), ap: ap };
   }
 
   /* ---------- read the sessions off every card ---------- */
@@ -46,6 +62,8 @@
       spec: card.getAttribute("data-spec") || "",
       /* the pill under the name is the shortest honest label we have */
       label: (card.querySelector(".dr-spec") || {}).textContent || "",
+      qual: card.getAttribute("data-qual") || "",
+      mono: card.getAttribute("data-mono") || "",
       sessions: sessions
     };
     entry.today = sessions.filter(function(s){ return s.d.indexOf(today) > -1; });
@@ -64,7 +82,8 @@
     var rows = [];
     panel.forEach(function(p){
       p.today.forEach(function(s){
-        rows.push({ start: s.s, end: s.e, name: p.name, label: p.label });
+        rows.push({ start: s.s, end: s.e, name: p.name, label: p.label,
+                    qual: p.qual, mono: p.mono });
       });
     });
     rows.sort(function(a, b){ return a.start - b.start; });
@@ -75,19 +94,32 @@
     }
     if (!rows.length) return;                /* keep the written fallback */
 
+    /* The wording matters more than it looks. "Upcoming" reads as "this
+       doctor is not here", which is the opposite of what a clinic that has
+       not started yet means — it is the one you can still get a slot in. So
+       a session yet to begin says "Booking open", and only a session that
+       has finished is played down. */
+    var LABEL = { now: "In clinic", soon: "Booking open", done: "Clinic ended" };
+
     var frag = document.createDocumentFragment();
     rows.forEach(function(r){
       var state = mins >= r.end ? "done" : (mins >= r.start ? "now" : "soon");
+      var t = clockParts(r.start);
       var li = document.createElement("li");
+      li.className = "is-" + state;
       li.innerHTML =
-        '<span class="tm">' + clock(r.start) + '</span>' +
-        '<span class="who"><b></b><span></span></span>' +
-        '<span class="st ' + state + '">' +
-          (state === "now" ? "In clinic" : state === "soon" ? "Upcoming" : "Ended") +
-        '</span>';
-      /* names and specialities go in as text, never as markup */
+        '<span class="dr-tmono" aria-hidden="true"></span>' +
+        '<span class="tm"><b></b><i></i></span>' +
+        '<span class="who"><b></b><span class="ql"></span><span class="sp"></span></span>' +
+        '<span class="st ' + state + '"><i aria-hidden="true"></i><em></em></span>';
+      /* every value goes in as text, never as markup */
+      li.querySelector(".dr-tmono").textContent = r.mono;
+      li.querySelector(".tm b").textContent = t.n;
+      li.querySelector(".tm i").textContent = t.ap;
       li.querySelector(".who b").textContent = r.name;
-      li.querySelector(".who span").textContent = r.label;
+      li.querySelector(".who .ql").textContent = r.qual;
+      li.querySelector(".who .sp").textContent = r.label;
+      li.querySelector(".st em").textContent = LABEL[state];
       frag.appendChild(li);
     });
     list.innerHTML = "";

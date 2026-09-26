@@ -55,23 +55,67 @@
 .dr-tdate{margin-top:6px;font-size:.75rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
   color:var(--gold-2)}
 
-.dr-tlist{list-style:none;margin:4px 0 0}
-.dr-tlist li{display:flex;align-items:center;gap:14px;padding:13px 2px;border-bottom:1px dashed var(--line)}
-.dr-tlist li:last-child{border-bottom:0}
-.dr-tlist .tm{flex:none;width:70px;font-size:.78rem;font-weight:800;color:var(--gold-2);letter-spacing:.01em}
+.dr-tlist{list-style:none;margin:6px 0 0}
+/* Each clinic is a slip rather than a table row: a monogram that matches the
+   consultant's card below, the hour set as a chip, then who and what. The
+   whole row is tinted by its state so the one running right now is the thing
+   the eye lands on first. */
+.dr-tlist li{position:relative;display:flex;align-items:center;gap:12px;
+  padding:11px 12px 11px 11px;margin-bottom:6px;border-radius:var(--r);
+  background:var(--ivory);border:1px solid var(--line-2);
+  transition:background-color .3s var(--ease),border-color .3s var(--ease)}
+.dr-tlist li:last-child{margin-bottom:0}
+
+.dr-tmono{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
+  font-family:'Instrument Serif',Georgia,serif;font-size:.92rem;color:var(--teal);
+  background:var(--paper);box-shadow:inset 0 0 0 1px var(--teal-100)}
+
+/* the hour, stacked so the figure reads big without eating the row */
+.dr-tlist .tm{flex:none;width:52px;text-align:center;line-height:1}
+.dr-tlist .tm b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;
+  font-size:1.16rem;color:var(--gold-2);font-variant-numeric:tabular-nums}
+.dr-tlist .tm i{display:block;margin-top:3px;font-style:normal;font-size:.58rem;font-weight:800;
+  letter-spacing:.14em;color:var(--grey-2)}
+
 .dr-tlist .who{flex:1;min-width:0}
-.dr-tlist .who b{display:block;font-size:.9rem;font-weight:700;color:var(--ink);line-height:1.3}
-.dr-tlist .who span{display:block;font-size:.72rem;color:var(--grey);margin-top:2px}
-.dr-tlist .st{flex:none;font-size:.63rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
-  padding:5px 9px;border-radius:100px;border:1px solid var(--line);color:var(--grey-2);background:var(--ivory)}
+.dr-tlist .who b{display:block;font-size:.88rem;font-weight:800;color:var(--ink);line-height:1.3}
+.dr-tlist .who .ql{display:block;font-size:.7rem;color:var(--grey);margin-top:3px;line-height:1.4}
+.dr-tlist .who .sp{display:block;font-size:.6rem;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gold-2);margin-top:4px}
+
+/* ---------- the state chip ----------
+   "Booking open" rather than "upcoming": a clinic that has not begun is the
+   one a visitor can still get into, and the old wording read as an absence. */
+.dr-tlist .st{flex:none;display:inline-flex;align-items:center;gap:6px;
+  font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:5px 10px;border-radius:100px;border:1px solid var(--line);
+  color:var(--grey-2);background:var(--paper);white-space:nowrap}
+.dr-tlist .st i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+/* the label is an <em> for emphasis, not for slant */
+.dr-tlist .st em{font-style:normal}
+
+/* running now: solid gold, with a live ring so it reads as happening */
 .dr-tlist .st.now{background:var(--gold);border-color:var(--gold);color:#2c2206}
-.dr-tlist .st.soon{border-color:var(--gold-soft);background:var(--gold-pale);color:var(--gold-2)}
-.dr-tlist .st.done{opacity:.62}
-.dr-tempty{display:block !important;font-size:.88rem;color:var(--grey);padding:18px 2px !important}
+.dr-tlist .st.now i{position:relative;background:#2c2206}
+.dr-tlist .st.now i::after{content:"";position:absolute;inset:-4px;border-radius:50%;
+  border:1.5px solid rgba(44,34,6,.55);animation:drPulse 2.2s var(--ease) infinite}
+.dr-tlist li.is-now{background:var(--gold-pale);border-color:var(--gold-soft)}
+
+/* yet to start: green, because the answer to "can I see them" is yes */
+.dr-tlist .st.soon{border-color:rgba(47,158,109,.34);background:rgba(47,158,109,.09);color:#1f7d55}
+
+/* finished: stated plainly and played right down, so it never competes */
+.dr-tlist .st.done{color:var(--grey-2);background:var(--ivory-2)}
+.dr-tlist li.is-done{opacity:.6}
+
+.dr-tempty{display:block !important;font-size:.88rem;color:var(--grey);padding:18px 2px !important;
+  background:transparent !important;border:0 !important}
 .dr-tempty a{color:var(--teal);font-weight:700;border-bottom:1px solid var(--teal-200)}
 .dr-tfoot{display:flex;align-items:flex-start;gap:9px;margin-top:14px;padding-top:14px;
-  border-top:1px solid var(--line);font-size:.74rem;color:var(--grey);line-height:1.5}
+  border-top:1px solid var(--line);font-size:.74rem;color:var(--grey);line-height:1.55}
 .dr-tfoot svg{width:14px;height:14px;color:var(--gold-2);flex-shrink:0;margin-top:2px}
+.dr-tfoot a{color:var(--teal);font-weight:800;border-bottom:1px solid var(--teal-200)}
+.dr-tfoot a:hover{border-bottom-color:var(--teal)}
 
 /* ================= CHAPTER RAIL =================
    Same behaviour as the about page rail (main.js drives both through
@@ -400,7 +444,9 @@
   .dr-cbody{padding:20px 18px 18px}
   .dr-cfoot{flex-direction:column;align-items:flex-start;gap:12px}
   .dr-book{width:100%;justify-content:center}
-  .dr-tlist .tm{width:62px;font-size:.74rem}
+  .dr-tmono{display:none}
+  .dr-tlist .tm{width:46px}
+  .dr-tlist .tm b{font-size:1.04rem}
 }
 @media(prefers-reduced-motion:reduce){
   .dr-tdot::after{animation:none;opacity:0}
