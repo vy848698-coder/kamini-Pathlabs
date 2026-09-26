@@ -430,19 +430,48 @@ footer .brand .wm span{color:var(--gold-soft)}
 .qbadge span{font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:rgba(255,255,255,.82);display:block;margin-top:5px}
 
 /* ================= REVIEWS ================= */
-.rev{padding:96px 0}
-.rgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
-.rc{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:32px 28px;display:flex;flex-direction:column;gap:16px;transition:.35s var(--ease)}
-.rc:hover{transform:translateY(-5px);box-shadow:var(--sh)}
-.rc .q{font-family:'Instrument Serif',serif;font-size:3.6rem;color:var(--teal-100);line-height:.6;height:24px}
-.rc .stars{color:var(--gold);letter-spacing:3px;font-size:.84rem}
-.rc blockquote{font-size:.96rem;line-height:1.7}
-.rc .by{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:18px;border-top:1px solid var(--line-2)}
-.av{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;font-family:'Instrument Serif',serif;font-size:1rem;color:#fff;flex-shrink:0}
-.rc .by b{font-size:.9rem;display:block;line-height:1.3}
-.rc .by small{font-size:.78rem;color:var(--grey)}
-.rc .gv{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-size:.7rem;font-weight:700;color:var(--teal);background:var(--teal-50);padding:5px 9px;border-radius:3px}
-.rc .gv svg{width:12px;height:12px;stroke-width:3}
+/* ================= PATIENT VOICES =================
+   The portrait leads. A review is trusted face first and words second, so
+   the picture is pressed into the top edge of the card like a seal rather
+   than tucked into a byline underneath the quote. */
+.rev{padding:96px 0;background:var(--ivory-2)}
+.rgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:56px}
+.rc{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:66px 26px 24px;margin-top:44px;
+  transition:transform .38s var(--ease),box-shadow .38s var(--ease),border-color .38s var(--ease)}
+.rc:hover{transform:translateY(-6px);box-shadow:var(--sh-lg);border-color:transparent}
+
+.rby{display:flex;flex-direction:column;align-items:center}
+/* half in, half out of the card, ringed first in paper and then in a gold hair */
+.rphoto{position:absolute;top:-44px;left:50%;transform:translateX(-50%);
+  width:86px;height:86px;border-radius:50%;overflow:hidden;display:grid;place-items:center;
+  background:linear-gradient(150deg,var(--teal),var(--teal-900));
+  box-shadow:0 0 0 5px var(--paper),0 0 0 6px var(--gold-soft),0 16px 30px -16px rgba(7,34,32,.95);
+  transition:box-shadow .38s var(--ease)}
+.rc:hover .rphoto{box-shadow:0 0 0 5px var(--paper),0 0 0 6px var(--gold),0 20px 36px -16px rgba(7,34,32,1)}
+.rphoto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;z-index:3}
+.rpmono{font-family:'Instrument Serif',Georgia,serif;font-size:1.52rem;letter-spacing:.03em;
+  color:var(--gold-soft)}
+
+.rby b{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.18rem;
+  letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.rsvc{margin-top:6px;font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold-2)}
+.rc .stars{margin-top:11px;color:var(--gold);letter-spacing:4px;font-size:.8rem}
+
+/* a small gold quote, in place of the oversized one that used to open the card */
+.rq{display:block;font-family:'Instrument Serif',Georgia,serif;font-size:2.9rem;line-height:.5;
+  color:var(--gold);opacity:.62;margin:22px 0 8px}
+.rc blockquote{font-size:.93rem;line-height:1.75;color:var(--grey);max-width:34ch}
+
+.rc .gv{display:inline-flex;align-items:center;gap:6px;margin-top:auto;
+  padding-top:18px;font-size:.68rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--teal)}
+.rc .gv svg{width:13px;height:13px;stroke-width:3;color:#2f9e6d}
+
+@media(max-width:1040px){ .rgrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media(max-width:700px){ .rgrid{grid-template-columns:1fr;gap:56px} }
 
 /* ================= FAQ ================= */
 .faq{background:var(--teal-50);padding:96px 0}
@@ -697,7 +726,7 @@ footer .brand{margin-bottom:18px}
   .pslide .pimg::after{background:linear-gradient(180deg,rgba(4,20,19,.26) 0%,rgba(4,20,19,0) 40%)}
   .pdots{left:28px;bottom:14px}
   .parr{width:36px;height:36px}
-  .pkgrid,.rgrid{grid-template-columns:1fr}
+  .pkgrid{grid-template-columns:1fr}
   .pc2.hot{order:-1}
   .chgrid{grid-template-columns:repeat(2,1fr);gap:26px}
   .chgrid::before{display:none}
