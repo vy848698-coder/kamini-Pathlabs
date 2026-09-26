@@ -271,7 +271,7 @@
         if (q.indexOf("751") === 0){
           answer("<b>Yes — " + q + " is inside Bhubaneswar.</b> Collection there is free, with slots from 6 AM to 8 PM. <a href=\"#book\">Book a slot</a>.", true);
         } else {
-          answer("That PIN sits outside Bhubaneswar. Call <a href=\"tel:9861451521\">98614 51521</a> and we will tell you honestly whether we can reach you.", false);
+          answer("That PIN sits outside Bhubaneswar. Call <a href=\"tel:+919861451521\">+91 98614 51521</a> and we will tell you honestly whether we can reach you.", false);
         }
         return;
       }
@@ -286,7 +286,7 @@
         hit.classList.add("hit");
         answer("<b>Yes — we collect in " + hit.textContent + ".</b> Free, seven days a week, with slots from 6 AM. <a href=\"#book\">Book a slot</a>.", true);
       } else {
-        answer("We could not match that name, but <b>collection anywhere in Bhubaneswar is free</b>. Call <a href=\"tel:9861451521\">98614 51521</a> and we will confirm your locality in a minute.", false);
+        answer("We could not match that name, but <b>collection anywhere in Bhubaneswar is free</b>. Call <a href=\"tel:+919861451521\">+91 98614 51521</a> and we will confirm your locality in a minute.", false);
       }
     });
 
