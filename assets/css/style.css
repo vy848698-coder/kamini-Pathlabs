@@ -391,7 +391,7 @@ footer .brand .wm span{color:var(--gold-soft)}
 
 /* ================= TRUST CHAIN (stats) ================= */
 .chain{background:var(--paper);padding:90px 0;border-bottom:1px solid var(--line)}
-.chgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;position:relative}
+.chgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;position:relative}
 .chgrid::before{content:"";position:absolute;top:52px;left:10%;right:10%;height:3px;background:linear-gradient(90deg,var(--gold-pale),var(--gold-soft),var(--gold-pale));border-radius:3px;z-index:0}
 .ch{text-align:center;position:relative;z-index:2}
 .ch .ring{width:104px;height:104px;margin:0 auto 18px;border-radius:50%;background:var(--paper);border:5px solid var(--gold-soft);display:grid;place-items:center;color:var(--teal);transition:.4s var(--spring);box-shadow:0 0 0 8px var(--gold-pale)}
@@ -552,7 +552,7 @@ footer .brand{margin-bottom:18px}
   .cbody{padding:12px 12px 13px;gap:8px}
   .cc small{font-size:.66rem}
   .tgrid{grid-template-columns:repeat(2,1fr)}
-  .chgrid{grid-template-columns:repeat(5,1fr);gap:8px}
+  .chgrid{grid-template-columns:repeat(4,1fr);gap:8px}
   .ch .ring{width:88px;height:88px}
   .ch .ring svg{width:36px;height:36px}
 }
@@ -620,7 +620,7 @@ footer .brand{margin-bottom:18px}
   .parr{width:36px;height:36px}
   .pkgrid,.rgrid{grid-template-columns:1fr}
   .pc2.hot{order:-1}
-  .chgrid{grid-template-columns:repeat(3,1fr);gap:26px}
+  .chgrid{grid-template-columns:repeat(2,1fr);gap:26px}
   .chgrid::before{display:none}
   .pstep{grid-template-columns:auto 1fr;gap:20px}
   .pstep .ic{display:none}
