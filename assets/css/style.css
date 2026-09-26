@@ -502,10 +502,40 @@ footer .brand{margin-bottom:18px}
 .fhours div{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:6px;gap:12px}
 .fhours div:last-child{margin:0}
 .fhours span:last-child{color:#fff;font-weight:600}
-.fdisc{font-size:.75rem;color:rgba(255,255,255,.34);padding-bottom:24px;line-height:1.7}
-.fbot{border-top:1px solid rgba(255,255,255,.1);padding:22px 0 28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:rgba(255,255,255,.45)}
-.fbot .lnks{display:flex;gap:20px}
-.fbot a:hover{color:var(--gold-soft)}
+/* ---------- the closing bar ----------
+   Three things that do not belong in one huddle: who owns the site, the two
+   legal pages, and who built it. They sit on one line with the credit pushed
+   to the far end behind a hairline, so the signature reads as a signature
+   rather than a third link in the list. */
+.fbot{border-top:1px solid rgba(255,255,255,.1);margin-top:8px;padding:24px 0 30px;
+  display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap;
+  font-size:.82rem;color:rgba(255,255,255,.45)}
+.fcopy{line-height:1.6}
+.fcopy em{font-style:normal;color:rgba(255,255,255,.3)}
+/* the legal pair sits beside the copyright; auto margin throws the credit right */
+.fbot .lnks{display:flex;gap:22px;margin-right:auto}
+.fbot .lnks a{position:relative;transition:color .25s var(--ease)}
+.fbot .lnks a::after{content:"";position:absolute;left:0;right:100%;bottom:-3px;height:1px;
+  background:var(--gold-soft);transition:right .3s var(--ease)}
+.fbot .lnks a:hover{color:#fff}
+.fbot .lnks a:hover::after{right:0}
+
+/* ---------- the build credit ----------
+   A bordered badge with an outbound arrow, so it is unmistakably a link and
+   not a line of small print that happens to carry a name. */
+.fmade{display:inline-flex;align-items:center;gap:9px;flex:none;
+  padding:9px 15px;border-radius:100px;white-space:nowrap;
+  border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);
+  font-size:.74rem;color:rgba(255,255,255,.5);
+  transition:border-color .3s var(--ease),background-color .3s var(--ease),color .3s var(--ease)}
+.fmade b{font-weight:800;font-size:.8rem;letter-spacing:.01em;color:#fff;
+  transition:color .3s var(--ease)}
+.fmade svg{width:12px;height:12px;stroke-width:2.4;color:var(--gold-soft);flex:none;
+  transition:transform .3s var(--ease)}
+.fmade:hover{border-color:var(--gold-soft);background:rgba(201,162,75,.14);color:rgba(255,255,255,.75)}
+.fmade:hover b{color:var(--gold-soft)}
+.fmade:hover svg{transform:translate(2px,-2px)}
+.fmade:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
 /* ================= CALLBACK WIDGET + FAB ================= */
 .advisor{position:fixed;right:20px;bottom:20px;z-index:140;display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:11px 16px 11px 11px;box-shadow:var(--sh-lg);transition:.4s var(--spring);max-width:340px}
@@ -681,7 +711,9 @@ footer .brand{margin-bottom:18px}
   .frow{grid-template-columns:1fr}
   .fgrid2{grid-template-columns:1fr}
   .fbrand{grid-column:auto}
-  .fbot{flex-direction:column;gap:10px}
+  .fbot{flex-direction:column;align-items:flex-start;gap:16px;padding:22px 0 28px}
+  .fbot .lnks{margin-right:0}
+  .fmade{align-self:stretch;justify-content:center}
   .qbadge{right:0;bottom:-14px;padding:18px 20px}
   .advisor{display:none}
   .fab{display:inline-flex}
