@@ -815,18 +815,54 @@ footer .brand{margin-bottom:18px}
 
 .dgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .dc{position:relative;display:flex;flex-direction:column;background:var(--paper);
-  border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 24px 22px;
+  border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;
   transition:transform .38s var(--ease),box-shadow .38s var(--ease),border-color .38s var(--ease)}
 .dc:hover{transform:translateY(-6px);box-shadow:var(--sh);border-color:transparent}
-.dic{width:46px;height:46px;border-radius:var(--r);background:var(--teal-50);color:var(--teal);
-  display:grid;place-items:center;margin-bottom:16px;transition:.38s var(--spring)}
-.dic svg{width:23px;height:23px}
+
+/* ---------- the portrait ----------
+   The same 4:3 band and the same placeholder as the consultant cards on
+   doctors.html, so the summary here and the full panel there are plainly
+   the same set of people. The speciality icon rides in the bottom corner
+   of the band, which is where the old icon block used to sit. */
+.dphoto{position:relative;aspect-ratio:4/3;flex:none;overflow:hidden;
+  background:linear-gradient(160deg,var(--teal-50),var(--teal-100));
+  display:grid;place-items:center;align-content:center;gap:8px;
+  border-bottom:1px solid var(--teal-100)}
+.dphoto::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(135deg,rgba(255,255,255,.5) 0 2px,transparent 2px 13px);opacity:.5}
+.dphoto>*{position:relative;z-index:2}
+/* z-index above the monogram, so a photograph hides the placeholder on its
+   own even where :has() below is unsupported */
+.dphoto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;
+  z-index:4;transition:transform .6s var(--ease)}
+.dc:hover .dphoto img{transform:scale(1.035)}
+.dpmono{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;
+  font-family:'Instrument Serif',Georgia,serif;font-size:1.4rem;color:var(--teal);background:var(--paper);
+  box-shadow:inset 0 0 0 1px var(--teal-100),0 6px 20px -12px rgba(7,34,32,.7)}
+.dpnote{font-size:.56rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--teal);opacity:.6}
+.dphoto:has(img) .dpmono,.dphoto:has(img) .dpnote,.dphoto:has(img)::before{display:none}
+
+.dic{position:absolute;right:12px;bottom:12px;z-index:5;
+  width:38px;height:38px;border-radius:var(--r);background:var(--paper);color:var(--teal);
+  display:grid;place-items:center;box-shadow:0 4px 14px -8px rgba(7,34,32,.8);
+  transition:.38s var(--spring)}
+.dic svg{width:19px;height:19px}
 .dc:hover .dic{background:var(--teal);color:#fff;transform:translateY(-2px) rotate(-5deg)}
+
+.dbody{display:flex;flex-direction:column;flex:1;padding:20px 22px 20px}
 .dc h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.32rem;
   line-height:1.15;letter-spacing:-.01em;margin-bottom:6px}
-.dq{font-size:.82rem;color:var(--grey);line-height:1.5;margin-bottom:12px}
+.dq{font-size:.82rem;color:var(--grey);line-height:1.5;margin-bottom:7px}
+/* where the consultant sits when they are not here */
+.daff{font-size:.74rem;color:var(--grey-2);line-height:1.5;margin-bottom:12px}
 .dtag{align-self:flex-start;font-size:.63rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
   color:var(--gold-2);background:var(--gold-pale);border-radius:100px;padding:5px 11px;margin-bottom:16px}
+
+/* the two consultants who keep no fixed evening clinic */
+.dappt{display:flex;align-items:center;gap:9px;margin-top:auto;padding-top:15px;
+  border-top:1px solid var(--line-2);font-size:.82rem;font-weight:800;color:var(--gold-2)}
+.dappt svg{width:15px;height:15px;flex:none}
 
 /* days / time sit on a two-column definition list so they stay aligned card to card */
 .dwhen{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 14px;margin-top:auto;
@@ -853,7 +889,7 @@ footer .brand{margin-bottom:18px}
 @media(max-width:900px){ .docs{padding:76px 0} .facs{padding:26px 22px} }
 @media(max-width:620px){
   .dgrid{grid-template-columns:minmax(0,1fr);gap:14px}
-  .dc{padding:22px 20px 20px}
+  .dbody{padding:18px 18px 18px}
   .dc h3{font-size:1.2rem}
   .fachead h3{font-size:1.35rem}
   .faclist li{font-size:.78rem;padding:7px 13px}
