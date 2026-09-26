@@ -298,10 +298,6 @@
     if (e.key === "Enter"){ e.preventDefault(); document.getElementById("tests").scrollIntoView({behavior: rm ? "auto":"smooth"}); }
   });
 
-  /* ---- advisor dismiss ---- */
-  var adv = document.getElementById("advisor"), advC = document.getElementById("advClose");
-  if (advC) advC.addEventListener("click", function(){ adv.style.display = "none"; });
-
   /* ---- booking form (front-end demo — wire to your backend) ---- */
   var f = document.getElementById("bform");
   if (f){

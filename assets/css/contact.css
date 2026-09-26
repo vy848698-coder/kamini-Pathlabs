@@ -336,9 +336,9 @@
   .ct-alt{padding:18px 20px}
   .ct-bar{display:flex}
   body{padding-bottom:76px}
-  /* the action bar already carries WhatsApp on a phone, and the float would
-     sit on top of it — so it stands down here rather than doubling up */
-  .wapp{display:none}
+  /* the action bar already carries both call and WhatsApp on a phone, and the
+     floats would sit on top of it — so they stand down rather than double up */
+  .wapp,.advisor{display:none}
   .ct-pacts .btn{flex:1 1 100%}
 }
 @media(max-width:460px){
