@@ -18,8 +18,8 @@ set from ~13 MB down to ~650 KB with no visible quality loss.
 
 ## `Images/healthcare/`
 
-The health-concern photography for the twelve tiles in section 01 of
-`test-package.html` — one picture per concern, already web-sized at 560x420 or
+The health-concern photography used on the home page — one picture per concern,
+already web-sized at 560x420 or
 660x454 and 24-47 KB each, so they need no further optimisation.
 
 | file | tile |

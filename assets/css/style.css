@@ -344,7 +344,6 @@ footer .brand .wm span{color:var(--gold-soft)}
 .tc .pr b{font-family:'Instrument Serif',serif;font-size:1.65rem;color:var(--teal)}
 .tc .pr s{font-size:.83rem;color:var(--grey-2)}
 .tc .pr .off{margin-left:auto;font-size:.68rem;font-weight:800;color:#2c2206;background:var(--gold-soft);padding:3px 7px;border-radius:3px}
-.tmore{text-align:center;margin-top:40px}
 
 /* ================= PACKAGES ================= */
 .pk{padding:96px 0}
@@ -735,7 +734,7 @@ footer .brand{margin-bottom:18px}
 
 /* Touch targets: pointer-coarse devices need a real hit area, not just text. */
 @media(pointer:coarse){
-  .fcol a,.fbot a,.chips a,.nlinks a,.fcont a,.tmore a{min-height:40px;display:flex;align-items:center}
+  .fcol a,.fbot a,.chips a,.nlinks a,.fcont a{min-height:40px;display:flex;align-items:center}
   .fcol a{margin-bottom:2px}
   .chips a{padding:9px 14px}
   .fq button{min-height:48px}
