@@ -833,8 +833,8 @@ footer .brand{margin-bottom:18px}
   .book{padding-bottom:66px}
   .nact .btn{display:none}
   #nav nav{gap:12px;height:70px}
-  .brand .mark{width:42px;height:42px}
-  .brand .wm b{font-size:1.28rem}
+  .brand .mark{width:48px;height:48px}
+  .brand .wm b{font-size:1.7rem}
   .tgrid{grid-template-columns:1fr 1fr}
   .cgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
   .pgrid6{grid-template-columns:1fr 1fr}
@@ -889,7 +889,7 @@ footer .brand{margin-bottom:18px}
   .bform{padding:22px 17px}
   .fgrid{gap:32px}
   .fq button{font-size:.92rem;gap:12px;padding:17px 0}
-  .brand .wm span{font-size:.6rem;letter-spacing:.2em}
+  .brand .wm span{font-size:.62rem;letter-spacing:.18em}
   .tsearch{flex-wrap:wrap;gap:7px}
   .tsearch .btn{width:100%}
   .hfeat{grid-template-columns:minmax(0,1fr)}
@@ -899,15 +899,17 @@ footer .brand{margin-bottom:18px}
 
 /* ---- very small phones: 360px and below ---- */
 @media(max-width:400px){
-  /* brand + switch + burger must all fit one row */
+  /* brand + burger must fit one row */
   #nav nav{gap:8px}
-  .brand .mark{width:38px;height:38px}
-  .brand .wm b{font-size:1.14rem}
+  .brand .mark{width:46px;height:46px}
+  .brand .wm b{font-size:1.62rem}
+  .brand .wm span{font-size:.6rem}
 }
 /* ---- 340px and below (small/older phones, or 320px zoomed) ---- */
 @media(max-width:340px){
-  .brand .wm b{font-size:1.02rem}
-  .brand .mark{width:34px;height:34px}
+  .brand .wm b{font-size:1.48rem}
+  .brand .wm span{font-size:.56rem}
+  .brand .mark{width:42px;height:42px}
   .burger{padding:7px}
 }
 @media(max-width:360px){
