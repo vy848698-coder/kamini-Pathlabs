@@ -38,6 +38,8 @@ kamini-Pathlabs/
 │       └── contact.js          Desk status, week strip, enquiry thank-you, copy address
 ├── mail/
 │   ├── send.php                Receives every form, checks it again, emails the clinic
+│   ├── templates.php           How the two emails look (clinic copy, patient confirmation)
+│   ├── assets/logo-light.png   The light logo as PNG, sent inside each email (Gmail shows no SVG)
 │   ├── config.sample.php       Template for config.php (SMTP login, recipients, limits)
 │   ├── config.php              The real settings — NOT in git, created on the server
 │   ├── .htaccess               Blocks web access to everything here except send.php
@@ -153,7 +155,7 @@ only — never the message or menu choices — goes to each address at most once
 is marked `Auto-Submitted` so out-of-office replies ignore it. It is sent after the
 clinic's copy; if it fails, that is logged and the visitor still sees success. Turn it off
 with `'auto_reply' => false` in `config.php`. If the clinic's numbers, hours or address
-change, update them in `mail/send.php` (section 5b) too.
+change, update them in `patient_email()` in `mail/templates.php` too.
 
 **Adding a form field:** give the input a `name`, then add that name to the form's list
 in `FORMS` at the top of `mail/send.php` (and to `FIELDS` with a label and rule). A field

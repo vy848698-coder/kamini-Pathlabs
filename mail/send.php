@@ -30,8 +30,10 @@ use PHPMailer\PHPMailer\Exception as MailException;
 require __DIR__ . '/lib/PHPMailer/Exception.php';
 require __DIR__ . '/lib/PHPMailer/PHPMailer.php';
 require __DIR__ . '/lib/PHPMailer/SMTP.php';
+require __DIR__ . '/templates.php';
 
 const DESK_PHONE = '+91 98614 51521';
+const LOGO_PNG = __DIR__ . '/assets/logo-light.png';   /* the light logo, as a PNG: Gmail shows no SVG */
 
 /* ---------- what each form sends ----------
    The key is the form's data-form attribute; the list is the named
@@ -391,37 +393,24 @@ foreach ($form['fields'] as $f) {
     $rows[] = [FIELDS[$f]['label'], $v === '' ? '—' : $v, $f];
 }
 
-$h = function (string $s): string { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); };
-
-$html = '<div style="font-family:Arial,Helvetica,sans-serif;color:#0b1a19;max-width:560px">'
-      . '<h2 style="color:#0d4744;margin:0 0 4px">' . $h($form['title']) . '</h2>'
-      . '<p style="margin:0 0 18px;color:#55635f;font-size:13px">From the ' . $h($form['page']) . ' form · ' . $h($when) . '</p>'
-      . '<table cellpadding="8" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:14px">';
-foreach ($rows as [$label, $value, $f]) {
-    $cell = $f === 'message' ? nl2br($h($value)) : $h($value);
-    if ($f === 'phone') {
-        $cell = '<a href="tel:+91' . $phone . '" style="color:#0d4744;font-weight:bold">' . $h($value) . '</a>'
-              . ' &nbsp;·&nbsp; <a href="https://wa.me/91' . $phone . '" style="color:#0d4744">WhatsApp</a>';
-    } elseif ($f === 'email' && $value !== '—') {
-        $cell = '<a href="mailto:' . $h($value) . '" style="color:#0d4744">' . $h($value) . '</a>';
-    }
-    $html .= '<tr><td style="border-bottom:1px solid #e6e1d8;color:#55635f;width:150px;vertical-align:top">' . $h($label) . '</td>'
-           . '<td style="border-bottom:1px solid #e6e1d8;vertical-align:top">' . $cell . '</td></tr>';
-}
-$html .= '</table>'
-       . '<p style="margin:18px 0 0;color:#55635f;font-size:12px">Sent automatically by the kaminiclinicandlabs.in website. '
-       . 'Call the patient back on the number above.</p></div>';
-
-$text = $form['title'] . "\nFrom the " . $form['page'] . ' form · ' . $when . "\n\n";
-foreach ($rows as [$label, $value]) $text .= str_pad($label . ':', 20) . str_replace("\n", "\n" . str_repeat(' ', 20), $value) . "\n";
+/* the logo travels inside each email (see templates.php); without the
+   file the header falls back to the name set in type */
+$logo = is_readable(LOGO_PNG);
+[$html, $text] = clinic_email([
+    'title' => $form['title'], 'page' => $form['page'], 'when' => $when,
+    'name' => $name, 'phone' => $phone, 'pretty' => $pretty,
+    'email' => $clean['email'] ?? '', 'message' => $clean['message'] ?? '',
+    'rows' => $rows,
+], $logo);
 
 /* A PHPMailer with the sender filled in, ready for a message. */
-function new_mail(array $cfg): PHPMailer
+function new_mail(array $cfg, bool $logo): PHPMailer
 {
     $mail = new PHPMailer(true);
     $mail->CharSet = PHPMailer::CHARSET_UTF8;
     $mail->setFrom($cfg['from']['email'], $cfg['from']['name'] ?? 'Kamini Clinic website');
     $mail->isHTML(true);
+    if ($logo) $mail->addEmbeddedImage(LOGO_PNG, 'logo', 'kamini-logo.png', PHPMailer::ENCODING_BASE64, 'image/png');
     return $mail;
 }
 
@@ -451,7 +440,7 @@ function deliver(PHPMailer $mail, array $cfg, string $tag): void
 }
 
 /* ---------- 5a. to the clinic ---------- */
-$mail = new_mail($cfg);
+$mail = new_mail($cfg, $logo);
 try {
     foreach ((array) $cfg['to'] as $addr) $mail->addAddress($addr);
     if (!empty($clean['email'])) $mail->addReplyTo($clean['email'], $name);
@@ -488,43 +477,9 @@ if (!empty($clean['email']) && ($cfg['auto_reply'] ?? true)) {
     });
 
     if ($due) {
-        $p = function (string $s): string {
-            return '<p style="margin:0 0 14px;line-height:1.6">' . $s . '</p>';
-        };
-        $a = 'style="color:#0d4744;font-weight:bold"';
-        $rhtml = '<div style="font-family:Arial,Helvetica,sans-serif;color:#0b1a19;max-width:560px;font-size:15px">'
-               . '<h2 style="color:#0d4744;margin:0 0 16px;font-size:20px">We have your message</h2>'
-               . $p('Dear ' . $h($name) . ',')
-               . $p('Thank you for contacting Kamini Clinic &amp; Labs. Your note has reached our front desk, and we will '
-                  . 'call you back on <b>+91 ' . $h($pretty) . '</b> — usually within 15 minutes during working hours.')
-               . $p('If that number is wrong, or it is urgent, call or WhatsApp us on '
-                  . '<a href="tel:+919861451521" ' . $a . '>+91 98614 51521</a> '
-                  . '(<a href="https://wa.me/919861451521" target="_blank" rel="noopener" ' . $a . '>WhatsApp</a>).')
-               . '<table cellpadding="6" cellspacing="0" style="border-collapse:collapse;font-size:14px;margin:6px 0 18px">'
-               . '<tr><td style="color:#55635f;padding-left:0">Alternate</td><td><a href="tel:+919040267654" ' . $a . '>+91 90402 67654</a></td></tr>'
-               . '<tr><td style="color:#55635f;padding-left:0">Clinic landline</td><td><a href="tel:+916747960142" ' . $a . '>+91 674 7960142</a></td></tr>'
-               . '<tr><td style="color:#55635f;padding-left:0;vertical-align:top">Hours</td><td>Mon – Sat 7:00 AM – 9:00 PM<br>Sunday 7:00 AM – 1:00 PM</td></tr>'
-               . '<tr><td style="color:#55635f;padding-left:0;vertical-align:top">Address</td><td>Plot No. 555, Alekh Niwas, In front of ICICI Bank,<br>Jagamara, Khandagiri, Bhubaneswar – 751030</td></tr>'
-               . '</table>'
-               . $p('Warm regards,<br>The front desk, Kamini Clinic &amp; Labs')
-               . '<p style="margin:22px 0 0;padding-top:14px;border-top:1px solid #e6e1d8;color:#8a948f;font-size:12px;line-height:1.5">'
-               . 'You are receiving this because this email address was entered on the contact form on our website. '
-               . 'If that was not you, please ignore this message — we will not email you again.</p></div>';
+        [$rhtml, $rtext] = patient_email($name, $pretty, $logo);
 
-        $rtext = "Dear " . $name . ",\n\n"
-               . "Thank you for contacting Kamini Clinic & Labs. Your note has reached our front desk, and we will "
-               . "call you back on +91 " . $pretty . " — usually within 15 minutes during working hours.\n\n"
-               . "If that number is wrong, or it is urgent, call or WhatsApp us on +91 98614 51521.\n\n"
-               . "Alternate:        +91 90402 67654\n"
-               . "Clinic landline:  +91 674 7960142\n"
-               . "Hours:            Mon – Sat 7:00 AM – 9:00 PM, Sunday 7:00 AM – 1:00 PM\n"
-               . "Address:          Plot No. 555, Alekh Niwas, In front of ICICI Bank,\n"
-               . "                  Jagamara, Khandagiri, Bhubaneswar – 751030\n\n"
-               . "Warm regards,\nThe front desk, Kamini Clinic & Labs\n\n"
-               . "--\nYou are receiving this because this email address was entered on the contact form on our website. "
-               . "If that was not you, please ignore this message — we will not email you again.\n";
-
-        $reply = new_mail($cfg);
+        $reply = new_mail($cfg, $logo);
         try {
             $reply->FromName = 'Kamini Clinic & Labs';
             $reply->addAddress($to, $name);
