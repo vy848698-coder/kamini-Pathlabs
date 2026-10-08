@@ -143,7 +143,9 @@
     if (rm) { el.textContent = fmt(t,t) + suf; return; }
     var dur = 1500, s = performance.now();
     (function tick(now){
-      var p = Math.min((now - s)/dur, 1), e = 1 - Math.pow(1 - p, 3);
+      /* clamp the low end too: a first frame timestamped before the start
+         would otherwise render a negative figure for one paint */
+      var p = Math.max(0, Math.min((now - s)/dur, 1)), e = 1 - Math.pow(1 - p, 3);
       el.textContent = fmt(t*e, t) + suf;
       if (p < 1) requestAnimationFrame(tick); else el.textContent = fmt(t,t) + suf;
     })(s);

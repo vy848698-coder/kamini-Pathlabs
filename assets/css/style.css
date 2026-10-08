@@ -733,8 +733,12 @@ footer .brand{margin-bottom:18px}
     linear-gradient(180deg,rgba(7,34,32,.96) 0%,rgba(7,34,32,.93) 40%,rgba(7,34,32,.9) 70%,rgba(7,34,32,.97) 100%)}
   .hphoto img{filter:brightness(.66) contrast(1.05) saturate(.85)}
   .hcopy{max-width:none;padding-bottom:0}
-  .hvis{min-height:270px;margin-top:26px}
-  .hvis{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;align-content:flex-start}
+  /* The 270px floor dates from when these two cards were pinned over the
+     photograph. They are in normal flow from here down and size themselves,
+     so the floor only left ~200px of dead hero between them and the trust
+     strip on a tablet. */
+  .hvis{min-height:0;margin-top:26px;
+    display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;align-content:flex-start}
   .hcard{position:static;flex:1 1 260px;min-width:0}
   .hc1,.hc2{animation:none}
   .hfeat{grid-template-columns:1fr 1fr}
@@ -810,7 +814,6 @@ footer .brand{margin-bottom:18px}
   .hstats .s{padding-right:0}
   .hstats .s+.s{padding-left:0;border-left:0}
   .hstats .s:nth-child(even){padding-left:20px;border-left:1px solid rgba(255,255,255,.13)}
-  .hvis{min-height:0}
   .hcard{padding:11px 14px}
   .bpanel{padding:36px 22px}
   .bform{padding:26px 20px}
