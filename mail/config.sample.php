@@ -36,6 +36,11 @@ return [
         'kaminiclinicandlabs@gmail.com',
     ],
 
+    /* When a visitor gives an email address (the contact form asks for
+       one), send them a short "we have your message" note with the
+       clinic's numbers and hours. At most one a day per address. */
+    'auto_reply' => true,
+
     /* Any long random text. It scrambles visitors' IP addresses before
        they are written to the rate-limit file. */
     'salt' => 'change-me-to-something-long-and-random',

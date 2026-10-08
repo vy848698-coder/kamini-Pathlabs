@@ -145,6 +145,16 @@ details stay in the form with the phone and WhatsApp numbers offered instead, an
 reason is written to the PHP error log. With JavaScript off, the forms still post to
 `send.php` and get a plain thank-you (or what-to-fix) page back.
 
+**Confirmation to the patient.** When a visitor gives an email address (only the contact
+form asks for one), they also get a short "we have your message" email with the callback
+number they entered, the clinic's three numbers, hours and address. Because anyone can
+type anyone's address, it is built from fixed text plus the name and checked phone number
+only — never the message or menu choices — goes to each address at most once a day, and
+is marked `Auto-Submitted` so out-of-office replies ignore it. It is sent after the
+clinic's copy; if it fails, that is logged and the visitor still sees success. Turn it off
+with `'auto_reply' => false` in `config.php`. If the clinic's numbers, hours or address
+change, update them in `mail/send.php` (section 5b) too.
+
 **Adding a form field:** give the input a `name`, then add that name to the form's list
 in `FORMS` at the top of `mail/send.php` (and to `FIELDS` with a label and rule). A field
 the server does not list is dropped.

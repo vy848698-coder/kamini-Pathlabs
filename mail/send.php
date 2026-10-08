@@ -415,37 +415,50 @@ $html .= '</table>'
 $text = $form['title'] . "\nFrom the " . $form['page'] . ' form · ' . $when . "\n\n";
 foreach ($rows as [$label, $value]) $text .= str_pad($label . ':', 20) . str_replace("\n", "\n" . str_repeat(' ', 20), $value) . "\n";
 
-$mail = new PHPMailer(true);
-try {
+/* A PHPMailer with the sender filled in, ready for a message. */
+function new_mail(array $cfg): PHPMailer
+{
+    $mail = new PHPMailer(true);
     $mail->CharSet = PHPMailer::CHARSET_UTF8;
     $mail->setFrom($cfg['from']['email'], $cfg['from']['name'] ?? 'Kamini Clinic website');
-    foreach ((array) $cfg['to'] as $addr) $mail->addAddress($addr);
-    if (!empty($clean['email'])) $mail->addReplyTo($clean['email'], $name);
-    $mail->Subject = $form['title'] . ' — ' . $name . ' (' . $pretty . ')';
     $mail->isHTML(true);
-    $mail->Body = $html;
-    $mail->AltBody = $text;
+    return $mail;
+}
 
+/* Sends over SMTP — or, with 'transport' => 'file', writes the message
+   to storage/outbox/ so the forms can be tried without sending anything. */
+function deliver(PHPMailer $mail, array $cfg, string $tag): void
+{
     if (($cfg['transport'] ?? 'smtp') === 'file') {
-        /* local testing: write the message to storage/outbox instead of sending it */
         $mail->preSend();
         $dir = ($cfg['storage'] ?? __DIR__ . '/storage') . '/outbox';
         if (!is_dir($dir)) mkdir($dir, 0750, true);
-        file_put_contents($dir . '/' . date('Ymd-His') . '-' . $kind . '-' . substr($same, 0, 8) . '.eml', $mail->getSentMIMEMessage());
-    } else {
-        $s = $cfg['smtp'];
-        $mail->isSMTP();
-        $mail->Host = $s['host'];
-        $mail->Port = (int) $s['port'];
-        $mail->SMTPAuth = ($s['username'] ?? '') !== '';
-        $mail->Username = $s['username'] ?? '';
-        $mail->Password = $s['password'] ?? '';
-        $secure = $s['secure'] ?? 'ssl';
-        $mail->SMTPSecure = $secure === 'ssl' ? PHPMailer::ENCRYPTION_SMTPS : ($secure === 'tls' ? PHPMailer::ENCRYPTION_STARTTLS : '');
-        $mail->SMTPAutoTLS = $secure !== '';
-        $mail->Timeout = 15;
-        $mail->send();
+        file_put_contents($dir . '/' . date('Ymd-His') . '-' . $tag . '-' . bin2hex(random_bytes(3)) . '.eml', $mail->getSentMIMEMessage());
+        return;
     }
+    $s = $cfg['smtp'];
+    $mail->isSMTP();
+    $mail->Host = $s['host'];
+    $mail->Port = (int) $s['port'];
+    $mail->SMTPAuth = ($s['username'] ?? '') !== '';
+    $mail->Username = $s['username'] ?? '';
+    $mail->Password = $s['password'] ?? '';
+    $secure = $s['secure'] ?? 'ssl';
+    $mail->SMTPSecure = $secure === 'ssl' ? PHPMailer::ENCRYPTION_SMTPS : ($secure === 'tls' ? PHPMailer::ENCRYPTION_STARTTLS : '');
+    $mail->SMTPAutoTLS = $secure !== '';
+    $mail->Timeout = 15;
+    $mail->send();
+}
+
+/* ---------- 5a. to the clinic ---------- */
+$mail = new_mail($cfg);
+try {
+    foreach ((array) $cfg['to'] as $addr) $mail->addAddress($addr);
+    if (!empty($clean['email'])) $mail->addReplyTo($clean['email'], $name);
+    $mail->Subject = $form['title'] . ' — ' . $name . ' (' . $pretty . ')';
+    $mail->Body = $html;
+    $mail->AltBody = $text;
+    deliver($mail, $cfg, $kind);
 } catch (MailException $ex) {
     /* the details go to the server log, never to the visitor */
     error_log('[kamini mail] sending failed: ' . $mail->ErrorInfo);
@@ -453,6 +466,78 @@ try {
         if ($d !== null) unset($d['repeats'][$same]);   /* so a retry is not swallowed as a repeat */
     });
     respond(502, ['ok' => false, 'error' => 'Sorry — this did not go through.']);
+}
+
+/* ---------- 5b. to the patient, if they gave an email ----------
+   Anyone can type anyone's address into a form, so this note is built
+   only from fixed text, the name (letters only, by now) and the checked
+   phone number — never the message or the menu choices, which would let
+   a stranger use the clinic to send their words to someone else. Each
+   address gets at most one of these a day, and a failure here is only
+   logged: the clinic already has the request, which is what matters. */
+if (!empty($clean['email']) && ($cfg['auto_reply'] ?? true)) {
+    $to = $clean['email'];
+    $key = hash('sha256', $salt . '|reply|' . strtolower($to));
+    $due = with_store($cfg['storage'] ?? __DIR__ . '/storage', function (?array &$d) use ($key, $now) {
+        if ($d === null) return true;
+        $d['replies'] = $d['replies'] ?? [];
+        foreach ($d['replies'] as $k => $t) if ($t < $now - 86400) unset($d['replies'][$k]);
+        if (isset($d['replies'][$key])) return false;
+        $d['replies'][$key] = $now;
+        return true;
+    });
+
+    if ($due) {
+        $p = function (string $s): string {
+            return '<p style="margin:0 0 14px;line-height:1.6">' . $s . '</p>';
+        };
+        $a = 'style="color:#0d4744;font-weight:bold"';
+        $rhtml = '<div style="font-family:Arial,Helvetica,sans-serif;color:#0b1a19;max-width:560px;font-size:15px">'
+               . '<h2 style="color:#0d4744;margin:0 0 16px;font-size:20px">We have your message</h2>'
+               . $p('Dear ' . $h($name) . ',')
+               . $p('Thank you for contacting Kamini Clinic &amp; Labs. Your note has reached our front desk, and we will '
+                  . 'call you back on <b>+91 ' . $h($pretty) . '</b> — usually within 15 minutes during working hours.')
+               . $p('If that number is wrong, or it is urgent, call or WhatsApp us on '
+                  . '<a href="tel:+919861451521" ' . $a . '>+91 98614 51521</a> '
+                  . '(<a href="https://wa.me/919861451521" target="_blank" rel="noopener" ' . $a . '>WhatsApp</a>).')
+               . '<table cellpadding="6" cellspacing="0" style="border-collapse:collapse;font-size:14px;margin:6px 0 18px">'
+               . '<tr><td style="color:#55635f;padding-left:0">Alternate</td><td><a href="tel:+919040267654" ' . $a . '>+91 90402 67654</a></td></tr>'
+               . '<tr><td style="color:#55635f;padding-left:0">Clinic landline</td><td><a href="tel:+916747960142" ' . $a . '>+91 674 7960142</a></td></tr>'
+               . '<tr><td style="color:#55635f;padding-left:0;vertical-align:top">Hours</td><td>Mon – Sat 7:00 AM – 9:00 PM<br>Sunday 7:00 AM – 1:00 PM</td></tr>'
+               . '<tr><td style="color:#55635f;padding-left:0;vertical-align:top">Address</td><td>Plot No. 555, Alekh Niwas, In front of ICICI Bank,<br>Jagamara, Khandagiri, Bhubaneswar – 751030</td></tr>'
+               . '</table>'
+               . $p('Warm regards,<br>The front desk, Kamini Clinic &amp; Labs')
+               . '<p style="margin:22px 0 0;padding-top:14px;border-top:1px solid #e6e1d8;color:#8a948f;font-size:12px;line-height:1.5">'
+               . 'You are receiving this because this email address was entered on the contact form on our website. '
+               . 'If that was not you, please ignore this message — we will not email you again.</p></div>';
+
+        $rtext = "Dear " . $name . ",\n\n"
+               . "Thank you for contacting Kamini Clinic & Labs. Your note has reached our front desk, and we will "
+               . "call you back on +91 " . $pretty . " — usually within 15 minutes during working hours.\n\n"
+               . "If that number is wrong, or it is urgent, call or WhatsApp us on +91 98614 51521.\n\n"
+               . "Alternate:        +91 90402 67654\n"
+               . "Clinic landline:  +91 674 7960142\n"
+               . "Hours:            Mon – Sat 7:00 AM – 9:00 PM, Sunday 7:00 AM – 1:00 PM\n"
+               . "Address:          Plot No. 555, Alekh Niwas, In front of ICICI Bank,\n"
+               . "                  Jagamara, Khandagiri, Bhubaneswar – 751030\n\n"
+               . "Warm regards,\nThe front desk, Kamini Clinic & Labs\n\n"
+               . "--\nYou are receiving this because this email address was entered on the contact form on our website. "
+               . "If that was not you, please ignore this message — we will not email you again.\n";
+
+        $reply = new_mail($cfg);
+        try {
+            $reply->FromName = 'Kamini Clinic & Labs';
+            $reply->addAddress($to, $name);
+            /* RFC 3834: marks it as automatic, so out-of-office replies leave it alone */
+            $reply->addCustomHeader('Auto-Submitted', 'auto-replied');
+            $reply->Subject = 'We have your message — Kamini Clinic & Labs';
+            $reply->Body = $rhtml;
+            $reply->AltBody = $rtext;
+            deliver($reply, $cfg, 'reply');
+        } catch (MailException $ex) {
+            error_log('[kamini mail] confirmation to the patient failed: ' . $reply->ErrorInfo);
+        }
+    }
 }
 
 respond(200, ['ok' => true]);
