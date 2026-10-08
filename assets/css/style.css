@@ -574,6 +574,9 @@ footer .brand{margin-bottom:18px}
    to the far end behind a hairline, so the signature reads as a signature
    rather than a third link in the list. */
 .fbot{border-top:1px solid rgba(255,255,255,.1);margin-top:8px;padding:24px 0 30px;
+  /* room under the last row for the fixed call and WhatsApp buttons
+     (20px offset + 56px disc + a gap), so they never sit on the credit */
+  padding-bottom:94px;
   display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap;
   font-size:.82rem;color:rgba(255,255,255,.45)}
 .fcopy{line-height:1.6}
@@ -799,8 +802,11 @@ footer .brand{margin-bottom:18px}
   .nlinks.show{overscroll-behavior:contain}
   .burger{display:flex}
   /* rail collapses to 2 columns — the spine only reads on a single row */
-  .pslide{grid-template-columns:1fr;min-height:0}
-  .pslide .ptxt{padding:36px 28px 30px;order:2}
+  /* the track stretches every slide to the tallest one; the photo row is
+     pinned so that slack goes to the text panel, not to a dark band between
+     the photo and the copy */
+  .pslide{grid-template-columns:1fr;grid-template-rows:auto 1fr;min-height:0}
+  .pslide .ptxt{padding:36px 28px 30px;order:2;justify-content:flex-start}
   .pslide .pimg{order:1;min-height:230px;height:230px}
   .pslide .pimg::before{background:linear-gradient(0deg,rgb(var(--sl-rgb)) 0%,rgba(var(--sl-rgb),.86) 16%,rgba(var(--sl-rgb),.42) 34%,rgba(var(--sl-rgb),.10) 52%,rgba(var(--sl-rgb),0) 68%)}
   .pslide .pimg::after{background:linear-gradient(180deg,rgba(4,20,19,.26) 0%,rgba(4,20,19,0) 40%)}
@@ -843,7 +849,7 @@ footer .brand{margin-bottom:18px}
   .frow{grid-template-columns:1fr}
   .fgrid2{grid-template-columns:1fr}
   .fbrand{grid-column:auto}
-  .fbot{flex-direction:column;align-items:flex-start;gap:16px;padding:22px 0 28px}
+  .fbot{flex-direction:column;align-items:flex-start;gap:16px;padding:22px 0 84px}
   .fbot .lnks{margin-right:0}
   .fmade{align-self:stretch;justify-content:center}
   .qbadge{right:0;bottom:-14px;padding:18px 20px}
