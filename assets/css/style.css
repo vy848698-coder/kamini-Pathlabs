@@ -633,6 +633,55 @@ footer .brand{margin-bottom:18px}
   transition:.25s var(--ease)}
 .fmade a:hover{color:var(--gold-soft);border-bottom-color:var(--gold-soft)}
 
+/* ================= PARTNER LABORATORIES =================
+   The marks arrived on three different grounds — three on white, Dr Lal on
+   yellow, Thyrocare on navy — so each is pre-set on a tile of its own colour
+   at one size. The tile is the artwork; the card around it only rounds the
+   corner and lifts it off the band.
+
+   The loop: the track holds four passes of the five marks and travels exactly
+   -25%, which is one pass, so the first frame and the last are identical and
+   the seam is invisible. Each item carries its own right margin rather than
+   the track using gap — a gap would make one pass slightly narrower than a
+   quarter of the track, and the row would creep out of register every cycle. */
+.labs{padding:30px 0;background:var(--paper);border-bottom:1px solid var(--line)}
+.labs-in{display:flex;align-items:center;gap:46px}
+.labs-lede{flex:none;width:272px}
+.labs-k{display:block;font-size:.62rem;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold-2);margin-bottom:9px}
+.labs-lede h2{font-size:1.3rem;line-height:1.15;margin:0 0 7px}
+.labs-lede p{font-size:.76rem;color:var(--grey);line-height:1.6}
+
+/* the marks fade at both ends rather than being chopped off by the overflow */
+.labs-rail{flex:1;min-width:0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.labs-track{display:flex;align-items:center;list-style:none;width:max-content;
+  animation:labsRun 26s linear infinite;will-change:transform}
+.labs-rail:hover .labs-track,.labs-rail:focus-within .labs-track{animation-play-state:paused}
+@keyframes labsRun{from{transform:translateX(0)}to{transform:translateX(-25%)}}
+
+.labs-item{flex:none;width:176px;height:104px;margin-right:18px;border-radius:var(--r);
+  overflow:hidden;border:1px solid var(--line);background:var(--paper);
+  box-shadow:0 8px 20px -16px rgba(7,34,32,.8);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease)}
+.labs-item img{width:100%;height:100%;object-fit:cover;display:block}
+.labs-item:hover{transform:translateY(-3px);border-color:var(--teal-200);
+  box-shadow:0 14px 28px -18px rgba(7,34,32,.95)}
+
+@media(max-width:900px){
+  .labs-in{flex-direction:column;align-items:flex-start;gap:20px}
+  .labs-lede{width:auto;max-width:46ch}
+  .labs-rail{width:100%}
+}
+@media(max-width:560px){
+  .labs{padding:24px 0}
+  .labs-item{width:150px;height:89px;margin-right:14px}
+  .labs-lede h2{font-size:1.16rem}
+}
+/* a rail that moves on its own is exactly what this setting is for */
+@media(prefers-reduced-motion:reduce){ .labs-track{animation:none} }
+
 /* ================= REVEAL ================= */
 .rv{opacity:0;transform:translateY(32px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .rv.in{opacity:1;transform:none}
@@ -1024,17 +1073,6 @@ footer .brand{margin-bottom:18px}
   .dwhen dt{padding-top:8px}
 }
 
-/* --- accredited lab partners --- */
-.labp{margin-top:52px;padding-top:30px;border-top:1px solid var(--teal-100);
-  display:flex;align-items:center;gap:26px;flex-wrap:wrap;justify-content:center}
-.labp-t{font-size:.68rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
-.labp-l{display:flex;flex-wrap:wrap;gap:10px;list-style:none;justify-content:center}
-.labp-l li{font-size:.86rem;font-weight:800;color:var(--teal);background:var(--paper);
-  border:1px solid var(--teal-100);border-radius:100px;padding:9px 18px}
-@media(max-width:620px){
-  .labp{margin-top:38px;gap:16px}
-  .labp-l li{font-size:.78rem;padding:7px 14px}
-}
 
 /* Smooth cross-document fade between pages (Chrome; others just navigate). */
 @view-transition{navigation:auto}
