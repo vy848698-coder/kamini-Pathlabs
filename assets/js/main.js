@@ -328,7 +328,12 @@
       var t = document.querySelector(id);
       if (!t) return;
       e.preventDefault();
-      window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - stickyTop(), behavior: rm ? "auto":"smooth" });
+      var y = t.getBoundingClientRect().top + window.scrollY - stickyTop();
+      /* The header is in the flow and settles to 70px once stuck, so a jump
+         from the top of the page pulls everything up by the difference on
+         the way down. Allow for it, or the target lands under the rail. */
+      if (y > 10) y -= nav.firstElementChild.firstElementChild.offsetHeight - 70;
+      window.scrollTo({ top: y, behavior: rm ? "auto":"smooth" });
     });
   });
 })();

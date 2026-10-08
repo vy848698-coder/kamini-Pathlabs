@@ -276,7 +276,7 @@ footer .brand .wm span{color:var(--gold-soft)}
 .hm-chap a:first-child.on::after{left:0}
 .hm-chap a:focus-visible{outline:2px solid var(--gold);outline-offset:-6px;border-radius:4px}
 /* a section reached by a hash link lands below the header and the rail */
-.hm-chap ~ section[id]{scroll-margin-top:140px}
+.hm-chap ~ section[id],#onsite{scroll-margin-top:140px}
 
 /* ================= PROMO BANNER CAROUSEL ================= */
 .promo{padding:70px 0 0}
@@ -828,7 +828,7 @@ footer .brand{margin-bottom:18px}
   .promo{padding-top:56px}
   .hm-chap .wrap{height:50px}
   .hm-chap a{font-size:.77rem;padding:0 13px}
-  .hm-chap ~ section[id]{scroll-margin-top:126px}
+  .hm-chap ~ section[id],#onsite{scroll-margin-top:126px}
   .progs,.conc,.tests,.pk,.proc,.rev,.faq,.qual,.chain{padding:66px 0}
   .book{padding-bottom:66px}
   .nact .btn{display:none}
