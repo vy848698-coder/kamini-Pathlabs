@@ -40,6 +40,31 @@ already web-sized at 560x420 or
 `heart-1.jpg`, `thyroid-1.jpg`, `diabetes-1.jpg` and `senior.jpg` are unused
 alternates — swap a filename in the tile markup to use one.
 
+### `Images/healthcare/onsite/`
+
+The soft-clay illustrations on the home page's "Also done at the clinic" cards.
+All fourteen were cut from one generated sheet so they share a single lighting
+and rendering style — keep that in mind before mixing in an illustration from
+somewhere else. Each is a 256x256 WebP with a transparent background (~10-16 KB),
+shown at about 86px, so it stays sharp on 2x screens.
+
+| file | card |
+| --- | --- |
+| ecg.webp | ECG |
+| eeg.webp | EEG |
+| ncv-ncs.webp | NCV & NCS |
+| audiometry.webp | Audiometry |
+| tympanometry.webp | Tympanometry |
+| laryngoscopy.webp | Laryngoscopy |
+| pft.webp | PFT (lung function) |
+| nebulisation.webp | Nebulisation |
+| vitamin.webp | Vitamin profiles |
+| thyroid.webp | Thyroid profiles |
+| saline.webp | Saline insertion |
+| catheter.webp | Catheterisation |
+| ryles-tube.webp | Ryle's tube insertion |
+| pathology.webp | All pathological investigations |
+
 ## Replacing a photo
 
 1. Drop the full-size original in `Images/`.

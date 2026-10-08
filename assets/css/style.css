@@ -1050,18 +1050,118 @@ footer .brand{margin-bottom:18px}
 .dnote b{color:var(--ink);font-weight:800}
 .dnote a{color:var(--teal);font-weight:800;border-bottom:1px solid var(--gold);padding-bottom:1px}
 
-/* on-site procedures */
-.facs{margin-top:44px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-xl);padding:32px 34px}
-.fachead h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.6rem;margin-bottom:6px}
-.fachead p{font-size:.88rem;color:var(--grey);margin-bottom:22px}
-.faclist{display:flex;flex-wrap:wrap;gap:9px;list-style:none}
-.faclist li{font-size:.83rem;font-weight:700;color:var(--teal);background:var(--teal-50);
-  border:1px solid var(--teal-100);border-radius:100px;padding:8px 15px;transition:.3s var(--ease)}
-.faclist li:hover{background:var(--teal);border-color:var(--teal);color:#fff}
+/* ---------- on-site procedures ----------
+   Four groups on a 3fr / 4fr grid: the left column holds three cards a row and
+   the right four, so the split keeps every card the same width and the two
+   rows of groups line up across the gutter. */
+.onsite{position:relative;isolation:isolate;overflow:hidden;margin-top:56px;
+  background:linear-gradient(180deg,#fdfcf9,var(--ivory));border:1px solid var(--line-2);
+  border-radius:28px;padding:52px 46px 46px;
+  box-shadow:inset 0 1px 0 #fff,0 34px 70px -56px rgba(7,34,32,.45)}
+/* decoration stays behind everything and well into the corners */
+.os-deco{position:absolute;z-index:-1;pointer-events:none;stroke:none}
+.os-deco-a{width:300px;top:-168px;left:-132px;fill:var(--teal-50)}
+.os-deco-b{width:104px;right:-4px;bottom:-4px;fill:var(--teal-100);opacity:.6}
+.os-deco-b .vein{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;opacity:.8}
+.onsite::after{content:"";position:absolute;z-index:-2;right:-120px;bottom:-150px;width:300px;height:300px;
+  border-radius:50%;background:radial-gradient(closest-side,rgba(216,235,229,.75),rgba(216,235,229,0));pointer-events:none}
+
+.os-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px 32px;flex-wrap:wrap;margin-bottom:40px}
+.os-rule{display:block;width:44px;height:2px;border-radius:2px;margin-bottom:20px;
+  background:linear-gradient(90deg,var(--teal-200),#9fd2c2)}
+.os-head h3{font-size:clamp(2rem,3.6vw,2.85rem);color:var(--teal-900);letter-spacing:-.022em;margin-bottom:12px}
+.os-head h3+p{color:var(--grey);font-size:1rem;max-width:52ch}
+.os-where{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;color:var(--teal);
+  background:var(--paper);border:1px solid var(--line-2);border-radius:100px;padding:8px 15px 8px 12px}
+.os-where svg{width:15px;height:15px;color:var(--gold-2);flex:none}
+
+.os-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,4fr);gap:40px 34px}
+.os-gh{display:flex;align-items:center;gap:12px;margin-bottom:18px;
+  font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:1rem;line-height:1.25;
+  letter-spacing:-.005em;color:var(--teal-900)}
+.os-gh::after{content:"";flex:1;height:1px;margin-left:6px;background:linear-gradient(90deg,var(--line),rgba(228,223,210,0))}
+.os-gic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex:none;
+  color:var(--teal);background:var(--teal-50);box-shadow:inset 0 0 0 1px var(--teal-100)}
+.os-gic svg{width:18px;height:18px;stroke-width:1.8}
+
+.os-cards{list-style:none;display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));gap:14px}
+.os-cards li{display:flex}
+.svc{position:relative;display:flex;flex-direction:column;width:100%;
+  background:var(--paper);border:1px solid rgba(13,71,68,.09);border-radius:20px;padding:16px 16px 14px;
+  box-shadow:0 1px 2px rgba(7,34,32,.04),0 14px 28px -24px rgba(7,34,32,.42);
+  transition:border-color .4s var(--ease),box-shadow .4s var(--ease)}
+.svc-art{position:relative;display:block;width:5.4rem;aspect-ratio:1;margin:0 0 14px -4px}
+/* a soft contact shadow, so the illustration sits on the card rather than on top of it */
+.svc-art::after{content:"";position:absolute;left:20%;right:20%;bottom:-3px;height:9px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(7,34,32,.13),rgba(7,34,32,0));
+  transition:transform .5s var(--ease),opacity .5s var(--ease)}
+.svc-art img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;
+  transition:transform .5s var(--ease)}
+/* kFall's stand-in is a full-bleed scene, so give it the tile's shape */
+.svc-art img[src^="data:"]{border-radius:24%}
+.svc b{display:block;font-size:.92rem;font-weight:800;line-height:1.25;letter-spacing:-.01em;color:var(--teal-900);margin-bottom:5px}
+.svc-d{display:block;font-size:.76rem;line-height:1.5;color:var(--grey)}
+.svc-more{display:inline-flex;align-items:center;gap:5px;margin-top:auto;padding-top:10px;
+  font-size:.72rem;font-weight:800;color:var(--teal);
+  opacity:0;transform:translateX(-6px);transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.svc-more svg{width:12px;height:12px;stroke-width:2.3}
+.svc:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.svc:hover,.svc:focus-visible{border-color:rgba(13,71,68,.22);
+  box-shadow:0 1px 2px rgba(7,34,32,.05),0 20px 34px -24px rgba(7,34,32,.55)}
+.svc:hover .svc-art img,.svc:focus-visible .svc-art img{transform:translateY(-4px) scale(1.04)}
+.svc:hover .svc-art::after,.svc:focus-visible .svc-art::after{transform:scale(.84);opacity:.7}
+.svc:hover .svc-more,.svc:focus-visible .svc-more{opacity:1;transform:none}
+/* no hover on touch screens, so the link cue is simply always there */
+@media(hover:none){ .svc-more{opacity:.85;transform:none} }
+
+.os-cta{display:flex;justify-content:center;margin-top:44px}
+.os-btn{border-radius:100px;padding:15px 30px;box-shadow:0 14px 28px -18px rgba(7,34,32,.7)}
+.os-btn:hover{box-shadow:0 18px 34px -18px rgba(7,34,32,.8)}
+
+/* Under ~1180 a 3:4 split would squeeze a card below its text. The 2x2 group
+   grid stays, but each card turns into a compact row (picture left, name and
+   line right), which roughly halves the block's height on a tablet. */
+@media(max-width:1180px){
+  .os-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 28px}
+  .os-cards{grid-template-columns:minmax(0,1fr);gap:10px}
+  .svc{display:grid;grid-template-columns:4rem minmax(0,1fr);column-gap:14px;align-items:center;
+    padding:12px 38px 12px 12px;border-radius:16px}
+  .svc-art{grid-row:1/3;width:4rem;margin:0}
+  .svc b{align-self:end;margin-bottom:2px;font-size:.88rem}
+  .svc-d{align-self:start;font-size:.74rem;line-height:1.45}
+  .svc-more{position:absolute;top:50%;right:12px;padding:0;font-size:0;gap:0;
+    opacity:.45;transform:translateY(-50%)}
+  .svc-more svg{width:14px;height:14px}
+  .svc:hover .svc-more,.svc:focus-visible .svc-more{opacity:1;transform:translateY(-50%)}
+}
+@media(max-width:900px){
+  .onsite{margin-top:44px;border-radius:24px;padding:40px 28px 36px}
+  .os-head{margin-bottom:32px}
+}
+@media(max-width:760px){
+  .os-grid{grid-template-columns:minmax(0,1fr)}
+  .os-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+  .onsite{border-radius:22px;padding:32px 18px 28px}
+  .os-cards{grid-template-columns:minmax(0,1fr)}
+  .os-gh{font-size:.95rem;margin-bottom:14px}
+  .os-gic{width:34px;height:34px}
+  .os-grid{gap:28px}
+  .os-cta{margin-top:32px}
+  .os-btn{width:100%}
+}
+@media(max-width:400px){
+  .onsite{padding:28px 14px 24px}
+}
+@media(prefers-reduced-motion:reduce){
+  .svc-art img,.svc-art::after,.svc-more{transition:none}
+  .svc:hover .svc-art img,.svc:focus-visible .svc-art img{transform:none}
+}
 
 @media(max-width:1180px){ .dgrid{grid-template-columns:repeat(3,minmax(0,1fr))} }
 @media(max-width:860px){ .dgrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
-@media(max-width:900px){ .docs{padding:76px 0} .facs{padding:26px 22px} }
+@media(max-width:900px){ .docs{padding:76px 0} }
 @media(max-width:620px){
   .dgrid{grid-template-columns:minmax(0,1fr);gap:14px}
   .dbody{padding:24px 18px 18px}
@@ -1069,13 +1169,8 @@ footer .brand{margin-bottom:18px}
      eleven of those is most of the scroll, so the frame flattens here */
   .dphoto{aspect-ratio:3/2}
   .dc h3{font-size:1.2rem}
-  .fachead h3{font-size:1.35rem}
-  .faclist li{font-size:.78rem;padding:7px 13px}
 }
 @media(max-width:400px){
-  .facs{padding:22px 17px}
-  .faclist{gap:7px}
-  .faclist li{font-size:.74rem;padding:6px 11px}
   .dwhen{grid-template-columns:minmax(0,1fr);gap:2px}
   .dwhen dt{padding-top:8px}
 }

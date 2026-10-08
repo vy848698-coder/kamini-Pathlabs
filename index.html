@@ -803,28 +803,109 @@
       <span>Same-day booking opens at <b>8.00 AM</b>. Timings can change — please call
       <a href="tel:+919861451521">+91 98614 51521</a> to confirm before you visit.</span></p>
 
-    <!-- on-site procedures, from the clinic's facilities list -->
-    <div class="facs rv">
-      <div class="fachead">
-        <h3>Also done at the clinic</h3>
-        <p>Diagnostics and day procedures handled on-site at Jagamara — no second trip.</p>
+    <!-- on-site procedures, from the clinic's facilities list.
+         Illustrations live in Images/healthcare/onsite/ (transparent 256px WebP).
+         Every card links to the fuller "Done on site" section on doctors.html. -->
+    <div class="onsite" role="region" aria-labelledby="onsiteT">
+      <svg class="os-deco os-deco-a" viewBox="0 0 200 200" aria-hidden="true"><path d="M146 22c34 18 50 62 34 98s-62 64-104 54S6 120 16 80 112 4 146 22z"/></svg>
+      <svg class="os-deco os-deco-b" viewBox="0 0 120 120" aria-hidden="true"><path d="M104 14C62 16 22 44 16 104c34-4 80-26 88-90z"/><path class="vein" d="M98 20C70 46 44 72 22 98"/></svg>
+
+      <header class="os-head rv">
+        <div>
+          <span class="os-rule" aria-hidden="true"></span>
+          <h3 id="onsiteT">Also done at the clinic</h3>
+          <p>Diagnostics and day procedures handled on-site — no second trip.</p>
+        </div>
+        <p class="os-where"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 0 0-7-7z"/><circle cx="12" cy="10" r="2.5"/></svg>All under one roof at Jagamara</p>
+      </header>
+
+      <div class="os-grid">
+
+        <div class="os-grp rv">
+          <h4 class="os-gh"><span class="os-gic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></span>Cardiac &amp; Neurological</h4>
+          <ul class="os-cards" style="--n:3">
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/ecg.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'lab')"></span>
+              <b>ECG</b><span class="svc-d">Checks heart rhythm and electrical activity.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/eeg.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'lab')"></span>
+              <b>EEG</b><span class="svc-d">Records brain activity and function.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/ncv-ncs.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'lab')"></span>
+              <b>NCV &amp; NCS</b><span class="svc-d">Checks nerve and muscle function.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+          </ul>
+        </div>
+
+        <div class="os-grp rv d1">
+          <h4 class="os-gh"><span class="os-gic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 9.5a5.5 5.5 0 0 1 11 0c0 3-2 4.2-2.9 5.6-.8 1.3-.8 2.6-1.6 3.6A2.7 2.7 0 0 1 8.5 18"/><path d="M9.6 10a2.4 2.4 0 0 1 4.8 0c0 1.5-1.3 1.9-1.9 2.9"/></svg></span>ENT &amp; Respiratory</h4>
+          <ul class="os-cards" style="--n:4">
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/audiometry.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'lab')"></span>
+              <b>Audiometry</b><span class="svc-d">Assesses hearing ability.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/tympanometry.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'lab')"></span>
+              <b>Tympanometry</b><span class="svc-d">Checks middle-ear pressure and function.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/laryngoscopy.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'lab')"></span>
+              <b>Laryngoscopy</b><span class="svc-d">Examines the throat and voice box.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/pft.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'lab')"></span>
+              <b>PFT (lung function)</b><span class="svc-d">Measures lung capacity and airflow.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+          </ul>
+        </div>
+
+        <div class="os-grp rv">
+          <h4 class="os-gh"><span class="os-gic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 2v6l-4 7a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-4-7V2M8 2h8"/><path d="M7.5 13.5h9"/></svg></span>Profiles &amp; Lab</h4>
+          <ul class="os-cards" style="--n:3">
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/nebulisation.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'lab')"></span>
+              <b>Nebulisation</b><span class="svc-d">Delivers medication directly to the lungs.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/vitamin.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'vials')"></span>
+              <b>Vitamin profiles</b><span class="svc-d">Checks essential vitamin levels.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/thyroid.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'vials')"></span>
+              <b>Thyroid profiles</b><span class="svc-d">Evaluates thyroid function — T3, T4 and TSH.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+          </ul>
+        </div>
+
+        <div class="os-grp rv d1">
+          <h4 class="os-gh"><span class="os-gic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8.5v7M8.5 12h7"/></svg></span>Clinical Procedures</h4>
+          <ul class="os-cards" style="--n:4">
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/saline.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'lab')"></span>
+              <b>Saline insertion</b><span class="svc-d">IV line for hydration and medication.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/catheter.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'lab')"></span>
+              <b>Catheterisation</b><span class="svc-d">Relieves urine retention or aids monitoring.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/ryles-tube.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'lab')"></span>
+              <b>Ryle&#39;s tube insertion</b><span class="svc-d">For feeding or gastric decompression.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+            <li><a class="svc" href="doctors.html#onsite">
+              <span class="svc-art"><img src="Images/healthcare/onsite/pathology.webp" width="256" height="256" alt="" loading="lazy" decoding="async" onerror="kFall(this,'micro')"></span>
+              <b>All pathological investigations</b><span class="svc-d">Blood, urine and other lab tests.</span>
+              <span class="svc-more">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+          </ul>
+        </div>
+
       </div>
-      <ul class="faclist">
-        <li>ECG</li>
-        <li>EEG</li>
-        <li>NCV &amp; NCS</li>
-        <li>Audiometry</li>
-        <li>Tympanometry</li>
-        <li>Laryngoscopy</li>
-        <li>PFT (lung function)</li>
-        <li>Nebulisation</li>
-        <li>Vitamin profiles</li>
-        <li>Thyroid profiles</li>
-        <li>Saline insertion</li>
-        <li>Catheterisation</li>
-        <li>Ryle's tube insertion</li>
-        <li>All pathological investigations</li>
-      </ul>
+
+      <div class="os-cta rv">
+        <a href="doctors.html#onsite" class="btn btn-solid os-btn">View all services <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
     </div>
   </div>
 </section>
