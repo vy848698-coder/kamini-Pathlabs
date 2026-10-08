@@ -150,8 +150,6 @@
 /* ================= VISION · MISSION · VALUES ================= */
 .ab-vm{position:relative;overflow:hidden;padding:104px 0;color:#fff;
   background:linear-gradient(150deg,var(--teal-2) 0%,var(--teal-900) 62%)}
-.ab-vm::before{content:"";position:absolute;left:-140px;bottom:-200px;width:520px;height:520px;border-radius:50%;
-  pointer-events:none;background:radial-gradient(circle,rgba(201,162,75,.2),transparent 66%)}
 .ab-vm .wrap{position:relative;z-index:1}
 .ab-vm .center-head h2{color:#fff}
 .ab-vm .center-head p{color:rgba(255,255,255,.7)}
@@ -272,8 +270,6 @@
 .ab-vgrid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:44px;align-items:stretch}
 .ab-vcard{background:var(--teal-900);color:#fff;border-radius:var(--r-xl);padding:38px 36px;
   display:flex;flex-direction:column;position:relative;overflow:hidden}
-.ab-vcard::after{content:"";position:absolute;right:-110px;top:-130px;width:340px;height:340px;border-radius:50%;
-  pointer-events:none;background:radial-gradient(circle,rgba(201,162,75,.24),transparent 66%)}
 .ab-vcard>*{position:relative;z-index:1}
 .ab-vcard h3{font-size:1.8rem;color:#fff;margin:16px 0 22px}
 .ab-vrow{display:flex;gap:13px;align-items:flex-start;padding:16px 0;border-top:1px solid rgba(255,255,255,.12)}
@@ -307,8 +303,6 @@
    and it stops the page ending on two dark blocks in a row. */
 .ab-cta{padding:88px 0;background:linear-gradient(125deg,var(--gold-pale) 0%,#f9f3e4 55%,var(--ivory-2) 100%);
   border-top:1px solid #eadfc2;text-align:center;position:relative;overflow:hidden}
-.ab-cta::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(60% 100% at 50% 0%,rgba(255,255,255,.7),transparent 70%)}
 .ab-cta .wrap{position:relative;z-index:1}
 .ab-cta .slabel{justify-content:center}
 .ab-cta h2{font-size:clamp(1.9rem,4.6vw,3rem);margin:18px auto 14px;max-width:18ch}

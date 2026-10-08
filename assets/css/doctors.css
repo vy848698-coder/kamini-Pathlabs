@@ -271,8 +271,6 @@
    Days across, clinics down — the shape of the printed OPD sheet that
    hangs behind the counter, rather than a calendar widget. */
 .dr-board{padding:96px 0 100px;background:var(--teal-900);color:#fff;position:relative;overflow:hidden}
-.dr-board::before{content:"";position:absolute;left:-200px;top:-160px;width:620px;height:620px;border-radius:50%;
-  pointer-events:none;background:radial-gradient(circle,rgba(201,162,75,.16),transparent 66%)}
 .dr-board .wrap{position:relative;z-index:2}
 .dr-board h2{color:#fff}
 .dr-board .lede{color:rgba(255,255,255,.68)}
@@ -365,8 +363,6 @@
 .dr-ref{padding:0 0 100px;background:var(--teal-50)}
 .dr-rpanel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-xl);
   padding:44px 46px;box-shadow:var(--sh);position:relative;overflow:hidden}
-.dr-rpanel::after{content:"";position:absolute;right:-120px;top:-140px;width:340px;height:340px;border-radius:50%;
-  pointer-events:none;background:radial-gradient(circle,rgba(245,236,214,.9),transparent 66%)}
 .dr-rpanel>*{position:relative;z-index:2}
 .dr-rhead{max-width:640px;margin-bottom:32px}
 .dr-rhead h2{font-size:clamp(1.6rem,3.6vw,2.35rem);margin:16px 0 12px}

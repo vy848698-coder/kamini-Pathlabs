@@ -157,8 +157,6 @@
    button — the one thing an enquiry form never tells you. On the right,
    the form, on paper. */
 .ct-write{padding:100px 0;background:var(--teal-900);color:#fff;position:relative;overflow:hidden}
-.ct-write::before{content:"";position:absolute;left:-180px;bottom:-220px;width:620px;height:620px;
-  border-radius:50%;background:radial-gradient(circle,rgba(201,162,75,.15),transparent 68%);pointer-events:none}
 .ct-write .wrap{position:relative;z-index:2}
 .ct-wgrid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:64px;align-items:start}
 .ct-write h2{color:#fff;margin:18px 0 16px;font-size:clamp(1.9rem,3.6vw,2.9rem)}

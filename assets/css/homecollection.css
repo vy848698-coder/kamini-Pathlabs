@@ -221,8 +221,6 @@
 /* an ID card, drawn rather than photographed — the fields are labels, not a
    made-up person, because the point is what the visitor should ask to see */
 .hc-idwrap{position:relative;display:flex;flex-direction:column;align-items:center;padding-top:96px}
-.hc-idwrap::before{content:"";position:absolute;left:50%;top:74px;width:270px;height:270px;
-  transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,var(--gold-pale),transparent 66%)}
 
 /* ---------- the lanyard ---------- */
 .hc-lany{position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:102px;z-index:1}
@@ -351,8 +349,6 @@
 
 /* ================= COVERAGE ================= */
 .hc-area{position:relative;overflow:hidden;padding:100px 0;background:var(--teal-900);color:#fff}
-.hc-area::before{content:"";position:absolute;right:-140px;top:-160px;width:520px;height:520px;border-radius:50%;
-  pointer-events:none;background:radial-gradient(circle,rgba(201,162,75,.22),transparent 66%)}
 .hc-area .wrap{position:relative;z-index:2}
 .hc-area .center-head h2{color:#fff}
 .hc-area .center-head p{color:rgba(255,255,255,.7)}
