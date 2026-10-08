@@ -417,6 +417,9 @@
   .dr-chap a{font-size:.77rem;padding:0 13px}
   .dr-anchor{scroll-margin-top:126px}
   .dr-roster{grid-template-columns:1fr}
+  /* one column means the portrait is as wide as the screen; at 4:3 that is a
+     525px picture on a 700px phone, so the frame flattens once it stacks */
+  .dr-photo{aspect-ratio:3/2}
   .dr-ogrid{grid-template-columns:1fr}
   .dr-rpanel{padding:32px 26px}
 

@@ -678,7 +678,8 @@ footer .brand{margin-bottom:18px}
 
 @media(max-width:560px){
   .labs{padding:26px 0 28px}
-  .labs-k{margin-bottom:20px;font-size:.6rem;letter-spacing:.18em}
+  .labs-k{margin-bottom:20px;font-size:.58rem;letter-spacing:.13em;gap:12px}
+  .labs-k::before,.labs-k::after{flex:0 1 46px;min-width:14px}
   .labs-item{width:152px;height:90px;margin-right:14px}
 }
 /* a rail that moves on its own is exactly what this setting is for */
@@ -1063,6 +1064,9 @@ footer .brand{margin-bottom:18px}
 @media(max-width:620px){
   .dgrid{grid-template-columns:minmax(0,1fr);gap:14px}
   .dbody{padding:24px 18px 18px}
+  /* one column means a square portrait is as wide as the screen and as tall;
+     eleven of those is most of the scroll, so the frame flattens here */
+  .dphoto{aspect-ratio:3/2}
   .dc h3{font-size:1.2rem}
   .fachead h3{font-size:1.35rem}
   .faclist li{font-size:.78rem;padding:7px 13px}

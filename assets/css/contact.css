@@ -146,7 +146,7 @@
 .ct-line.wa .ct-lgo{color:#1f7d55}
 .ct-line.wa:hover .ct-lgo{background:#1f7d55;border-color:#1f7d55;color:#fff}
 
-.ct-lfoot{display:flex;align-items:center;gap:11px;margin-top:18px;font-size:.82rem;color:var(--grey)}
+.ct-lfoot{display:flex;align-items:flex-start;gap:11px;margin-top:18px;font-size:.82rem;color:var(--grey)}
 .ct-lfoot svg{width:16px;height:16px;color:var(--gold-2);flex:none}
 .ct-lfoot a{color:var(--teal);font-weight:700;border-bottom:1px solid var(--teal-200);transition:.2s;
   white-space:nowrap}
