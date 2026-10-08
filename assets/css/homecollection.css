@@ -5,8 +5,8 @@
    page, the about page or the legal pages.
 ========================================================== */
 
-/* anchors clear the sticky header (70px once stuck) with air to spare */
-.hc-anchor{scroll-margin-top:100px}
+/* header (70px stuck) + chapter rail (56px) + air */
+.hc-anchor{scroll-margin-top:140px}
 
 /* ================= MASTHEAD ================= */
 /* Deliberately unlike both the home hero and the about masthead: the
@@ -70,6 +70,26 @@
 .hc-sgo{margin-top:16px}
 .hc-snote{margin-top:12px;font-size:.74rem;color:var(--grey-2);text-align:center;line-height:1.6}
 .hc-snote b{color:var(--teal);font-weight:800}
+
+/* ================= CHAPTER RAIL =================
+   Same behaviour as the about, doctors and contact rails (main.js drives
+   them all through #chap), on the teal band so it runs on from the masthead. */
+.hc-chap{position:sticky;top:69px;z-index:120;background:rgba(7,34,32,.95);
+  backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.09)}
+.hc-chap .wrap{display:flex;align-items:stretch;height:56px;overflow-x:auto;scrollbar-width:none;
+  -ms-overflow-style:none;scroll-behavior:smooth}
+.hc-chap .wrap::-webkit-scrollbar{display:none}
+.hc-chap a{position:relative;flex:none;display:inline-flex;align-items:center;gap:9px;padding:0 17px;
+  font-size:.81rem;font-weight:700;color:rgba(255,255,255,.6);white-space:nowrap;transition:color .25s var(--ease)}
+.hc-chap a:first-child{padding-left:0}
+.hc-chap a i{font-style:normal;font-size:.62rem;font-weight:800;letter-spacing:.1em;color:var(--gold-soft);opacity:.55}
+.hc-chap a::after{content:"";position:absolute;left:50%;right:50%;bottom:0;height:2px;background:var(--gold);
+  transition:left .32s var(--ease),right .32s var(--ease)}
+.hc-chap a:hover,.hc-chap a.on{color:#fff}
+.hc-chap a.on i{opacity:1}
+.hc-chap a.on::after{left:14px;right:14px}
+.hc-chap a:first-child.on::after{left:0}
+.hc-chap a:focus-visible{outline:2px solid var(--gold);outline-offset:-6px;border-radius:4px}
 
 /* ================= NO-CHARGE RECEIPT ================= */
 .hc-zero{padding:96px 0;background:var(--ivory)}
@@ -188,7 +208,7 @@
 .hc-bnote b{color:var(--ink);font-weight:700}
 
 /* the running total — dark, so it holds its own against a page of white cards */
-.hc-sum{position:sticky;top:100px;background:linear-gradient(160deg,var(--teal),var(--teal-900));color:#fff;
+.hc-sum{position:sticky;top:145px;background:linear-gradient(160deg,var(--teal),var(--teal-900));color:#fff;
   border-radius:var(--r-lg);padding:26px 24px;box-shadow:var(--sh-lg);overflow:hidden}
 .hc-sum h3{font-size:1.25rem;color:#fff;margin-bottom:3px}
 .hc-sum .sub{font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:20px}
@@ -415,6 +435,9 @@
   .hc-fcols{grid-template-columns:1fr;gap:0}
 }
 @media(max-width:640px){
+  .hc-chap .wrap{height:50px}
+  .hc-chap a{font-size:.77rem;padding:0 13px}
+  .hc-anchor{scroll-margin-top:126px}
   .hc-mast{padding:46px 0 66px}
   .hc-zero,.hc-day,.hc-build,.hc-who,.hc-prep,.hc-area,.hc-faqs{padding:64px 0}
   .hc-kit{padding-bottom:64px}
@@ -456,6 +479,7 @@
   .hc-chips button,.hc-tab{min-height:40px;display:inline-flex;align-items:center}
 }
 @media(prefers-reduced-motion:reduce){
+  .hc-chap .wrap{scroll-behavior:auto}
   .hc-rail::after{transition:none;transform:scaleX(1)}
   .hc-ndot::after{transition:none;transform:scale(1)}
   .hc-id{transform:none}

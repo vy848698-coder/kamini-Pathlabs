@@ -256,6 +256,28 @@ footer .brand .wm span{color:var(--gold-soft)}
 .hfeat b{display:block;font-size:.83rem;font-weight:800;line-height:1.35;color:#fff}
 .hfeat small{display:block;font-size:.72rem;color:rgba(255,255,255,.5);line-height:1.45}
 
+/* ================= CHAPTER RAIL =================
+   The home page's copy of the inner pages' rail (main.js drives them all
+   through #chap), on the teal band so it runs on from the hero. */
+.hm-chap{position:sticky;top:69px;z-index:120;background:rgba(7,34,32,.95);
+  backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.09)}
+.hm-chap .wrap{display:flex;align-items:stretch;height:56px;overflow-x:auto;scrollbar-width:none;
+  -ms-overflow-style:none;scroll-behavior:smooth}
+.hm-chap .wrap::-webkit-scrollbar{display:none}
+.hm-chap a{position:relative;flex:none;display:inline-flex;align-items:center;gap:9px;padding:0 17px;
+  font-size:.81rem;font-weight:700;color:rgba(255,255,255,.6);white-space:nowrap;transition:color .25s var(--ease)}
+.hm-chap a:first-child{padding-left:0}
+.hm-chap a i{font-style:normal;font-size:.62rem;font-weight:800;letter-spacing:.1em;color:var(--gold-soft);opacity:.55}
+.hm-chap a::after{content:"";position:absolute;left:50%;right:50%;bottom:0;height:2px;background:var(--gold);
+  transition:left .32s var(--ease),right .32s var(--ease)}
+.hm-chap a:hover,.hm-chap a.on{color:#fff}
+.hm-chap a.on i{opacity:1}
+.hm-chap a.on::after{left:14px;right:14px}
+.hm-chap a:first-child.on::after{left:0}
+.hm-chap a:focus-visible{outline:2px solid var(--gold);outline-offset:-6px;border-radius:4px}
+/* a section reached by a hash link lands below the header and the rail */
+.hm-chap ~ section[id]{scroll-margin-top:140px}
+
 /* ================= PROMO BANNER CAROUSEL ================= */
 .promo{padding:70px 0 0}
 .pcar{position:relative;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg);background:var(--teal-900)}
@@ -798,6 +820,9 @@ footer .brand{margin-bottom:18px}
   .wrap{padding:0 20px}
   .hero{padding:40px 0 60px}
   .promo{padding-top:56px}
+  .hm-chap .wrap{height:50px}
+  .hm-chap a{font-size:.77rem;padding:0 13px}
+  .hm-chap ~ section[id]{scroll-margin-top:126px}
   .progs,.conc,.tests,.pk,.proc,.rev,.faq,.qual,.chain{padding:66px 0}
   .book{padding-bottom:66px}
   .nact .btn{display:none}
@@ -918,6 +943,7 @@ footer .brand{margin-bottom:18px}
   *{animation:none!important;transition:none!important}
   .rv{opacity:1;transform:none}
   html{scroll-behavior:auto}
+  .hm-chap .wrap{scroll-behavior:auto}
 }
 
 
