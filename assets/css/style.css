@@ -1061,14 +1061,13 @@ footer .brand{margin-bottom:18px}
 /* decoration stays behind everything and well into the corners */
 .os-deco{position:absolute;z-index:-1;pointer-events:none;stroke:none}
 .os-deco-a{width:300px;top:-168px;left:-132px;fill:var(--teal-50)}
-.os-deco-b{width:104px;right:-4px;bottom:-4px;fill:var(--teal-100);opacity:.6}
-.os-deco-b .vein{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;opacity:.8}
-.onsite::after{content:"";position:absolute;z-index:-2;right:-120px;bottom:-150px;width:300px;height:300px;
+.onsite::after{content:"";position:absolute;z-index:-2;right:-130px;bottom:-170px;width:380px;height:380px;
   border-radius:50%;background:radial-gradient(closest-side,rgba(216,235,229,.75),rgba(216,235,229,0));pointer-events:none}
 
 .os-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px 32px;flex-wrap:wrap;margin-bottom:40px}
-.os-rule{display:block;width:44px;height:2px;border-radius:2px;margin-bottom:20px;
-  background:linear-gradient(90deg,var(--teal-200),#9fd2c2)}
+.os-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:18px;
+  font-size:.66rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--teal)}
+.os-eyebrow i{width:34px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--teal-200),#9fd2c2)}
 .os-head h3{font-size:clamp(2rem,3.6vw,2.85rem);color:var(--teal-900);letter-spacing:-.022em;margin-bottom:12px}
 .os-head h3+p{color:var(--grey);font-size:1rem;max-width:52ch}
 .os-where{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;color:var(--teal);
@@ -1079,7 +1078,10 @@ footer .brand{margin-bottom:18px}
 .os-gh{display:flex;align-items:center;gap:12px;margin-bottom:18px;
   font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:1rem;line-height:1.25;
   letter-spacing:-.005em;color:var(--teal-900)}
-.os-gh::after{content:"";flex:1;height:1px;margin-left:6px;background:linear-gradient(90deg,var(--line),rgba(228,223,210,0))}
+.os-gh::after{content:"";order:1;flex:1;height:1px;margin-left:6px;background:linear-gradient(90deg,var(--line),rgba(228,223,210,.35))}
+/* the group's card count closes its rule, set like a folio number */
+.os-count{order:2;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.05rem;
+  letter-spacing:.04em;color:var(--grey-2)}
 .os-gic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex:none;
   color:var(--teal);background:var(--teal-50);box-shadow:inset 0 0 0 1px var(--teal-100)}
 .os-gic svg{width:18px;height:18px;stroke-width:1.8}
@@ -1087,8 +1089,9 @@ footer .brand{margin-bottom:18px}
 .os-cards{list-style:none;display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));gap:14px}
 .os-cards li{display:flex}
 .svc{position:relative;display:flex;flex-direction:column;width:100%;
-  background:var(--paper);border:1px solid rgba(13,71,68,.09);border-radius:20px;padding:16px 16px 14px;
-  box-shadow:0 1px 2px rgba(7,34,32,.04),0 14px 28px -24px rgba(7,34,32,.42);
+  background:radial-gradient(130% 62% at 0 0,rgba(238,245,242,.85),rgba(238,245,242,0) 62%),var(--paper);
+  border:1px solid rgba(13,71,68,.09);border-radius:20px;padding:16px 16px 14px;
+  box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(7,34,32,.04),0 14px 28px -24px rgba(7,34,32,.42);
   transition:border-color .4s var(--ease),box-shadow .4s var(--ease)}
 .svc-art{position:relative;display:block;width:5.4rem;aspect-ratio:1;margin:0 0 14px -4px}
 /* a soft contact shadow, so the illustration sits on the card rather than on top of it */
@@ -1101,22 +1104,19 @@ footer .brand{margin-bottom:18px}
 .svc-art img[src^="data:"]{border-radius:24%}
 .svc b{display:block;font-size:.92rem;font-weight:800;line-height:1.25;letter-spacing:-.01em;color:var(--teal-900);margin-bottom:5px}
 .svc-d{display:block;font-size:.76rem;line-height:1.5;color:var(--grey)}
-.svc-more{display:inline-flex;align-items:center;gap:5px;margin-top:auto;padding-top:10px;
+.svc-more{display:inline-flex;align-items:center;gap:5px;margin-top:auto;padding-top:8px;
   font-size:.72rem;font-weight:800;color:var(--teal);
   opacity:0;transform:translateX(-6px);transition:opacity .35s var(--ease),transform .35s var(--ease)}
 .svc-more svg{width:12px;height:12px;stroke-width:2.3}
 .svc:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
 .svc:hover,.svc:focus-visible{border-color:rgba(13,71,68,.22);
-  box-shadow:0 1px 2px rgba(7,34,32,.05),0 20px 34px -24px rgba(7,34,32,.55)}
+  box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(7,34,32,.05),0 20px 34px -24px rgba(7,34,32,.55)}
 .svc:hover .svc-art img,.svc:focus-visible .svc-art img{transform:translateY(-4px) scale(1.04)}
 .svc:hover .svc-art::after,.svc:focus-visible .svc-art::after{transform:scale(.84);opacity:.7}
 .svc:hover .svc-more,.svc:focus-visible .svc-more{opacity:1;transform:none}
 /* no hover on touch screens, so the link cue is simply always there */
 @media(hover:none){ .svc-more{opacity:.85;transform:none} }
 
-.os-cta{display:flex;justify-content:center;margin-top:44px}
-.os-btn{border-radius:100px;padding:15px 30px;box-shadow:0 14px 28px -18px rgba(7,34,32,.7)}
-.os-btn:hover{box-shadow:0 18px 34px -18px rgba(7,34,32,.8)}
 
 /* Under ~1180 a 3:4 split would squeeze a card below its text. The 2x2 group
    grid stays, but each card turns into a compact row (picture left, name and
@@ -1148,8 +1148,6 @@ footer .brand{margin-bottom:18px}
   .os-gh{font-size:.95rem;margin-bottom:14px}
   .os-gic{width:34px;height:34px}
   .os-grid{gap:28px}
-  .os-cta{margin-top:32px}
-  .os-btn{width:100%}
 }
 @media(max-width:400px){
   .onsite{padding:28px 14px 24px}
