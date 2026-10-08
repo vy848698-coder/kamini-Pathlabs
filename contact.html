@@ -273,25 +273,25 @@
         </p>
       </div>
 
-      <form class="ct-form rv d1" id="ctForm" novalidate>
+      <form class="ct-form rv d1" id="ctForm" action="mail/send.php" method="post" data-form="contact" novalidate>
         <h3>Tell us what you need</h3>
         <p class="ct-fsub">Two fields are compulsory. Everything else just helps us give you a straight answer on the first call.</p>
 
         <div class="ct-fld" id="fldName">
           <label for="ctName">Full name</label>
-          <input id="ctName" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+          <input id="ctName" name="name" type="text" placeholder="Your name" autocomplete="name" autocapitalize="words" spellcheck="false" maxlength="60" required>
           <span class="ct-err">Please tell us who you are.</span>
         </div>
 
         <div class="ct-frow">
           <div class="ct-fld" id="fldPhone">
             <label for="ctPhone">Mobile number</label>
-            <input id="ctPhone" name="phone" type="tel" placeholder="10-digit number" autocomplete="tel" inputmode="numeric" maxlength="10" required>
+            <input id="ctPhone" name="phone" type="tel" placeholder="10-digit number" autocomplete="tel-national" inputmode="numeric" maxlength="16" required>
             <span class="ct-err">A 10-digit mobile number, please.</span>
           </div>
           <div class="ct-fld" id="fldEmail">
             <label for="ctEmail">Email <em>optional</em></label>
-            <input id="ctEmail" name="email" type="email" placeholder="Your email address" autocomplete="email">
+            <input id="ctEmail" name="email" type="email" placeholder="Your email address" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254">
             <span class="ct-err">That email address does not look right.</span>
           </div>
         </div>
@@ -325,6 +325,8 @@
           <span class="ct-count" id="ctCount" aria-hidden="true">0 / 500</span>
           <textarea id="ctMsg" name="message" maxlength="500" placeholder="Tests on the prescription, the locality for a home visit, or anything we should know before we call."></textarea>
         </div>
+
+        <div class="hp" aria-hidden="true"><label for="ctWeb">Leave this empty</label><input id="ctWeb" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 
         <button type="submit" class="btn btn-gold btn-full ct-fbtn" id="ctSend">
           Send to the desk <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -581,6 +583,7 @@
 }
 </script>
 
+<script src="assets/js/forms.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/contact.js" defer></script>
 <!-- Two quick-contact buttons, one in each bottom corner: a callback

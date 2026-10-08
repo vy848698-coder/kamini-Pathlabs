@@ -711,23 +711,23 @@
           </div>
         </div>
 
-        <form class="bform" id="bform" novalidate>
+        <form class="bform" id="bform" action="mail/send.php" method="post" data-form="collection" novalidate>
           <h3>Book a home visit</h3>
           <p>We usually call back within 15 minutes during working hours.</p>
 
-          <div class="fld"><label for="bn">Full name</label><input id="bn" type="text" placeholder="Patient's name" autocomplete="name"></div>
+          <div class="fld"><label for="bn">Full name</label><input id="bn" name="name" type="text" placeholder="Patient's name" autocomplete="name" autocapitalize="words" spellcheck="false" maxlength="60" required></div>
           <div class="frow">
-            <div class="fld"><label for="bp">Mobile number</label><input id="bp" type="tel" placeholder="10-digit number" autocomplete="tel" inputmode="numeric" maxlength="10"></div>
-            <div class="fld"><label for="ba">Locality</label><input id="ba" type="text" placeholder="e.g. Jagamara" autocomplete="address-level3" list="hcAreas"></div>
+            <div class="fld"><label for="bp">Mobile number</label><input id="bp" name="phone" type="tel" placeholder="10-digit number" autocomplete="tel-national" inputmode="numeric" maxlength="16" required></div>
+            <div class="fld"><label for="ba">Locality</label><input id="ba" name="locality" type="text" placeholder="e.g. Jagamara" autocomplete="address-level3" list="hcAreas" maxlength="80" required></div>
           </div>
           <div class="frow">
             <div class="fld"><label for="bd">Day</label>
-              <select id="bd">
+              <select id="bd" name="day">
                 <option>Today</option><option>Tomorrow</option><option>Day after</option><option>Later this week</option>
               </select>
             </div>
             <div class="fld"><label for="bt">Slot</label>
-              <select id="bt">
+              <select id="bt" name="slot">
                 <option>6:00 – 7:00 AM</option>
                 <option>7:00 – 8:30 AM</option>
                 <option>8:30 – 10:00 AM</option>
@@ -741,10 +741,12 @@
           <div class="fld hc-fchosen">
             <label for="bsel">Tests to collect</label>
             <div class="box" id="bsel">Nothing selected yet — or just tell us on the call.</div>
+            <input type="hidden" name="tests" id="btests" value="">
           </div>
 
+          <div class="hp" aria-hidden="true"><label for="bweb">Leave this empty</label><input id="bweb" name="website" type="text" tabindex="-1" autocomplete="off"></div>
           <button type="submit" class="btn btn-gold btn-full" id="bbtn">Book my collection <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-          <p class="fmsg" id="fmsg" hidden><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Thank you — our team will call you shortly to confirm your slot.</p>
+          <p class="fmsg" id="fmsg" role="status" hidden><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Thank you — our team will call you shortly to confirm your slot.</p>
           <p class="ffine">Your details stay with Kamini Clinic &amp; Labs and are never shared.</p>
         </form>
       </div>
@@ -901,6 +903,7 @@
 }
 </script>
 
+<script src="assets/js/forms.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/homecollection.js" defer></script>
 <!-- WhatsApp, pinned bottom left so it never collides with the booking

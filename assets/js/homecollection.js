@@ -179,15 +179,18 @@
     save.hidden = saved <= 0;
     if (saved > 0) save.textContent = "You save " + rupees(saved) + " on list price";
 
-    /* mirror into the booking form so the callback team sees the same list */
+    /* mirror into the booking form so the callback team sees the same list —
+       the box is what the visitor reads, #btests is what gets sent */
+    var names = chosen.map(function(i){ return i.name; }).join(", ");
     if (bsel){
       if (!chosen.length){
         bsel.textContent = "Nothing selected yet — or just tell us on the call.";
       } else {
-        bsel.innerHTML = chosen.map(function(i){ return i.name; }).join(", ") +
-                         " &middot; <b>" + rupees(amount) + "</b>";
+        bsel.innerHTML = names + " &middot; <b>" + rupees(amount) + "</b>";
       }
     }
+    var btests = $("btests");
+    if (btests) btests.value = chosen.length ? names + " — " + rupees(amount) : "";
   }
 
   function toggle(id){

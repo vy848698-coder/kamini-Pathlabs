@@ -4,7 +4,8 @@
      1. say whether the desk is open at this exact moment,
      2. keep the availability chips on the switchboard honest,
      3. light today's card in the week strip,
-     4. validate the enquiry form and copy the address.
+     4. word the enquiry form's thank-you and copy the address.
+   (The enquiry form itself is checked and sent by forms.js.)
 
    Everything is evaluated in IST rather than the browser's own
    zone, so a relative checking the timings from Dubai or New
@@ -118,75 +119,43 @@
      plenty and costs nothing. */
   setInterval(tick, 30000);
 
-  /* ================= 4a. the enquiry form ================= */
+  /* ================= 4a. the enquiry form =================
+     forms.js checks the fields and sends the note; this only words the
+     thank-you, which depends on whether the desk is open right now. */
   var form = document.getElementById("ctForm");
-  if (form) {
-    var name  = document.getElementById("ctName"),
-        phone = document.getElementById("ctPhone"),
-        email = document.getElementById("ctEmail"),
-        msg   = document.getElementById("ctMsg"),
+  if (form && window.KForms) {
+    var msg   = document.getElementById("ctMsg"),
         when  = document.getElementById("ctWhen"),
         count = document.getElementById("ctCount"),
         done  = document.getElementById("ctDone"),
         doneT = document.getElementById("ctDoneText"),
         send  = document.getElementById("ctSend");
 
-    /* a phone field that only ever holds a phone number */
-    phone.addEventListener("input", function(){
-      phone.value = phone.value.replace(/\D/g, "").slice(0, 10);
-    });
-
-    /* the error clears the moment the visitor starts fixing it, so the red
-       is a nudge rather than a punishment */
-    [name, phone, email].forEach(function(el){
-      el.addEventListener("input", function(){
-        el.classList.remove("bad");
-        el.parentNode.classList.remove("err");
-      });
-    });
-
     msg.addEventListener("input", function(){
       count.textContent = msg.value.length + " / 500";
     });
 
-    function fail(el){
-      el.classList.add("bad");
-      el.parentNode.classList.add("err");
-    }
+    KForms.bind(form, {
+      done: function(data){
+        var first = data.name.split(" ")[0];
+        var s = state();
+        var promise = s.open
+          ? "We will call you back on " + data.phone + " shortly."
+          : "The desk is closed just now — you will get a call soon after it opens at " +
+            clock(s.beforeOpen ? s.today.open : HOURS[(s.day+1)%7].open) + ".";
 
-    form.addEventListener("submit", function(e){
-      e.preventDefault();
-      var bad = null;
+        doneT.textContent = "Thank you, " + first + ". Your note is with the desk. " + promise +
+          (when.selectedIndex ? " (" + when.value + ")" : "");
+        done.classList.add("show");
 
-      if (!name.value.trim()) { fail(name); bad = bad || name; }
-      if (phone.value.trim().length !== 10) { fail(phone); bad = bad || phone; }
-      if (email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) {
-        fail(email); bad = bad || email;
+        send.innerHTML = "Sent to the desk";
+        send.style.opacity = ".7";
+
+        setTimeout(function(){
+          form.reset();
+          count.textContent = "0 / 500";
+        }, 400);
       }
-      if (bad) { bad.focus(); return; }
-
-      /* Front-end only — wire the values below to your backend or WhatsApp
-         Business API when one exists. Nothing leaves the page today. */
-      var first = name.value.trim().split(/\s+/)[0];
-      var s = state();
-      var promise = s.open
-        ? "We will call you back on " + phone.value + " shortly."
-        : "The desk is closed just now — you will get a call soon after it opens at " +
-          clock(s.beforeOpen ? s.today.open : HOURS[(s.day+1)%7].open) + ".";
-
-      doneT.textContent = "Thank you, " + first + ". Your note is with the desk. " + promise +
-        (when.selectedIndex ? " (" + when.value + ")" : "");
-      done.classList.add("show");
-
-      send.innerHTML = "Sent to the desk";
-      send.disabled = true;
-      send.style.pointerEvents = "none";
-      send.style.opacity = ".7";
-
-      setTimeout(function(){
-        form.reset();
-        count.textContent = "0 / 500";
-      }, 400);
     });
   }
 

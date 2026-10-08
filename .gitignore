@@ -14,3 +14,7 @@ dist/
 *.tmp
 .*.part
 .*.body
+
+# Mail settings hold the SMTP password; storage holds rate limits and test mail
+mail/config.php
+mail/storage/

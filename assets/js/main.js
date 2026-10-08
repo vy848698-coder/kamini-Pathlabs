@@ -300,25 +300,7 @@
     if (e.key === "Enter"){ e.preventDefault(); document.getElementById("tests").scrollIntoView({behavior: rm ? "auto":"smooth"}); }
   });
 
-  /* ---- booking form (front-end demo — wire to your backend) ---- */
-  var f = document.getElementById("bform");
-  if (f){
-    var bn = document.getElementById("bn"), bp = document.getElementById("bp"),
-        msg = document.getElementById("fmsg"), btn2 = document.getElementById("bbtn");
-    bp.addEventListener("input", function(){ bp.value = bp.value.replace(/\D/g,"").slice(0,10); });
-    [bn,bp].forEach(function(x){ x.addEventListener("input", function(){ x.classList.remove("bad"); }); });
-    f.addEventListener("submit", function(e){
-      e.preventDefault();
-      var ok = true;
-      if (!bn.value.trim()){ bn.classList.add("bad"); ok = false; }
-      if (bp.value.trim().length !== 10){ bp.classList.add("bad"); ok = false; }
-      if (!ok){ (bn.classList.contains("bad") ? bn : bp).focus(); return; }
-      msg.hidden = false;
-      btn2.textContent = "Request received";
-      btn2.style.pointerEvents = "none";
-      setTimeout(function(){ f.reset(); }, 500);
-    });
-  }
+  /* The booking form (#bform) is validated and sent by forms.js. */
 
   /* ---- smooth anchors ---- */
   document.querySelectorAll('a[href^="#"]').forEach(function(a){

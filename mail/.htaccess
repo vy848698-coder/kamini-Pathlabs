@@ -1,0 +1,15 @@
+# Only send.php is meant to be reached from the web. config.php (the SMTP
+# password), the PHPMailer library and the storage folder are all refused.
+Options -Indexes
+
+<IfModule mod_authz_core.c>
+  <FilesMatch "^(?!send\.php$)">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+  <FilesMatch "^(?!send\.php$)">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+</IfModule>

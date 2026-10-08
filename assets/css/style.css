@@ -545,6 +545,20 @@ footer .brand .wm span{color:var(--gold-soft)}
 .fmsg[hidden]{display:none}
 .fmsg svg{width:15px;height:15px;stroke-width:3}
 .ffine{margin-top:12px;font-size:.75rem;color:var(--grey-2);text-align:center}
+/* what is wrong with a field, written by forms.js under the input */
+.ferr{display:none;margin-top:6px;font-size:.75rem;font-weight:700;line-height:1.45;color:var(--red)}
+.fld.err .ferr,.ct-fld.err .ferr{display:block}
+/* a suggested correction ("Did you mean …@gmail.com?") — one tap applies it */
+.ffix{font:inherit;color:var(--teal);text-decoration:underline;text-underline-offset:2px;background:none;border:0;padding:0;cursor:pointer}
+/* the form could not be sent — shared by #bform and the contact form */
+.fsend{margin-top:13px;padding:12px 14px;border-radius:var(--r);background:#fdf3f0;border:1px solid rgba(180,68,47,.25);
+  font-size:.84rem;font-weight:600;line-height:1.55;color:var(--red)}
+.fsend[hidden]{display:none}
+.fsend a{color:var(--teal);font-weight:800;text-decoration:underline;text-underline-offset:2px}
+/* while a form is sending, and after it has gone */
+.bform .btn:disabled,.ct-form .btn:disabled{opacity:.75;cursor:default;pointer-events:none}
+/* spam trap: off-screen for people, still filled in by form bots */
+.hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
 
 /* ================= FOOTER ================= */
 footer{background:var(--ink);color:rgba(255,255,255,.66);padding:76px 0 0}
