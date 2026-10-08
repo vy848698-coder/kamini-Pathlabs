@@ -114,7 +114,7 @@ function email_shell(string $preheader, string $headerNote, string $body, string
          . '</table></td></tr></table></body></html>';
 }
 
-/* "Complete Blood Count, Lipid Profile — ₹900" as tags and a total */
+/* "Complete Blood Count, Lipid Profile — ₹700" as tags and a total */
 function email_tests(string $value): string
 {
     if (!preg_match('/^(.+?) — (₹[\d,]+)$/u', $value, $m)) return esc($value);
