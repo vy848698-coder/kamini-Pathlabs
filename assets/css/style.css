@@ -634,34 +634,41 @@ footer .brand{margin-bottom:18px}
 .fmade a:hover{color:var(--gold-soft);border-bottom-color:var(--gold-soft)}
 
 /* ================= PARTNER LABORATORIES =================
-   The marks arrived on three different grounds — three on white, Dr Lal on
-   yellow, Thyrocare on navy — so each is pre-set on a tile of its own colour
-   at one size. The tile is the artwork; the card around it only rounds the
-   corner and lifts it off the band.
+   Four words of caption and then the marks. An earlier pass gave this a
+   heading and a paragraph in a column down the left, which left the logos —
+   the only thing anyone actually reads here — squeezed into what was left.
 
-   The loop: the track holds four passes of the five marks and travels exactly
-   -25%, which is one pass, so the first frame and the last are identical and
-   the seam is invisible. Each item carries its own right margin rather than
+   The marks arrived on three different grounds: three on white, Dr Lal on
+   yellow, Thyrocare on navy. Each is pre-set on a tile of its own colour at
+   one size, so the row reads as a set rather than as five stray exports.
+
+   The loop: the track holds five passes of the five marks and travels exactly
+   -20%, which is one pass, so the first frame and the last are identical and
+   the seam is invisible. Five rather than four because the rail is full-bleed
+   now — four left it able to run dry at the end of a cycle past about 3060px. Each tile carries its own right margin rather than
    the track using gap — a gap would make one pass slightly narrower than a
    quarter of the track, and the row would creep out of register every cycle. */
-.labs{padding:30px 0;background:var(--paper);border-bottom:1px solid var(--line)}
-.labs-in{display:flex;align-items:center;gap:46px}
-.labs-lede{flex:none;width:272px}
-.labs-k{display:block;font-size:.62rem;font-weight:800;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--gold-2);margin-bottom:9px}
-.labs-lede h2{font-size:1.3rem;line-height:1.15;margin:0 0 7px}
-.labs-lede p{font-size:.76rem;color:var(--grey);line-height:1.6}
+.labs{padding:34px 0 36px;background:var(--paper);border-bottom:1px solid var(--line)}
 
-/* the marks fade at both ends rather than being chopped off by the overflow */
-.labs-rail{flex:1;min-width:0;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
-          mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+/* a rule either side of the caption, so four words still read as a section */
+.labs-k{display:flex;align-items:center;justify-content:center;gap:18px;
+  font-family:'Manrope',system-ui,sans-serif;font-size:.64rem;font-weight:800;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--grey-2);margin:0 0 26px}
+.labs-k::before,.labs-k::after{content:"";height:1px;flex:0 1 92px;min-width:28px;
+  background:linear-gradient(90deg,transparent,var(--line))}
+.labs-k::after{background:linear-gradient(90deg,var(--line),transparent)}
+
+/* full-bleed: the rail is a sibling of .wrap, not inside it, so the marks run
+   edge to edge and fade out instead of stopping at a container boundary */
+.labs-rail{overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .labs-track{display:flex;align-items:center;list-style:none;width:max-content;
-  animation:labsRun 26s linear infinite;will-change:transform}
+  animation:labsRun 30s linear infinite;will-change:transform}
 .labs-rail:hover .labs-track,.labs-rail:focus-within .labs-track{animation-play-state:paused}
-@keyframes labsRun{from{transform:translateX(0)}to{transform:translateX(-25%)}}
+@keyframes labsRun{from{transform:translateX(0)}to{transform:translateX(-20%)}}
 
-.labs-item{flex:none;width:176px;height:104px;margin-right:18px;border-radius:var(--r);
+.labs-item{flex:none;width:184px;height:109px;margin-right:20px;border-radius:var(--r);
   overflow:hidden;border:1px solid var(--line);background:var(--paper);
   box-shadow:0 8px 20px -16px rgba(7,34,32,.8);
   transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease)}
@@ -669,15 +676,10 @@ footer .brand{margin-bottom:18px}
 .labs-item:hover{transform:translateY(-3px);border-color:var(--teal-200);
   box-shadow:0 14px 28px -18px rgba(7,34,32,.95)}
 
-@media(max-width:900px){
-  .labs-in{flex-direction:column;align-items:flex-start;gap:20px}
-  .labs-lede{width:auto;max-width:46ch}
-  .labs-rail{width:100%}
-}
 @media(max-width:560px){
-  .labs{padding:24px 0}
-  .labs-item{width:150px;height:89px;margin-right:14px}
-  .labs-lede h2{font-size:1.16rem}
+  .labs{padding:26px 0 28px}
+  .labs-k{margin-bottom:20px;font-size:.6rem;letter-spacing:.18em}
+  .labs-item{width:152px;height:90px;margin-right:14px}
 }
 /* a rail that moves on its own is exactly what this setting is for */
 @media(prefers-reduced-motion:reduce){ .labs-track{animation:none} }
