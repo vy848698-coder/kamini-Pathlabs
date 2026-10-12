@@ -197,8 +197,12 @@
     return true;
   }
 
-  /* ---------- sending ---------- */
-  function post(url, data){
+  /* ---------- sending ----------
+     The host (BigRock) puts a bot screen in front of PHP: a first request
+     without its cookie gets a 409 and a one-line script that sets the cookie
+     and reloads. A page load passes that by itself; a fetch does not, so here
+     the cookie is set from that script and the request is sent once more. */
+  function post(url, data, again){
     var ctrl = window.AbortController ? new AbortController() : null;
     var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 20000) : null;
     return fetch(url, {
@@ -208,6 +212,15 @@
       credentials: "same-origin",
       signal: ctrl ? ctrl.signal : undefined
     }).then(function(r){
+      if (r.status === 409 && !again){
+        return r.text().then(function(t){
+          var m = /document\.cookie\s*=\s*["']([^"';]+)/.exec(t);
+          if (!m) return { status: 409 };
+          document.cookie = m[1] + "; path=/; SameSite=Lax";
+          if (timer) clearTimeout(timer);
+          return post(url, data, true);
+        });
+      }
       return r.json().catch(function(){ return {}; }).then(function(j){
         if (!j || typeof j !== "object") j = {};
         j.status = r.status;

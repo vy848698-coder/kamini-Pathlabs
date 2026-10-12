@@ -1,0 +1,49 @@
+# ==========================================================
+# KAMINI CLINIC & LABS — site-wide Apache rules
+# Read by Apache / LiteSpeed hosts (BigRock, cPanel). mail/ has
+# its own .htaccess on top of this, which keeps config.php private.
+# ==========================================================
+
+# No folder ever shows a list of its files.
+Options -Indexes
+
+# A missing page gets the site's own not-found page.
+ErrorDocument 404 /404.html
+
+# File types the server does not always know. Without a type a
+# browser downloads the file instead of opening it.
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+  AddType image/svg+xml .svg
+  AddType image/webp .webp
+  AddCharset utf-8 .html .css .js .svg .xml .txt .webmanifest
+</IfModule>
+
+# Project notes and hidden files are not part of the website:
+# README.md, .gitignore, .htaccess and the like are refused.
+<FilesMatch "(^\.|\.md$)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Version-control folders, should one ever be uploaded by mistake.
+<IfModule mod_alias.c>
+  RedirectMatch 404 /\.(git|svn|hg)(/|$)
+</IfModule>
+
+# Standard protective headers.
+#   nosniff         a file is only ever treated as the type it is sent as
+#   SAMEORIGIN      other sites cannot show these pages inside a frame
+#   Referrer-Policy other sites see only the domain a visitor came from
+#   Permissions     the site never asks for camera, microphone or location
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>

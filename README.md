@@ -20,6 +20,7 @@ kamini-Pathlabs/
 ├── favicon.svg                 Brand mark used as the tab icon
 ├── site.webmanifest            PWA / add-to-home-screen metadata
 ├── robots.txt                  Crawler rules
+├── .htaccess                   Apache rules: file types, 404 page, blocks notes/hidden files, security headers
 ├── sitemap.xml                 URL list for search engines
 ├── assets/
 │   ├── css/
@@ -200,7 +201,16 @@ Then open <http://localhost:8000>. Any static server (`npx serve .`,
 
 ## Deploying
 
-Upload the whole folder as-is. Then:
+Upload the site files, but **not** `.git/`, `README.md`, `Images/README.md`, `.gitignore`
+or the original photos in `Images/doctor/` (only `doctor-placeholder-square.svg` from there is
+used). The root `.htaccess` refuses notes and hidden files anyway, so a stray upload is not
+served — without it, a browser downloads them, because the server sends them with no type.
+
+BigRock puts a bot screen in front of PHP files: a request without its `humans_…` cookie gets
+a 409 and a script that sets the cookie. Page loads pass it on their own; `forms.js` reads the
+cookie from that reply and sends the form once more, so the forms work behind it.
+
+Then:
 
 1. Replace `https://kaminiclinicandlabs.in/` in the `<link rel="canonical">` tags,
    `robots.txt` and `sitemap.xml` with the real domain.
