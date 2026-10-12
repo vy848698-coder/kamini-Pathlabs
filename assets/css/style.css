@@ -1048,7 +1048,11 @@ footer .brand{margin-bottom:18px}
 .dphoto>*{position:relative;z-index:2}
 /* z-index above the monogram, so a photograph hides the placeholder on its own
    even where :has() below is unsupported */
-.dphoto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;
+/* the portraits are cropped to this frame already (a square, plus a 4:3 cut
+   served through <picture> once the frame turns 3:2 on phones), so the browser
+   only ever trims a sliver — taken mostly from below, to keep the head clear */
+.dphoto picture{display:contents}
+.dphoto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 10%;
   z-index:4;transition:transform .6s var(--ease)}
 .dc:hover .dphoto img{transform:scale(1.04)}
 /* the monogram sits in a disc ringed in paper, the way a portrait is mounted */

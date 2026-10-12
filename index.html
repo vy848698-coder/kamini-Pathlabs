@@ -614,9 +614,12 @@
       <article class="dc rv">
         <!-- Portrait supplied. -->
         <div class="dphoto">
-          <img src="Images/doctors/alok-das.jpg" width="900" height="675"
-               alt="Prof. Dr. Alok Das, consultant ENT surgeon at Kamini Clinic &amp; Labs"
-               loading="lazy" decoding="async" onerror="kFall(this,'lab')">
+          <picture>
+            <source media="(max-width:620px)" srcset="Images/doctors/alok-das.jpg" width="900" height="675">
+            <img src="Images/doctors/alok-das-sq.jpg" width="800" height="800"
+                 alt="Prof. Dr. Alok Das, consultant ENT surgeon at Kamini Clinic &amp; Labs"
+                 loading="lazy" decoding="async" onerror="kFall(this,'lab')">
+          </picture>
         </div>
         <div class="dbody">
           <span class="dtag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 20a3 3 0 0 1-3-3c0-2 1-3 1-6a6 6 0 0 1 12 0c0 4-3 5-4.5 7.5A2.5 2.5 0 0 1 8 20z"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4"/></svg>ENT</span>
@@ -633,9 +636,12 @@
       <article class="dc rv d1">
         <!-- Portrait supplied. -->
         <div class="dphoto">
-          <img src="Images/doctors/padmalaya-thakur.jpg" width="900" height="675"
-               alt="Prof. Dr. Padmalaya Thakur, gynaecologist and infertility specialist at Kamini Clinic &amp; Labs"
-               loading="lazy" decoding="async" onerror="kFall(this,'lab')">
+          <picture>
+            <source media="(max-width:620px)" srcset="Images/doctors/padmalaya-thakur.jpg" width="900" height="675">
+            <img src="Images/doctors/padmalaya-thakur-sq.jpg" width="800" height="800"
+                 alt="Prof. Dr. Padmalaya Thakur, gynaecologist and infertility specialist at Kamini Clinic &amp; Labs"
+                 loading="lazy" decoding="async" onerror="kFall(this,'lab')">
+          </picture>
         </div>
         <div class="dbody">
           <span class="dtag"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="4.5"/><path d="M12 13.5V21M9 18h6"/><path d="M7.5 6.5C5 5 3.5 6 3.5 8M16.5 6.5C19 5 20.5 6 20.5 8"/></svg>Gynaecology</span>
@@ -652,9 +658,12 @@
       <article class="dc rv d2">
         <!-- Portrait supplied. -->
         <div class="dphoto">
-          <img src="Images/doctors/tk-panda.jpg" width="900" height="675"
-               alt="Dr. T. K. Panda, consultant physician and diabetologist at Kamini Clinic &amp; Labs"
-               loading="lazy" decoding="async" onerror="kFall(this,'lab')">
+          <picture>
+            <source media="(max-width:620px)" srcset="Images/doctors/tk-panda.jpg" width="900" height="675">
+            <img src="Images/doctors/tk-panda-sq.jpg" width="800" height="800"
+                 alt="Dr. T. K. Panda, consultant physician and diabetologist at Kamini Clinic &amp; Labs"
+                 loading="lazy" decoding="async" onerror="kFall(this,'lab')">
+          </picture>
         </div>
         <div class="dbody">
           <span class="dtag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Medicine &amp; Diabetes</span>
@@ -669,11 +678,10 @@
       </article>
 
       <article class="dc rv d3">
-        <!-- Photograph: drop an <img> in as the first child of .dphoto and the
-             monogram steps aside on its own, exactly as on doctors.html. -->
+        <!-- Photograph to follow: the shared illustration stands in until then.
+             Swap the src for the portrait (and add -sq / <picture> as above). -->
         <div class="dphoto">
-          <span class="dpmono" aria-hidden="true">MN</span>
-          <span class="dpnote">Photograph to follow</span>
+          <img src="Images/doctor/doctor-placeholder-square.svg" width="1000" height="1000" alt="" loading="lazy" decoding="async">
         </div>
         <div class="dbody">
           <span class="dtag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c4 4 7 6.5 7 10a7 7 0 0 1-14 0c0-3.5 3-6 7-10z"/><path d="M9 14.5a3 3 0 0 0 3 3"/></svg>Dermatology</span>
@@ -688,11 +696,10 @@
       </article>
 
       <article class="dc rv">
-        <!-- Photograph: drop an <img> in as the first child of .dphoto and the
-             monogram steps aside on its own, exactly as on doctors.html. -->
+        <!-- Photograph to follow: the shared illustration stands in until then.
+             Swap the src for the portrait (and add -sq / <picture> as above). -->
         <div class="dphoto">
-          <span class="dpmono" aria-hidden="true">SS</span>
-          <span class="dpnote">Photograph to follow</span>
+          <img src="Images/doctor/doctor-placeholder-square.svg" width="1000" height="1000" alt="" loading="lazy" decoding="async">
         </div>
         <div class="dbody">
           <span class="dtag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c-3 0-4.5 2-4.5 4 0 1-1 1.4-1 3s1 2 1 3.2c0 2.3 2 4.3 4.5 4.3s4.5-2 4.5-4.3c0-1.2 1-1.6 1-3.2s-1-2-1-3c0-2-1.5-4-4.5-4z"/><path d="M12 3.5v14M9 8.5h6M9.5 13h5"/></svg>Neurology</span>
@@ -707,11 +714,10 @@
       </article>
 
       <article class="dc rv d1">
-        <!-- Photograph: drop an <img> in as the first child of .dphoto and the
-             monogram steps aside on its own, exactly as on doctors.html. -->
+        <!-- Photograph to follow: the shared illustration stands in until then.
+             Swap the src for the portrait (and add -sq / <picture> as above). -->
         <div class="dphoto">
-          <span class="dpmono" aria-hidden="true">DM</span>
-          <span class="dpnote">Photograph to follow</span>
+          <img src="Images/doctor/doctor-placeholder-square.svg" width="1000" height="1000" alt="" loading="lazy" decoding="async">
         </div>
         <div class="dbody">
           <span class="dtag"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3.1-6.5 7-6.5s7 2.5 7 6.5"/><path d="M10 7.5h.01M14 7.5h.01"/></svg>Paediatrics</span>
@@ -726,11 +732,10 @@
       </article>
 
       <article class="dc rv d2">
-        <!-- Photograph: drop an <img> in as the first child of .dphoto and the
-             monogram steps aside on its own, exactly as on doctors.html. -->
+        <!-- Photograph to follow: the shared illustration stands in until then.
+             Swap the src for the portrait (and add -sq / <picture> as above). -->
         <div class="dphoto">
-          <span class="dpmono" aria-hidden="true">AM</span>
-          <span class="dpnote">Photograph to follow</span>
+          <img src="Images/doctor/doctor-placeholder-square.svg" width="1000" height="1000" alt="" loading="lazy" decoding="async">
         </div>
         <div class="dbody">
           <span class="dtag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8c3-2 7-2 9 0 2-1.6 5-1.6 7 .4 0 6-4 10-8 11C7 18.6 4 14 4 8z"/><path d="M9 11c1.5 1 3 1.4 4.5 1"/></svg>Hepatology</span>
@@ -747,9 +752,12 @@
       <article class="dc rv d3">
         <!-- Portrait supplied. -->
         <div class="dphoto">
-          <img src="Images/doctors/yera-dhanurdhar.jpg" width="900" height="675"
-               alt="Dr. Yera Dhanurdhar, consultant in pulmonary medicine at Kamini Clinic &amp; Labs"
-               loading="lazy" decoding="async" onerror="kFall(this,'lab')">
+          <picture>
+            <source media="(max-width:620px)" srcset="Images/doctors/yera-dhanurdhar.jpg" width="900" height="675">
+            <img src="Images/doctors/yera-dhanurdhar-sq.jpg" width="800" height="800"
+                 alt="Dr. Yera Dhanurdhar, consultant in pulmonary medicine at Kamini Clinic &amp; Labs"
+                 loading="lazy" decoding="async" onerror="kFall(this,'lab')">
+          </picture>
         </div>
         <div class="dbody">
           <span class="dtag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v8"/><path d="M9.5 7.5C7 7.5 5 9.5 5 13c0 3 .5 5.5 1.5 6.5S9 20 9.5 18.5c.4-1.2.5-3 .5-5.5V7.5z"/><path d="M14.5 7.5c2.5 0 4.5 2 4.5 5.5 0 3-.5 5.5-1.5 6.5S15 20 14.5 18.5c-.4-1.2-.5-3-.5-5.5V7.5z"/></svg>Pulmonology</span>
@@ -764,11 +772,10 @@
       </article>
 
       <article class="dc rv">
-        <!-- Photograph: drop an <img> in as the first child of .dphoto and the
-             monogram steps aside on its own, exactly as on doctors.html. -->
+        <!-- Photograph to follow: the shared illustration stands in until then.
+             Swap the src for the portrait (and add -sq / <picture> as above). -->
         <div class="dphoto">
-          <span class="dpmono" aria-hidden="true">PM</span>
-          <span class="dpnote">Photograph to follow</span>
+          <img src="Images/doctor/doctor-placeholder-square.svg" width="1000" height="1000" alt="" loading="lazy" decoding="async">
         </div>
         <div class="dbody">
           <span class="dtag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5a2.2 2.2 0 0 0-3 3L16.5 20a2.2 2.2 0 0 0 3-3z"/><path d="M5.5 3a2 2 0 1 0-2 2M20.5 21a2 2 0 1 0 2-2"/></svg>Orthopaedics</span>
@@ -785,9 +792,12 @@
       <article class="dc rv d1">
         <!-- Portrait supplied. -->
         <div class="dphoto">
-          <img src="Images/doctors/suyash-bajoria.jpg" width="900" height="675"
-               alt="Dr. Suyash Bajoria, consultant urologist at Kamini Clinic &amp; Labs"
-               loading="lazy" decoding="async" onerror="kFall(this,'lab')">
+          <picture>
+            <source media="(max-width:620px)" srcset="Images/doctors/suyash-bajoria.jpg" width="900" height="675">
+            <img src="Images/doctors/suyash-bajoria-sq.jpg" width="800" height="800"
+                 alt="Dr. Suyash Bajoria, consultant urologist at Kamini Clinic &amp; Labs"
+                 loading="lazy" decoding="async" onerror="kFall(this,'lab')">
+          </picture>
         </div>
         <div class="dbody">
           <span class="dtag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 5.5 6 10a6 6 0 0 1-12 0c0-4.5 6-10 6-10z"/><path d="M9.5 14a2.5 2.5 0 0 0 2.5 2.5"/></svg>Urology</span>
@@ -799,11 +809,10 @@
       </article>
 
       <article class="dc rv d2">
-        <!-- Photograph: drop an <img> in as the first child of .dphoto and the
-             monogram steps aside on its own, exactly as on doctors.html. -->
+        <!-- Photograph to follow: the shared illustration stands in until then.
+             Swap the src for the portrait (and add -sq / <picture> as above). -->
         <div class="dphoto">
-          <span class="dpmono" aria-hidden="true">UC</span>
-          <span class="dpnote">Photograph to follow</span>
+          <img src="Images/doctor/doctor-placeholder-square.svg" width="1000" height="1000" alt="" loading="lazy" decoding="async">
         </div>
         <div class="dbody">
           <span class="dtag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 7.9-7 9-4-1.1-7-4.6-7-9V6z"/><path d="M12 9v6M9 12h6"/></svg>General Medicine</span>
