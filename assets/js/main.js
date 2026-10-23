@@ -302,6 +302,55 @@
 
   /* The booking form (#bform) is validated and sent by forms.js. */
 
+  /* ---- WhatsApp: arrive with the message already typed ----
+     wa.me pre-fills whatever comes in ?text=, so the visitor only has to
+     press send (WhatsApp never lets a website send on their behalf). The
+     page says what they are interested in — <body data-wa="..."> — and
+     whatever we already know about them goes underneath: a form they are
+     filling in right now, or failing that one they sent before (forms.js
+     keeps it as kVisitor). Nothing known, and it is just the greeting. */
+  var WA = "919861451521", WA_SEL = 'a[href^="https://wa.me/' + WA + '"]';
+  var waTopic = document.body.getAttribute("data-wa") || "your tests and services";
+
+  function waWho(){
+    var who = {};
+    try { who = JSON.parse(localStorage.getItem("kVisitor")) || {}; } catch (e) {}
+    ["name", "phone", "email"].forEach(function(k){
+      document.querySelectorAll('form [name="' + k + '"]').forEach(function(el){
+        if (el.value.trim()) who[k] = el.value.trim();
+      });
+    });
+    /* only what reads as real goes in: a half-typed number would just be noise */
+    var out = {}, name = String(who.name || "").replace(/\s+/g, " ").slice(0, 60),
+        tel = String(who.phone || "").replace(/\D/g, "").replace(/^(?:91|0)(?=\d{10}$)/, ""),
+        mail = String(who.email || "").trim();
+    if (/\p{L}/u.test(name)) out.name = name;
+    if (/^[6-9]\d{9}$/.test(tel)) out.phone = tel.slice(0, 5) + " " + tel.slice(5);
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) out.email = mail;
+    return out;
+  }
+
+  function waHref(){
+    var who = waWho(), lines = [];
+    if (who.name) lines.push("Name: " + who.name);
+    if (who.phone) lines.push("Phone: " + who.phone);
+    if (who.email) lines.push("Email: " + who.email);
+    var text = "Hello Kamini Clinic & Labs! I came across your website and I'm interested in " +
+               waTopic + ". Could you please share more details, or give me a call back?" +
+               (lines.length ? "\n\n" + lines.join("\n") : "") + "\n\nThank you.";
+    return "https://wa.me/" + WA + "?text=" + encodeURIComponent(text);
+  }
+
+  document.querySelectorAll(WA_SEL).forEach(function(a){ a.href = waHref(); });
+  /* rebuilt at the moment of the click, so details typed since the page
+     loaded make it in, and links added later (forms.js's error line) too */
+  function waClick(e){
+    var a = e.target.closest && e.target.closest(WA_SEL);
+    if (a) a.href = waHref();
+  }
+  document.addEventListener("click", waClick, true);
+  document.addEventListener("auxclick", waClick, true);
+
   /* ---- smooth anchors ---- */
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
     a.addEventListener("click", function(e){

@@ -236,7 +236,10 @@ function patient_email(string $name, string $pretty, bool $logo): array
            . '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"><tr><td align="center">'
            . email_buttons(
                  email_button('tel:+919861451521', '&#9742;&nbsp; Call +91 98614 51521', C_GOLD, C_INK, false, true),
-                 email_button('https://wa.me/919861451521', 'WhatsApp us', C_TEAL, '#ffffff', true, true),
+                 email_button('https://wa.me/919861451521?text=' . rawurlencode(
+                     "Hello Kamini Clinic & Labs! I just sent an enquiry on your website and would like to talk to you about it. "
+                     . "Could you please call me back?\n\nName: " . $name . "\nPhone: " . $pretty . "\n\nThank you."
+                 ), 'WhatsApp us', C_TEAL, '#ffffff', true, true),
                  true
              )
            . '</td></tr></table>';
