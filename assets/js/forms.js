@@ -301,6 +301,9 @@
 
       post(url, data).then(function(res){
         if (res.ok){
+          /* whichever form it was, the desk now has this visitor: the home
+             page's appointment pop-up reads this and stops asking */
+          try { localStorage.setItem("kFormSent", String(Date.now())); } catch (err) {}
           if (opts.done) opts.done(data);
           return;   /* the button stays spent: one request per visit is plenty */
         }

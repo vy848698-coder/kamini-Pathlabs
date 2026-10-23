@@ -162,13 +162,22 @@ with `'auto_reply' => false` in `config.php`. If the clinic's numbers, hours or 
 change, update them in `patient_email()` in `mail/templates.php` too.
 
 **The appointment pop-up.** `appointment.js` opens it three seconds after the home page
-loads. Step one is a single tap on what the visitor needs (stored in a hidden `reason`
-input); step two asks for name and mobile, with email and a short note optional. It waits
-while someone is typing in another form, has the mobile menu open or is on another tab, and
-does not open at all when the page is reached at `#contact`. Once closed it stays away for
-the rest of the browser session (`sessionStorage` key `kApptSeen`); once sent, for 30 days
-(`localStorage` key `kApptSent`). `DELAY` and `QUIET_DAYS` at the top of the file change
-both timings. Browsers without `<dialog>` never see it, and the booking form is still there.
+loads (never on other pages). Step one is a single tap on what the visitor needs (stored in
+a hidden `reason` input); step two asks for name and mobile, with email and a short note
+optional. When it opens by itself:
+
+- on every fresh visit to the home page, and on every refresh of it;
+- but not when the visitor closed it and is just moving around the site (home → about →
+  home) — `AWAY_HOURS` (3) must pass first;
+- at most `MAX_A_DAY` (3) times a day, so someone who keeps refreshing is left alone;
+- not for `QUIET_DAYS` (7) after any of the five forms was sent from that browser —
+  `forms.js` writes `kFormSent` to `localStorage` on every successful send;
+- not while someone is typing in another form, has the mobile menu open or is on another
+  tab, and not when the page is reached at `#contact`.
+
+On the home page the corner callback button opens it on demand. The settings are at the top
+of `appointment.js`; the record of when it last opened is the `kApptShown` key. Browsers
+without `<dialog>` never see it, and the booking form is still there.
 
 **Adding a form field:** give the input a `name`, then add that name to the form's list
 in `FORMS` at the top of `mail/send.php` (and to `FIELDS` with a label and rule). A field
