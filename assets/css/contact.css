@@ -294,6 +294,9 @@
   calc(10px + env(safe-area-inset-bottom));background:rgba(251,249,244,.94);
   backdrop-filter:blur(16px) saturate(1.5);border-top:1px solid var(--line)}
 .ct-bar .btn{flex:1;min-height:48px}
+/* Equal halves overflow a 320–340px phone: "Call the desk" alone needs more
+   than half. Below 380 each button takes its own width and the padding eases. */
+@media(max-width:380px){ .ct-bar .btn{flex:1 1 auto;padding:12px 14px;gap:8px} }
 
 /* ================= RESPONSIVE ================= */
 @media(max-width:1060px){

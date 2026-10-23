@@ -148,7 +148,7 @@
           (when.selectedIndex ? " (" + when.value + ")" : "");
         done.classList.add("show");
 
-        send.innerHTML = "Sent to the desk";
+        send.innerHTML = "Request received";
         send.style.opacity = ".7";
 
         setTimeout(function(){

@@ -41,7 +41,7 @@ const LOGO_PNG = __DIR__ . '/assets/logo-light.png';   /* the light logo, as a P
    fields in the order they should read in the email. A field that is
    not listed here is ignored, whatever the browser sends. */
 const FORMS = [
-    'home'        => ['title' => 'Callback request',        'page' => 'Home page',              'fields' => ['name', 'phone', 'time', 'service']],
+    'home'        => ['title' => 'Appointment request',     'page' => 'Home page',              'fields' => ['name', 'phone', 'time', 'service']],
     'doctors'     => ['title' => 'Consultation request',    'page' => 'Our Doctors page',       'fields' => ['name', 'phone', 'day', 'doctor']],
     'collection'  => ['title' => 'Home collection booking', 'page' => 'Home Collection page',   'fields' => ['name', 'phone', 'locality', 'day', 'slot', 'tests']],
     'contact'     => ['title' => 'Contact enquiry',         'page' => 'Contact page',           'fields' => ['name', 'phone', 'email', 'topic', 'when', 'message']],
