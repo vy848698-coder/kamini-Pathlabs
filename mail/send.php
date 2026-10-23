@@ -3,10 +3,11 @@
    KAMINI CLINIC & LABS — mail/send.php
    The one server-side file the site has. Every form posts here:
    the booking form on the home, doctors and home collection
-   pages, and the contact enquiry. It checks the details again
-   (assets/js/forms.js has already checked them in the browser,
-   but anyone can post here directly), then emails them to the
-   clinic over SMTP with PHPMailer.
+   pages, the contact enquiry and the home page's appointment
+   pop-up. It checks the details again (assets/js/forms.js has
+   already checked them in the browser, but anyone can post here
+   directly), then emails them to the clinic over SMTP with
+   PHPMailer.
 
    Two kinds of caller:
      - forms.js sends JSON and gets JSON back;
@@ -40,10 +41,11 @@ const LOGO_PNG = __DIR__ . '/assets/logo-light.png';   /* the light logo, as a P
    fields in the order they should read in the email. A field that is
    not listed here is ignored, whatever the browser sends. */
 const FORMS = [
-    'home'       => ['title' => 'Callback request',        'page' => 'Home page',              'fields' => ['name', 'phone', 'time', 'service']],
-    'doctors'    => ['title' => 'Consultation request',    'page' => 'Our Doctors page',       'fields' => ['name', 'phone', 'day', 'doctor']],
-    'collection' => ['title' => 'Home collection booking', 'page' => 'Home Collection page',   'fields' => ['name', 'phone', 'locality', 'day', 'slot', 'tests']],
-    'contact'    => ['title' => 'Contact enquiry',         'page' => 'Contact page',           'fields' => ['name', 'phone', 'email', 'topic', 'when', 'message']],
+    'home'        => ['title' => 'Callback request',        'page' => 'Home page',              'fields' => ['name', 'phone', 'time', 'service']],
+    'doctors'     => ['title' => 'Consultation request',    'page' => 'Our Doctors page',       'fields' => ['name', 'phone', 'day', 'doctor']],
+    'collection'  => ['title' => 'Home collection booking', 'page' => 'Home Collection page',   'fields' => ['name', 'phone', 'locality', 'day', 'slot', 'tests']],
+    'contact'     => ['title' => 'Contact enquiry',         'page' => 'Contact page',           'fields' => ['name', 'phone', 'email', 'topic', 'when', 'message']],
+    'appointment' => ['title' => 'Appointment request',     'page' => 'Home page pop-up',       'fields' => ['name', 'phone', 'email', 'reason', 'message']],
 ];
 
 /* How each field is checked, and what it is called in the email.
@@ -63,6 +65,7 @@ const FIELDS = [
     'slot'     => ['label' => 'Slot',             'rule' => 'choice'],
     'topic'    => ['label' => 'About',            'rule' => 'choice'],
     'when'     => ['label' => 'Best time to call', 'rule' => 'choice'],
+    'reason'   => ['label' => 'Visiting for',     'rule' => 'choice'],
 ];
 
 /* The same slips forms.js catches, for visitors without JavaScript. */

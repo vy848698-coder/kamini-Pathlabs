@@ -9,7 +9,7 @@ submissions to the clinic, so the host needs PHP 7.4 or newer.
 
 ```
 kamini-Pathlabs/
-├── index.html                  Home page (hero, programmes, tests, packages, FAQ, booking)
+├── index.html                  Home page (hero, programmes, tests, packages, FAQ, booking, appointment pop-up)
 ├── about.html                  About Us (story, timeline, values, quality, visit)
 ├── homecollection.html         Home sample collection (slot picker, test picker, coverage)
 ├── doctors.html                Our Doctors (panel, weekly OPD board, visit, on-site tests)
@@ -34,6 +34,7 @@ kamini-Pathlabs/
 │       ├── image-fallback.js   Inline-SVG placeholders when a photo fails to load
 │       ├── forms.js            Checks and sends every form (see "Forms and email")
 │       ├── main.js             All shared page behaviour (see below)
+│       ├── appointment.js      The home page's "Book an Appointment" pop-up (see "Forms and email")
 │       ├── homecollection.js   Slot picker, test picker and coverage checker
 │       ├── doctors.js          Today's board, week dials, filters and booking prefill
 │       └── contact.js          Desk status, week strip, enquiry thank-you, copy address
@@ -64,6 +65,7 @@ Every page loads the same core assets, in this order:
 | `assets/js/forms.js` | end of `<body>`, `defer`, pages with a form only | Before `main.js` and the page script, so `contact.js` can use `KForms` |
 | `assets/js/main.js` | end of `<body>`, `defer` | Runs after the DOM is parsed |
 | `assets/js/doctors.js` | after `main.js`, `defer` | Page-specific; `main.js` already owns the nav, reveals, rail and form |
+| `assets/js/appointment.js` | after `main.js`, `defer`, `index.html` only | Needs `KForms` from `forms.js` |
 
 `image-fallback.js` must stay a plain blocking script in the head. If it is deferred, a
 photo that fails early would call `kFall` before it exists and the layout would break.
@@ -116,7 +118,7 @@ changes, edit it in two places: the card's `data-sessions` (plus its `.dr-days` 
 
 ## Forms and email
 
-Four forms reach the desk, and all of them post to `mail/send.php`:
+Five forms reach the desk, and all of them post to `mail/send.php`:
 
 | Form | Page | `data-form` | Fields |
 | --- | --- | --- | --- |
@@ -124,6 +126,7 @@ Four forms reach the desk, and all of them post to `mail/send.php`:
 | `#bform` "Request a consultation" | `doctors.html` | `doctors` | name, phone, day, doctor |
 | `#bform` "Book a home visit" | `homecollection.html` | `collection` | name, phone, locality, day, slot, tests |
 | `#ctForm` "Tell us what you need" | `contact.html` | `contact` | name, phone, email, topic, when, message |
+| `#apForm` "Book an Appointment" pop-up | `index.html` | `appointment` | reason, name, phone, email, message |
 
 **The checks run twice, with the same rules** — in the browser (`assets/js/forms.js`) so
 the visitor is told straight away, and again in `mail/send.php` because anyone can post to
@@ -148,8 +151,8 @@ details stay in the form with the phone and WhatsApp numbers offered instead, an
 reason is written to the PHP error log. With JavaScript off, the forms still post to
 `send.php` and get a plain thank-you (or what-to-fix) page back.
 
-**Confirmation to the patient.** When a visitor gives an email address (only the contact
-form asks for one), they also get a short "we have your message" email with the callback
+**Confirmation to the patient.** When a visitor gives an email address (the contact form
+and the appointment pop-up ask for one), they also get a short "we have your message" email with the callback
 number they entered, the clinic's three numbers, hours and address. Because anyone can
 type anyone's address, it is built from fixed text plus the name and checked phone number
 only — never the message or menu choices — goes to each address at most once a day, and
@@ -157,6 +160,15 @@ is marked `Auto-Submitted` so out-of-office replies ignore it. It is sent after 
 clinic's copy; if it fails, that is logged and the visitor still sees success. Turn it off
 with `'auto_reply' => false` in `config.php`. If the clinic's numbers, hours or address
 change, update them in `patient_email()` in `mail/templates.php` too.
+
+**The appointment pop-up.** `appointment.js` opens it three seconds after the home page
+loads. Step one is a single tap on what the visitor needs (stored in a hidden `reason`
+input); step two asks for name and mobile, with email and a short note optional. It waits
+while someone is typing in another form, has the mobile menu open or is on another tab, and
+does not open at all when the page is reached at `#contact`. Once closed it stays away for
+the rest of the browser session (`sessionStorage` key `kApptSeen`); once sent, for 30 days
+(`localStorage` key `kApptSent`). `DELAY` and `QUIET_DAYS` at the top of the file change
+both timings. Browsers without `<dialog>` never see it, and the booking form is still there.
 
 **Adding a form field:** give the input a `name`, then add that name to the form's list
 in `FORMS` at the top of `mail/send.php` (and to `FIELDS` with a label and rule). A field

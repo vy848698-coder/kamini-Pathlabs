@@ -1,9 +1,10 @@
 /* ==========================================================
    KAMINI CLINIC & LABS — every form that reaches the desk
    One set of rules for the booking form (#bform, on the home,
-   doctors and home collection pages) and the contact enquiry
-   (#ctForm), so a number that is refused on one page is
-   refused on all of them.
+   doctors and home collection pages), the contact enquiry
+   (#ctForm) and the home page's appointment pop-up (#apForm),
+   so a number that is refused on one page is refused on all
+   of them.
 
    What a field is checked against comes from its `name`:
    name, phone, email, locality and message have rules; any

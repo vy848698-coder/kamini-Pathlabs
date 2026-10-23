@@ -31,7 +31,7 @@ a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 svg{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
-input,select{font-family:inherit}
+input,select,textarea{font-family:inherit}
 /* Every section measures itself against this, so widening the page at a
    given size is one line rather than fifteen. */
 .wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
@@ -535,9 +535,9 @@ footer .brand .wm span{color:var(--gold-soft)}
 .bform>p{font-size:.85rem;color:var(--grey);margin-bottom:22px}
 .fld{margin-bottom:15px}
 .fld label{display:block;font-size:.74rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--grey);margin-bottom:7px}
-.fld input,.fld select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:var(--r);font-size:.92rem;color:var(--ink);background:var(--ivory);transition:.25s;outline:none}
-.fld input:focus,.fld select:focus{border-color:var(--teal);background:var(--paper);box-shadow:0 0 0 4px rgba(13,71,68,.08)}
-.fld input.bad{border-color:var(--red);background:#fdf3f0}
+.fld input,.fld select,.fld textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:var(--r);font-size:.92rem;color:var(--ink);background:var(--ivory);transition:.25s;outline:none}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--teal);background:var(--paper);box-shadow:0 0 0 4px rgba(13,71,68,.08)}
+.fld input.bad,.fld textarea.bad{border-color:var(--red);background:#fdf3f0}
 .frow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:13px}
 .fmsg{margin-top:13px;font-size:.87rem;font-weight:700;color:var(--teal);display:flex;align-items:center;gap:8px}
 /* display:flex on the class outranks the UA's [hidden] rule, so the success
@@ -663,6 +663,119 @@ footer .brand{margin-bottom:18px}
   .advisor{left:14px;bottom:14px;width:50px;height:50px}
   .advisor svg{width:24px;height:24px}
 }
+
+/* ================= APPOINTMENT POP-UP ================= */
+/* ---------- the "Book an Appointment" dialog (index.html) ----------
+   A native <dialog>, so focus stays inside and Escape closes it for free.
+   The dialog itself is a transparent full-screen frame: the card sits in
+   it, and a press on the frame is a press on the backdrop. A centred card
+   on a desktop; on a phone a sheet that rises from the bottom edge.
+   appointment.js adds `.in` a frame after opening, so the card eases in. */
+html.ap-lock{overflow:hidden}
+.ap{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:24px;
+  border:0;background:transparent;color:var(--ink);overflow:hidden}
+.ap[open]{display:flex;align-items:center;justify-content:center}
+.ap::backdrop{background:rgba(7,34,32,.6);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+  opacity:0;transition:opacity .32s var(--ease)}
+.ap.in::backdrop{opacity:1}
+.ap-card{position:relative;display:grid;grid-template-columns:300px minmax(0,1fr);width:min(880px,100%);max-height:100%;
+  background:var(--paper);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg);
+  opacity:0;transform:translateY(18px) scale(.98);transition:opacity .32s var(--ease),transform .42s var(--ease)}
+.ap.in .ap-card{opacity:1;transform:none}
+
+.ap-x{position:absolute;top:14px;right:14px;z-index:3;width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;background:var(--ivory-2);color:var(--grey);transition:.25s var(--ease)}
+.ap-x:hover{background:var(--line);color:var(--ink)}
+.ap-x svg{width:16px;height:16px;stroke-width:2.2}
+.ap-x:focus-visible,.ap-chip:focus-visible,.ap-link:focus-visible,.ap-later:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* the teal side reuses the booking panel's ticks and call button */
+.ap-side{display:flex;flex-direction:column;padding:40px 30px 30px;color:#fff;
+  background:linear-gradient(160deg,var(--teal),var(--teal-900))}
+.ap-side h2{color:#fff;font-size:2.15rem;margin:16px 0 12px;outline:none}
+.ap-side p{color:rgba(255,255,255,.78);font-size:.9rem;line-height:1.6}
+.ap-side .bpts{gap:10px}
+.ap-side .bpts li{font-size:.86rem}
+.ap-side .bcall{margin-top:auto;padding-top:28px}
+.ap-side .bcall a{width:100%}
+
+.ap-form{display:flex;flex-direction:column;min-height:0;padding:34px 36px 22px;overflow-y:auto;overscroll-behavior:contain}
+.ap-prog{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-right:44px;
+  font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--grey-2)}
+.ap-prog b{color:var(--teal)}
+.ap-prog i{position:relative;flex:1;max-width:110px;height:3px;border-radius:3px;background:var(--line-2);overflow:hidden}
+.ap-prog i::after{content:"";position:absolute;inset:0 50% 0 0;background:var(--gold);transition:right .4s var(--ease)}
+.ap-form[data-step="2"] .ap-prog i::after{right:0}
+.ap-prog[hidden]{display:none}
+.ap-step h3,.ap-done h3{font-size:1.8rem;margin-bottom:6px;color:var(--teal);outline:none}
+.ap-step>p{font-size:.86rem;color:var(--grey);margin-bottom:20px}
+
+.ap-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ap-chip{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:12px;align-items:center;text-align:left;
+  padding:12px 13px;border:1.5px solid var(--line);border-radius:var(--r-lg);background:var(--ivory);transition:.25s var(--ease)}
+.ap-chip .ic{grid-row:1 / 3;width:38px;height:38px;border-radius:var(--r);display:grid;place-items:center;
+  background:var(--teal-50);color:var(--teal);transition:.25s var(--ease)}
+.ap-chip .ic svg{width:19px;height:19px}
+.ap-chip b{align-self:end;font-size:.9rem;font-weight:700;line-height:1.25;color:var(--ink)}
+.ap-chip small{align-self:start;font-size:.74rem;line-height:1.35;color:var(--grey-2)}
+.ap-chip:hover{border-color:var(--teal-200);background:var(--paper);transform:translateY(-1px)}
+.ap-chip:hover .ic,.ap-chip[aria-pressed="true"] .ic{background:var(--teal);color:#fff}
+.ap-chip[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-50)}
+
+.ap-picked{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.ap-picked b{padding:3px 11px;border-radius:999px;background:var(--teal-50);color:var(--teal);font-weight:700}
+.ap-link{font-size:.84rem;font-weight:800;color:var(--teal);text-decoration:underline;text-underline-offset:3px}
+.ap-form .fld textarea{resize:vertical;min-height:70px;line-height:1.55}
+.fld label .opt{font-weight:600;letter-spacing:0;text-transform:none;color:var(--grey-2)}
+.ap-form .btn-full{margin-top:4px}
+
+.ap-done{margin:auto 0;padding:24px 0 12px;text-align:center}
+.ap-done .tick{width:64px;height:64px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;
+  background:var(--teal-50);color:var(--teal)}
+.ap-done .tick svg{width:28px;height:28px;stroke-width:2.6}
+.ap-done p{max-width:36ch;margin:6px auto 24px;font-size:.92rem;color:var(--grey)}
+.ap-done p b{color:var(--ink);white-space:nowrap}
+
+.ap-foot{margin-top:auto;padding-top:16px;text-align:center}
+.ap-foot[hidden]{display:none}
+.ap-later{padding:6px 8px;font-size:.8rem;font-weight:700;color:var(--grey-2);text-decoration:underline;text-underline-offset:3px;transition:color .25s}
+.ap-later:hover{color:var(--teal)}
+
+/* a sheet on phones: the teal side shrinks to a heading band */
+@media(max-width:720px){
+  .ap{padding:0}
+  .ap[open]{align-items:flex-end}
+  .ap-card{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);width:100%;
+    max-height:92vh;max-height:92dvh;border-radius:20px 20px 0 0;transform:translateY(48px)}
+  .ap-side{padding:22px 64px 18px 20px}
+  .ap-side h2{font-size:1.55rem;margin:8px 0 0}
+  .ap-side p,.ap-side .bpts,.ap-side .bcall{display:none}
+  .ap-x{background:rgba(255,255,255,.14);color:#fff}
+  .ap-x:hover{background:rgba(255,255,255,.26);color:#fff}
+  .ap-form{padding:20px 20px calc(14px + env(safe-area-inset-bottom))}
+  .ap-step h3,.ap-done h3{font-size:1.5rem}
+  .ap-step>p{margin-bottom:16px}
+  .ap-chip{padding:11px;column-gap:10px}
+  .ap-chip .ic{width:34px;height:34px}
+}
+/* A narrow form column — a phone, or a tablet beside the teal side — puts
+   the icon above the words, so the label gets the chip's whole width
+   instead of wrapping beside it. Measured on the column, not the screen. */
+.ap-form{container:apform / inline-size}
+@container apform (max-width:440px){
+  .ap-chip{grid-template-columns:minmax(0,1fr);align-content:start;padding:12px}
+  .ap-chip .ic{grid-row:auto;width:32px;height:32px;margin-bottom:8px}
+  .ap-chip .ic svg{width:17px;height:17px}
+  .ap-chip b,.ap-chip small{align-self:auto}
+}
+@container apform (max-width:300px){ .ap-chip small{display:none} }
+/* short landscape phones: no room for the heading band */
+@media(max-height:480px) and (orientation:landscape){
+  .ap-side{display:none}
+  .ap-x{background:var(--ivory-2);color:var(--grey)}
+  .ap-card{grid-template-columns:minmax(0,1fr);max-height:100vh;max-height:100dvh;border-radius:0}
+}
+@media(pointer:coarse){ .ap-chip{min-height:58px} .ap-later,.ap-link{min-height:40px} }
 
 /* ---------- the design credit ---------- */
 .fmade{display:inline-flex;align-items:center;gap:6px}
@@ -941,7 +1054,7 @@ footer .brand{margin-bottom:18px}
 /* Inputs below 16px make iOS Safari zoom the page on focus and never zoom
    back out. Hold them at 16px wherever a touch keyboard is likely. */
 @media(max-width:900px){
-  .fld input,.fld select,.tsearch input{font-size:16px}
+  .fld input,.fld select,.fld textarea,.tsearch input{font-size:16px}
 }
 
 /* Touch targets: pointer-coarse devices need a real hit area, not just text. */
