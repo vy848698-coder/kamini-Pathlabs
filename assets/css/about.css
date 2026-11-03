@@ -32,12 +32,12 @@
 /* photo composition */
 .ab-mvis{position:relative}
 .ab-mgold{position:absolute;right:-20px;top:-20px;width:168px;height:168px;
-  border:1px solid rgba(201,162,75,.55);border-radius:var(--r-lg)}
+  border:1px solid rgba(245,184,0,.55);border-radius:var(--r-lg)}
 .ab-mframe{position:relative;z-index:1;border-radius:var(--r-xl);overflow:hidden;aspect-ratio:4/4.5;
   border:1px solid rgba(255,255,255,.14);box-shadow:var(--sh-lg)}
 .ab-mframe img{width:100%;height:100%;object-fit:cover;object-position:52% 42%}
 .ab-mframe::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(7,34,32,0) 42%,rgba(7,34,32,.68))}
+  background:linear-gradient(180deg,rgba(30,24,4,0) 42%,rgba(30,24,4,.68))}
 .ab-mcard{position:absolute;z-index:2;left:-28px;bottom:36px;display:flex;align-items:center;gap:13px;
   background:var(--paper);color:var(--ink);border-radius:var(--r-lg);padding:14px 20px 14px 16px;box-shadow:var(--sh-lg)}
 .ab-mcard .stars{display:block;color:var(--gold);font-size:.8rem;letter-spacing:.1em;line-height:1;margin-bottom:7px}
@@ -64,7 +64,7 @@
 /* ================= CHAPTER RAIL ================= */
 /* A second, page-local nav. It sticks just under the header (which settles at
    70px once stuck) and scrolls sideways on narrow screens. */
-.ab-chap{position:sticky;top:69px;z-index:120;background:rgba(251,249,244,.93);
+.ab-chap{position:sticky;top:69px;z-index:120;background:rgba(255,251,235,.93);
   backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid var(--line)}
 .ab-chap .wrap{display:flex;align-items:stretch;height:56px;overflow-x:auto;scrollbar-width:none;
   -ms-overflow-style:none;scroll-behavior:smooth}
@@ -125,14 +125,14 @@
 .ab-tspine::before{content:"";position:absolute;left:50%;top:8px;bottom:-30px;width:1px;
   background:var(--line);transform:translateX(-50%)}
 .ab-tspine i{position:absolute;left:50%;top:8px;bottom:-30px;width:1px;transform:translateX(-50%) scaleY(0);
-  transform-origin:top;background:linear-gradient(180deg,var(--gold),rgba(201,162,75,.18));
+  transform-origin:top;background:linear-gradient(180deg,var(--gold),rgba(245,184,0,.18));
   transition:transform .95s var(--ease) .12s}
 .ab-tli.in .ab-tspine i{transform:translateX(-50%) scaleY(1)}
 .ab-tli:last-child .ab-tspine::before,.ab-tli:last-child .ab-tspine i{bottom:auto;height:26px}
 .ab-tspine b{position:relative;z-index:1;width:13px;height:13px;margin-top:11px;border-radius:50%;
   background:var(--ivory-2);border:2px solid var(--gold);
   transition:background .5s var(--ease) .35s,box-shadow .5s var(--ease) .35s}
-.ab-tli.in .ab-tspine b{background:var(--gold);box-shadow:0 0 0 5px rgba(201,162,75,.16)}
+.ab-tli.in .ab-tspine b{background:var(--gold);box-shadow:0 0 0 5px rgba(245,184,0,.16)}
 
 .ab-tcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px 26px;
   transition:transform .38s var(--ease),box-shadow .38s var(--ease),border-color .38s var(--ease)}
@@ -144,7 +144,7 @@
 /* the closing item reads as "you are here" */
 .ab-tli.now .ab-tcard{background:var(--teal);border-color:var(--teal);color:#fff}
 .ab-tli.now .ab-tcard p{color:rgba(255,255,255,.74)}
-.ab-tli.now .ab-tcard .tag{background:rgba(201,162,75,.2);color:var(--gold-soft)}
+.ab-tli.now .ab-tcard .tag{background:rgba(245,184,0,.2);color:var(--gold-soft)}
 .ab-tli.now .ab-tyear b{color:var(--gold-2)}
 
 /* ================= VISION · MISSION · VALUES ================= */
@@ -167,7 +167,7 @@
 .ab-val{position:relative;display:grid;grid-template-columns:64px minmax(0,.95fr) minmax(0,1.15fr);
   gap:26px;align-items:center;padding:26px 18px 26px 8px;border-bottom:1px solid rgba(255,255,255,.13)}
 .ab-val::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .4s var(--ease);
-  background:linear-gradient(90deg,rgba(201,162,75,.13),rgba(201,162,75,0) 62%)}
+  background:linear-gradient(90deg,rgba(245,184,0,.13),rgba(245,184,0,0) 62%)}
 .ab-val:hover::before{opacity:1}
 .ab-val>*{position:relative;z-index:1}
 .ab-val .n{font-family:'Instrument Serif',Georgia,serif;font-size:1.75rem;line-height:1;color:var(--gold-soft);
@@ -205,8 +205,8 @@
 .ab-bt.dark:hover .ic{background:var(--gold);color:#2c2206}
 .ab-bt.dark .k{color:var(--gold-soft)}
 .ab-bt.dark .ab-btags li{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:#fff}
-.ab-bt.brass{background:var(--gold-pale);border-color:#eadfc2}
-.ab-bt.brass .ic{background:rgba(201,162,75,.2);color:var(--gold-2)}
+.ab-bt.brass{background:var(--gold-pale);border-color:#f3e0a6}
+.ab-bt.brass .ic{background:rgba(245,184,0,.2);color:var(--gold-2)}
 .ab-bt.brass:hover .ic{background:var(--gold-2);color:#fff}
 .ab-bt.photo{padding:0;min-height:210px}
 /* absolute rather than a flex child, so the photo fills the tile whatever
@@ -215,7 +215,7 @@
   transition:transform .8s var(--ease)}
 .ab-bt.photo:hover img{transform:scale(1.05)}
 .ab-bt.photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 26px 22px;color:#fff;
-  background:linear-gradient(0deg,rgba(7,34,32,.88),rgba(7,34,32,0))}
+  background:linear-gradient(0deg,rgba(30,24,4,.88),rgba(30,24,4,0))}
 .ab-bt.photo figcaption b{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.28rem;display:block}
 .ab-bt.photo figcaption span{font-size:.83rem;color:rgba(255,255,255,.76)}
 
@@ -278,7 +278,7 @@
 .ab-vrow dt{font-size:.65rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
   color:rgba(255,255,255,.45);margin-bottom:5px}
 .ab-vrow dd{font-size:.94rem;line-height:1.6;color:#fff}
-.ab-vrow dd a{color:#fff;border-bottom:1px solid rgba(201,162,75,.6);transition:.25s}
+.ab-vrow dd a{color:#fff;border-bottom:1px solid rgba(245,184,0,.6);transition:.25s}
 .ab-vrow dd a:hover{color:var(--gold-soft)}
 .ab-vrow dd em{font-style:normal;color:rgba(255,255,255,.62)}
 .ab-vhours{display:flex;justify-content:space-between;gap:14px;font-size:.88rem;margin-bottom:7px}
@@ -301,8 +301,8 @@
 /* ================= CLOSING CTA ================= */
 /* brass rather than teal — nothing else on the site closes on this colour,
    and it stops the page ending on two dark blocks in a row. */
-.ab-cta{padding:88px 0;background:linear-gradient(125deg,var(--gold-pale) 0%,#f9f3e4 55%,var(--ivory-2) 100%);
-  border-top:1px solid #eadfc2;text-align:center;position:relative;overflow:hidden}
+.ab-cta{padding:88px 0;background:linear-gradient(125deg,var(--gold-pale) 0%,#fff4d4 55%,var(--ivory-2) 100%);
+  border-top:1px solid #f3e0a6;text-align:center;position:relative;overflow:hidden}
 .ab-cta .wrap{position:relative;z-index:1}
 .ab-cta .slabel{justify-content:center}
 .ab-cta h2{font-size:clamp(1.9rem,4.6vw,3rem);margin:18px auto 14px;max-width:18ch}

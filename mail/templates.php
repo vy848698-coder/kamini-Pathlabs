@@ -18,19 +18,19 @@
 ========================================================== */
 declare(strict_types=1);
 
-const C_TEAL = '#0d4744';
-const C_TEAL_900 = '#072220';
-const C_TEAL_50 = '#eef5f2';
-const C_GOLD = '#c9a24b';
-const C_GOLD_2 = '#ab8639';
-const C_GOLD_PALE = '#f5ecd6';
-const C_INK = '#0b1a19';
-const C_GREY = '#55635f';
-const C_GREY_2 = '#8a9591';
-const C_LINE = '#e4dfd2';
-const C_LINE_2 = '#efebe0';
-const C_IVORY = '#fbf9f4';
-const C_IVORY_2 = '#f4f0e6';
+const C_TEAL = '#3d3007';
+const C_TEAL_900 = '#1e1804';
+const C_TEAL_50 = '#fdf4d7';
+const C_GOLD = '#f5b800';
+const C_GOLD_2 = '#a87b00';
+const C_GOLD_PALE = '#fff0c2';
+const C_INK = '#1c1909';
+const C_GREY = '#5e5741';
+const C_GREY_2 = '#948a6c';
+const C_LINE = '#efe2b8';
+const C_LINE_2 = '#f7eccb';
+const C_IVORY = '#fffbeb';
+const C_IVORY_2 = '#fdf3d3';
 
 const F_SANS = "'Manrope','Segoe UI',Roboto,Helvetica,Arial,sans-serif";
 const F_SERIF = "'Instrument Serif',Georgia,'Times New Roman',serif";
@@ -110,7 +110,7 @@ function email_shell(string $preheader, string $headerNote, string $body, string
          . '<tr><td class="px" style="padding:32px 32px 30px;font-family:' . F_SANS . ';color:' . C_INK . '">' . $body . '</td></tr>'
          /* footer */
          . '<tr><td class="px" bgcolor="' . C_TEAL_900 . '" style="background:' . C_TEAL_900 . ';padding:22px 32px;'
-         . 'font-family:' . F_SANS . ';font-size:12px;line-height:1.6;color:#a9bdb8">' . $footer . '</td></tr>'
+         . 'font-family:' . F_SANS . ';font-size:12px;line-height:1.6;color:#cbbf9c">' . $footer . '</td></tr>'
          . '</table></td></tr></table></body></html>';
 }
 
@@ -268,7 +268,7 @@ function patient_email(string $name, string $pretty, bool $logo): array
            . '<span style="font-family:' . F_SERIF . ';font-size:20px;color:' . C_TEAL . '">The front desk, Kamini Clinic &amp; Labs</span></p>';
 
     $footer = '<b style="color:#ffffff">Kamini Clinic &amp; Labs</b> &nbsp;·&nbsp; Jagamara, Khandagiri, Bhubaneswar<br>'
-            . '<span style="color:#7f9792">You are receiving this because this email address was entered on the contact form on our website. '
+            . '<span style="color:#a3987a">You are receiving this because this email address was entered on the contact form on our website. '
             . 'If that was not you, please ignore this message — we will not email you again.</span>';
 
     $html = email_shell('We will call you back on +91 ' . $pretty . ' — usually within 15 minutes.', '', $body, $footer, $logo);

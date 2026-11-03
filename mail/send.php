@@ -119,9 +119,9 @@ function respond(int $status, array $body): void
     echo '<!doctype html><html lang="en"><head><meta charset="utf-8">'
        . '<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">'
        . '<title>' . ($ok ? 'Request received' : 'Please check your details') . ' — Kamini Clinic &amp; Labs</title>'
-       . '<style>body{margin:0;background:#faf7f2;color:#0b1a19;font:16px/1.6 system-ui,sans-serif}'
-       . 'main{max-width:520px;margin:12vh auto;padding:0 20px}h1{color:#0d4744;font-size:1.5rem}'
-       . 'a{color:#0d4744;font-weight:700}</style></head><body><main>'
+       . '<style>body{margin:0;background:#fffaf0;color:#1c1909;font:16px/1.6 system-ui,sans-serif}'
+       . 'main{max-width:520px;margin:12vh auto;padding:0 20px}h1{color:#3d3007;font-size:1.5rem}'
+       . 'a{color:#3d3007;font-weight:700}</style></head><body><main>'
        . '<h1>' . ($ok ? 'Request received' : 'Please check your details') . '</h1>' . $html
        . '<p><a href="' . ($ok ? '../index.html' : $back) . '">' . ($ok ? 'Back to the website' : 'Go back to the form') . '</a></p>'
        . '</main></body></html>';

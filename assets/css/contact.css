@@ -23,7 +23,7 @@
 .ct-mast::before{content:"";position:absolute;right:-140px;top:-160px;width:760px;height:760px;
   border-radius:50%;pointer-events:none;
   background:repeating-radial-gradient(circle at center,
-    rgba(227,198,127,.085) 0 1px, transparent 1px 62px)}
+    rgba(255,212,71,.085) 0 1px, transparent 1px 62px)}
 .ct-mast .wrap{position:relative;z-index:2}
 .ct-mgrid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:58px;align-items:center}
 .ct-crumb{margin-bottom:20px}
@@ -86,7 +86,7 @@
 /* ================= CHAPTER RAIL =================
    Driven by main.js through #chap, like the about and doctors rails.
    Set on the teal band so the pages read as siblings. */
-.ct-chap{position:sticky;top:69px;z-index:120;background:rgba(7,34,32,.95);
+.ct-chap{position:sticky;top:69px;z-index:120;background:rgba(30,24,4,.95);
   backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.09)}
 .ct-chap .wrap{display:flex;align-items:stretch;height:56px;overflow-x:auto;scrollbar-width:none;
   -ms-overflow-style:none;scroll-behavior:smooth}
@@ -172,17 +172,17 @@
 /* the rail: drawn from each marker down to the next, so it stops cleanly
    at the last step instead of trailing into nothing */
 .ct-steps li::before{content:"";position:absolute;left:14px;top:30px;bottom:0;width:1px;
-  background:linear-gradient(rgba(227,198,127,.42),rgba(227,198,127,.06))}
+  background:linear-gradient(rgba(255,212,71,.42),rgba(255,212,71,.06))}
 .ct-steps li:last-child::before{display:none}
 .ct-steps li i{position:absolute;left:0;top:2px;width:29px;height:29px;border-radius:50%;
-  border:1px solid rgba(227,198,127,.45);background:rgba(227,198,127,.09);color:var(--gold-soft);
+  border:1px solid rgba(255,212,71,.45);background:rgba(255,212,71,.09);color:var(--gold-soft);
   display:grid;place-items:center;font-style:normal;font-size:.7rem;font-weight:800;letter-spacing:.04em}
 .ct-steps b{display:block;font-size:1rem;font-weight:800;color:#fff;letter-spacing:-.01em}
 .ct-steps p{margin-top:5px;font-size:.9rem;color:rgba(255,255,255,.68);line-height:1.65;max-width:42ch}
 .ct-wpriv{display:flex;align-items:flex-start;gap:11px;margin-top:30px;padding-top:24px;
   border-top:1px solid rgba(255,255,255,.12);font-size:.81rem;color:rgba(255,255,255,.6);line-height:1.65}
 .ct-wpriv svg{width:16px;height:16px;color:var(--gold-soft);flex:none;margin-top:3px}
-.ct-wpriv a{color:var(--gold-soft);font-weight:700;border-bottom:1px solid rgba(227,198,127,.4)}
+.ct-wpriv a{color:var(--gold-soft);font-weight:700;border-bottom:1px solid rgba(255,212,71,.4)}
 
 /* ---------- the note ---------- */
 .ct-form{position:relative;background:var(--paper);color:var(--ink);border-radius:var(--r-xl);
@@ -207,7 +207,7 @@
 /* background-COLOR, not the shorthand: the shorthand would drop the chevron
    the select draws with background-image the moment the field takes focus. */
 .ct-fld input:focus,.ct-fld select:focus,.ct-fld textarea:focus{border-color:var(--teal);
-  background-color:var(--paper);box-shadow:0 0 0 4px rgba(13,71,68,.08)}
+  background-color:var(--paper);box-shadow:0 0 0 4px rgba(61,48,7,.08)}
 .ct-fld input.bad,.ct-fld textarea.bad{border-color:var(--red);box-shadow:0 0 0 4px rgba(180,68,47,.08)}
 .ct-err{display:none;margin-top:6px;font-size:.75rem;font-weight:700;color:var(--red)}
 .ct-fld.err .ct-err{display:block}
@@ -234,9 +234,9 @@
   filter:saturate(.86) contrast(1.03)}
 /* a soft scrim under the card so white type on a pale map stays readable */
 .ct-mapwrap::after{content:"";position:absolute;left:0;bottom:0;width:min(560px,68%);height:100%;
-  pointer-events:none;background:linear-gradient(90deg,rgba(7,34,32,.42),transparent 88%)}
+  pointer-events:none;background:linear-gradient(90deg,rgba(30,24,4,.42),transparent 88%)}
 .ct-pin{position:absolute;left:32px;bottom:32px;z-index:3;width:min(430px,calc(100% - 64px));
-  background:rgba(7,34,32,.95);backdrop-filter:blur(14px) saturate(1.3);color:#fff;
+  background:rgba(30,24,4,.95);backdrop-filter:blur(14px) saturate(1.3);color:#fff;
   border:1px solid rgba(255,255,255,.13);border-radius:var(--r-lg);padding:26px 28px 24px;
   box-shadow:var(--sh-lg)}
 .ct-pin h3{font-size:1.5rem;color:#fff;margin:14px 0 14px}
@@ -266,7 +266,7 @@
   font-variant-numeric:tabular-nums}
 .ct-day em{display:block;margin-top:6px;font-style:normal;font-size:.62rem;font-weight:800;
   letter-spacing:.12em;text-transform:uppercase;color:transparent}
-.ct-day.today{border-color:var(--teal);background:var(--teal-50);box-shadow:0 0 0 3px rgba(13,71,68,.07)}
+.ct-day.today{border-color:var(--teal);background:var(--teal-50);box-shadow:0 0 0 3px rgba(61,48,7,.07)}
 .ct-day.today b{color:var(--teal)}
 .ct-day.today em{color:var(--gold-2)}
 
@@ -291,7 +291,7 @@
    This page replaces the site-wide floating button with the two things a
    contact page is actually for. Phones only. */
 .ct-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:140;gap:10px;padding:10px 14px
-  calc(10px + env(safe-area-inset-bottom));background:rgba(251,249,244,.94);
+  calc(10px + env(safe-area-inset-bottom));background:rgba(255,251,235,.94);
   backdrop-filter:blur(16px) saturate(1.5);border-top:1px solid var(--line)}
 .ct-bar .btn{flex:1;min-height:48px}
 /* Equal halves overflow a 320–340px phone: "Call the desk" alone needs more

@@ -17,7 +17,8 @@ kamini-Pathlabs/
 ├── privacy.html                Privacy Policy
 ├── terms.html                  Terms of Service
 ├── 404.html                    Not-found page
-├── favicon.svg                 Brand mark used as the tab icon
+├── favicon.png                 Brand mark used as the tab icon (48px)
+├── apple-touch-icon.png        Home-screen icon (180px, on cream)
 ├── site.webmanifest            PWA / add-to-home-screen metadata
 ├── robots.txt                  Crawler rules
 ├── .htaccess                   Apache rules: file types, 404 page, blocks notes/hidden files, security headers
@@ -48,6 +49,9 @@ kamini-Pathlabs/
 │   ├── lib/PHPMailer/          PHPMailer 7.1.1 (Exception, PHPMailer, SMTP + LICENSE)
 │   └── storage/                Rate-limit file (and test mail) — NOT in git, made by PHP
 └── Images/                     Local photography goes here
+    ├── brand/                  kamini-mark.png (the logo, used in every header/footer) and icon-192.png
+    ├── promo/                  kamini-offer.jpg — the offer poster shown in the appointment pop-up
+    └── doctors/thumb/          96px faces for the "In clinic today" board
 ```
 
 ## How the pages are wired
@@ -105,8 +109,11 @@ the on-site investigation list, the referral panel and its own FAQ.
 
 **One source of truth for timings.** Every clinic is declared once, on the roster card, as
 `data-sessions` — a small JSON array of `{d, s, e, t}` where `d` is the weekdays
-(0 = Sunday), `s` and `e` are minutes from midnight, and `t` is the label a patient reads.
-`doctors.js` reads those back to build the "In clinic today" board in the masthead, ring
+(0 = Sunday), `s` and `e` are minutes from midnight, and `t` is the label a patient reads. Leave out `s` and `e` when the hours are not fixed yet (e.g.
+`{"d": [2, 4, 6], "t": "Call for timing"}`): the board then shows "Call for timing" for that day.
+`doctors.js` reads those back to build the "In clinic today" board in the masthead (every
+consultant, grouped as sitting today / later this week / by appointment, each row linking to
+its card via the card's `id`; a card's optional `data-avatar` gives the row a face), ring
 today's letter on each week dial and drive the "Sitting today" filter, so the board can
 never disagree with the cards.
 
@@ -161,7 +168,10 @@ clinic's copy; if it fails, that is logged and the visitor still sees success. T
 with `'auto_reply' => false` in `config.php`. If the clinic's numbers, hours or address
 change, update them in `patient_email()` in `mail/templates.php` too.
 
-**The appointment pop-up.** `appointment.js` opens it three seconds after the home page
+**The appointment pop-up.** Its side panel shows the current offer poster
+(`Images/promo/kamini-offer.jpg`); on phones it is a thumbnail in the heading band, and a tap
+enlarges it over the card. To change the offer, replace that file and update the `alt` text and
+the band's caption in `index.html`. `appointment.js` opens the pop-up three seconds after the home page
 loads (never on other pages). Step one is a single tap on what the visitor needs (stored in
 a hidden `reason` input); step two asks for name and mobile, with email and a short note
 optional. When it opens by itself:

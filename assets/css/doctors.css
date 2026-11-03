@@ -49,64 +49,92 @@
 .dr-tt{display:flex;align-items:center;gap:10px}
 .dr-thead h2{font-size:1.4rem;color:var(--teal);margin:0}
 .dr-tdot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;position:relative}
-.dr-tdot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(201,162,75,.55);
+.dr-tdot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(245,184,0,.55);
   animation:drPulse 2.6s var(--ease) infinite}
 @keyframes drPulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.5);opacity:0}}
 .dr-tdate{margin-top:6px;font-size:.75rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
   color:var(--gold-2)}
 
-.dr-tlist{list-style:none;margin:6px 0 0}
-/* Each clinic is a slip rather than a table row: a monogram that matches the
-   consultant's card below, the hour set as a chip, then who and what. The
-   whole row is tinted by its state so the one running right now is the thing
-   the eye lands on first. */
-.dr-tlist li{position:relative;display:flex;align-items:center;gap:12px;
-  padding:11px 12px 11px 11px;margin-bottom:6px;border-radius:var(--r);
-  background:var(--ivory);border:1px solid var(--line-2);
-  transition:background-color .3s var(--ease),border-color .3s var(--ease)}
+.dr-tlist{list-style:none;margin:4px 0 0}
+/* The whole panel on one card: a compact row per consultant — face or
+   monogram, name over speciality, and on the right when they sit and the
+   state they are in. Rows are grouped (today / later this week / by
+   appointment) under small register headings, and the running clinic is
+   tinted so it is the first thing the eye lands on. */
+.dr-tgrp{display:flex;align-items:center;gap:8px;margin:14px 2px 6px;
+  font-size:.62rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--grey-2)}
+.dr-tgrp:first-child{margin-top:10px}
+.dr-tgrp span{flex:none}
+.dr-tgrp::after{content:"";flex:1;height:1px;background:var(--line-2)}
+.dr-tgrp i{order:3;flex:none;font-style:normal;min-width:20px;height:18px;padding:0 6px;border-radius:100px;
+  display:grid;place-items:center;background:var(--ivory-2);color:var(--gold-2);letter-spacing:0;font-size:.64rem}
+
+.dr-tlist li{position:relative;margin-bottom:4px}
 .dr-tlist li:last-child{margin-bottom:0}
+.dr-trow{display:flex;align-items:center;gap:11px;padding:7px 10px 7px 7px;border-radius:var(--r-lg);
+  background:var(--ivory);border:1px solid var(--line-2);color:inherit;
+  transition:background-color .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease)}
+.dr-trow:hover,.dr-trow:focus-visible{background:var(--paper);border-color:var(--gold-soft);transform:translateX(2px)}
+.dr-trow:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
 
-.dr-tmono{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
-  font-family:'Instrument Serif',Georgia,serif;font-size:.92rem;color:var(--teal);
-  background:var(--paper);box-shadow:inset 0 0 0 1px var(--teal-100)}
-
-/* the hour, stacked so the figure reads big without eating the row */
-.dr-tlist .tm{flex:none;width:52px;text-align:center;line-height:1}
-.dr-tlist .tm b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;
-  font-size:1.16rem;color:var(--gold-2);font-variant-numeric:tabular-nums}
-.dr-tlist .tm i{display:block;margin-top:3px;font-style:normal;font-size:.58rem;font-weight:800;
-  letter-spacing:.14em;color:var(--grey-2)}
+/* face where we have one, the card's monogram where we do not */
+.dr-tlist .av{flex:none;width:34px;height:34px;border-radius:50%;overflow:hidden;display:grid;place-items:center;
+  font-family:'Instrument Serif',Georgia,serif;font-size:.86rem;color:var(--teal);
+  background:var(--teal-50);box-shadow:inset 0 0 0 1px var(--teal-100)}
+.dr-tlist .av img{width:100%;height:100%;object-fit:cover}
 
 .dr-tlist .who{flex:1;min-width:0}
-.dr-tlist .who b{display:block;font-size:.88rem;font-weight:800;color:var(--ink);line-height:1.3}
-.dr-tlist .who .ql{display:block;font-size:.7rem;color:var(--grey);margin-top:3px;line-height:1.4}
-.dr-tlist .who .sp{display:block;font-size:.6rem;font-weight:800;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--gold-2);margin-top:4px}
+.dr-tlist .who b{display:block;font-size:.84rem;font-weight:800;color:var(--ink);line-height:1.25;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dr-tlist .who .sp{display:block;font-size:.58rem;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold-2);margin-top:3px;line-height:1.3;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* when, over the state chip */
+.dr-tlist .when{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px;text-align:right}
+.dr-tlist .tm{font-size:.74rem;font-weight:800;color:var(--ink);line-height:1.2;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
 
 /* ---------- the state chip ----------
    "Booking open" rather than "upcoming": a clinic that has not begun is the
    one a visitor can still get into, and the old wording read as an absence. */
-.dr-tlist .st{flex:none;display:inline-flex;align-items:center;gap:6px;
-  font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-  padding:5px 10px;border-radius:100px;border:1px solid var(--line);
-  color:var(--grey-2);background:var(--paper);white-space:nowrap}
-.dr-tlist .st i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.dr-tlist .st{display:inline-flex;align-items:center;gap:5px;
+  font-size:.55rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 8px;border-radius:100px;border:1px solid var(--line);
+  color:var(--grey-2);background:var(--paper);white-space:nowrap;line-height:1.3}
+.dr-tlist .st i{width:5px;height:5px;border-radius:50%;background:currentColor;flex:none}
 /* the label is an <em> for emphasis, not for slant */
 .dr-tlist .st em{font-style:normal}
 
-/* running now: solid gold, with a live ring so it reads as happening */
+/* running now: solid yellow, with a live ring so it reads as happening */
 .dr-tlist .st.now{background:var(--gold);border-color:var(--gold);color:#2c2206}
 .dr-tlist .st.now i{position:relative;background:#2c2206}
 .dr-tlist .st.now i::after{content:"";position:absolute;inset:-4px;border-radius:50%;
   border:1.5px solid rgba(44,34,6,.55);animation:drPulse 2.2s var(--ease) infinite}
-.dr-tlist li.is-now{background:var(--gold-pale);border-color:var(--gold-soft)}
+.dr-tlist li.is-now .dr-trow{background:var(--gold-pale);border-color:var(--gold-soft)}
 
 /* yet to start: green, because the answer to "can I see them" is yes */
 .dr-tlist .st.soon{border-color:rgba(47,158,109,.34);background:rgba(47,158,109,.09);color:#1f7d55}
 
 /* finished: stated plainly and played right down, so it never competes */
 .dr-tlist .st.done{color:var(--grey-2);background:var(--ivory-2)}
-.dr-tlist li.is-done{opacity:.6}
+.dr-tlist li.is-done .dr-trow{opacity:.62}
+.dr-tlist li.is-done .dr-trow:hover{opacity:1}
+
+/* sitting today but no hours fixed yet: a soft yellow "call for timing" */
+.dr-tlist .st.tbc,.dr-tlist .st.latertbc{border-color:var(--gold-soft);background:var(--gold-pale);color:var(--gold-2)}
+
+/* not today: quieter rows, the next day carries the information */
+.dr-tlist li.is-later .dr-trow,.dr-tlist li.is-latertbc .dr-trow,.dr-tlist li.is-appt .dr-trow{background:transparent;border-color:transparent}
+.dr-tlist li.is-later .dr-trow:hover,.dr-tlist li.is-latertbc .dr-trow:hover,.dr-tlist li.is-appt .dr-trow:hover{background:var(--ivory);border-color:var(--line-2)}
+.dr-tlist li.is-later .tm,.dr-tlist li.is-latertbc .tm,.dr-tlist li.is-appt .tm{color:var(--grey);font-weight:700}
+.dr-tlist .st.later,.dr-tlist .st.appt{border-color:transparent;background:transparent;padding-right:0}
+.dr-tlist .st.later i,.dr-tlist .st.appt i,.dr-tlist .st.tbc i,.dr-tlist .st.latertbc i{display:none}
+
+/* a row tapped on the board lights its card for a moment on arrival */
+.dr-card{scroll-margin-top:140px}
+.dr-card.dr-flash{animation:drFlash 1.8s var(--ease) .35s}
+@keyframes drFlash{0%,100%{box-shadow:0 0 0 0 rgba(245,184,0,0)}25%,60%{box-shadow:0 0 0 3px var(--gold)}}
 
 .dr-tempty{display:block !important;font-size:.88rem;color:var(--grey);padding:18px 2px !important;
   background:transparent !important;border:0 !important}
@@ -121,7 +149,7 @@
    Same behaviour as the about page rail (main.js drives both through
    #chap) but set on the teal band rather than ivory, so the two pages
    read as siblings instead of copies. */
-.dr-chap{position:sticky;top:69px;z-index:120;background:rgba(7,34,32,.95);
+.dr-chap{position:sticky;top:69px;z-index:120;background:rgba(30,24,4,.95);
   backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.09)}
 .dr-chap .wrap{display:flex;align-items:stretch;height:56px;overflow-x:auto;scrollbar-width:none;
   -ms-overflow-style:none;scroll-behavior:smooth}
@@ -193,7 +221,7 @@
 .dr-photo>*{position:relative;z-index:2}
 .dr-pmono{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;
   font-family:'Instrument Serif',Georgia,serif;font-size:1.62rem;letter-spacing:.02em;color:var(--teal);
-  background:var(--paper);box-shadow:inset 0 0 0 1px var(--teal-100),0 6px 20px -12px rgba(7,34,32,.7)}
+  background:var(--paper);box-shadow:inset 0 0 0 1px var(--teal-100),0 6px 20px -12px rgba(30,24,4,.7)}
 .dr-pnote{font-size:.6rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);
   opacity:.62}
 /* once an <img> is in the box the monogram and the caption step aside */
@@ -207,7 +235,7 @@
   background:linear-gradient(var(--teal-100) 1px,transparent 1px 2px,var(--teal-100) 2px)}
 .dr-mono{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
   font-family:'Instrument Serif',Georgia,serif;font-size:1.12rem;letter-spacing:.02em;color:var(--teal);
-  background:var(--teal-50);box-shadow:inset 0 0 0 1px var(--teal-100),0 0 0 3px rgba(216,235,229,.4)}
+  background:var(--teal-50);box-shadow:inset 0 0 0 1px var(--teal-100),0 0 0 3px rgba(250,230,166,.4)}
 .dr-cid{flex:1;min-width:0}
 .dr-cid h3{font-size:1.24rem;line-height:1.15}
 .dr-qual{font-size:.76rem;color:var(--grey);margin-top:5px;line-height:1.5}
@@ -285,9 +313,9 @@
 
 .dr-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.11);
   border:1px solid rgba(255,255,255,.11);border-radius:var(--r-lg);overflow:hidden}
-.dr-col{background:rgba(7,34,32,.86);padding:0 0 12px;display:flex;flex-direction:column;
+.dr-col{background:rgba(30,24,4,.86);padding:0 0 12px;display:flex;flex-direction:column;
   transition:background .35s var(--ease)}
-.dr-col:hover{background:rgba(13,71,68,.7)}
+.dr-col:hover{background:rgba(61,48,7,.7)}
 .dr-dhead{padding:15px 14px 13px;border-bottom:1px solid rgba(255,255,255,.1);position:relative}
 .dr-dhead b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.16rem;
   line-height:1;color:#fff}
@@ -303,7 +331,7 @@
 .dr-slip span{display:block;margin-top:3px;font-size:.68rem;color:rgba(255,255,255,.45);line-height:1.4}
 
 /* today's column, marked by doctors.js */
-.dr-col.today{background:rgba(13,71,68,.92);box-shadow:inset 0 3px 0 var(--gold)}
+.dr-col.today{background:rgba(61,48,7,.92);box-shadow:inset 0 3px 0 var(--gold)}
 .dr-col.today .dr-dhead b{color:var(--gold-soft)}
 .dr-col.today .dr-dhead span::after{content:" · today";color:var(--gold)}
 .dr-sun .dr-dhead b{color:rgba(255,255,255,.82)}
@@ -321,7 +349,7 @@
 .dr-vgrid{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:60px;align-items:start}
 .dr-vphoto{position:sticky;top:140px;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg)}
 .dr-vphoto img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:66% 44%}
-.dr-vstamp{position:absolute;left:20px;bottom:20px;max-width:78%;background:rgba(251,249,244,.94);
+.dr-vstamp{position:absolute;left:20px;bottom:20px;max-width:78%;background:rgba(255,251,235,.94);
   backdrop-filter:blur(10px);border-radius:var(--r);padding:14px 18px}
 .dr-vstamp b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.25rem;
   color:var(--teal);line-height:1}
@@ -424,7 +452,7 @@
   /* the board becomes one day at a time, chosen from the tab strip */
   .dr-wtabs{display:flex}
   .dr-week{grid-template-columns:1fr;background:transparent;border-color:rgba(255,255,255,.14)}
-  .dr-col{display:none;background:rgba(7,34,32,.75)}
+  .dr-col{display:none;background:rgba(30,24,4,.75)}
   .dr-col.show{display:flex}
   .dr-col:nth-child(n+5){border-top:0}
 }
@@ -445,12 +473,13 @@
   .dr-cbody{padding:20px 18px 18px}
   .dr-cfoot{flex-direction:column;align-items:flex-start;gap:12px}
   .dr-book{width:100%;justify-content:center}
-  .dr-tmono{display:none}
-  .dr-tlist .tm{width:46px}
-  .dr-tlist .tm b{font-size:1.04rem}
+  .dr-tlist .who .sp{letter-spacing:.06em}
+  .dr-trow{gap:9px;padding-right:8px}
 }
 @media(prefers-reduced-motion:reduce){
   .dr-tdot::after{animation:none;opacity:0}
+  .dr-card.dr-flash{animation:none}
+  .dr-trow,.dr-trow:hover{transition:none;transform:none}
   .dr-card,.dr-oc{transition:none}
   .dr-card:hover,.dr-oc:hover{transform:none}
 }

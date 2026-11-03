@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-90 20 980 980" width="1000" height="1000">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#EAF4EE"/>
+      <stop offset="0" stop-color="#fdf4d7"/>
       <stop offset="1" stop-color="#F7F3E6"/>
     </linearGradient>
     <linearGradient id="coatL" x1="0" y1="0" x2="1" y2="0">
@@ -28,7 +28,7 @@
       <stop offset="1" stop-color="#A06A4C"/>
     </linearGradient>
     <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#1E3A30" flood-opacity="0.16"/>
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#2e2406" flood-opacity="0.16"/>
     </filter>
     <filter id="tiny" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.22"/>
@@ -41,10 +41,10 @@
   <circle cx="400" cy="560" r="300" fill="#F2C94C" opacity="0.18"/>
   <!-- leaf motif -->
   <g opacity="0.55">
-    <path d="M95 300 C 60 200, 130 120, 230 110 C 235 210, 170 290, 95 300 Z" fill="#9CCBA8"/>
-    <path d="M95 300 C 140 230, 180 170, 228 115" stroke="#7DB38D" stroke-width="4" fill="none"/>
-    <path d="M705 300 C 740 200, 670 120, 570 110 C 565 210, 630 290, 705 300 Z" fill="#9CCBA8"/>
-    <path d="M705 300 C 660 230, 620 170, 572 115" stroke="#7DB38D" stroke-width="4" fill="none"/>
+    <path d="M95 300 C 60 200, 130 120, 230 110 C 235 210, 170 290, 95 300 Z" fill="#f3d67c"/>
+    <path d="M95 300 C 140 230, 180 170, 228 115" stroke="#e8c050" stroke-width="4" fill="none"/>
+    <path d="M705 300 C 740 200, 670 120, 570 110 C 565 210, 630 290, 705 300 Z" fill="#f3d67c"/>
+    <path d="M705 300 C 660 230, 620 170, 572 115" stroke="#e8c050" stroke-width="4" fill="none"/>
   </g>
 
   <g filter="url(#soft)" transform="translate(0 -70)">
@@ -77,8 +77,8 @@
     <circle cx="342" cy="860" r="9" fill="#E1E7EA" stroke="#C3CDD2" stroke-width="2"/>
 
     <!-- breast pocket (doctor's left) with pens -->
-    <rect x="590" y="505" width="14" height="80" rx="6" fill="#1F6B4F"/>
-    <rect x="590" y="505" width="14" height="14" rx="6" fill="#16503B"/>
+    <rect x="590" y="505" width="14" height="80" rx="6" fill="#8a6400"/>
+    <rect x="590" y="505" width="14" height="14" rx="6" fill="#6b4f00"/>
     <rect x="614" y="520" width="12" height="70" rx="5" fill="#E2B33A"/>
     <rect x="612" y="530" width="4" height="40" rx="2" fill="#B98C22"/>
     <path d="M565 560 L685 560 L680 670 Q625 680 570 670 Z" fill="#F3F6F7" stroke="#C9D3D8" stroke-width="3"/>
@@ -86,12 +86,12 @@
 
     <!-- ID badge (doctor's right) -->
     <g transform="translate(150 560) rotate(-3)">
-      <rect x="44" y="-38" width="12" height="44" rx="3" fill="#1F6B4F"/>
+      <rect x="44" y="-38" width="12" height="44" rx="3" fill="#8a6400"/>
       <rect x="0" y="0" width="100" height="130" rx="12" fill="#FFFFFF" stroke="#C9D3D8" stroke-width="3"/>
-      <rect x="0" y="0" width="100" height="36" rx="12" fill="#1F6B4F"/>
-      <rect x="0" y="22" width="100" height="14" fill="#1F6B4F"/>
-      <circle cx="50" cy="70" r="20" fill="#E8F2EC"/>
-      <path d="M50 58 L50 82 M38 70 L62 70" stroke="#1F6B4F" stroke-width="7" stroke-linecap="round"/>
+      <rect x="0" y="0" width="100" height="36" rx="12" fill="#8a6400"/>
+      <rect x="0" y="22" width="100" height="14" fill="#8a6400"/>
+      <circle cx="50" cy="70" r="20" fill="#fbf0d0"/>
+      <path d="M50 58 L50 82 M38 70 L62 70" stroke="#8a6400" stroke-width="7" stroke-linecap="round"/>
       <rect x="20" y="100" width="60" height="7" rx="3.5" fill="#D5DDE1"/>
       <rect x="30" y="112" width="40" height="6" rx="3" fill="#E4E9EC"/>
     </g>
@@ -99,18 +99,18 @@
     <!-- stethoscope tubing -->
     <g fill="none" stroke-linecap="round">
       <path d="M318 640 C 300 520, 300 340, 345 235 C 370 195, 430 195, 455 235 C 500 330, 520 440, 515 560"
-            stroke="#173F33" stroke-width="15"/>
+            stroke="#3d3007" stroke-width="15"/>
       <path d="M318 640 C 300 520, 300 340, 345 235 C 370 195, 430 195, 455 235 C 500 330, 520 440, 515 560"
-            stroke="#2E6B57" stroke-width="7" opacity="0.6"/>
+            stroke="#8a6a1a" stroke-width="7" opacity="0.6"/>
       <!-- Y split to earpieces -->
-      <path d="M515 560 C 510 610, 488 640, 480 700" stroke="#173F33" stroke-width="12"/>
-      <path d="M515 560 C 522 610, 548 640, 556 700" stroke="#173F33" stroke-width="12"/>
+      <path d="M515 560 C 510 610, 488 640, 480 700" stroke="#3d3007" stroke-width="12"/>
+      <path d="M515 560 C 522 610, 548 640, 556 700" stroke="#3d3007" stroke-width="12"/>
       <path d="M480 700 C 476 740, 472 760, 470 780" stroke="url(#metal)" stroke-width="7"/>
       <path d="M556 700 C 560 740, 566 760, 568 780" stroke="url(#metal)" stroke-width="7"/>
     </g>
     <rect x="505" y="548" width="20" height="26" rx="6" fill="url(#metal)"/>
-    <ellipse cx="470" cy="790" rx="11" ry="13" fill="#173F33"/>
-    <ellipse cx="568" cy="790" rx="11" ry="13" fill="#173F33"/>
+    <ellipse cx="470" cy="790" rx="11" ry="13" fill="#3d3007"/>
+    <ellipse cx="568" cy="790" rx="11" ry="13" fill="#3d3007"/>
 
     <!-- chest piece -->
     <g filter="url(#tiny)">

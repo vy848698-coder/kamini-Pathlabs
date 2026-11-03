@@ -147,6 +147,20 @@
     document.getElementById(id).addEventListener("click", shut);
   });
 
+  /* The offer poster: the side panel on a desktop, a thumbnail in the
+     heading band on a phone. A tap opens it over the whole card, so the
+     small print can be read; another tap puts it back. */
+  var offer = document.getElementById("apOffer");
+  function setOffer(on){
+    if (!offer) return;
+    offer.setAttribute("aria-expanded", on ? "true" : "false");
+    dlg.classList.toggle("ap-big", on);
+  }
+  if (offer) offer.addEventListener("click", function(){
+    setOffer(offer.getAttribute("aria-expanded") !== "true");
+  });
+  dlg.addEventListener("close", function(){ setOffer(false); });
+
   /* The corner callback button opens the pop-up here instead of jumping
      to the booking form — until it has been sent, when the link is back
      to doing what it does on every other page. */
@@ -216,16 +230,21 @@
     }
   });
 
-  /* ---------- opening by itself ---------- */
-  if (!wanted() || location.hash === "#contact") return;   /* came straight for the booking form */
+  /* ---------- opening by itself ----------
+     `?popup` in the address (index.html?popup) always opens it, ignoring
+     the daily limit and the quiet days — for checking the pop-up or the
+     offer poster without clearing the browser's storage. It is not
+     counted towards the visitor's three a day. */
+  var force = /[?&]popup\b/.test(location.search);
+  if (!force && (!wanted() || location.hash === "#contact")) return;   /* came straight for the booking form */
   var tries = 0;
   function attempt(){
-    if (dlg.open || !wanted()) return;
+    if (dlg.open || (!force && !wanted())) return;
     if (busy()){
       if (++tries < 20) setTimeout(attempt, 1500);
       return;
     }
-    open(true);
+    open(!force);
   }
   setTimeout(attempt, DELAY);
 })();

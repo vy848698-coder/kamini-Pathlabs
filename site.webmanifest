@@ -4,9 +4,10 @@
   "description": "Diagnostic centre in Jagamara, Bhubaneswar — blood tests, ECG, EEG, PFT and health checkup packages with free home sample collection.",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#fbf9f4",
-  "theme_color": "#0d4744",
+  "background_color": "#fffbeb",
+  "theme_color": "#1e1804",
   "icons": [
-    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    { "src": "Images/brand/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
   ]
 }
