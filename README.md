@@ -174,20 +174,18 @@ enlarges it over the card. To change the offer, replace that file and update the
 the band's caption in `home.html`. `appointment.js` opens the pop-up three seconds after the home page
 loads (never on other pages). Step one is a single tap on what the visitor needs (stored in
 a hidden `reason` input); step two asks for name and mobile, with email and a short note
-optional. When it opens by itself:
+optional. It opens by itself every time the home page is shown, for new and returning
+visitors alike — a first visit, a refresh, or coming back from another page (including with the
+Back button, when the browser restores the page from its back/forward cache). Nothing is counted
+or remembered between visits. It only holds off:
 
-- on every fresh visit to the home page, and on every refresh of it;
-- but not when the visitor closed it and is just moving around the site (home → about →
-  home) — `AWAY_HOURS` (3) must pass first;
-- at most `MAX_A_DAY` (3) times a day, so someone who keeps refreshing is left alone;
-- not for `QUIET_DAYS` (7) after any of the five forms was sent from that browser —
-  `forms.js` writes `kFormSent` to `localStorage` on every successful send;
-- not while someone is typing in another form, has the mobile menu open or is on another
-  tab, and not when the page is reached at `#contact`.
+- while someone is typing in another form, has the mobile menu open or is on another tab (it
+  tries again every 1.5 s, for about half a minute);
+- when the page is reached at `#contact`, a link straight to the booking form.
 
-On the home page the corner callback button opens it on demand. The settings are at the top
-of `appointment.js`; the record of when it last opened is the `kApptShown` key. Browsers
-without `<dialog>` never see it, and the booking form is still there.
+On the home page the corner callback button opens it on demand, and `home.html?popup` always
+opens it, for checking. The delay is `DELAY` at the top of `appointment.js`. Browsers without
+`<dialog>` never see it, and the booking form is still there.
 
 **Adding a form field:** give the input a `name`, then add that name to the form's list
 in `FORMS` at the top of `mail/send.php` (and to `FIELDS` with a label and rule). A field

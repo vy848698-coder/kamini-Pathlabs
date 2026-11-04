@@ -5,16 +5,12 @@
    (data-form="appointment"); this file owns when it opens, the
    steps and the thank-you.
 
-   When it opens by itself, three seconds after the page loads:
-   - on every fresh visit to the home page;
-   - on a refresh of the home page, even just after closing it;
-   - but NOT when the visitor closed it and is now just moving
-     around the site (home → about → home) — that is someone
-     browsing, and AWAY_HOURS must pass first;
-   - at most MAX_A_DAY times a day, so a visitor who keeps
-     refreshing and closing it is left alone until tomorrow;
-   - and not for QUIET_DAYS once ANY form on the site has been
-     sent from this browser: the desk already has them.
+   It opens by itself three seconds after the home page is shown —
+   every time, for new and returning visitors alike: a first visit,
+   a refresh, or coming back from another page (Back button too).
+   Nothing is counted or remembered between visits. It only holds
+   off while the visitor is busy (typing, menu open, other tab), and
+   when they followed a link straight to the booking form.
    The corner callback button opens it on demand at any time.
 ========================================================== */
 (function(){
@@ -24,10 +20,6 @@
   if (!dlg || typeof dlg.showModal !== "function" || !window.KForms) return;
 
   var DELAY = 3000;
-  var AWAY_HOURS = 3;
-  var MAX_A_DAY = 3;
-  var QUIET_DAYS = 7;
-  var SHOWN = "kApptShown", SENT = "kFormSent";   /* SENT is written by forms.js */
 
   var rm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine = window.matchMedia("(pointer: fine)").matches;
@@ -38,31 +30,6 @@
   var chips = [].slice.call(form.querySelectorAll(".ap-chip"));
   var done = document.getElementById("apDone");
   var lastFocus = null, closing = false;
-
-  /* Storage can be off (private windows, blocked site data). Then every
-     visit counts as the first, which is the safe way round. */
-  function get(key){ try { return localStorage.getItem(key); } catch (e) { return null; } }
-  function put(key, v){ try { localStorage.setItem(key, v); } catch (e) {} }
-  function today(){ return new Date().toDateString(); }
-
-  /* { at: when it last opened by itself, day: that day, n: times that day } */
-  function shown(){
-    try { return JSON.parse(get(SHOWN)) || {}; } catch (e) { return {}; }
-  }
-
-  function reloaded(){
-    var nav = window.performance && performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
-    if (nav) return nav.type === "reload";
-    return !!(window.performance && performance.navigation && performance.navigation.type === 1);
-  }
-
-  function wanted(){
-    if (Date.now() - (+get(SENT) || 0) < QUIET_DAYS * 864e5) return false;
-    var s = shown();
-    if (!s.at) return true;
-    if (s.day === today() && s.n >= MAX_A_DAY) return false;
-    return reloaded() || Date.now() - s.at > AWAY_HOURS * 36e5;
-  }
 
   /* Never interrupt: not while they are typing into the booking form,
      not with the mobile menu open, not in a background tab. */
@@ -96,7 +63,7 @@
   form.addEventListener("focusin", function(){ setTimeout(fit, 300); });
 
   /* ---------- opening and closing ---------- */
-  function open(auto){
+  function open(){
     if (dlg.open) return;
     lastFocus = document.activeElement;
     /* the page behind stops scrolling; pad for the vanished scrollbar so
@@ -106,10 +73,6 @@
     if (gap > 0) root.style.paddingRight = gap + "px";
     dlg.showModal();
     fit();
-    if (auto){
-      var s = shown(), d = today();
-      put(SHOWN, JSON.stringify({ at: Date.now(), day: d, n: (s.day === d ? s.n || 0 : 0) + 1 }));
-    }
     requestAnimationFrame(function(){
       requestAnimationFrame(function(){ dlg.classList.add("in"); });
     });
@@ -174,7 +137,7 @@
     advisor.addEventListener("click", function(e){
       if (form.getAttribute("data-step") === "done") return;
       e.preventDefault();
-      open(false);
+      open();
     });
   }
 
@@ -236,20 +199,34 @@
   });
 
   /* ---------- opening by itself ----------
-     `?popup` in the address (home.html?popup) always opens it, ignoring
-     the daily limit and the quiet days — for checking the pop-up or the
-     offer poster without clearing the browser's storage. It is not
-     counted towards the visitor's three a day. */
+     Every time the home page is shown, however often. The one exception
+     is a visitor who followed a link straight to the booking form
+     (home.html#contact): the form they came for is already in front of
+     them. `?popup` in the address (home.html?popup) opens it even then. */
   var force = /[?&]popup\b/.test(location.search);
-  if (!force && (!wanted() || location.hash === "#contact")) return;   /* came straight for the booking form */
-  var tries = 0;
+  var tries = 0, timer = null;
   function attempt(){
-    if (dlg.open || (!force && !wanted())) return;
+    timer = null;
+    if (dlg.open) return;
     if (busy()){
-      if (++tries < 20) setTimeout(attempt, 1500);
+      if (++tries < 20) timer = setTimeout(attempt, 1500);
       return;
     }
-    open(!force);
+    open();
   }
-  setTimeout(attempt, DELAY);
+  function schedule(){
+    if (!force && location.hash === "#contact") return;
+    tries = 0;
+    clearTimeout(timer);
+    timer = setTimeout(attempt, DELAY);
+  }
+  schedule();
+  /* Coming back with the Back button, a browser often shows the page
+     exactly as it was left (the back/forward cache) instead of loading
+     it again, so nothing above would run. It says so with pageshow.
+     If they sent the pop-up on this very page, it stays on its
+     thank-you; a fresh load of the page starts over anyway. */
+  window.addEventListener("pageshow", function(e){
+    if (e.persisted && form.getAttribute("data-step") !== "done") schedule();
+  });
 })();

@@ -301,10 +301,7 @@
 
       post(url, data).then(function(res){
         if (res.ok){
-          /* whichever form it was, the desk now has this visitor: the home
-             page's appointment pop-up reads this and stops asking */
-          try { localStorage.setItem("kFormSent", String(Date.now())); } catch (err) {}
-          /* and main.js puts these under the WhatsApp greeting from now on;
+          /* main.js puts these under the WhatsApp greeting from now on;
              a form without an email keeps the one an earlier form gave */
           try {
             var who = JSON.parse(localStorage.getItem("kVisitor")) || {};
