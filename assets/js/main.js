@@ -269,11 +269,16 @@
   }
   chapSpy();
 
-  /* How much sticky chrome an anchor has to clear: the header (72 has always
-     been the right number for it), plus the chapter rail on pages that have
-     one. Without this the about page would drop each section under its rail. */
+  /* The header's settled height, as style.css sets it (--nav-h). */
+  function navH(){
+    return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 78;
+  }
+
+  /* How much sticky chrome an anchor has to clear: the settled header (and
+     two pixels), plus the chapter rail on pages that have one. Without this
+     the about page would drop each section under its rail. */
   function stickyTop(){
-    return 72 + (chap ? chap.offsetHeight : 0);
+    return navH() + 2 + (chap ? chap.offsetHeight : 0);
   }
 
   /* ---- FAQ ---- */
@@ -360,10 +365,10 @@
       if (!t) return;
       e.preventDefault();
       var y = t.getBoundingClientRect().top + window.scrollY - stickyTop();
-      /* The header is in the flow and settles to 70px once stuck, so a jump
+      /* The header is in the flow and settles to --nav-h once stuck, so a jump
          from the top of the page pulls everything up by the difference on
          the way down. Allow for it, or the target lands under the rail. */
-      if (y > 10) y -= nav.firstElementChild.firstElementChild.offsetHeight - 70;
+      if (y > 10) y -= nav.firstElementChild.firstElementChild.offsetHeight - navH();
       window.scrollTo({ top: y, behavior: rm ? "auto":"smooth" });
     });
   });

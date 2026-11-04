@@ -7,6 +7,11 @@
    Type: Instrument Serif (display) + Manrope (UI)
 ========================================================== */
 :root{
+  /* The header's height, set once. --nav-h is the bar once the page has
+     scrolled (and on phones); --nav-top is the taller bar at the very top of
+     a desktop page. Everything that has to clear the header — the chapter
+     rails, anchor offsets, main.js, homecollection.js — reads --nav-h. */
+  --nav-h:78px; --nav-top:92px;
   --ink:#1c1909; --teal:#3d3007; --teal-2:#2e2406; --teal-900:#1e1804;
   --teal-50:#fdf4d7; --teal-100:#fae6a6; --teal-200:#f3d67c;
   --gold:#f5b800; --gold-2:#a87b00; --gold-soft:#ffd447; --gold-pale:#fff0c2;
@@ -81,16 +86,21 @@ section{position:relative}
 /* Brand, then the links anchored to it, and the actions pushed to the far
    right. Space-between used to leave the six links adrift in the middle of
    a 130px void once the phone block dropped out at 1280. */
-#nav nav{display:flex;align-items:center;height:82px;transition:height .4s var(--ease)}
-#nav.stuck nav{height:70px}
-.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
-.brand .mark{width:47px;height:47px;flex-shrink:0;transition:.45s var(--spring)}
+#nav nav{display:flex;align-items:center;height:var(--nav-top);transition:height .4s var(--ease)}
+#nav.stuck nav{height:var(--nav-h)}
+.brand{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.brand .mark{width:58px;height:58px;flex-shrink:0;transition:.45s var(--spring)}
 .brand:hover .mark{transform:rotate(-6deg) scale(1.04)}
 .brand .wm{display:flex;flex-direction:column;line-height:1}
-.brand .wm b{font-family:'Instrument Serif',serif;font-weight:400;font-size:1.46rem;color:var(--ink)}
-.brand .wm span{font-size:.55rem;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-2);margin-top:4px;white-space:nowrap}
+.brand .wm b{font-family:'Instrument Serif',serif;font-weight:400;font-size:1.72rem;color:var(--ink)}
+.brand .wm span{font-size:.63rem;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-2);margin-top:5px;white-space:nowrap}
 footer .brand .wm b{color:#fff}
 footer .brand .wm span{color:var(--gold-soft)}
+/* the footer has the room for a larger mark than the header */
+footer .brand{gap:16px}
+footer .brand .mark{width:68px;height:68px}
+footer .brand .wm b{font-size:2rem}
+footer .brand .wm span{font-size:.7rem}
 /* The spacing lives in the links' own padding, not in a gap between bare
    words, so the row reads as one navigational object and each item has a
    hit area worth the name. */
@@ -262,7 +272,7 @@ footer .brand .wm span{color:var(--gold-soft)}
 /* ================= CHAPTER RAIL =================
    The home page's copy of the inner pages' rail (main.js drives them all
    through #chap), on the teal band so it runs on from the hero. */
-.hm-chap{position:sticky;top:69px;z-index:120;background:rgba(30,24,4,.95);
+.hm-chap{position:sticky;top:calc(var(--nav-h) - 1px);z-index:120;background:rgba(30,24,4,.95);
   backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.09)}
 .hm-chap .wrap{display:flex;align-items:stretch;height:56px;overflow-x:auto;scrollbar-width:none;
   -ms-overflow-style:none;scroll-behavior:smooth}
@@ -279,7 +289,7 @@ footer .brand .wm span{color:var(--gold-soft)}
 .hm-chap a:first-child.on::after{left:0}
 .hm-chap a:focus-visible{outline:2px solid var(--gold);outline-offset:-6px;border-radius:4px}
 /* a section reached by a hash link lands below the header and the rail */
-.hm-chap ~ section[id],#onsite{scroll-margin-top:140px}
+.hm-chap ~ section[id],#onsite{scroll-margin-top:calc(var(--nav-h) + 70px)}
 
 /* ================= PROMO BANNER CAROUSEL ================= */
 .promo{padding:70px 0 0}
@@ -1039,13 +1049,13 @@ html.ap-lock{overflow:hidden}
   .promo{padding-top:56px}
   .hm-chap .wrap{height:50px}
   .hm-chap a{font-size:.77rem;padding:0 13px}
-  .hm-chap ~ section[id],#onsite{scroll-margin-top:126px}
+  .hm-chap ~ section[id],#onsite{scroll-margin-top:calc(var(--nav-h) + 56px)}
   .progs,.conc,.tests,.pk,.proc,.rev,.faq,.qual,.chain{padding:66px 0}
   .book{padding-bottom:66px}
   .nact .btn{display:none}
-  #nav nav{gap:12px;height:70px}
-  .brand .mark{width:48px;height:48px}
-  .brand .wm b{font-size:1.7rem}
+  #nav nav{gap:12px;height:var(--nav-h)}
+  .brand .mark{width:54px;height:54px}
+  .brand .wm b{font-size:1.74rem}
   .tgrid{grid-template-columns:1fr 1fr}
   .cgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
   .pgrid6{grid-template-columns:1fr 1fr}
@@ -1112,7 +1122,7 @@ html.ap-lock{overflow:hidden}
 @media(max-width:400px){
   /* brand + burger must fit one row */
   #nav nav{gap:8px}
-  .brand .mark{width:46px;height:46px}
+  .brand .mark{width:50px;height:50px}
   .brand .wm b{font-size:1.62rem}
   .brand .wm span{font-size:.6rem}
 }
@@ -1120,7 +1130,7 @@ html.ap-lock{overflow:hidden}
 @media(max-width:340px){
   .brand .wm b{font-size:1.48rem}
   .brand .wm span{font-size:.56rem}
-  .brand .mark{width:42px;height:42px}
+  .brand .mark{width:46px;height:46px}
   .burger{padding:7px}
 }
 @media(max-width:360px){
@@ -1154,7 +1164,8 @@ html.ap-lock{overflow:hidden}
 @media(max-height:480px) and (orientation:landscape){
   .hero{padding:26px 0 34px}
   .progs,.conc,.tests,.pk,.proc,.rev,.faq,.qual,.chain{padding:48px 0}
-  #nav nav{height:58px}
+  :root{--nav-h:62px;--nav-top:62px}
+  .brand .mark{width:46px;height:46px}
   .advisor,.wapp{display:none}
 }
 

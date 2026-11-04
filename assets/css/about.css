@@ -64,7 +64,7 @@
 /* ================= CHAPTER RAIL ================= */
 /* A second, page-local nav. It sticks just under the header (which settles at
    70px once stuck) and scrolls sideways on narrow screens. */
-.ab-chap{position:sticky;top:69px;z-index:120;background:rgba(255,251,235,.93);
+.ab-chap{position:sticky;top:calc(var(--nav-h) - 1px);z-index:120;background:rgba(255,251,235,.93);
   backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid var(--line)}
 .ab-chap .wrap{display:flex;align-items:stretch;height:56px;overflow-x:auto;scrollbar-width:none;
   -ms-overflow-style:none;scroll-behavior:smooth}
@@ -83,7 +83,7 @@
 .ab-chap a:focus-visible{outline:2px solid var(--gold);outline-offset:-6px;border-radius:4px}
 
 /* every section lands below the sticky header + rail when jumped to */
-.ab-anchor{scroll-margin-top:132px}
+.ab-anchor{scroll-margin-top:calc(var(--nav-h) + 62px)}
 
 /* ================= STORY ================= */
 .ab-story{padding:104px 0;background:var(--ivory)}
@@ -347,7 +347,7 @@
   .ab-st{padding:22px 20px}
   .ab-chap .wrap{height:50px}
   .ab-chap a{font-size:.77rem;padding:0 13px}
-  .ab-anchor{scroll-margin-top:118px}
+  .ab-anchor{scroll-margin-top:calc(var(--nav-h) + 48px)}
   .ab-body>p:first-child::first-letter{font-size:3.4rem;padding-right:11px}
   .ab-marks{margin-top:28px}
   .ab-mark{flex-basis:50%;padding-right:16px}

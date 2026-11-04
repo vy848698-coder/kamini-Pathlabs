@@ -27,7 +27,7 @@
 .doc{max-width:76ch}
 .doc > section{padding-bottom:34px;margin-bottom:34px;border-bottom:1px solid var(--line-2)}
 .doc > section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-.doc h2{font-size:clamp(1.5rem,2.6vw,2rem);margin-bottom:14px;scroll-margin-top:100px}
+.doc h2{font-size:clamp(1.5rem,2.6vw,2rem);margin-bottom:14px;scroll-margin-top:calc(var(--nav-h) + 30px)}
 .doc h3{font-family:'Manrope',sans-serif;font-size:1rem;font-weight:800;color:var(--teal);margin:24px 0 8px;letter-spacing:0}
 .doc p{color:var(--grey);margin-bottom:14px}
 .doc p:last-child{margin-bottom:0}

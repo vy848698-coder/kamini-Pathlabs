@@ -11,7 +11,7 @@
 ========================================================== */
 
 /* header (70px stuck) + chapter rail (56px) + air */
-.ct-anchor{scroll-margin-top:140px}
+.ct-anchor{scroll-margin-top:calc(var(--nav-h) + 70px)}
 
 /* ================= MASTHEAD =================
    The same flat deep-teal ground the other four inner pages open on.
@@ -86,7 +86,7 @@
 /* ================= CHAPTER RAIL =================
    Driven by main.js through #chap, like the about and doctors rails.
    Set on the teal band so the pages read as siblings. */
-.ct-chap{position:sticky;top:69px;z-index:120;background:rgba(30,24,4,.95);
+.ct-chap{position:sticky;top:calc(var(--nav-h) - 1px);z-index:120;background:rgba(30,24,4,.95);
   backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.09)}
 .ct-chap .wrap{display:flex;align-items:stretch;height:56px;overflow-x:auto;scrollbar-width:none;
   -ms-overflow-style:none;scroll-behavior:smooth}
@@ -320,7 +320,7 @@
   .ct-mast{padding:52px 0 70px}
   .ct-lines,.ct-write,.ct-find{padding:70px 0}
   .ct-faq{padding:70px 0 78px}
-  .ct-anchor{scroll-margin-top:126px}
+  .ct-anchor{scroll-margin-top:calc(var(--nav-h) + 56px)}
   .ct-chap .wrap{height:50px}
   .ct-chap a{font-size:.77rem;padding:0 13px}
   .ct-desk{padding:24px 22px 20px}

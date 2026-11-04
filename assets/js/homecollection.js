@@ -112,7 +112,9 @@
     syncForm();
     var target = $("book");
     if (target){
-      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: rm ? "auto" : "smooth" });
+      /* clear the settled header (style.css --nav-h) and two pixels */
+      var navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 78;
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navH - 2, behavior: rm ? "auto" : "smooth" });
     }
     /* wait for the scroll before pulling focus, or the browser jumps twice */
     setTimeout(function(){ var bn = $("bn"); if (bn) bn.focus({ preventScroll: true }); }, rm ? 0 : 620);

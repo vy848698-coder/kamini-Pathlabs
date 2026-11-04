@@ -11,7 +11,7 @@
 ========================================================== */
 
 /* header (70px stuck) + chapter rail (56px) + air */
-.dr-anchor{scroll-margin-top:140px}
+.dr-anchor{scroll-margin-top:calc(var(--nav-h) + 70px)}
 
 /* ================= MASTHEAD =================
    The same flat deep-teal ground as About, Home Collection and the rate
@@ -132,7 +132,7 @@
 .dr-tlist .st.later i,.dr-tlist .st.appt i,.dr-tlist .st.tbc i,.dr-tlist .st.latertbc i{display:none}
 
 /* a row tapped on the board lights its card for a moment on arrival */
-.dr-card{scroll-margin-top:140px}
+.dr-card{scroll-margin-top:calc(var(--nav-h) + 70px)}
 .dr-card.dr-flash{animation:drFlash 1.8s var(--ease) .35s}
 @keyframes drFlash{0%,100%{box-shadow:0 0 0 0 rgba(245,184,0,0)}25%,60%{box-shadow:0 0 0 3px var(--gold)}}
 
@@ -149,7 +149,7 @@
    Same behaviour as the about page rail (main.js drives both through
    #chap) but set on the teal band rather than ivory, so the two pages
    read as siblings instead of copies. */
-.dr-chap{position:sticky;top:69px;z-index:120;background:rgba(30,24,4,.95);
+.dr-chap{position:sticky;top:calc(var(--nav-h) - 1px);z-index:120;background:rgba(30,24,4,.95);
   backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.09)}
 .dr-chap .wrap{display:flex;align-items:stretch;height:56px;overflow-x:auto;scrollbar-width:none;
   -ms-overflow-style:none;scroll-behavior:smooth}
@@ -441,7 +441,7 @@
   .dr-ref{padding-bottom:76px}
   .dr-chap .wrap{height:50px}
   .dr-chap a{font-size:.77rem;padding:0 13px}
-  .dr-anchor{scroll-margin-top:126px}
+  .dr-anchor{scroll-margin-top:calc(var(--nav-h) + 56px)}
   .dr-roster{grid-template-columns:1fr}
   /* one column means the portrait is as wide as the screen; at 4:3 that is a
      525px picture on a 700px phone, so the frame flattens once it stacks */

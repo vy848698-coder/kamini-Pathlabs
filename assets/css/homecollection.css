@@ -6,7 +6,7 @@
 ========================================================== */
 
 /* header (70px stuck) + chapter rail (56px) + air */
-.hc-anchor{scroll-margin-top:140px}
+.hc-anchor{scroll-margin-top:calc(var(--nav-h) + 70px)}
 
 /* ================= MASTHEAD ================= */
 /* Deliberately unlike both the home hero and the about masthead: the
@@ -74,7 +74,7 @@
 /* ================= CHAPTER RAIL =================
    Same behaviour as the about, doctors and contact rails (main.js drives
    them all through #chap), on the teal band so it runs on from the masthead. */
-.hc-chap{position:sticky;top:69px;z-index:120;background:rgba(30,24,4,.95);
+.hc-chap{position:sticky;top:calc(var(--nav-h) - 1px);z-index:120;background:rgba(30,24,4,.95);
   backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.09)}
 .hc-chap .wrap{display:flex;align-items:stretch;height:56px;overflow-x:auto;scrollbar-width:none;
   -ms-overflow-style:none;scroll-behavior:smooth}
@@ -437,7 +437,7 @@
 @media(max-width:640px){
   .hc-chap .wrap{height:50px}
   .hc-chap a{font-size:.77rem;padding:0 13px}
-  .hc-anchor{scroll-margin-top:126px}
+  .hc-anchor{scroll-margin-top:calc(var(--nav-h) + 56px)}
   .hc-mast{padding:46px 0 66px}
   .hc-zero,.hc-day,.hc-build,.hc-who,.hc-prep,.hc-area,.hc-faqs{padding:64px 0}
   .hc-kit{padding-bottom:64px}
