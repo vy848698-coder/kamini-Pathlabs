@@ -236,7 +236,7 @@
   });
 
   /* ---------- opening by itself ----------
-     `?popup` in the address (index.html?popup) always opens it, ignoring
+     `?popup` in the address (home.html?popup) always opens it, ignoring
      the daily limit and the quiet days — for checking the pop-up or the
      offer poster without clearing the browser's storage. It is not
      counted towards the visitor's three a day. */

@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    { "source": "/index.html", "destination": "/home.html", "permanent": true },
+    { "source": "/about.html", "destination": "/aboutus.html", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/", "destination": "/home.html" }
+  ]
+}

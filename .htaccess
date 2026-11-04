@@ -10,6 +10,22 @@ Options -Indexes
 # A missing page gets the site's own not-found page.
 ErrorDocument 404 /404.html
 
+# The home page is home.html, so the bare domain (kaminilabs.in/)
+# opens it. index.html stays second in line only as a fallback.
+DirectoryIndex home.html index.html
+
+# The pages were once index.html and about.html. Old links, bookmarks
+# and search results are sent on to the new names for good (301), with
+# any ?query kept. The condition captures the folder the site sits in,
+# so the redirect also works from a sub-folder (e.g. a local XAMPP copy).
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_URI} ^(.*/)index\.html$
+  RewriteRule ^index\.html$ %1home.html [R=301,L]
+  RewriteCond %{REQUEST_URI} ^(.*/)about\.html$
+  RewriteRule ^about\.html$ %1aboutus.html [R=301,L]
+</IfModule>
+
 # File types the server does not always know. Without a type a
 # browser downloads the file instead of opening it.
 <IfModule mod_mime.c>

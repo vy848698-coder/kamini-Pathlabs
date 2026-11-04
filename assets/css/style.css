@@ -668,7 +668,7 @@ footer .brand{margin-bottom:18px}
 }
 
 /* ================= APPOINTMENT POP-UP ================= */
-/* ---------- the "Book an Appointment" dialog (index.html) ----------
+/* ---------- the "Book an Appointment" dialog (home.html) ----------
    A native <dialog>, so focus stays inside and Escape closes it for free.
    The dialog itself is a transparent full-screen frame: the card sits in
    it, and a press on the frame is a press on the backdrop. A centred card

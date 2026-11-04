@@ -9,8 +9,8 @@ submissions to the clinic, so the host needs PHP 7.4 or newer.
 
 ```
 kamini-Pathlabs/
-├── index.html                  Home page (hero, programmes, tests, packages, FAQ, booking, appointment pop-up)
-├── about.html                  About Us (story, timeline, values, quality, visit)
+├── home.html                  Home page (hero, programmes, tests, packages, FAQ, booking, appointment pop-up)
+├── aboutus.html                  About Us (story, timeline, values, quality, visit)
 ├── homecollection.html         Home sample collection (slot picker, test picker, coverage)
 ├── doctors.html                Our Doctors (panel, weekly OPD board, visit, on-site tests)
 ├── contact.html                Contact (live desk status, switchboard, enquiry form, map)
@@ -25,9 +25,9 @@ kamini-Pathlabs/
 ├── sitemap.xml                 URL list for search engines
 ├── assets/
 │   ├── css/
-│   │   ├── style.css           All shared styling — extracted from index.html
+│   │   ├── style.css           All shared styling — extracted from home.html
 │   │   ├── pages.css           Extra styling for the legal pages, 404 and about
-│   │   ├── about.css           Everything unique to about.html (all .ab- prefixed)
+│   │   ├── about.css           Everything unique to aboutus.html (all .ab- prefixed)
 │   │   ├── homecollection.css  Everything unique to homecollection.html (.hc- prefixed)
 │   │   ├── doctors.css         Everything unique to doctors.html (.dr- prefixed)
 │   │   └── contact.css         Everything unique to contact.html (.ct- prefixed)
@@ -62,14 +62,14 @@ Every page loads the same core assets, in this order:
 | --- | --- | --- |
 | `assets/css/style.css` | `<head>` | Design tokens + all component styles |
 | `assets/css/pages.css` | `<head>`, inner pages only | Overrides layered on top of `style.css` |
-| `assets/css/about.css` | `<head>`, `about.html` only | Loaded last; every rule is prefixed `.ab-` |
+| `assets/css/about.css` | `<head>`, `aboutus.html` only | Loaded last; every rule is prefixed `.ab-` |
 | `assets/css/homecollection.css` | `<head>`, `homecollection.html` only | Loaded last; every rule is prefixed `.hc-` |
 | `assets/css/doctors.css` | `<head>`, `doctors.html` only | Loaded last; every rule is prefixed `.dr-` |
 | `assets/js/image-fallback.js` | `<head>`, **blocking** | Defines `kFall()` before any `<img onerror>` can fire |
 | `assets/js/forms.js` | end of `<body>`, `defer`, pages with a form only | Before `main.js` and the page script, so `contact.js` can use `KForms` |
 | `assets/js/main.js` | end of `<body>`, `defer` | Runs after the DOM is parsed |
 | `assets/js/doctors.js` | after `main.js`, `defer` | Page-specific; `main.js` already owns the nav, reveals, rail and form |
-| `assets/js/appointment.js` | after `main.js`, `defer`, `index.html` only | Needs `KForms` from `forms.js` |
+| `assets/js/appointment.js` | after `main.js`, `defer`, `home.html` only | Needs `KForms` from `forms.js` |
 
 `image-fallback.js` must stay a plain blocking script in the head. If it is deferred, a
 photo that fails early would call `kFall` before it exists and the layout would break.
@@ -86,7 +86,7 @@ load on pages that do not have the element in question.
 - Sticky nav state, top scroll-progress bar, hero parallax
 - Mobile burger menu (`#burger` / `#nlinks`)
 - FAQ accordion (`.fq`)
-- Chapter rail spy + sideways auto-scroll (`#chap`) — used by `about.html` and `doctors.html`
+- Chapter rail spy + sideways auto-scroll (`#chap`) — used by `aboutus.html` and `doctors.html`
 - Advisor widget dismiss (`#advClose`)
 - Smooth scrolling for in-page anchors, offset for the sticky header
 
@@ -129,11 +129,11 @@ Five forms reach the desk, and all of them post to `mail/send.php`:
 
 | Form | Page | `data-form` | Fields |
 | --- | --- | --- | --- |
-| `#bform` "Request a callback" | `index.html` | `home` | name, phone, time, service |
+| `#bform` "Request a callback" | `home.html` | `home` | name, phone, time, service |
 | `#bform` "Request a consultation" | `doctors.html` | `doctors` | name, phone, day, doctor |
 | `#bform` "Book a home visit" | `homecollection.html` | `collection` | name, phone, locality, day, slot, tests |
 | `#ctForm` "Tell us what you need" | `contact.html` | `contact` | name, phone, email, topic, when, message |
-| `#apForm` "Book an Appointment" pop-up | `index.html` | `appointment` | reason, name, phone, email, message |
+| `#apForm` "Book an Appointment" pop-up | `home.html` | `appointment` | reason, name, phone, email, message |
 
 **The checks run twice, with the same rules** — in the browser (`assets/js/forms.js`) so
 the visitor is told straight away, and again in `mail/send.php` because anyone can post to
@@ -171,7 +171,7 @@ change, update them in `patient_email()` in `mail/templates.php` too.
 **The appointment pop-up.** Its side panel shows the current offer poster
 (`Images/promo/kamini-offer.jpg`); on phones it is a thumbnail in the heading band, and a tap
 enlarges it over the card. To change the offer, replace that file and update the `alt` text and
-the band's caption in `index.html`. `appointment.js` opens the pop-up three seconds after the home page
+the band's caption in `home.html`. `appointment.js` opens the pop-up three seconds after the home page
 loads (never on other pages). Step one is a single tap on what the visitor needs (stored in
 a hidden `reason` input); step two asks for name and mobile, with email and a short note
 optional. When it opens by itself:
@@ -243,7 +243,7 @@ cookie from that reply and sends the form once more, so the forms work behind it
 
 Then:
 
-1. Replace `https://kaminiclinicandlabs.in/` in the `<link rel="canonical">` tags,
+1. Replace `https://kaminilabs.in/` in the `<link rel="canonical">` tags,
    `robots.txt` and `sitemap.xml` with the real domain.
 2. Configure the host to serve `404.html` for unknown paths.
 3. Set up email — see "Setting up email on the server" above.

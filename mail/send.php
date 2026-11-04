@@ -123,7 +123,7 @@ function respond(int $status, array $body): void
        . 'main{max-width:520px;margin:12vh auto;padding:0 20px}h1{color:#3d3007;font-size:1.5rem}'
        . 'a{color:#3d3007;font-weight:700}</style></head><body><main>'
        . '<h1>' . ($ok ? 'Request received' : 'Please check your details') . '</h1>' . $html
-       . '<p><a href="' . ($ok ? '../index.html' : $back) . '">' . ($ok ? 'Back to the website' : 'Go back to the form') . '</a></p>'
+       . '<p><a href="' . ($ok ? '../home.html' : $back) . '">' . ($ok ? 'Back to the website' : 'Go back to the form') . '</a></p>'
        . '</main></body></html>';
     exit;
 }
