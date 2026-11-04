@@ -12,28 +12,27 @@ return [
        without sending anything. */
     'transport' => 'smtp',
 
-    /* The mailbox the website logs in to, to send.
-       For Gmail: turn on 2-Step Verification for the account, then make
-       an App Password at https://myaccount.google.com/apppasswords and
-       paste the 16 letters below. The normal Gmail password will NOT work. */
+    /* The mailbox the website logs in to, to send: a BigRock (cPanel)
+       mailbox, with the same password you use for its webmail. Server
+       details are under cPanel → Email Accounts → Connect Devices. */
     'smtp' => [
-        'host'     => 'smtp.gmail.com',
+        'host'     => 'mail.kaminilabs.in',
         'port'     => 465,
         'secure'   => 'ssl',            /* 'ssl' for port 465, 'tls' for port 587 */
-        'username' => 'kaminiclinicandlabs@gmail.com',
-        'password' => 'xxxx xxxx xxxx xxxx',
+        'username' => 'hello@kaminilabs.in',
+        'password' => 'the mailbox password',
     ],
 
-    /* Who the email says it is from. With Gmail this must be the same
-       address as smtp.username above. */
+    /* Who the email says it is from. Must be the same mailbox as
+       smtp.username above, or BigRock may refuse or junk it. */
     'from' => [
-        'email' => 'kaminiclinicandlabs@gmail.com',
+        'email' => 'hello@kaminilabs.in',
         'name'  => 'Kamini Clinic website',
     ],
 
     /* Who receives the form details. More than one address is fine. */
     'to' => [
-        'kaminiclinicandlabs@gmail.com',
+        'info@kaminilabs.in',
     ],
 
     /* When a visitor gives an email address (the contact form asks for
@@ -49,7 +48,7 @@ return [
     'limits' => [
         'per_visitor'    => 5,     /* submissions one visitor may make… */
         'window_minutes' => 15,    /* …in this many minutes */
-        'per_day'        => 200,   /* all forms together; Gmail allows about 500 a day */
+        'per_day'        => 200,   /* all forms together; BigRock also caps outgoing mail per hour */
     ],
 
     /* Behind Cloudflare, every visitor seems to come from Cloudflare's
@@ -57,8 +56,8 @@ return [
     'ip_header' => 'REMOTE_ADDR',
 
     /* Extra hosts allowed to post to the form, besides the one serving it,
-       e.g. 'www.kaminiclinicandlabs.in' if both www and bare domain are live. */
-    'extra_hosts' => [],
+       e.g. both the www and bare domain, which are both live. */
+    'extra_hosts' => ['kaminilabs.in', 'www.kaminilabs.in'],
 
     /* Where the rate-limit file (and the 'file' transport's outbox) live.
        Must be writable by PHP. */
