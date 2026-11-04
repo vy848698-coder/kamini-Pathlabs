@@ -1352,10 +1352,12 @@
   <div class="ap-card">
     <button type="button" class="ap-x" id="apClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
 
-    <!-- The side panel carries the current offer poster. On a desktop it
-         fills the panel; on a phone it shrinks to a thumbnail in the heading
-         band, and a tap opens it full size (appointment.js). To change the
-         offer, swap Images/promo/kamini-offer.jpg and the alt/caption text. -->
+    <!-- The side panel carries the current offer poster. On a desktop the
+         panel is the poster's own shape and sets the card's height; on a
+         phone it shrinks to a thumbnail in the heading band, and a tap opens
+         it full size (appointment.js). To change the offer, swap
+         Images/promo/kamini-offer.jpg and the alt/caption text — and if the
+         new poster is not 720 × 1002, its proportions in style.css (--ap-ar). -->
     <aside class="ap-side">
       <h2 id="apT" class="sr" tabindex="-1" autofocus>Book an appointment — how can we help you today?</h2>
       <p id="apD" class="sr">Tell us what you need and leave your number. Our team will call you back to fix a time that suits you.</p>
@@ -1369,9 +1371,6 @@
           <em class="ap-offer-tap">Tap to view offer</em>
         </span>
       </button>
-      <div class="bcall">
-        <a href="tel:+919861451521"><span class="ic"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><span><small>Rather talk now?</small><b>+91 98614 51521</b></span></a>
-      </div>
     </aside>
 
     <form class="ap-form" id="apForm" action="mail/send.php" method="post" data-form="appointment" data-step="1" novalidate>
@@ -1432,7 +1431,10 @@
         <button type="button" class="btn btn-solid" id="apOk">Continue browsing</button>
       </div>
 
-      <p class="ap-foot" id="apFoot"><button type="button" class="ap-later" id="apLater">Maybe later — I'll look around first</button></p>
+      <p class="ap-foot" id="apFoot">
+        <a class="ap-call" href="tel:+919861451521"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span>Rather talk? <b>+91 98614 51521</b></span></a>
+        <button type="button" class="ap-later" id="apLater">Maybe later</button>
+      </p>
     </form>
   </div>
 </dialog>

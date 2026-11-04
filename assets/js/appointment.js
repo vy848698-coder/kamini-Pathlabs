@@ -148,18 +148,23 @@
   });
 
   /* The offer poster: the side panel on a desktop, a thumbnail in the
-     heading band on a phone. A tap opens it over the whole card, so the
-     small print can be read; another tap puts it back. */
+     heading band on a phone. On a phone a tap opens it over the whole card,
+     so the small print can be read; another tap puts it back. A desktop
+     already shows it whole, as tall as the card, so there a tap does nothing. */
   var offer = document.getElementById("apOffer");
+  var phone = window.matchMedia("(max-width:720px)");
   function setOffer(on){
     if (!offer) return;
     offer.setAttribute("aria-expanded", on ? "true" : "false");
     dlg.classList.toggle("ap-big", on);
   }
   if (offer) offer.addEventListener("click", function(){
+    if (!phone.matches) return;
     setOffer(offer.getAttribute("aria-expanded") !== "true");
   });
   dlg.addEventListener("close", function(){ setOffer(false); });
+  /* turned to landscape or widened past phone width while enlarged */
+  if (phone.addEventListener) phone.addEventListener("change", function(){ if (!phone.matches) setOffer(false); });
 
   /* The corner callback button opens the pop-up here instead of jumping
      to the booking form — until it has been sent, when the link is back
