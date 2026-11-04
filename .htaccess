@@ -20,6 +20,15 @@ DirectoryIndex home.html index.html
 # so the redirect also works from a sub-folder (e.g. a local XAMPP copy).
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Every visit to the live site is over https. Only on kaminilabs.in
+  # (with or without www), so a local copy on http://localhost is left
+  # alone; the forwarded-proto check stops a loop behind a proxy.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteCond %{HTTP_HOST} ^(www\.)?kaminilabs\.in$ [NC]
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
   RewriteCond %{REQUEST_URI} ^(.*/)index\.html$
   RewriteRule ^index\.html$ %1home.html [R=301,L]
   RewriteCond %{REQUEST_URI} ^(.*/)about\.html$
